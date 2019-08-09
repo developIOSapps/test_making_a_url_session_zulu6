@@ -1,0 +1,105 @@
+{
+    "code": 200,
+    "deviceGroups": [
+        {
+            "id": 7,
+            "locationId": 3,
+            "name": "1:1 Teachers",
+            "description": "This is just for the teachers",
+            "members": 1,
+            "type": "normal",
+            "shared": false,
+            "isSmartGroup": false
+        },
+        {
+            "id": 17,
+            "locationId": 3,
+            "name": "All Students Shared iPads",
+            "description": "This contains all shared iPads",
+            "members": 5,
+            "type": "normal",
+            "shared": false,
+            "isSmartGroup": true
+        },
+        {
+            "id": 22,
+            "locationId": 3,
+            "name": "API New DeviceGroup",
+            "description": "This is a test from api",
+            "members": 0,
+            "type": "normal",
+            "shared": true,
+            "isSmartGroup": false
+        },
+        {
+            "id": 13,
+            "locationId": 3,
+            "name": "FC Morah-Chumie -  - Morah-Chumie",
+            "description": "Shared iPads for FC Morah-Chumie -  - Morah-Chumie",
+            "members": 4,
+            "type": "class",
+            "shared": false,
+            "isSmartGroup": true
+        },
+        {
+            "id": 15,
+            "locationId": 3,
+            "name": "FC Morah-Gitty -  - Morah-Gitty",
+            "description": "Shared iPads for FC Morah-Gitty -  - Morah-Gitty",
+            "members": 1,
+            "type": "class",
+            "shared": false,
+            "isSmartGroup": true
+        },
+        {
+            "id": 24,
+            "locationId": 0,
+            "name": "iBeacon",
+            "description": "for iBeacons",
+            "members": 0,
+            "type": "normal",
+            "shared": true,
+            "isSmartGroup": true
+        },
+        {
+            "id": 21,
+            "locationId": 3,
+            "name": "Listening Station Devices",
+            "description": "These listening station are 1:1 iPads ",
+            "members": 1,
+            "type": "normal",
+            "shared": false,
+            "isSmartGroup": false
+        },
+        {
+            "id": 12,
+            "locationId": 3,
+            "name": "Morah Chumie Student Devices",
+            "description": "",
+            "members": 4,
+            "type": "normal",
+            "shared": false,
+            "isSmartGroup": false
+        },
+        {
+            "id": 14,
+            "locationId": 3,
+            "name": "Morah Gittys Student Devices",
+            "description": "",
+            "members": 1,
+            "type": "normal",
+            "shared": false,
+            "isSmartGroup": false
+        },
+        {
+            "id": 9,
+            "locationId": 3,
+            "name": "Morah Sheindys Student Devices",
+            "description": "Student Devices for Morah Sheindy",
+            "members": 0,
+            "type": "normal",
+            "shared": false,
+            "isSmartGroup": false
+        }
+    ]
+}
