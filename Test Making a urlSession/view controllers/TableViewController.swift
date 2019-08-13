@@ -40,6 +40,16 @@ class TableViewController: UITableViewController {
         let whatToDo = 2
         
         switch whatToDo {
+            
+        case 0:
+            GetDataApi.updateNoteProperty { () in
+                DispatchQueue.main.async {
+                    
+                    print("****** Hooray it worked ****")
+                    
+                }
+            }
+
         case 1:
             GetDataApi.getUserListResponse { (xyz) in
                 DispatchQueue.main.async {

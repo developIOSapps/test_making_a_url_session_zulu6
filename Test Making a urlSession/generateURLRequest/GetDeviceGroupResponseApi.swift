@@ -18,6 +18,36 @@ struct GetDataApi {
         return urlSession
     }
     
+    static func updateNoteProperty(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.updateDeviceProperty), then completion: @escaping () -> Void )  {
+        
+        /// Get the data
+        getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
+            
+            print("in the GetDataApi.getZuluDataWrapper before switch")
+            switch result {
+                
+            case .failure(let err):
+                print("in the GetDataApi.getZuluDataWrapper in switch error")
+                switch err {
+                case .decodingError:    print("decoding error")
+                case .domainError:      print("domiain error")
+                }
+                print(err)
+                
+                
+            case .success(let data):
+                print("in the GetDataApi.getZuluDataWrapper in switch success")
+                //                print(data.prettyPrintedJSONString)
+                print("we are updating notes")
+                completion()
+                
+            }
+        }
+    }
+    
+
+    
+    
     static func getUserListResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.users), then completion: @escaping (OurCodable) -> Void )  {
         
         /// Get the data
