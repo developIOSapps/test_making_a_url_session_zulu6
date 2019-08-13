@@ -25,9 +25,8 @@
 		466B2C9622FDAF19009C19E4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B2C9522FDAF19009C19E4 /* User.swift */; };
 		466B2C9822FDAF33009C19E4 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B2C9722FDAF33009C19E4 /* UserResponse.swift */; };
 		466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B2C9A22FDBAD9009C19E4 /* PrettyPrintingJson.swift */; };
-		4694D91D2302E58000FEE622 /* GenerateRek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4694D91C2302E58000FEE622 /* GenerateRek.swift */; };
+		4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4694D91C2302E58000FEE622 /* GenerateReq.swift */; };
 		469CB55622A9BCD600631ACE /* deviceGroups.json in Resources */ = {isa = PBXBuildFile; fileRef = 469CB55522A9BCD600631ACE /* deviceGroups.json */; };
-		46C1D8D422C641A8005E3BE7 /* GenerateReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C1D8D322C641A8005E3BE7 /* GenerateReq.swift */; };
 		46EF5FE622B28D1C001C45AF /* GetDeviceGroupResponseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,9 +51,8 @@
 		466B2C9522FDAF19009C19E4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		466B2C9722FDAF33009C19E4 /* UserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		466B2C9A22FDBAD9009C19E4 /* PrettyPrintingJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyPrintingJson.swift; sourceTree = "<group>"; };
-		4694D91C2302E58000FEE622 /* GenerateRek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateRek.swift; sourceTree = "<group>"; };
+		4694D91C2302E58000FEE622 /* GenerateReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateReq.swift; sourceTree = "<group>"; };
 		469CB55522A9BCD600631ACE /* deviceGroups.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deviceGroups.json; sourceTree = "<group>"; };
-		46C1D8D322C641A8005E3BE7 /* GenerateReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateReq.swift; sourceTree = "<group>"; };
 		46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDeviceGroupResponseApi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,8 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */,
-				46C1D8D322C641A8005E3BE7 /* GenerateReq.swift */,
-				4694D91C2302E58000FEE622 /* GenerateRek.swift */,
+				4694D91C2302E58000FEE622 /* GenerateReq.swift */,
 			);
 			path = generateURLRequest;
 			sourceTree = "<group>";
@@ -322,9 +319,8 @@
 				4662C764228CBAAB00D99B84 /* QueryType.swift in Sources */,
 				466B2C8D22FDA4B8009C19E4 /* DeviceGroup.swift in Sources */,
 				466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */,
-				4694D91D2302E58000FEE622 /* GenerateRek.swift in Sources */,
+				4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */,
 				4662C75D228CA8E900D99B84 /* APIClient.swift in Sources */,
-				46C1D8D422C641A8005E3BE7 /* GenerateReq.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

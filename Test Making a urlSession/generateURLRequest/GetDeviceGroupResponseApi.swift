@@ -84,9 +84,6 @@ struct GetDataApi {
     }
     
     
-    
-    
-    
     // 2
     static func getZuluDataWrapper(with urlRequest: URLRequest,
                                    then completion: @escaping (Result<Data, NetworkError>) -> Void) {
