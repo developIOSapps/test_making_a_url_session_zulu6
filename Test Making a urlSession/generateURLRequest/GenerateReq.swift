@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum GeneratedReq: String {
+enum GeneratedRex: String {
     case deviceGroups = "/devices/groups"
     case apps = "/apps"
     case users = "/users"

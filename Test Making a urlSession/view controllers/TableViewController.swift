@@ -37,7 +37,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let whatToDo = 1
+        let whatToDo = 2
         
         switch whatToDo {
         case 1:

@@ -18,7 +18,7 @@ struct GetDataApi {
         return urlSession
     }
     
-    static func getUserListResponse(_ generatedReq: GeneratedReq = GeneratedReq.users, then completion: @escaping (OurCodable) -> Void )  {
+    static func getUserListResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.users), then completion: @escaping (OurCodable) -> Void )  {
         
         /// Get the data
         getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
@@ -53,7 +53,7 @@ struct GetDataApi {
     
     
     
-    static func getDeviceGroupResponse(_ generatedReq: GeneratedReq = GeneratedReq.deviceGroups, then completion: @escaping (OurCodable) -> Void )  {
+    static func getDeviceGroupResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.deviceGroups), then completion: @escaping (OurCodable) -> Void )  {
         
         /// Get the data
         getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
