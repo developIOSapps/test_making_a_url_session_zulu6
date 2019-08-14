@@ -37,18 +37,17 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let whatToDo = 2
+        let whatToDo = 0
         
         switch whatToDo {
             
         case 0:
-            GetDataApi.updateNoteProperty { () in
+            GetDataApi.updateNoteProperty(GeneratedReq.init(request: ValidReqs.updateDeviceProperty(deviceId: "cf50471c282fa5748a709425ffcd9a88bf9c3df3", propertyName: "notes", propertyValue: "SECONDHALF"))) {
                 DispatchQueue.main.async {
-                    
-                    print("****** Hooray it worked ****")
-                    
+                    print("*** Hooray Job well done")
                 }
             }
+                        
 
         case 1:
             GetDataApi.getUserListResponse { (xyz) in

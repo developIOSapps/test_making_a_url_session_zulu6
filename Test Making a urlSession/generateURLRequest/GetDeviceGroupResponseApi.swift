@@ -18,7 +18,7 @@ struct GetDataApi {
         return urlSession
     }
     
-    static func updateNoteProperty(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.updateDeviceProperty), then completion: @escaping () -> Void )  {
+    static func updateNoteProperty(_ generatedReq: GeneratedReq , then completion: @escaping () -> Void )  {
         
         /// Get the data
         getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in

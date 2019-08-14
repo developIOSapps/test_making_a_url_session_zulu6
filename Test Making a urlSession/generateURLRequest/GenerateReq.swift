@@ -14,7 +14,8 @@ enum HttpMethod: String {
 }
 
 enum ValidReqs {
-    case updateDeviceProperty, users, apps, deviceGroups
+    case updateDeviceProperty(deviceId: String, propertyName: String, propertyValue: String)
+    case users, apps, deviceGroups
 }
 
 enum GeneratedReq  {
@@ -28,8 +29,14 @@ enum GeneratedReq  {
         
         let headerDict: [String: String] = ["Authorization": "Basic NTM3MjI0NjA6RVBUTlpaVEdYV1U1VEo0Vk5RUDMyWDVZSEpSVjYyMkU=", "X-Server-Protocol-Version": "2", "Content-Type": "text/plain; charset=utf-8" ]
         
-        let whatToDo = "SECONDHALF"
-        let bodyString = "{\n  \"notes\": \"\(whatToDo)\"\n}\n"
+//        let whatToDo = "SECONDHALF"
+        // let bodyString = "{\n  \"notes\": \"\(whatToDo)\"\n}\n"
+
+//        let bodyString = #"""
+//        {
+//        "notes": "\#(whatToDo)"
+//        }
+//        """#
 
         switch request {
         case .deviceGroups :
@@ -38,8 +45,15 @@ enum GeneratedReq  {
             self = .users(path: "/users", method: HttpMethod.get, header: headerDict, body: nil)
         case .apps:
             self = .apps(path: "/apps", method: HttpMethod.get, header: headerDict, body: nil)
-        case .updateDeviceProperty:
-            self = .updateDeviceProperty(path: "/devices/cf50471c282fa5748a709425ffcd9a88bf9c3df3/details", method: HttpMethod.post, header: headerDict, body: bodyString)
+        case .updateDeviceProperty(let deviceId, let propertyName, let propertyValue):
+
+            let bodyString = #"""
+            {
+            "\#(propertyName)": "\#(propertyValue)"
+            }
+            """#
+
+            self = .updateDeviceProperty(path: "/devices/~~deviceId~~/details".replacingOccurrences(of: "~~deviceId~~", with: deviceId), method: HttpMethod.post, header: headerDict, body: bodyString)
         }
     }
     
