@@ -16,6 +16,8 @@ enum HttpMethod: String {
 enum ValidReqs {
     case updateDeviceProperty(deviceId: String, propertyName: String, propertyValue: String)
     case users, apps, deviceGroups
+    case deviceDetail(deviceId: String)
+    case userDetail(userId: String)
 }
 
 enum GeneratedReq  {
@@ -24,19 +26,13 @@ enum GeneratedReq  {
     case apps(path: String, method: HttpMethod, header: [String: String], body: String?)
     case users(path: String, method: HttpMethod, header: [String: String], body: String?)
     case updateDeviceProperty(path: String, method: HttpMethod, header: [String: String], body: String?)
+    case deviceDetail(path: String, method: HttpMethod, header: [String: String], body: String?)
+    case userDetail(path: String, method: HttpMethod, header: [String: String], body: String?)
     
     init(request: ValidReqs) {
         
         let headerDict: [String: String] = ["Authorization": "Basic NTM3MjI0NjA6RVBUTlpaVEdYV1U1VEo0Vk5RUDMyWDVZSEpSVjYyMkU=", "X-Server-Protocol-Version": "2", "Content-Type": "text/plain; charset=utf-8" ]
         
-//        let whatToDo = "SECONDHALF"
-        // let bodyString = "{\n  \"notes\": \"\(whatToDo)\"\n}\n"
-
-//        let bodyString = #"""
-//        {
-//        "notes": "\#(whatToDo)"
-//        }
-//        """#
 
         switch request {
         case .deviceGroups :
@@ -46,14 +42,17 @@ enum GeneratedReq  {
         case .apps:
             self = .apps(path: "/apps", method: HttpMethod.get, header: headerDict, body: nil)
         case .updateDeviceProperty(let deviceId, let propertyName, let propertyValue):
-
             let bodyString = #"""
             {
             "\#(propertyName)": "\#(propertyValue)"
             }
             """#
-
             self = .updateDeviceProperty(path: "/devices/~~deviceId~~/details".replacingOccurrences(of: "~~deviceId~~", with: deviceId), method: HttpMethod.post, header: headerDict, body: bodyString)
+        case .deviceDetail(let deviceId):
+            self = .deviceDetail(path: "/devices/\(deviceId)", method: HttpMethod.get, header: headerDict, body: nil)
+
+        case .userDetail(let userId):
+            self = .userDetail(path: "/users/\(userId)", method: HttpMethod.get, header: headerDict, body: nil)
         }
     }
     
@@ -73,6 +72,10 @@ enum GeneratedReq  {
             return path
         case .users(let path, _, _, _):
             return path
+        case .deviceDetail(let path, let method, let header, let body):
+            return path
+        case .userDetail(let path, let method, let header, let body):
+            return path
         }
     }
     
@@ -86,6 +89,11 @@ enum GeneratedReq  {
             return method.rawValue
         case .users(_ , let method, _, _):
             return method.rawValue
+        case .deviceDetail(let path, let method, let header, let body):
+            return method.rawValue
+        case .userDetail(let path, let method, let header, let body):
+            return method.rawValue
+
         }
     }
     
@@ -98,6 +106,10 @@ enum GeneratedReq  {
         case .updateDeviceProperty(_ , _, let header, _):
             return header
         case .users(_ , _, let header, _):
+            return header
+        case .deviceDetail(let path, let method, let header, let body):
+            return header
+        case .userDetail(let path, let method, let header, let body):
             return header
         }
     }
@@ -112,6 +124,11 @@ enum GeneratedReq  {
             return body
         case .users(_ , _,  _, let body):
             return body
+        case .deviceDetail(let path, let method, let header, let body):
+            return body
+        case .userDetail(let path, let method, let header, let body):
+            return body
+
         }
     }
 
@@ -148,21 +165,7 @@ enum GeneratedReq  {
         
         /// Set the method
         urlRequest.httpMethod = self.generatedMethod
-        
-//        switch self {
-//        case .updateDeviceProperty:
-//            print("---- In Update Property")
-//            // urlRequest.httpMethod = "POST"
-//            // Body
-//            let whatToDo = "SECONDHALF"
-//            let bodyString = "{\n  \"notes\": \"\(whatToDo)\"\n}\n"
-//            urlRequest.httpBody = bodyString.data(using: .utf8, allowLossyConversion: true)
-//
-//
-//        default:
-//            print("---- Not In Update Property")
-//        }
-        
+                
         
         return urlRequest
     }

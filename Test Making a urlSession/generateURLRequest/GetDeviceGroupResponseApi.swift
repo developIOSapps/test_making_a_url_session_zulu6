@@ -18,6 +18,44 @@ struct GetDataApi {
         return urlSession
     }
     
+    
+    static func getDeviceDetail(_ generatedReq: GeneratedReq , then completion: @escaping (Codable) -> Void )  {
+        
+        /// Get the data
+        getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
+            
+            print("in the GetDataApi.getZuluDataWrapper before switch")
+            switch result {
+                
+            case .failure(let err):
+                print(err.localizedDescription)
+                print("in the GetDataApi.getZuluDataWrapper in switch error")
+                switch err {
+                case .decodingError:    print("decoding error")
+                case .domainError:      print("domiain error")
+                case .generalError:     print("HTTP error")
+                }
+                print(err)
+                
+                
+            case .success(let data):
+                print("in the GetDataApi.getZuluDataWrapper in switch success")
+                print(data.prettyPrintedJSONString)
+                print("we are updating notes")
+                
+                
+                let decoder = JSONDecoder()
+                
+                guard let deviceDetailResponsxx = try? decoder.decode(DeviceDetailResponse.self, from: data) else {fatalError()}
+                guard let dvdtl = deviceDetailResponsxx as? DeviceDetailResponse else {fatalError("could not convert it to Users")}
+                print("we are up to device detail response response")
+                completion(dvdtl)
+                
+            }
+        }
+    }
+
+    
     static func updateNoteProperty(_ generatedReq: GeneratedReq , then completion: @escaping () -> Void )  {
         
         /// Get the data
@@ -27,17 +65,19 @@ struct GetDataApi {
             switch result {
                 
             case .failure(let err):
+                print(err.localizedDescription)
                 print("in the GetDataApi.getZuluDataWrapper in switch error")
                 switch err {
                 case .decodingError:    print("decoding error")
                 case .domainError:      print("domiain error")
+                case .generalError:     print("HTTP error")
                 }
                 print(err)
                 
                 
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
-                //                print(data.prettyPrintedJSONString)
+                print(data.prettyPrintedJSONString)
                 print("we are updating notes")
                 completion()
                 
@@ -61,6 +101,7 @@ struct GetDataApi {
                 switch err {
                 case .decodingError:    print("decoding error")
                 case .domainError:      print("domiain error")
+                case .generalError:     print("HTTP error")
                 }
                 print(err)
                 
@@ -96,6 +137,7 @@ struct GetDataApi {
                 switch err {
                 case .decodingError:    print("decoding error")
                 case .domainError:      print("domiain error")
+                case .generalError:     print("HTTP error")
                 }
                 print(err)
                 
@@ -132,7 +174,16 @@ struct GetDataApi {
         
         getZuluData(with: urlRequest) { (data, response, err) in
             
+            if let myResponse = response as? HTTPURLResponse {
+                print(myResponse.statusCode)
+                print(HTTPURLResponse.localizedString(forStatusCode: myResponse.statusCode))
+
+                print("************************")
+            }
+            
+            
             guard let data = data, err == nil  else {
+    
                 if let err = err as NSError?, err.domain == NSURLErrorDomain {
                     completion(.failure(NetworkError.domainError))
                 } else {
@@ -141,7 +192,15 @@ struct GetDataApi {
                 return
             }
             
-            completion(.success(data))
+            guard let response = response as? HTTPURLResponse else {fatalError(" Could not convert response to http url response") }
+            
+            if response.statusCode == 200 {
+                completion(.success(data))
+            } else {
+                completion(.failure(NetworkError.generalError))
+            }
+            
+            
             
         }
         

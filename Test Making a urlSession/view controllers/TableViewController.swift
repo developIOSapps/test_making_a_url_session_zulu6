@@ -14,6 +14,7 @@ import UIKit
 enum NetworkError: Error {
     case domainError
     case decodingError
+    case generalError
 }
 
 class TableViewController: UITableViewController {
@@ -37,7 +38,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let whatToDo = 0
+        let whatToDo = 1
         
         switch whatToDo {
             
@@ -75,6 +76,24 @@ class TableViewController: UITableViewController {
                     self.tableView.reloadData()
                 }
             }
+            
+        case 3:
+            GetDataApi.updateNoteProperty(GeneratedReq.init(request: ValidReqs.userDetail(userId: "249"))) {
+                DispatchQueue.main.async {
+                    print("*** Hooray printed user detail-- well done")
+                }
+            }
+            
+        case 4:
+            GetDataApi.getDeviceDetail(GeneratedReq.init(request: ValidReqs.deviceDetail(deviceId: "b049f2becb4a8040735e6b85f1ded62a87ce4e30"))) { (dvcdtl) in
+                guard let dvcdtl = dvcdtl as? DeviceDetailResponse else {fatalError("could not convert it to devicedetail")}
+
+           // GetDataApi.updateNoteProperty(GeneratedReq.init(request: ValidReqs.deviceDetail(deviceId: "b049f2becb4a8040735e6b85f1ded62a87ce4e30"))) {
+                DispatchQueue.main.async {
+                    print("*** Hooray printed user detail-- well done")
+                }
+            }
+
         default:
             break
         }
