@@ -38,12 +38,12 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let whatToDo = 1
+        let whatToDo = 5
         
         switch whatToDo {
             
         case 0:
-            GetDataApi.updateNoteProperty(GeneratedReq.init(request: ValidReqs.updateDeviceProperty(deviceId: "cf50471c282fa5748a709425ffcd9a88bf9c3df3", propertyName: "notes", propertyValue: "SECONDHALF"))) {
+            GetDataApi.updateNoteProperty(GeneratedReq.init(request: ValidReqs.updateDeviceProperty(deviceId: "cf50471c282fa5748a709425ffcd9a88bf9c3df3", propertyName: "notes", propertyValue: "FIRSTHALF"))) {
                 DispatchQueue.main.async {
                     print("*** Hooray Job well done")
                 }
@@ -93,6 +93,21 @@ class TableViewController: UITableViewController {
                     print("*** Hooray printed user detail-- well done")
                 }
             }
+        case 5:
+            GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : "9" ]) )) { (xyz) in
+                DispatchQueue.main.async {
+                    guard let usrResponse = xyz as? UserResponse else {fatalError("could not convert it to Users")}
+                    let user = usrResponse.users.first
+                    print(String(repeating: "\(String(describing: user?.firstName))  " , count: 5))
+                    
+                    self.users = usrResponse.users
+                    
+                    self.users.forEach { print($0.firstName + $0.lastName) }
+                    
+                    // self.tableView.reloadData()
+                }
+            }
+
 
         default:
             break
