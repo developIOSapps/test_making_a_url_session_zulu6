@@ -49,7 +49,6 @@ class TableViewController: UITableViewController {
                 }
             }
                         
-
         case 1:
             GetDataApi.getUserListResponse { (xyz) in
                 DispatchQueue.main.async {
@@ -64,6 +63,7 @@ class TableViewController: UITableViewController {
                     // self.tableView.reloadData()
                 }
             }
+        
         case 2:
             GetDataApi.getDeviceGroupResponse { (dvcgr) in
                 DispatchQueue.main.async {
@@ -93,21 +93,21 @@ class TableViewController: UITableViewController {
                     print("*** Hooray printed user detail-- well done")
                 }
             }
+        
         case 5:
-            GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : "9" ]) )) { (xyz) in
+            GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : "9" ]) )) { (userResponse) in
                 DispatchQueue.main.async {
-                    guard let usrResponse = xyz as? UserResponse else {fatalError("could not convert it to Users")}
-                    let user = usrResponse.users.first
-                    print(String(repeating: "\(String(describing: user?.firstName))  " , count: 5))
                     
+                    guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
+                    
+                    /// Just load in the users into this class if needed
                     self.users = usrResponse.users
-                    
-                    self.users.forEach { print($0.firstName + $0.lastName) }
+                    /// Here we have what we need
+                    usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
                     
                     // self.tableView.reloadData()
                 }
             }
-
 
         default:
             break

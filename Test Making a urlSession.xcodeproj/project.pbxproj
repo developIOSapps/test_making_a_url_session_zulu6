@@ -74,7 +74,7 @@
 			children = (
 				46D56C3F2304E32A00CFF452 /* device detail */,
 				466B2C9222FDADBC009C19E4 /* user */,
-				466B2C8B22FDA46C009C19E4 /* device */,
+				466B2C8B22FDA46C009C19E4 /* deviceGroup */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -148,13 +148,13 @@
 			path = item;
 			sourceTree = "<group>";
 		};
-		466B2C8B22FDA46C009C19E4 /* device */ = {
+		466B2C8B22FDA46C009C19E4 /* deviceGroup */ = {
 			isa = PBXGroup;
 			children = (
 				466B2C8A22FDA44B009C19E4 /* item */,
 				466B2C8922FDA432009C19E4 /* response */,
 			);
-			path = device;
+			path = deviceGroup;
 			sourceTree = "<group>";
 		};
 		466B2C8E22FDAA5C009C19E4 /* protocols and extensions */ = {
@@ -486,8 +486,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MZ552MTEJZ;
+				IBSC_WARNINGS = YES;
 				INFOPLIST_FILE = "Test Making a urlSession/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -495,6 +497,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dia.Test-Making-a-urlSession";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SUPPRESS_WARNINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -504,8 +507,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MZ552MTEJZ;
+				IBSC_WARNINGS = YES;
 				INFOPLIST_FILE = "Test Making a urlSession/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -513,6 +518,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dia.Test-Making-a-urlSession";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SUPPRESS_WARNINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
