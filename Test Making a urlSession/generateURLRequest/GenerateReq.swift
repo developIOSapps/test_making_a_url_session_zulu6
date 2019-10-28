@@ -19,6 +19,8 @@ enum ValidReqs {
     case deviceDetail(deviceId: String)
     case userDetail(userId: String)
     case usersInDeviceGroup(parameterDict: [String: String])
+    case devicesInDeviceGroup(parameterDict: [String: String])
+
 }
 
 enum GeneratedReq  {
@@ -30,6 +32,7 @@ enum GeneratedReq  {
     case deviceDetail(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case userDetail(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case usersInDeviceGroup(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
+    case devicesInDeviceGroup(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
 
     init(request: ValidReqs) {
         
@@ -58,7 +61,10 @@ enum GeneratedReq  {
  
         case .usersInDeviceGroup(let deviceGroupsDictionary):
             self = .usersInDeviceGroup(path: "/users", method: HttpMethod.get, header: headerDict, body: nil, queryItems: deviceGroupsDictionary)
-        
+
+        case .devicesInDeviceGroup(let deviceGroupsDictionary):
+            self = .devicesInDeviceGroup(path: "/devices", method: HttpMethod.get, header: headerDict, body: nil, queryItems: deviceGroupsDictionary)
+
 //        case .usersInDeviceGroup:
 //            self = .usersInDeviceGroup(path: "/users", method: HttpMethod.get, header: headerDict, body: nil, queryItems: ["memberOf": "9,12"])
 
@@ -87,6 +93,8 @@ enum GeneratedReq  {
             return path
         case .usersInDeviceGroup(let path, _, _, _, _):
             return path
+        case .devicesInDeviceGroup(let path, _, _, _, _):
+            return path
         }
     }
     
@@ -105,6 +113,8 @@ enum GeneratedReq  {
         case .userDetail(_ , let method, _, _, _):
             return method.rawValue
         case .usersInDeviceGroup(_ , let method, _, _, _):
+            return method.rawValue
+        case .devicesInDeviceGroup(_ , let method, _, _, _):
             return method.rawValue
         }
     }
@@ -125,6 +135,8 @@ enum GeneratedReq  {
             return header
         case .usersInDeviceGroup(_ , _, let header, _, _):
             return header
+        case .devicesInDeviceGroup(_ , _, let header, _, _):
+            return header
         }
     }
     
@@ -144,6 +156,9 @@ enum GeneratedReq  {
             return body
         case .usersInDeviceGroup(_ , _,  _, let body, _):
             return body
+        case .devicesInDeviceGroup(_ , _,  _, let body, _):
+            return body
+
         }
     }
 
@@ -162,6 +177,8 @@ enum GeneratedReq  {
         case .userDetail(_ , _,  _, _, let queryItems):
             return queryItems
         case .usersInDeviceGroup(_ , _,  _, _, let queryItems):
+            return queryItems
+        case .devicesInDeviceGroup(_ , _,  _, _, let queryItems):
             return queryItems
         }
     }

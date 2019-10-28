@@ -156,6 +156,40 @@ struct GetDataApi {
     }
     
     
+    static func getDeviceListByGroupResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.usersInDeviceGroup(parameterDict: ["groups" : "12"])), then completion: @escaping (OurCodable) -> Void )  {
+        
+        /// Get the data
+        getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
+            
+            print("in the GetDataApi.getZuluDataWrapper before switch")
+            switch result {
+                
+            case .failure(let err):
+                print("in the GetDataApi.getZuluDataWrapper in switch error")
+                switch err {
+                case .decodingError:    print("decoding error")
+                case .domainError:      print("domiain error")
+                case .generalError:     print("HTTP error")
+                }
+                print(err)
+                
+                
+            case .success(let data):
+                print("in the GetDataApi.getZuluDataWrapper in switch success")
+                //                print(data.prettyPrintedJSONString)
+                
+                let decoder = JSONDecoder()
+                
+                guard let deviceListResponsexx = try? decoder.decode(DeviceListResponse.self, from: data) else {fatalError()}
+                guard let dvc = deviceListResponsexx as? DeviceListResponse else {fatalError("could not convert it to DeviceList")}
+                print("we are up to users response")
+                completion(dvc)
+                
+            }
+        }
+    }
+    
+
     
     
     static func getDeviceGroupResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.deviceGroups), then completion: @escaping (OurCodable) -> Void )  {

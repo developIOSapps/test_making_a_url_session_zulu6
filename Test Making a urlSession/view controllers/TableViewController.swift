@@ -21,7 +21,7 @@ class TableViewController: UITableViewController {
 
     var deviceGroups: [DeviceGroup] = []
     var users: [User] = []
-    
+    var devices: [Device] = []
     
     fileprivate func doSideStuff() {
         _ = DeviceGroupResponse.loadTheData()
@@ -38,7 +38,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let whatToDo = 5
+        let whatToDo = 6
         
         switch whatToDo {
             
@@ -108,6 +108,20 @@ class TableViewController: UITableViewController {
                     // self.tableView.reloadData()
                 }
             }
+            case 6:
+                GetDataApi.getDeviceListByGroupResponse (GeneratedReq.init(request: ValidReqs.devicesInDeviceGroup(parameterDict: ["groups" : "12" ]) )) { (deviceListResponse) in
+                    DispatchQueue.main.async {
+                        
+                        guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
+                        
+                        /// Just load in the users into this class if needed
+                        self.devices = deviceListResponse.devices
+                        /// Here we have what we need
+                        deviceListResponse.devices.forEach { print($0.serialNumber + "--" + $0.serialNumber) }
+                        
+                        // self.tableView.reloadData()
+                    }
+                }
 
         default:
             break
