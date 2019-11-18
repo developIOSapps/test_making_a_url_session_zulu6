@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4608FE33237EEBC500EE7C80 /* ProfilesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4608FE32237EEBC500EE7C80 /* ProfilesResponse.swift */; };
+		4608FE35237EECC400EE7C80 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4608FE34237EECC400EE7C80 /* Profile.swift */; };
 		460C56052365FBBC00AC7606 /* DeviceListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460C56042365FBBC00AC7606 /* DeviceListResponse.swift */; };
 		460C56072365FC9A00AC7606 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460C56062365FC9A00AC7606 /* Device.swift */; };
 		463F328C22A9A5C60015092E /* DeviceGroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F328B22A9A5C60015092E /* DeviceGroupResponse.swift */; };
 		4641D33422B6FB0200D8EA13 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641D33322B6FB0200D8EA13 /* DetailViewController.swift */; };
+		4649F20A2381DB4B00D12E80 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4649F2092381DB4B00D12E80 /* HelperFunctions.swift */; };
 		4662C74B228C996E00D99B84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662C74A228C996E00D99B84 /* AppDelegate.swift */; };
 		4662C74D228C996E00D99B84 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662C74C228C996E00D99B84 /* TableViewController.swift */; };
 		4662C750228C996E00D99B84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4662C74E228C996E00D99B84 /* Main.storyboard */; };
@@ -29,15 +32,22 @@
 		466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B2C9A22FDBAD9009C19E4 /* PrettyPrintingJson.swift */; };
 		4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4694D91C2302E58000FEE622 /* GenerateReq.swift */; };
 		469CB55622A9BCD600631ACE /* deviceGroups.json in Resources */ = {isa = PBXBuildFile; fileRef = 469CB55522A9BCD600631ACE /* deviceGroups.json */; };
+		46A3237E237E3BC500D4F77E /* SchoolClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A3237D237E3BC500D4F77E /* SchoolClass.swift */; };
+		46A32380237E3BF700D4F77E /* SchoolClassResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A3237F237E3BF700D4F77E /* SchoolClassResponse.swift */; };
+		46C75CF3237ED19C00EE37CD /* StudentTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C75CF2237ED19C00EE37CD /* StudentTableTableViewController.swift */; };
+		46C75CF5237EDB5300EE37CD /* StudentProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C75CF4237EDB5300EE37CD /* StudentProfileViewController.swift */; };
 		46D56C422304E36A00CFF452 /* DeviceDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D56C412304E36A00CFF452 /* DeviceDetailResponse.swift */; };
 		46EF5FE622B28D1C001C45AF /* GetDeviceGroupResponseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4608FE32237EEBC500EE7C80 /* ProfilesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesResponse.swift; sourceTree = "<group>"; };
+		4608FE34237EECC400EE7C80 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		460C56042365FBBC00AC7606 /* DeviceListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListResponse.swift; sourceTree = "<group>"; };
 		460C56062365FC9A00AC7606 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		463F328B22A9A5C60015092E /* DeviceGroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceGroupResponse.swift; sourceTree = "<group>"; };
 		4641D33322B6FB0200D8EA13 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		4649F2092381DB4B00D12E80 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		4662C747228C996E00D99B84 /* Test Making a urlSession.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test Making a urlSession.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4662C74A228C996E00D99B84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4662C74C228C996E00D99B84 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +68,10 @@
 		466B2C9A22FDBAD9009C19E4 /* PrettyPrintingJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyPrintingJson.swift; sourceTree = "<group>"; };
 		4694D91C2302E58000FEE622 /* GenerateReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateReq.swift; sourceTree = "<group>"; };
 		469CB55522A9BCD600631ACE /* deviceGroups.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deviceGroups.json; sourceTree = "<group>"; };
+		46A3237D237E3BC500D4F77E /* SchoolClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolClass.swift; sourceTree = "<group>"; };
+		46A3237F237E3BF700D4F77E /* SchoolClassResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolClassResponse.swift; sourceTree = "<group>"; };
+		46C75CF2237ED19C00EE37CD /* StudentTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTableTableViewController.swift; sourceTree = "<group>"; };
+		46C75CF4237EDB5300EE37CD /* StudentProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProfileViewController.swift; sourceTree = "<group>"; };
 		46D56C412304E36A00CFF452 /* DeviceDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailResponse.swift; sourceTree = "<group>"; };
 		46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDeviceGroupResponseApi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +87,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4608FE2F237EEB4100EE7C80 /* profiles */ = {
+			isa = PBXGroup;
+			children = (
+				4608FE31237EEB6200EE7C80 /* response */,
+				4608FE30237EEB5100EE7C80 /* item */,
+			);
+			path = profiles;
+			sourceTree = "<group>";
+		};
+		4608FE30237EEB5100EE7C80 /* item */ = {
+			isa = PBXGroup;
+			children = (
+				4608FE34237EECC400EE7C80 /* Profile.swift */,
+			);
+			path = item;
+			sourceTree = "<group>";
+		};
+		4608FE31237EEB6200EE7C80 /* response */ = {
+			isa = PBXGroup;
+			children = (
+				4608FE32237EEBC500EE7C80 /* ProfilesResponse.swift */,
+			);
+			path = response;
+			sourceTree = "<group>";
+		};
 		460C56082365FCFC00AC7606 /* deviceList */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +140,8 @@
 		463F328822A98E2C0015092E /* models */ = {
 			isa = PBXGroup;
 			children = (
+				4608FE2F237EEB4100EE7C80 /* profiles */,
+				46A3237C237E3B9400D4F77E /* SchoolClass */,
 				46D56C3F2304E32A00CFF452 /* device detail */,
 				466B2C9222FDADBC009C19E4 /* user */,
 				466B2C8B22FDA46C009C19E4 /* deviceGroup */,
@@ -128,6 +169,7 @@
 		4662C749228C996E00D99B84 /* Test Making a urlSession */ = {
 			isa = PBXGroup;
 			children = (
+				4649F2092381DB4B00D12E80 /* HelperFunctions.swift */,
 				4662C74A228C996E00D99B84 /* AppDelegate.swift */,
 				467881F822B6ABF600FA8DCF /* view controllers */,
 				466B2C8522FC4369009C19E4 /* generateURLRequest */,
@@ -252,6 +294,8 @@
 			children = (
 				4662C74C228C996E00D99B84 /* TableViewController.swift */,
 				4641D33322B6FB0200D8EA13 /* DetailViewController.swift */,
+				46C75CF2237ED19C00EE37CD /* StudentTableTableViewController.swift */,
+				46C75CF4237EDB5300EE37CD /* StudentProfileViewController.swift */,
 			);
 			path = "view controllers";
 			sourceTree = "<group>";
@@ -263,6 +307,31 @@
 				466B2C8722FDA11D009C19E4 /* users.json */,
 			);
 			path = resources;
+			sourceTree = "<group>";
+		};
+		46A3237C237E3B9400D4F77E /* SchoolClass */ = {
+			isa = PBXGroup;
+			children = (
+				46A32381237E3C0700D4F77E /* item */,
+				46A32382237E3C1600D4F77E /* response */,
+			);
+			path = SchoolClass;
+			sourceTree = "<group>";
+		};
+		46A32381237E3C0700D4F77E /* item */ = {
+			isa = PBXGroup;
+			children = (
+				46A3237D237E3BC500D4F77E /* SchoolClass.swift */,
+			);
+			path = item;
+			sourceTree = "<group>";
+		};
+		46A32382237E3C1600D4F77E /* response */ = {
+			isa = PBXGroup;
+			children = (
+				46A3237F237E3BF700D4F77E /* SchoolClassResponse.swift */,
+			);
+			path = response;
 			sourceTree = "<group>";
 		};
 		46D56C3F2304E32A00CFF452 /* device detail */ = {
@@ -357,7 +426,11 @@
 				466B2C9122FDAAB6009C19E4 /* OurCodable.swift in Sources */,
 				46EF5FE622B28D1C001C45AF /* GetDeviceGroupResponseApi.swift in Sources */,
 				4662C74D228C996E00D99B84 /* TableViewController.swift in Sources */,
+				46A32380237E3BF700D4F77E /* SchoolClassResponse.swift in Sources */,
+				4608FE33237EEBC500EE7C80 /* ProfilesResponse.swift in Sources */,
+				46A3237E237E3BC500D4F77E /* SchoolClass.swift in Sources */,
 				46D56C422304E36A00CFF452 /* DeviceDetailResponse.swift in Sources */,
+				4649F20A2381DB4B00D12E80 /* HelperFunctions.swift in Sources */,
 				4662C766228CBD7300D99B84 /* APIRequest.swift in Sources */,
 				466B2C9622FDAF19009C19E4 /* User.swift in Sources */,
 				4641D33422B6FB0200D8EA13 /* DetailViewController.swift in Sources */,
@@ -367,9 +440,12 @@
 				463F328C22A9A5C60015092E /* DeviceGroupResponse.swift in Sources */,
 				4662C761228CB95400D99B84 /* HTTPMethod.swift in Sources */,
 				4662C764228CBAAB00D99B84 /* QueryType.swift in Sources */,
+				4608FE35237EECC400EE7C80 /* Profile.swift in Sources */,
+				46C75CF5237EDB5300EE37CD /* StudentProfileViewController.swift in Sources */,
 				460C56072365FC9A00AC7606 /* Device.swift in Sources */,
 				466B2C8D22FDA4B8009C19E4 /* DeviceGroup.swift in Sources */,
 				460C56052365FBBC00AC7606 /* DeviceListResponse.swift in Sources */,
+				46C75CF3237ED19C00EE37CD /* StudentTableTableViewController.swift in Sources */,
 				466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */,
 				4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */,
 				4662C75D228CA8E900D99B84 /* APIClient.swift in Sources */,

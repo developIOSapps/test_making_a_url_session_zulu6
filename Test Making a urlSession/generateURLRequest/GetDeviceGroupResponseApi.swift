@@ -85,8 +85,104 @@ struct GetDataApi {
         }
     }
     
+  
+  static func updateUserProperty(_ generatedReq: GeneratedReq , then completion: @escaping () -> Void )  {
+      
+      /// Get the data
+      getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
+          
+          print("in the GetDataApi.getZuluDataWrapper before switch")
+          switch result {
+              
+          case .failure(let err):
+              print(err.localizedDescription)
+              print("in the GetDataApi.getZuluDataWrapper in switch error")
+              switch err {
+              case .decodingError:    print("decoding error")
+              case .domainError:      print("domiain error")
+              case .generalError:     print("HTTP error")
+              }
+              print(err)
+              
+              
+          case .success(let data):
+              print("in the GetDataApi.getZuluDataWrapper in switch success")
+              print(data.prettyPrintedJSONString)
+              print("we are updating notes")
+              completion()
+              
+          }
+      }
+  }
 
     
+        static func getSchoolClassListResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.classes), then completion: @escaping (OurCodable) -> Void )  {
+            
+            /// Get the data
+            getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
+                
+                print("in the GetDataApi.getZuluDataWrapper before switch")
+                switch result {
+                    
+                case .failure(let err):
+                    print("in the GetDataApi.getZuluDataWrapper in switch error")
+                    switch err {
+                    case .decodingError:    print("decoding error")
+                    case .domainError:      print("domiain error")
+                    case .generalError:     print("HTTP error")
+                    }
+                    print(err)
+                    
+                    
+                case .success(let data):
+                    print("in the GetDataApi.getZuluDataWrapper in switch success")
+                    print(data.prettyPrintedJSONString)
+
+                    let decoder = JSONDecoder()
+
+                    guard let schoolClassResponsxx = try? decoder.decode(SchoolClassResponse.self, from: data) else {fatalError()}
+                    guard let schoolClss = schoolClassResponsxx as? SchoolClassResponse else {fatalError("could not convert it to Users")}
+                    print("we are up to schoolClss response")
+                    completion(schoolClss)
+                    
+                }
+            }
+        }
+
+    
+    static func getProfileListResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.profiles), then completion: @escaping (OurCodable) -> Void )  {
+        
+        /// Get the data
+        getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
+            
+            print("in the GetDataApi.getZuluDataWrapper before switch")
+            switch result {
+                
+            case .failure(let err):
+                print("in the GetDataApi.getZuluDataWrapper in switch error")
+                switch err {
+                case .decodingError:    print("decoding error")
+                case .domainError:      print("domiain error")
+                case .generalError:     print("HTTP error")
+                }
+                print(err)
+                
+                
+            case .success(let data):
+                print("in the GetDataApi.getZuluDataWrapper in switch success")
+                print(data.prettyPrintedJSONString)
+
+                let decoder = JSONDecoder()
+
+                guard let profilesResponsexx = try? decoder.decode(ProfilesResponse.self, from: data) else {fatalError()}
+                guard let profileList = profilesResponsexx as? ProfilesResponse else {fatalError("could not convert it to profiles")}
+                print("we are up to schoolClss response")
+                completion(profileList)
+                
+            }
+        }
+    }
+
     
     static func getUserListResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.users), then completion: @escaping (OurCodable) -> Void )  {
         

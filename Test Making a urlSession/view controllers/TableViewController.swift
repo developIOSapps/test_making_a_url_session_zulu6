@@ -21,6 +21,10 @@ class TableViewController: UITableViewController {
 
     var deviceGroups: [DeviceGroup] = []
     var users: [User] = []
+    var schoolClasses: [SchoolClass] = []
+    var profiles: [Profile] = []
+
+    
     var devices: [Device] = []
     
     fileprivate func doSideStuff() {
@@ -38,7 +42,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let whatToDo = 6
+        let whatToDo = 7
         
         switch whatToDo {
             
@@ -73,7 +77,7 @@ class TableViewController: UITableViewController {
                     
                     self.deviceGroups = dvcg.deviceGroups
                     
-                    self.tableView.reloadData()
+                    // self.tableView.reloadData()
                 }
             }
             
@@ -95,17 +99,21 @@ class TableViewController: UITableViewController {
             }
         
         case 5:
-            GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : "9" ]) )) { (userResponse) in
+            GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : "18" ]) )) { (userResponse) in
                 DispatchQueue.main.async {
                     
                     guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
                     
                     /// Just load in the users into this class if needed
                     self.users = usrResponse.users
+                    self.users.sort {
+                        $0.lastName < $1.lastName
+                    }
+
                     /// Here we have what we need
                     usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
                     
-                    // self.tableView.reloadData()
+                     self.tableView.reloadData()
                 }
             }
             case 6:
@@ -120,6 +128,44 @@ class TableViewController: UITableViewController {
                         deviceListResponse.devices.forEach { print($0.serialNumber + "--" + $0.serialNumber) }
                         
                         // self.tableView.reloadData()
+                    }
+                }
+            case 7:
+                GetDataApi.getSchoolClassListResponse { (xyz) in
+                    DispatchQueue.main.async {
+                        guard let clsResponse = xyz as? SchoolClassResponse else {fatalError("could not convert it to Classes")}
+                        let clss = clsResponse.classes.first
+                        print(String(repeating: "\(String(describing: clss?.name))  " , count: 5))
+                        
+                        self.schoolClasses = clsResponse.classes.filter{$0.name.hasPrefix("20") }
+                        
+                        
+                        self.schoolClasses.forEach { print($0.name ) }
+                        
+                        self.tableView.reloadData()
+                    }
+                }
+
+            case 8:
+                GetDataApi.getProfileListResponse { (xyz) in
+                    DispatchQueue.main.async {
+                        guard let profilesResponse = xyz as? ProfilesResponse else {fatalError("could not convert it to Profiles")}
+                        let profls = profilesResponse.profiles.first
+                        print(String(repeating: "\(String(describing: profls?.name))  " , count: 5))
+                        
+                        self.profiles = profilesResponse.profiles.filter{$0.name.hasPrefix("Profile-App ") }
+                        
+                        
+                        self.profiles.forEach { print($0.name ) }
+                        
+                        // self.tableView.reloadData()
+                    }
+                }
+            
+            case 9:
+                GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: "249", propertyName: "notes", propertyValue: "1212121212"))) {
+                    DispatchQueue.main.async {
+                        print("*** Hooray Job well done")
                     }
                 }
 
@@ -142,12 +188,14 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return deviceGroups.count
+        return schoolClasses.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = deviceGroups[indexPath.row].name
+        let schoolClass =  schoolClasses[indexPath.row]
+        
+        cell.textLabel?.text = schoolClass.name 
         return cell
     }
 
@@ -156,9 +204,12 @@ class TableViewController: UITableViewController {
 
 extension TableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let indexPath = tableView.indexPathForSelectedRow
-        var detailVC = segue.destination as! DetailViewController
-        detailVC.deviceGroup = deviceGroups[(indexPath?.row)!]
+        let studentTableVC = segue.destination as! StudentTableTableViewController
+        
+        guard let rowSelected = tableView.indexPathForSelectedRow?.row else {fatalError()}
+        
+        studentTableVC.classGroupCodeInt = schoolClasses[rowSelected].userGroupId
+        studentTableVC.navBarTitle = schoolClasses[rowSelected].name
     }
 }
 

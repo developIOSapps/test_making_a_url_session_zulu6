@@ -11,11 +11,13 @@ import Foundation
 enum HttpMethod: String {
     case get = "Get"
     case post = "Post"
+    case put = "Put"
 }
 
 enum ValidReqs {
     case updateDeviceProperty(deviceId: String, propertyName: String, propertyValue: String)
-    case users, apps, deviceGroups
+    case updateUserProperty(userId: String, propertyName: String, propertyValue: String)
+    case users, apps, deviceGroups, classes, profiles
     case deviceDetail(deviceId: String)
     case userDetail(userId: String)
     case usersInDeviceGroup(parameterDict: [String: String])
@@ -27,8 +29,11 @@ enum GeneratedReq  {
     
     case deviceGroups(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case apps(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
+    case classes(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
+    case profiles(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case users(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case updateDeviceProperty(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
+    case updateUserProperty(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case deviceDetail(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case userDetail(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case usersInDeviceGroup(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
@@ -36,7 +41,7 @@ enum GeneratedReq  {
 
     init(request: ValidReqs) {
         
-        let headerDict: [String: String] = ["Authorization": "Basic NTM3MjI0NjA6RVBUTlpaVEdYV1U1VEo0Vk5RUDMyWDVZSEpSVjYyMkU=", "X-Server-Protocol-Version": "2", "Content-Type": "text/plain; charset=utf-8" ]
+        let headerDict: [String: String] = ["Authorization": "Basic NTM3MjI0NjA6RVBUTlpaVEdYV1U1VEo0Vk5RUDMyWDVZSEpSVjYyMkU=", "X-Server-Protocol-Version": "3", "Content-Type": "text/plain; charset=utf-8" ]
         
 
         switch request {
@@ -44,6 +49,10 @@ enum GeneratedReq  {
             self = .deviceGroups(path: "/devices/groups", method: HttpMethod.get, header: headerDict, body: nil, queryItems: nil)
         case .users:
             self = .users(path: "/users", method: HttpMethod.get, header: headerDict, body: nil, queryItems: nil)
+        case .classes:
+            self = .classes(path: "/classes", method: HttpMethod.get, header: headerDict, body: nil, queryItems: nil)
+        case .profiles:
+            self = .classes(path: "/profiles", method: HttpMethod.get, header: headerDict, body: nil, queryItems: nil)
         case .apps:
             self = .apps(path: "/apps", method: HttpMethod.get, header: headerDict, body: nil, queryItems: nil)
         case .updateDeviceProperty(let deviceId, let propertyName, let propertyValue):
@@ -53,6 +62,13 @@ enum GeneratedReq  {
             }
             """#
             self = .updateDeviceProperty(path: "/devices/~~deviceId~~/details".replacingOccurrences(of: "~~deviceId~~", with: deviceId), method: HttpMethod.post, header: headerDict, body: bodyString, queryItems: nil)
+        case .updateUserProperty(let userId, let propertyName, let propertyValue):
+            let bodyString = #"""
+            {
+            "\#(propertyName)": "\#(propertyValue)"
+            }
+            """#
+            self = .updateUserProperty(path: "/users/~~userId~~".replacingOccurrences(of: "~~userId~~", with: userId), method: HttpMethod.put, header: headerDict, body: bodyString, queryItems: nil)
         case .deviceDetail(let deviceId):
             self = .deviceDetail(path: "/devices/\(deviceId)", method: HttpMethod.get, header: headerDict, body: nil, queryItems: nil)
 
@@ -81,9 +97,15 @@ enum GeneratedReq  {
         switch self {
         case .apps(let path, _, _, _, _):
             return path
+        case .classes(let path, _, _, _, _):
+            return path
+        case .profiles(let path, _, _, _, _):
+            return path
         case .deviceGroups(let path, _, _, _, _):
             return path
         case .updateDeviceProperty(let path, _, _, _, _):
+            return path
+        case .updateUserProperty(let path, _, _, _, _):
             return path
         case .users(let path, _, _, _, _):
             return path
@@ -102,9 +124,15 @@ enum GeneratedReq  {
         switch self {
         case .apps(_ , let method, _, _, _):
             return method.rawValue
+        case .classes(_ , let method, _, _, _):
+            return method.rawValue
+        case .profiles(_ , let method, _, _, _):
+            return method.rawValue
         case .deviceGroups(_ , let method, _, _, _):
             return method.rawValue
         case .updateDeviceProperty(_ , let method, _, _, _):
+            return method.rawValue
+        case .updateUserProperty(_ , let method, _, _, _):
             return method.rawValue
         case .users(_ , let method, _, _, _):
             return method.rawValue
@@ -123,9 +151,15 @@ enum GeneratedReq  {
         switch self {
         case .apps(_ , _, let header, _, _):
             return header
+        case .classes(_ , _, let header, _, _):
+            return header
+        case .profiles(_ , _, let header, _, _):
+            return header
         case .deviceGroups(_ , _, let header, _, _):
             return header
         case .updateDeviceProperty(_ , _, let header, _, _):
+            return header
+        case .updateUserProperty(_ , _, let header, _, _):
             return header
         case .users(_ , _, let header, _, _):
             return header
@@ -144,9 +178,15 @@ enum GeneratedReq  {
         switch self {
         case .apps(_ , _, _, let body, _):
             return body
+        case .classes(_ , _, _, let body, _):
+            return body
+        case .profiles(_ , _, _, let body, _):
+            return body
         case .deviceGroups(_ , _,  _, let body, _):
             return body
         case .updateDeviceProperty(_ , _,  _, let body, _):
+            return body
+        case .updateUserProperty(_ , _,  _, let body, _):
             return body
         case .users(_ , _,  _, let body, _):
             return body
@@ -166,9 +206,15 @@ enum GeneratedReq  {
         switch self {
         case .apps(_ , _, _, _, let queryItems):
             return queryItems
+        case .classes(_ , _, _, _, let queryItems):
+            return queryItems
+        case .profiles(_ , _, _, _, let queryItems):
+            return queryItems
         case .deviceGroups(_ , _,  _, _, let queryItems):
             return queryItems
         case .updateDeviceProperty(_ , _,  _, _, let queryItems):
+            return queryItems
+        case .updateUserProperty(_ , _,  _, _, let queryItems):
             return queryItems
         case .users(_ , _,  _, _, let queryItems):
             return queryItems
