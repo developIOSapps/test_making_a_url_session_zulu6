@@ -12,33 +12,23 @@ class StudentProfileViewController: UIViewController {
     
     var student : User!
     
-    @IBOutlet weak var firstName: UILabel!
-
-    @IBOutlet weak var LastName: UILabel!
-    
-    @IBOutlet weak var profilesTableView: UITableView!
-    
-    @IBOutlet weak var profileDescription: UILabel!
-    
-    @IBOutlet weak var dayOfWeekSegment: UISegmentedControl!
+    @IBOutlet weak var firstName:           UILabel!
+    @IBOutlet weak var LastName:            UILabel!
+    @IBOutlet weak var profilesTableView:   UITableView!
+    @IBOutlet weak var profileDescription:  UILabel!
+    @IBOutlet weak var dayOfWeekSegment:    UISegmentedControl!
     
 
-    var notesDelegate: NotesDelegate?
-    
-    var setAlready: Bool = false
-    
-    var profiles: [Profile] = []
-    
-    var profileForTheDayArray = Array(repeating: String(), count: 5)
-    
-    var segmentMovingFrom = 0
-    
-    var indexPathDictionary: [String: IndexPath] = [:]
+    var notesDelegate:          NotesDelegate?
+    var setAlready:             Bool = false
+    var profiles:               [Profile] = []
+    var profileForTheDayArray   = Array(repeating: String(), count: 5)
+    var segmentMovingFrom       = 0
+    // var indexPathDictionary: [String: IndexPath] = [:]
         
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         profilesTableView.dataSource = self
         profilesTableView.delegate = self
@@ -47,7 +37,6 @@ class StudentProfileViewController: UIViewController {
         LastName.text = student.lastName
         
         dayOfWeekSegment.selectedSegmentIndex = 0
-        
         
         GetDataApi.getProfileListResponse { (xyz) in
             DispatchQueue.main.async {
@@ -87,11 +76,6 @@ class StudentProfileViewController: UIViewController {
         var studentProfileList = profileForTheDayArray.joined(separator: ";")
         studentProfileList.append("~#~")
         let studentProfileListComplete = "~#~" + studentProfileList
-        
-        guard let rowSelected = profilesTableView.indexPathForSelectedRow?.row else {
-            print("need to select a profile")
-            return
-        }
 
         GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: String(student.id), propertyName: "notes", propertyValue: studentProfileListComplete))) {
             DispatchQueue.main.async {
@@ -170,9 +154,7 @@ class StudentProfileViewController: UIViewController {
             setAlready = false
             return
         }
-         
     }
-    
 }
 
 extension StudentProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -188,9 +170,6 @@ extension StudentProfileViewController: UITableViewDelegate, UITableViewDataSour
         let profile = profiles[indexPath.row]
         cell.textLabel?.text = profile.name
         
-        /// need this so when I get all the profile names I can buid and index pat arrary
-        indexPathDictionary[profile.name] = indexPath
-
         return cell
     }
     
@@ -200,7 +179,4 @@ extension StudentProfileViewController: UITableViewDelegate, UITableViewDataSour
         let row = indexPath.row
         profileForTheDayArray[segmentMovingFrom] = profiles[row].name
     }
-    
-   
-    
 }
