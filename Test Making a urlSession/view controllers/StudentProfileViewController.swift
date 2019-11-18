@@ -40,13 +40,11 @@ class StudentProfileViewController: UIViewController {
         
         GetDataApi.getProfileListResponse { (xyz) in
             DispatchQueue.main.async {
-                guard let profilesResponse = xyz as? ProfilesResponse else {fatalError("could not convert it to Profiles")}
+                guard let profilesResponse = xyz as? ProfilesResponse
+                    else {fatalError("could not convert it to Profiles")}
                 let profls = profilesResponse.profiles.first
-                print(String(repeating: "\(String(describing: profls?.name))  " , count: 5))
-                
-                self.profiles = profilesResponse.profiles.filter{$0.name.hasPrefix("Profile-App ") }
-                
-                self.profiles.forEach { print($0.name ) }
+                self.profiles =
+                    profilesResponse.profiles.filter{$0.name.hasPrefix("Profile-App ") }
                 
                 self.profilesTableView.reloadData()
                 
@@ -83,18 +81,14 @@ class StudentProfileViewController: UIViewController {
                 print("````````````Hooray Job well done")
             }
         }
-        
     }
     
     @IBAction func dayOfWeekChanged(_ sender: UISegmentedControl) {
-        print("The current day selection is \(sender.selectedSegmentIndex)")
-        
-        for item in profileForTheDayArray {
-            print("``````````````````the item is \(item)")
-        }
         
         guard let selectionIndexPath = self.profilesTableView.indexPathForSelectedRow
-            else { sender.selectedSegmentIndex  = segmentMovingFrom
+            else {
+                sender.selectedSegmentIndex  = segmentMovingFrom
+                print("Please select a profile before changing days")
                 return
         }
         
@@ -108,7 +102,6 @@ class StudentProfileViewController: UIViewController {
         /// get the profile of the day
         
         if let rownumber = profiles.firstIndex(where: { (item) -> Bool in
-            print("Check to hightlight row with --- \(profileForTheDayArray[sender.selectedSegmentIndex])")
             return item.name == profileForTheDayArray[sender.selectedSegmentIndex]
         }) {
             profilesTableView.selectRow(at: IndexPath(row: rownumber, section: 0), animated: true, scrollPosition: .none)
@@ -123,7 +116,6 @@ class StudentProfileViewController: UIViewController {
     
     func processStudentNotes() {
         /// Setup
-        // let stringToProcess = "a soft ~#~Here fkjbf;;kjkfjvkjf;fjjfjfjf; I want to capture~#~ orange cat"
         let delimeter = "~#~"
         
         /// Function Call
@@ -144,13 +136,8 @@ class StudentProfileViewController: UIViewController {
                 profileForTheDayArray[idx] = (String(item))
                 print("`````loading \(String(item))")
             }
-            
-            
-            strSplit2.forEach { (item) in
-                print("--",item)
-            }
-            
-        } catch  {
+        }
+        catch  {
             setAlready = false
             return
         }
