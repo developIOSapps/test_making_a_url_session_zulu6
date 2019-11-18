@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WOQ-K5-tem">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WOQ-K5-tem">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -164,16 +164,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1WU-cm-3VV">
-                                <rect key="frame" x="51" y="117" width="134" height="29"/>
+                                <rect key="frame" x="20" y="121" width="374" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6a5-3x-A0U">
-                                <rect key="frame" x="213" y="117" width="154" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -208,13 +201,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6J-43-MzO">
-                                <rect key="frame" x="68" y="671" width="278" height="30"/>
-                                <state key="normal" title="Update the Student with selected profile"/>
-                                <connections>
-                                    <action selector="updateTheStudent:" destination="5fD-25-OpJ" eventType="touchUpInside" id="tve-UL-sMS"/>
-                                </connections>
-                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9rL-Jg-yXE">
                                 <rect key="frame" x="20" y="209" width="374" height="31"/>
                                 <constraints>
@@ -231,21 +217,39 @@
                                     <action selector="dayOfWeekChanged:" destination="5fD-25-OpJ" eventType="valueChanged" id="Bek-gK-JRy"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6J-43-MzO" customClass="DesignableButton" customModule="Test_Making_a_urlSession" customModuleProvider="target">
+                                <rect key="frame" x="207" y="824" width="187" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="tintColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Update the Student " image="plus.square.on.square" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateTheStudent:" destination="5fD-25-OpJ" eventType="touchUpInside" id="tve-UL-sMS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="FiA-Qc-UDa" firstAttribute="bottom" secondItem="f6J-43-MzO" secondAttribute="bottom" constant="161" id="FCi-60-JKS"/>
                             <constraint firstItem="9rL-Jg-yXE" firstAttribute="top" secondItem="FiA-Qc-UDa" secondAttribute="top" constant="121" id="Keg-KB-lS3"/>
                             <constraint firstItem="9rL-Jg-yXE" firstAttribute="leading" secondItem="FiA-Qc-UDa" secondAttribute="leading" constant="20" id="Lrb-1L-1a6"/>
                             <constraint firstItem="FiA-Qc-UDa" firstAttribute="trailing" secondItem="9rL-Jg-yXE" secondAttribute="trailing" constant="20" id="YXl-Vn-rfD"/>
-                            <constraint firstItem="FiA-Qc-UDa" firstAttribute="trailing" secondItem="f6J-43-MzO" secondAttribute="trailing" constant="68" id="j1M-9H-rKH"/>
-                            <constraint firstItem="f6J-43-MzO" firstAttribute="leading" secondItem="FiA-Qc-UDa" secondAttribute="leading" constant="68" id="yRj-O9-Ing"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FiA-Qc-UDa"/>
                     </view>
                     <navigationItem key="navigationItem" id="7Xu-0S-6r5"/>
                     <connections>
-                        <outlet property="LastName" destination="6a5-3x-A0U" id="P0e-Iq-ojO"/>
                         <outlet property="dayOfWeekSegment" destination="9rL-Jg-yXE" id="xFP-sr-FiB"/>
                         <outlet property="firstName" destination="1WU-cm-3VV" id="Ah5-Ei-8up"/>
                         <outlet property="profileDescription" destination="Z8D-rl-jc8" id="bgC-mu-SiK"/>
@@ -257,4 +261,7 @@
             <point key="canvasLocation" x="2589.8550724637685" y="-70.3125"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="plus.square.on.square" catalog="system" width="64" height="56"/>
+    </resources>
 </document>

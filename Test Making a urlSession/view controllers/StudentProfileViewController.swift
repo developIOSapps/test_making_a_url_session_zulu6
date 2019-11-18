@@ -8,7 +8,17 @@
 
 import UIKit
 
+enum Literals: Int {
+    case nbrOfDays = 5
+    
+    static func nbrOfDaysInt() -> Int {
+        Literals.nbrOfDays.rawValue
+    }
+}
+
+
 class StudentProfileViewController: UIViewController {
+    
     
     var student : User!
     
@@ -22,9 +32,8 @@ class StudentProfileViewController: UIViewController {
     var notesDelegate:          NotesDelegate?
     var setAlready:             Bool = false
     var profiles:               [Profile] = []
-    var profileForTheDayArray   = Array(repeating: String(), count: 5)
+    var profileForTheDayArray   = Array(repeating: String(), count: Literals.nbrOfDaysInt())
     var segmentMovingFrom       = 0
-    // var indexPathDictionary: [String: IndexPath] = [:]
         
     
     override func viewDidLoad() {
@@ -33,8 +42,7 @@ class StudentProfileViewController: UIViewController {
         profilesTableView.dataSource = self
         profilesTableView.delegate = self
         
-        firstName.text = student.firstName
-        LastName.text = student.lastName
+        firstName.text = student.firstName + " " + student.lastName.trimmingCharacters(in: .whitespacesAndNewlines)
         
         dayOfWeekSegment.selectedSegmentIndex = 0
         
@@ -42,7 +50,6 @@ class StudentProfileViewController: UIViewController {
             DispatchQueue.main.async {
                 guard let profilesResponse = xyz as? ProfilesResponse
                     else {fatalError("could not convert it to Profiles")}
-                let profls = profilesResponse.profiles.first
                 self.profiles =
                     profilesResponse.profiles.filter{$0.name.hasPrefix("Profile-App ") }
                 
@@ -64,9 +71,12 @@ class StudentProfileViewController: UIViewController {
     
     @IBAction func updateTheStudent(_ sender: Any) {
         
-        for profile in profileForTheDayArray   {
+        
+        for (idx, profile) in profileForTheDayArray.enumerated()   {
             if profile.isEmpty {
-                print("Update Failed, All 5 Days are required")
+                dayOfWeekSegment.selectedSegmentIndex = idx
+                dayOfWeekChanged(dayOfWeekSegment)
+                presentAlertWithTitle("Error", message: "Update failed, all the days are required")
                 return
             }
         }
@@ -78,6 +88,7 @@ class StudentProfileViewController: UIViewController {
         GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: String(student.id), propertyName: "notes", propertyValue: studentProfileListComplete))) {
             DispatchQueue.main.async {
                 self.notesDelegate?.updateStudentNote(passedNoted: studentProfileListComplete)
+                self.presentAlertWithTitle("Update Done", message: "Update successful, student profile set")
                 print("````````````Hooray Job well done")
             }
         }
@@ -85,15 +96,18 @@ class StudentProfileViewController: UIViewController {
     
     @IBAction func dayOfWeekChanged(_ sender: UISegmentedControl) {
         
+        /* No longer doing this check
         guard let selectionIndexPath = self.profilesTableView.indexPathForSelectedRow
             else {
                 sender.selectedSegmentIndex  = segmentMovingFrom
                 print("Please select a profile before changing days")
                 return
         }
-        
+        */
         /// deselect current selection
-        self.profilesTableView.deselectRow(at: selectionIndexPath, animated: true)
+        if let selectionIndexPath = self.profilesTableView.indexPathForSelectedRow {
+            self.profilesTableView.deselectRow(at: selectionIndexPath, animated: true)
+        }
         /// save newSegment
         segmentMovingFrom = sender.selectedSegmentIndex
         
@@ -128,13 +142,11 @@ class StudentProfileViewController: UIViewController {
             print(cleanString)
             
             /// Process Extracted  String
-            let strSplit2 = String(extractedString).split(separator: ";")
-            // let strSplit3 = extractedString.split(separator: ";", maxSplits: 100, omittingEmptySubsequences: false)
+            let studentsNotesAppProfileArray = String(extractedString).split(separator: ";")
             
             /// Load Profiles
-            for (idx, item)  in strSplit2.enumerated() {
+            for (idx, item)  in studentsNotesAppProfileArray.enumerated() {
                 profileForTheDayArray[idx] = (String(item))
-                print("`````loading \(String(item))")
             }
         }
         catch  {
@@ -142,6 +154,8 @@ class StudentProfileViewController: UIViewController {
             return
         }
     }
+    
+    
 }
 
 extension StudentProfileViewController: UITableViewDelegate, UITableViewDataSource {

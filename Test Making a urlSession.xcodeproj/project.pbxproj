@@ -11,9 +11,11 @@
 		4608FE35237EECC400EE7C80 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4608FE34237EECC400EE7C80 /* Profile.swift */; };
 		460C56052365FBBC00AC7606 /* DeviceListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460C56042365FBBC00AC7606 /* DeviceListResponse.swift */; };
 		460C56072365FC9A00AC7606 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460C56062365FC9A00AC7606 /* Device.swift */; };
+		4622303923830B3C00B3DC70 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622303823830B3B00B3DC70 /* DesignableButton.swift */; };
 		463F328C22A9A5C60015092E /* DeviceGroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F328B22A9A5C60015092E /* DeviceGroupResponse.swift */; };
 		4641D33422B6FB0200D8EA13 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641D33322B6FB0200D8EA13 /* DetailViewController.swift */; };
 		4649F20A2381DB4B00D12E80 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4649F2092381DB4B00D12E80 /* HelperFunctions.swift */; };
+		465F7474238309A3005C6132 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465F7473238309A2005C6132 /* UIViewController.swift */; };
 		4662C74B228C996E00D99B84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662C74A228C996E00D99B84 /* AppDelegate.swift */; };
 		4662C74D228C996E00D99B84 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662C74C228C996E00D99B84 /* TableViewController.swift */; };
 		4662C750228C996E00D99B84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4662C74E228C996E00D99B84 /* Main.storyboard */; };
@@ -45,9 +47,11 @@
 		4608FE34237EECC400EE7C80 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		460C56042365FBBC00AC7606 /* DeviceListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListResponse.swift; sourceTree = "<group>"; };
 		460C56062365FC9A00AC7606 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		4622303823830B3B00B3DC70 /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		463F328B22A9A5C60015092E /* DeviceGroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceGroupResponse.swift; sourceTree = "<group>"; };
 		4641D33322B6FB0200D8EA13 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4649F2092381DB4B00D12E80 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		465F7473238309A2005C6132 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		4662C747228C996E00D99B84 /* Test Making a urlSession.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test Making a urlSession.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4662C74A228C996E00D99B84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4662C74C228C996E00D99B84 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +154,14 @@
 			path = models;
 			sourceTree = "<group>";
 		};
+		465F7472238309A2005C6132 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				465F7473238309A2005C6132 /* UIViewController.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
 		4662C73E228C996E00D99B84 = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +181,8 @@
 		4662C749228C996E00D99B84 /* Test Making a urlSession */ = {
 			isa = PBXGroup;
 			children = (
+				4622303823830B3B00B3DC70 /* DesignableButton.swift */,
+				465F7472238309A2005C6132 /* extensions */,
 				4649F2092381DB4B00D12E80 /* HelperFunctions.swift */,
 				4662C74A228C996E00D99B84 /* AppDelegate.swift */,
 				467881F822B6ABF600FA8DCF /* view controllers */,
@@ -425,6 +439,7 @@
 			files = (
 				466B2C9122FDAAB6009C19E4 /* OurCodable.swift in Sources */,
 				46EF5FE622B28D1C001C45AF /* GetDeviceGroupResponseApi.swift in Sources */,
+				465F7474238309A3005C6132 /* UIViewController.swift in Sources */,
 				4662C74D228C996E00D99B84 /* TableViewController.swift in Sources */,
 				46A32380237E3BF700D4F77E /* SchoolClassResponse.swift in Sources */,
 				4608FE33237EEBC500EE7C80 /* ProfilesResponse.swift in Sources */,
@@ -445,6 +460,7 @@
 				460C56072365FC9A00AC7606 /* Device.swift in Sources */,
 				466B2C8D22FDA4B8009C19E4 /* DeviceGroup.swift in Sources */,
 				460C56052365FBBC00AC7606 /* DeviceListResponse.swift in Sources */,
+				4622303923830B3C00B3DC70 /* DesignableButton.swift in Sources */,
 				46C75CF3237ED19C00EE37CD /* StudentTableTableViewController.swift in Sources */,
 				466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */,
 				4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */,
