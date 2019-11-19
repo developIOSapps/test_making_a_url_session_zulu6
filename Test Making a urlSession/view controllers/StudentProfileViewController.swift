@@ -31,6 +31,8 @@ class StudentProfileViewController: UIViewController {
 
     var notesDelegate:          NotesDelegate?
     var setAlready:             Bool = false
+    var userInputToNote          = ""
+    
     var profiles:               [Profile] = []
     var profileForTheDayArray   = Array(repeating: String(), count: Literals.nbrOfDaysInt())
     var segmentMovingFrom       = 0
@@ -84,10 +86,14 @@ class StudentProfileViewController: UIViewController {
         var studentProfileList = profileForTheDayArray.joined(separator: ";")
         studentProfileList.append("~#~")
         let studentProfileListComplete = "~#~" + studentProfileList
+        
+        let newNote = userInputToNote.trimmingCharacters(in: .whitespacesAndNewlines) + "   " + studentProfileListComplete
+        
+        /// find the clean part of note to save
 
-        GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: String(student.id), propertyName: "notes", propertyValue: studentProfileListComplete))) {
+        GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: String(student.id), propertyName: "notes", propertyValue: newNote))) {
             DispatchQueue.main.async {
-                self.notesDelegate?.updateStudentNote(passedNoted: studentProfileListComplete)
+                self.notesDelegate?.updateStudentNote(passedNoted: newNote)
                 self.presentAlertWithTitle("Update Done", message: "Update successful, student profile set")
                 print("````````````Hooray Job well done")
             }
@@ -139,7 +145,9 @@ class StudentProfileViewController: UIViewController {
             setAlready = true
             
             /// Process Cleaned String
-            print(cleanString)
+            print("This is the clean string",cleanString)
+            userInputToNote = cleanString
+            
             
             /// Process Extracted  String
             let studentsNotesAppProfileArray = String(extractedString).split(separator: ";")
