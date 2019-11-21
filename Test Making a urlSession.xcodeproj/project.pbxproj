@@ -39,6 +39,8 @@
 		46C75CF3237ED19C00EE37CD /* StudentTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C75CF2237ED19C00EE37CD /* StudentTableTableViewController.swift */; };
 		46C75CF5237EDB5300EE37CD /* StudentProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C75CF4237EDB5300EE37CD /* StudentProfileViewController.swift */; };
 		46D56C422304E36A00CFF452 /* DeviceDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D56C412304E36A00CFF452 /* DeviceDetailResponse.swift */; };
+		46DD196C23874B4F0023C0EF /* StudentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DD196B23874B4F0023C0EF /* StudentCollectionViewCell.swift */; };
+		46DD196E23874EB20023C0EF /* StudentCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DD196D23874EB20023C0EF /* StudentCollectionViewController.swift */; };
 		46EF5FE622B28D1C001C45AF /* GetDeviceGroupResponseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +79,8 @@
 		46C75CF2237ED19C00EE37CD /* StudentTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTableTableViewController.swift; sourceTree = "<group>"; };
 		46C75CF4237EDB5300EE37CD /* StudentProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProfileViewController.swift; sourceTree = "<group>"; };
 		46D56C412304E36A00CFF452 /* DeviceDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailResponse.swift; sourceTree = "<group>"; };
+		46DD196B23874B4F0023C0EF /* StudentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCollectionViewCell.swift; sourceTree = "<group>"; };
+		46DD196D23874EB20023C0EF /* StudentCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCollectionViewController.swift; sourceTree = "<group>"; };
 		46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDeviceGroupResponseApi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -310,6 +314,8 @@
 				4641D33322B6FB0200D8EA13 /* DetailViewController.swift */,
 				46C75CF2237ED19C00EE37CD /* StudentTableTableViewController.swift */,
 				46C75CF4237EDB5300EE37CD /* StudentProfileViewController.swift */,
+				46DD196B23874B4F0023C0EF /* StudentCollectionViewCell.swift */,
+				46DD196D23874EB20023C0EF /* StudentCollectionViewController.swift */,
 			);
 			path = "view controllers";
 			sourceTree = "<group>";
@@ -438,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				466B2C9122FDAAB6009C19E4 /* OurCodable.swift in Sources */,
+				46DD196C23874B4F0023C0EF /* StudentCollectionViewCell.swift in Sources */,
 				46EF5FE622B28D1C001C45AF /* GetDeviceGroupResponseApi.swift in Sources */,
 				465F7474238309A3005C6132 /* UIViewController.swift in Sources */,
 				4662C74D228C996E00D99B84 /* TableViewController.swift in Sources */,
@@ -464,6 +471,7 @@
 				46C75CF3237ED19C00EE37CD /* StudentTableTableViewController.swift in Sources */,
 				466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */,
 				4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */,
+				46DD196E23874EB20023C0EF /* StudentCollectionViewController.swift in Sources */,
 				4662C75D228CA8E900D99B84 /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

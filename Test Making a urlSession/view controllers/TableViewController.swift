@@ -203,14 +203,23 @@ class TableViewController: UITableViewController {
 
 
 extension TableViewController {
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let studentTableVC = segue.destination as! StudentTableTableViewController
+//        
+//        guard let rowSelected = tableView.indexPathForSelectedRow?.row else {fatalError()}
+//        
+//        studentTableVC.classGroupCodeInt = schoolClasses[rowSelected].userGroupId
+//        studentTableVC.navBarTitle = schoolClasses[rowSelected].name
+//    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let studentTableVC = segue.destination as! StudentTableTableViewController
+        let studentTableVC = segue.destination as! StudentCollectionViewController
         
         guard let rowSelected = tableView.indexPathForSelectedRow?.row else {fatalError()}
         
         studentTableVC.classGroupCodeInt = schoolClasses[rowSelected].userGroupId
         studentTableVC.navBarTitle = schoolClasses[rowSelected].name
     }
+
 }
 
 extension TableViewController {

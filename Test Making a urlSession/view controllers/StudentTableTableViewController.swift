@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol NotesDelegate {
+protocol NotesDelegatex {
         func updateStudentNote(passedNoted: String)
 }
 
-class StudentTableTableViewController: UITableViewController, NotesDelegate {
+class StudentTableTableViewController: UITableViewController, NotesDelegatex {
     
     var navBarTitle = ""
     
@@ -88,7 +88,7 @@ class StudentTableTableViewController: UITableViewController, NotesDelegate {
         rowSelected = rowSelectedTemp
         
         studentProfileVC.student = users[rowSelected]
-        studentProfileVC.notesDelegate = self
+        //studentProfileVC.notesDelegate = self
 
     }
 

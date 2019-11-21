@@ -16,6 +16,7 @@ struct User: OurCodable {
     let id:             Int
     let firstName:      String
     let lastName:       String
+    let username:       String
     var notes:          String
 
 }
