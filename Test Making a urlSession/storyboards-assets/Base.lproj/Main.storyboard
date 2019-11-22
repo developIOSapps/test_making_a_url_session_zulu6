@@ -91,6 +91,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bIU-y5-o3g"/>
                     </view>
+                    <navigationItem key="navigationItem" id="VNC-Sq-0d2"/>
                     <connections>
                         <outlet property="desc" destination="mHp-5h-EOA" id="v9f-Rb-XLd"/>
                         <outlet property="members" destination="NFy-k7-jQV" id="4Ez-H0-OGk"/>
@@ -99,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vWP-NX-7jj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3583" y="-66"/>
+            <point key="canvasLocation" x="2848" y="410"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ekf-oT-19G">
@@ -259,12 +260,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J4g-jC-nH8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2589.8550724637685" y="-70.3125"/>
+            <point key="canvasLocation" x="2654" y="-275"/>
         </scene>
         <!--Student Collection View Controller-->
         <scene sceneID="oNz-Tn-7hT">
             <objects>
-                <collectionViewController id="2id-1p-veB" customClass="StudentCollectionViewController" customModule="Student_Collection_View_Test" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="2id-1p-veB" customClass="StudentCollectionViewController" customModule="Test_Making_a_urlSession" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MBH-zS-lai">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -276,7 +277,7 @@
                             <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myCell" id="gU3-RP-D1P" customClass="StudentCollectionViewCell" customModule="Student_Collection_View_Test" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myCell" id="gU3-RP-D1P" customClass="StudentCollectionViewCell" customModule="Test_Making_a_urlSession" customModuleProvider="target">
                                 <rect key="frame" x="20" y="20" width="140" height="140"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EZi-3c-852">
@@ -316,10 +317,13 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="hFx-JN-cAJ"/>
+                    <connections>
+                        <segue destination="OPQ-kX-Cpq" kind="show" identifier="goToStudentDetail" id="MZH-mU-Nvn"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ea8-9Z-pXf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1819" y="412"/>
+            <point key="canvasLocation" x="1857" y="410"/>
         </scene>
     </scenes>
     <resources>

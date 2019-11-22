@@ -76,49 +76,21 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("in did select item and the item in \(indexPath.row)")
+        rowSelected = indexPath.row
+        performSegue(withIdentifier: "goToStudentDetail", sender: nil)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(segue.identifier)
         
-        let studentProfileVC = segue.destination as! StudentProfileViewController
-        
-        guard let rowSelectedTemp = collectionView.indexPathsForSelectedItems?.last?.row else {fatalError()}
-        rowSelected = rowSelectedTemp
-        
-        studentProfileVC.student = users[rowSelected]
-        studentProfileVC.notesDelegate = self
+        guard let xVC = segue.destination as? DetailViewController else {fatalError(" could not segue ")}
+        print("again")
+        xVC.user = users[rowSelected]
 
     }
 
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }

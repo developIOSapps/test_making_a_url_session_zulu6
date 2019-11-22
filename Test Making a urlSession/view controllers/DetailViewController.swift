@@ -10,6 +10,8 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    var user : User! 
+    
     
     @IBOutlet weak var desc: UILabel!
     
@@ -18,13 +20,16 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var type: UILabel!
     
     
-    var deviceGroup : DeviceGroup!
+    // var deviceGroup : DeviceGroup!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        desc.text = deviceGroup.description
-        members.text = String(deviceGroup.members)
-        type.text = deviceGroup.type
+        desc.text = ""
+        members.text = ""
+        type.text = ""
+        print(user.firstName)
+        let student = Student.getStudentFromUser(user)
+        print("")
         
 
         // Do any additional setup after loading the view.
