@@ -85,10 +85,12 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print(segue.identifier)
         
-        guard let xVC = segue.destination as? DetailViewController else {fatalError(" could not segue ")}
-        print("again")
-        xVC.user = users[rowSelected]
+        guard let studentProfileStaticTableVC = segue.destination as? StudentProfileStaticTableViewController else {fatalError(" could not segue ")}
+      
+        
+        studentProfileStaticTableVC.user = users[rowSelected]
 
+        print("finished Segue")
     }
 
 

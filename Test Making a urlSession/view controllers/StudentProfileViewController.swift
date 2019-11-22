@@ -4,7 +4,9 @@
 //
 //  Created by Steven Hertz on 11/15/19.
 //  Copyright © 2019 DIA. All rights reserved.
-//
+
+
+// From old profile table
 
 import UIKit
 
