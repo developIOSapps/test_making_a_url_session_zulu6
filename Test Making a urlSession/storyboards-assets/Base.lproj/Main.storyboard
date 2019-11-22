@@ -260,7 +260,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J4g-jC-nH8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2654" y="-275"/>
+            <point key="canvasLocation" x="2777" y="-404"/>
         </scene>
         <!--Student Collection View Controller-->
         <scene sceneID="oNz-Tn-7hT">
@@ -365,6 +365,9 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="nU2-MJ-mEo" secondAttribute="trailing" id="n28-4g-f5E"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Pg4-jT-3Tl" kind="show" id="VVM-xK-7o3"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="70" id="d8Q-N5-nET">
                                         <rect key="frame" x="20" y="125.5" width="374" height="70"/>
@@ -543,6 +546,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TlZ-ue-jLx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2804" y="425"/>
+        </scene>
+        <!--Application Profiles-->
+        <scene sceneID="pdB-au-qbq">
+            <objects>
+                <tableViewController hidesBottomBarWhenPushed="YES" id="Pg4-jT-3Tl" customClass="AppProfilesTableViewController" customModule="Rebuild" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VmR-wG-otg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ProfileTableViewCell" rowHeight="111" id="7jo-y4-ug4" customClass="ProfileTableViewCell" customModule="Rebuild" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="111"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7jo-y4-ug4" id="YIf-X1-X9a">
+                                    <rect key="frame" x="0.0" y="0.0" width="370" height="111"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTG-Ya-0ZY">
+                                            <rect key="frame" x="20" y="11" width="342" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="hcD-51-53m"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="749" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmn-Po-w2U">
+                                            <rect key="frame" x="20" y="44" width="342" height="56"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="NTG-Ya-0ZY" firstAttribute="leading" secondItem="YIf-X1-X9a" secondAttribute="leadingMargin" id="cLQ-MB-ey1"/>
+                                        <constraint firstItem="NTG-Ya-0ZY" firstAttribute="trailing" secondItem="YIf-X1-X9a" secondAttribute="trailingMargin" id="fiX-Xq-nlX"/>
+                                        <constraint firstItem="NTG-Ya-0ZY" firstAttribute="top" secondItem="YIf-X1-X9a" secondAttribute="topMargin" id="qno-4o-WEw"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="descrriptionLabel" destination="vmn-Po-w2U" id="jPb-Iw-4u9"/>
+                                    <outlet property="titleLabel" destination="NTG-Ya-0ZY" id="XqI-bS-N4C"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Pg4-jT-3Tl" id="sQZ-Y7-thZ"/>
+                            <outlet property="delegate" destination="Pg4-jT-3Tl" id="3fX-bM-B7t"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Application Profiles" prompt="Select an application profile" id="oyB-Tt-x1n">
+                        <barButtonItem key="backBarButtonItem" systemItem="cancel" id="DJ0-2E-TWu"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="0Qy-2A-9FI">
+                            <connections>
+                                <action selector="doneClicked:" destination="Pg4-jT-3Tl" id="HoY-zO-EYg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uay-ll-6u0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3684" y="425"/>
         </scene>
     </scenes>
     <resources>
