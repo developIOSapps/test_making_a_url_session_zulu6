@@ -76,5 +76,17 @@ extension StudentProfileStaticTableViewController {
 
         profileForDayLabel[daySelected].text = appProfilesTableVC.profiles[appProfilesTableVC.rowSelected].name
         daySelected = 99
+        
+        /// get the note ready
+        
+        var studentProfileList = ""
+        for profile in profileForDayLabel {
+            studentProfileList += (";" + (profile.text ?? ""))
+        }
+        studentProfileList.removeFirst()
+     
+        studentProfileList.append("~#~")
+        let studentProfileListComplete = "~#~" + studentProfileList
+        
     }
 }
