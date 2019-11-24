@@ -10,12 +10,9 @@ import UIKit
 
 class AppProfilesTableViewController: UITableViewController {
 
-    var profiles:               [Profile] = []
-    
-    var expanded: Bool = false
+    var profiles:    [Profile] = []
+    var expanded:    Bool = false
     var rowSelected: Int!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,6 +105,18 @@ class AppProfilesTableViewController: UITableViewController {
          }
      }
 
-
 }
+
+extension AppProfilesTableViewController {
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        guard let rowSelected = rowSelected, let cell = tableView.cellForRow(at: IndexPath(row: rowSelected, section: 0)) else {return false}
+        
+        // don't perform segue unless it is checked
+        return cell.accessoryType == .checkmark
+    }
+    
+}
+
+
  

@@ -366,7 +366,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Pg4-jT-3Tl" kind="show" id="VVM-xK-7o3"/>
+                                            <segue destination="Pg4-jT-3Tl" kind="show" identifier="monday" id="VVM-xK-7o3"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="70" id="d8Q-N5-nET">
@@ -400,6 +400,9 @@
                                                 <constraint firstItem="Rrk-UR-A7r" firstAttribute="leading" secondItem="y7m-ge-d8b" secondAttribute="leadingMargin" id="yys-ch-h0n"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Pg4-jT-3Tl" kind="show" identifier="tuesday" id="FsX-g1-57h"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="70" id="alD-Zi-bQ2">
                                         <rect key="frame" x="20" y="195.5" width="374" height="70"/>
@@ -432,6 +435,9 @@
                                                 <constraint firstItem="rfD-gg-JY3" firstAttribute="leading" secondItem="ZSs-gC-eRE" secondAttribute="leadingMargin" id="yFY-gF-nDT"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Pg4-jT-3Tl" kind="show" identifier="wednesday" id="FBc-6k-1YY"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="70" id="AN2-fk-p6d">
                                         <rect key="frame" x="20" y="265.5" width="374" height="70"/>
@@ -464,6 +470,9 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="YGt-Io-CWR" secondAttribute="bottom" id="YG1-bA-YSf"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Pg4-jT-3Tl" kind="show" identifier="thursday" id="aYO-y2-8XG"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="70" id="Kw4-B6-Aki">
                                         <rect key="frame" x="20" y="335.5" width="374" height="70"/>
@@ -496,6 +505,9 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="gX0-7d-rO3" secondAttribute="bottom" id="koX-WG-wgP"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Pg4-jT-3Tl" kind="show" identifier="friday" id="2Rb-n8-NA1"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -550,13 +562,13 @@
         <!--Application Profiles-->
         <scene sceneID="pdB-au-qbq">
             <objects>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="Pg4-jT-3Tl" customClass="AppProfilesTableViewController" customModule="Rebuild" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="Pg4-jT-3Tl" customClass="AppProfilesTableViewController" customModule="Test_Making_a_urlSession" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VmR-wG-otg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ProfileTableViewCell" rowHeight="111" id="7jo-y4-ug4" customClass="ProfileTableViewCell" customModule="Rebuild" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ProfileTableViewCell" rowHeight="111" id="7jo-y4-ug4" customClass="ProfileTableViewCell" customModule="Test_Making_a_urlSession" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="111"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7jo-y4-ug4" id="YIf-X1-X9a">
@@ -601,12 +613,13 @@
                         <barButtonItem key="backBarButtonItem" systemItem="cancel" id="DJ0-2E-TWu"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="0Qy-2A-9FI">
                             <connections>
-                                <action selector="doneClicked:" destination="Pg4-jT-3Tl" id="HoY-zO-EYg"/>
+                                <segue destination="xyE-SG-GVN" kind="unwind" unwindAction="backToStudentAppProfileWithSeque:" id="kgZ-aw-mik"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uay-ll-6u0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="xyE-SG-GVN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3684" y="425"/>
         </scene>
@@ -614,4 +627,7 @@
     <resources>
         <image name="plus.square.on.square" catalog="system" width="64" height="56"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="2Rb-n8-NA1"/>
+    </inferredMetricsTieBreakers>
 </document>
