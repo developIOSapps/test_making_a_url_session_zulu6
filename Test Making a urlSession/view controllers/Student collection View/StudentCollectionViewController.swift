@@ -50,8 +50,6 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                  self.collectionView.reloadData()
             }
         }
-
-        
     }
 
     func updateStudentNote(passedNoted: String) {
@@ -59,7 +57,6 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     }
     
 
-    
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
@@ -85,10 +82,13 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print(segue.identifier)
         
-        guard let studentProfileStaticTableVC = segue.destination as? StudentProfileStaticTableViewController else {fatalError(" could not segue ")}
+        guard let tabBarVC = segue.destination as? UITabBarController else {fatalError(" could not segue ")}
+        guard let studentProfileStaticTableVC = tabBarVC.customizableViewControllers?.first as? StudentProfileStaticTableViewController else {fatalError(" could not segue ")}
+
       
         
         studentProfileStaticTableVC.user = users[rowSelected]
+        studentProfileStaticTableVC.notesDelegate = self
 
         print("finished Segue")
     }

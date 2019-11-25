@@ -163,7 +163,7 @@ class TableViewController: UITableViewController {
                 }
             
             case 9:
-                GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: "249", propertyName: "notes", propertyValue: "1212121212"))) {
+                GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: "432", propertyName: "notes", propertyValue: "1212121212"))) {
                     DispatchQueue.main.async {
                         print("*** Hooray Job well done")
                     }

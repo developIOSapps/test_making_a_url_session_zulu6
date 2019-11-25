@@ -10,18 +10,22 @@ class StudentProfileStaticTableViewController: UITableViewController {
     
     @IBOutlet var profileForDayLabel: [UILabel]!
     @IBOutlet weak var notesLabel: UITextView!
+    
 
     var user : User!
     var student : Student!
     var daySelected = 99
-    
+    var notesDelegate: NotesDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        student = Student.getStudentFromUser(user)
-        print(student.mondayName)
         
-        navigationItem.title = student.lastName
+        student = Student.getStudentFromUser(user)
+        dump(student)
+        
+        navigationItem.title = "This is the title"
+        
+        navigationItem.prompt = "This is the prompt"
         
         /// Set navigation left bar button
         ///
@@ -46,9 +50,28 @@ class StudentProfileStaticTableViewController: UITableViewController {
 extension StudentProfileStaticTableViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         print("we ended editing")
+        
+        /// Check if the note changed
+        if notesLabel.text != student.notes {
+            student.notes = notesLabel.text
+            print(" Notes have changed")
+            upDateStudentAppNotes()
+        }
+    /* Updated for Swift 4 */
+
+        
 //        store.student.notes = textView.text
 //        Student.saveTheStudent(self.store.student)
     }
+    
+     /* Updated for Swift 4 */
+     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+         if(text == "\n") {
+             textView.resignFirstResponder()
+             return false
+         }
+         return true
+     }
 }
 
 extension StudentProfileStaticTableViewController {
@@ -77,16 +100,42 @@ extension StudentProfileStaticTableViewController {
         profileForDayLabel[daySelected].text = appProfilesTableVC.profiles[appProfilesTableVC.rowSelected].name
         daySelected = 99
         
-        /// get the note ready
+        upDateStudentAppNotes()
+    }
+    
+    func upDateStudentAppNotes()  {
+        // Build the app profile portion of the note
+        let profileNoteDelimiter = "~#~"
+        guard let profileForDayLabel = profileForDayLabel else {fatalError("eeeee")}
+        print(profileForDayLabel.count)
+        let profileArrayNoNulls = profileForDayLabel.compactMap { $0.text }
+        print(profileArrayNoNulls)
         
-        var studentProfileList = ""
-        for profile in profileForDayLabel {
-            studentProfileList += (";" + (profile.text ?? ""))
+        var studentProfileListTemp = profileNoteDelimiter
+        for item in profileArrayNoNulls {
+            studentProfileListTemp.append(item + ";")
         }
-        studentProfileList.removeFirst()
-     
-        studentProfileList.append("~#~")
-        let studentProfileListComplete = "~#~" + studentProfileList
+        var studentProfileList = String(studentProfileListTemp.dropLast())
+        studentProfileList.append(profileNoteDelimiter)
         
+        
+//        var studentProfileList = profileArrayNoNulls.reduce(profileNoteDelimiter) { (x, y)  in
+//            x + (x == profileNoteDelimiter ? "" : ";") +  y
+//        }
+        
+        let trimmedNote = student.notes.trimmingCharacters(in: .whitespacesAndNewlines)
+        let fullNote = trimmedNote +  "   " + studentProfileList
+        print(fullNote)
+        
+        dump(student)
+        print(String(user.id))
+        
+        GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: String(student.id), propertyName: "notes", propertyValue: fullNote))) {
+            DispatchQueue.main.async {
+                self.notesDelegate?.updateStudentNote(passedNoted: fullNote)
+                // self.presentAlertWithTitle("Update Done", message: "Update successful, student profile set")
+                print("````````````Hooray Job well done")
+            }
+        }
     }
 }

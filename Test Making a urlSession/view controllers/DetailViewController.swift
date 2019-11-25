@@ -27,9 +27,9 @@ class DetailViewController: UIViewController {
         desc.text = ""
         members.text = ""
         type.text = ""
-        print(user.firstName)
-        let student = Student.getStudentFromUser(user)
-        print("")
+//        print(user.firstName)
+//        let student = Student.getStudentFromUser(user)
+//        print("")
         
 
         // Do any additional setup after loading the view.
