@@ -57,6 +57,8 @@
 		46DD196C23874B4F0023C0EF /* StudentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DD196B23874B4F0023C0EF /* StudentCollectionViewCell.swift */; };
 		46DD196E23874EB20023C0EF /* StudentCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DD196D23874EB20023C0EF /* StudentCollectionViewController.swift */; };
 		46EF5FE622B28D1C001C45AF /* GetDeviceGroupResponseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */; };
+		46F0444E239082E8007EB18B /* oldWay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46F0444C239082E8007EB18B /* oldWay.storyboard */; };
+		46F0445423908404007EB18B /* Not interested.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46F0445223908404007EB18B /* Not interested.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +114,8 @@
 		46DD196B23874B4F0023C0EF /* StudentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCollectionViewCell.swift; sourceTree = "<group>"; };
 		46DD196D23874EB20023C0EF /* StudentCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCollectionViewController.swift; sourceTree = "<group>"; };
 		46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDeviceGroupResponseApi.swift; sourceTree = "<group>"; };
+		46F0444D239082E8007EB18B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Test Making a urlSession/storyboards-assets/Base.lproj/oldWay.storyboard"; sourceTree = "<group>"; };
+		46F0445323908404007EB18B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Test Making a urlSession/storyboards-assets/Base.lproj/Not interested.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +239,8 @@
 		4662C73E228C996E00D99B84 = {
 			isa = PBXGroup;
 			children = (
+				46F0445223908404007EB18B /* Not interested.storyboard */,
+				46F0444C239082E8007EB18B /* oldWay.storyboard */,
 				4662C749228C996E00D99B84 /* Test Making a urlSession */,
 				4662C748228C996E00D99B84 /* Products */,
 			);
@@ -521,11 +527,13 @@
 				464C69CB238D548C00842071 /* Rubik-BlackItalic.ttf in Resources */,
 				464C69CE238D548C00842071 /* Rubik-Light.ttf in Resources */,
 				464C69D2238D548C00842071 /* Rubik-LightItalic.ttf in Resources */,
+				46F0444E239082E8007EB18B /* oldWay.storyboard in Resources */,
 				469CB55622A9BCD600631ACE /* deviceGroups.json in Resources */,
 				464C69D4238D548C00842071 /* Rubik-Medium.ttf in Resources */,
 				464C69D1238D548C00842071 /* Rubik-Italic.ttf in Resources */,
 				464C69CC238D548C00842071 /* Rubik-MediumItalic.ttf in Resources */,
 				464C69D3238D548C00842071 /* Rubik-Bold.ttf in Resources */,
+				46F0445423908404007EB18B /* Not interested.storyboard in Resources */,
 				4662C752228C997300D99B84 /* Assets.xcassets in Resources */,
 				4662C750228C996E00D99B84 /* Main.storyboard in Resources */,
 			);
@@ -593,6 +601,22 @@
 				4662C754228C997300D99B84 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		46F0444C239082E8007EB18B /* oldWay.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				46F0444D239082E8007EB18B /* Base */,
+			);
+			name = oldWay.storyboard;
+			sourceTree = "<group>";
+		};
+		46F0445223908404007EB18B /* Not interested.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				46F0445323908404007EB18B /* Base */,
+			);
+			name = "Not interested.storyboard";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

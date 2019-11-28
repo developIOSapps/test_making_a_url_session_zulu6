@@ -56,8 +56,6 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         users[rowSelected].notes = passedNoted
     }
     
-
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
          return users.count
@@ -80,15 +78,14 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(segue.identifier)
         
-        guard let tabBarVC = segue.destination as? UITabBarController else {fatalError(" could not segue ")}
-        guard let studentProfileStaticTableVC = tabBarVC.customizableViewControllers?.first as? StudentProfileStaticTableViewController else {fatalError(" could not segue ")}
-
-      
+        guard let studentProfileStaticTableVC = segue.destination as? StudentProfileStaticTableViewController else { fatalError(" could not segue ") }
+       // guard let studentProfileStaticTableVC = tabBarVC.customizableViewControllers?.first as? StudentProfileStaticTableViewController else {fatalError(" could not segue ")}
         
         studentProfileStaticTableVC.user = users[rowSelected]
         studentProfileStaticTableVC.notesDelegate = self
+        
+        studentProfileStaticTableVC.navigationItem.title = users[rowSelected].firstName.trimmingCharacters(in: .whitespacesAndNewlines) + " " + users[rowSelected].lastName.trimmingCharacters(in: .whitespacesAndNewlines)
 
         print("finished Segue")
     }

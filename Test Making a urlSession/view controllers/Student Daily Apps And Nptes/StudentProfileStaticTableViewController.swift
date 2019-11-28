@@ -23,9 +23,9 @@ class StudentProfileStaticTableViewController: UITableViewController {
         student = Student.getStudentFromUser(user)
         dump(student)
         
-        navigationItem.title = "This is the title"
+//        navigationItem.title = "This is the title"
         
-        navigationItem.prompt = "This is the prompt"
+        navigationItem.prompt = "Setup the Student"
         
         /// Set navigation left bar button
         ///

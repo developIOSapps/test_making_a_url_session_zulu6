@@ -90,12 +90,12 @@ class AppProfilesTableViewController: UITableViewController {
          if indexPath.row == rowSelected {
              switch expanded {
              case true:
-                 return 108.0
+                return UITableView.automaticDimension
              case false:
-                 return 44.0
+                 return 62.0
              }
          } else {
-             return 44.0
+             return 62.0
          }
      }
 
