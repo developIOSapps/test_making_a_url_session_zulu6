@@ -76,17 +76,27 @@ extension StudentProfileStaticTableViewController: UITextViewDelegate {
 
 extension StudentProfileStaticTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let appProfileVC = segue.destination as? AppProfilesTableViewController else {
+            fatalError("could not cast the destination app segue")
+        }
+        
         switch segue.identifier {
         case "monday":
             daySelected = 0
+            appProfileVC.navigationItem.prompt = "Monday apps for \(student.firstName)"
         case "tuesday":
             daySelected = 1
+            appProfileVC.navigationItem.prompt = "Tuesday apps for \(student.firstName)"
         case "wednesday":
             daySelected = 2
+            appProfileVC.navigationItem.prompt = "Wednesday apps for \(student.firstName)"
         case "thursday":
             daySelected = 3
+            appProfileVC.navigationItem.prompt = "Thursday apps for \(student.firstName)"
         case "friday":
             daySelected = 4
+            appProfileVC.navigationItem.prompt = "Friday apps for \(student.firstName)"
         default:
             break
         }

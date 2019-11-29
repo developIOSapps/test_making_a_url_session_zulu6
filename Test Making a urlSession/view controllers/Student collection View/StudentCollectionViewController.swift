@@ -26,6 +26,15 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Customize the navigation bar
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.navigationBar.tintColor = .white
+
+        
 
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -67,7 +76,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         // Configure the cell
         let student = users[indexPath.row]
         cell.studentImageView.image = UIImage(named: student.username)
-        cell.studentNameLabel.text = student.firstName + " " + student.lastName
+        cell.studentNameLabel.text = student.firstName // + " " + student.lastName
         return cell
     }
     
