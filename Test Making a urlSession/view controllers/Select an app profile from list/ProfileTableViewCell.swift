@@ -30,7 +30,7 @@ class ProfileTableViewCell: UITableViewCell {
     
     func setup(appProfileModel: Profile) {
         titleLabel.text = appProfileModel.name
-        descrriptionLabel.text = appProfileModel.description
+        descrriptionLabel.text = appProfileModel.description.trimmingCharacters(in: .whitespacesAndNewlines)
         
         //        if let tripImage = tripModel.image {
         //            tripImageView.alpha = 0.3

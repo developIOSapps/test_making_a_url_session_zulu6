@@ -32,7 +32,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         navigationController?.navigationBar.shadowImage = UIImage()
         
         navigationController?.hidesBarsOnSwipe = true
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = UIColor(named: "tintContrast")
 
         
 

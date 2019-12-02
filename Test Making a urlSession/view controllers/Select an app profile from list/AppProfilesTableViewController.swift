@@ -22,7 +22,7 @@ class AppProfilesTableViewController: UITableViewController {
                 guard let profilesResponse = xyz as? ProfilesResponse
                     else {fatalError("could not convert it to Profiles")}
                 self.profiles =
-                    profilesResponse.profiles.filter{$0.name.hasPrefix("Profile-App ") }
+                    profilesResponse.profiles.filter{$0.name.hasPrefix("Profile-App") }
                 
                 self.tableView.reloadData()
                 print(self.profiles[1].name)
