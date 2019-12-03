@@ -8,13 +8,6 @@
 
 import UIKit
 
-enum Direction: Int, CaseIterable {
-  case left = 1
-  case right
-  case up
-  case down
-}
-
 enum ClassTeachers: String, CaseIterable {
     case Morah_Ilana
     case Morah_Chaya
@@ -26,26 +19,20 @@ enum ClassTeachers: String, CaseIterable {
 
 class LoginViewController: UIViewController {
     
+    /// to know what class in the array was selected
+    
     let groupIdKeyText = "groupIdKey"
     
     var schoolClasses: [SchoolClass] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
- 
-//        print(Direction.allCases.count)
-//        // 4
-//        Direction.allCases.forEach { print($0.rawValue) }
-//        // left right up down.
-//
-//        ClassTeachers.allCases.forEach { (item) in
-//            print(item.rawValue.replacingOccurrences(of: "_", with: " "))
-//        }
-    }
+     }
     
     @IBAction func loginPressed(_ sender: Any) {
         // ShowSettings()
-        getClasses()
+        // getClasses()
+        doAnimate()
 
     }
     
@@ -62,6 +49,7 @@ class LoginViewController: UIViewController {
 
         alertController.addAction(settingsAction)
         alertController.addAction(settingsAction2)
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         alertController.addAction(cancelAction)
@@ -77,6 +65,14 @@ class LoginViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    func doAnimate() -> Void {
+        print("About to animate")
+        
+        UIView.animate(withDuration: 2.0) {
+            self.view.alpha = 0.15
+        }
+    }
+    
     
     
     
@@ -84,58 +80,30 @@ class LoginViewController: UIViewController {
     fileprivate func getClasses() {
         print("about to get classes")
         
+        var actionButtonArray = [UIAlertAction]()
+        
         GetDataApi.getSchoolClassListResponse { (xyz) in
             DispatchQueue.main.async {
                 guard let clsResponse = xyz as? SchoolClassResponse else {fatalError("could not convert it to Classes")}
-
-                self.schoolClasses = clsResponse.classes.filter{$0.name.hasPrefix("20") }
+                
+                self.schoolClasses = clsResponse.classes.filter{$0.name.contains("20 - ") }
                 
                 /// create the AlertController
                 let alertController = UIAlertController (title: "Class Selection Required", message: "Please select the class that will be setup", preferredStyle: .actionSheet)
                 
                 self.schoolClasses.forEach { (item) in
                     
-                    alertController.addAction(UIAlertAction(title: item.name, style: .default, handler: { (alert) in
-                        
-                        let idx = self.schoolClasses.firstIndex { (schoolClass) -> Bool in
-                            schoolClass.name == alert.title
-                        }
-                        guard let theIdx = idx else {fatalError("Fatal Error: Could not find the selected class")}
+                    let alertAction = UIAlertAction(title: item.name, style: .default) { (alert) in
+                        guard let theIdx = actionButtonArray.firstIndex(of: alert) else {fatalError()}
                         print(self.schoolClasses[theIdx].userGroupId)
-                    }  )  )
+                    }
+                    
+                    actionButtonArray.append(alertAction)
+                    alertController.addAction(alertAction)
                 }
-
                 self.present(alertController, animated: true, completion: nil)
-
             }
         }
-        
-        /*
-        let alertController = UIAlertController (title: "Class Selection Required", message: "Please select the class that will be setup", preferredStyle: .actionSheet)
-        
-        schoolClasses.forEach { (item) in
-            print(item.name)
-            
-            alertController.addAction(UIAlertAction(title: item.name, style: .default, handler: { (alert) in
-                print(alert.title)
-            }))
-        }
-
-        present(alertController, animated: true, completion: nil)
-    */
-    }
     
-
-
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     }
 }

@@ -387,11 +387,11 @@
 			isa = PBXGroup;
 			children = (
 				46204ACD2394888600E55690 /* ViewController.swift */,
-				46204ACB2394854E00E55690 /* LoginViewController.swift */,
 				4662C74C228C996E00D99B84 /* TableViewController.swift */,
 				4641D33322B6FB0200D8EA13 /* DetailViewController.swift */,
 				46C75CF4237EDB5300EE37CD /* StudentProfileViewController.swift */,
 				46C75CF2237ED19C00EE37CD /* StudentTableTableViewController.swift */,
+				46ABE62D23968F9800FCB1DB /* Login Screen */,
 				46D91FD8238780CB001E0597 /* Student collection View */,
 				46510BEE2388222500838764 /* Student Daily Apps And Nptes */,
 				46510BF12388300C00838764 /* Select an app profile from list */,
@@ -432,6 +432,14 @@
 				46A3237F237E3BF700D4F77E /* SchoolClassResponse.swift */,
 			);
 			path = response;
+			sourceTree = "<group>";
+		};
+		46ABE62D23968F9800FCB1DB /* Login Screen */ = {
+			isa = PBXGroup;
+			children = (
+				46204ACB2394854E00E55690 /* LoginViewController.swift */,
+			);
+			path = "Login Screen";
 			sourceTree = "<group>";
 		};
 		46D56C3F2304E32A00CFF452 /* device detail */ = {
