@@ -19,6 +19,11 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     var navBarTitle = ""
     
     var classGroupCodeInt: Int!
+    var className: String! {
+        didSet {
+            navigationItem.title = className
+        }
+    }
     var users: [User] = []
     var rowSelected = 0
 
@@ -40,7 +45,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         
         // navigationController?.hidesBarsOnSwipe = true
         navigationController?.navigationBar.tintColor = UIColor(named: "tintContrast")
-
+        
         
 
         print("in view did load")
@@ -80,13 +85,16 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
      
     @IBAction func returnFromLoginWithClass(segue: UIStoryboardSegue) {
-        guard let vc = segue.source as? LoginViewController, let groupID = vc.groupID else { fatalError("No Class Group Code")  }
+        guard let vc = segue.source as? LoginViewController, let groupID = vc.groupID, let groupName = vc.groupName  else { fatalError("No Class Group Code")  }
         classGroupCodeInt = groupID
+        className = groupName
         print("Returned from Segue \(classGroupCodeInt)")
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
-         title = navBarTitle
+        navigationItem.title = className
+
+         // title = navBarTitle
         let classGroupCodeStr = String(classGroupCodeInt)
         
         GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in

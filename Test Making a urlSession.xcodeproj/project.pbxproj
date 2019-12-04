@@ -261,7 +261,6 @@
 		4662C749228C996E00D99B84 /* Test Making a urlSession */ = {
 			isa = PBXGroup;
 			children = (
-				4622303823830B3B00B3DC70 /* DesignableButton.swift */,
 				465F7472238309A2005C6132 /* extensions */,
 				4649F2092381DB4B00D12E80 /* HelperFunctions.swift */,
 				4662C74A228C996E00D99B84 /* AppDelegate.swift */,
@@ -273,6 +272,7 @@
 				469CB55722A9C25500631ACE /* resources */,
 				4662C762228CBA7800D99B84 /* -customization-notneeded */,
 				4662C756228C997300D99B84 /* Info.plist */,
+				4622303823830B3B00B3DC70 /* DesignableButton.swift */,
 			);
 			path = "Test Making a urlSession";
 			sourceTree = "<group>";

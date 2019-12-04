@@ -14,7 +14,7 @@ class LoginViewController: UIViewController {
     let groupIdKeyLiteral = "groupIdKey"
     
     var groupID: Int?
-    
+    var groupName: String?
     
     var schoolClasses: [SchoolClass] = []
 
@@ -82,7 +82,7 @@ class LoginViewController: UIViewController {
                 self.schoolClasses.forEach { (item) in
                     let alertAction = UIAlertAction(title: item.name, style: .default) { (alert) in
                         guard let theIdx = actionButtonArray.firstIndex(of: alert) else {fatalError()}
-                        self.saveGroupId(self.schoolClasses[theIdx].userGroupId)
+                        self.saveGroupId(self.schoolClasses[theIdx].userGroupId, andName: self.schoolClasses[theIdx].name )
                         self.performSegue(withIdentifier: "returnFromLoginWithClass", sender: nil)
                         print(self.schoolClasses[theIdx].userGroupId)
                     }
@@ -96,8 +96,9 @@ class LoginViewController: UIViewController {
         }
      }
     
-    func saveGroupId(_ groupID: Int) {
+    func saveGroupId(_ groupID: Int, andName name: String) {
         self.groupID = groupID
+        self.groupName = name
         UserDefaults.standard.set(groupID, forKey: groupIdKeyLiteral)
     }
  
