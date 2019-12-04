@@ -42,6 +42,8 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UserDefaults.standard.removeObject(forKey: "groupIdKey")
+        
         let whatToDo = 7
         
         switch whatToDo {

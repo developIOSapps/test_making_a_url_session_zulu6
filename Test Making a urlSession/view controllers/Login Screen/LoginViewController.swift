@@ -1,82 +1,71 @@
 //
 //  LoginViewController.swift
 //  Login App
-//
-//  Created by Steven Hertz on 12/1/19.
-//  Copyright © 2019 DevelopItSolutions. All rights reserved.
-//
+
+
+
 
 import UIKit
 
-enum ClassTeachers: String, CaseIterable {
-    case Morah_Ilana
-    case Morah_Chaya
-    case Morah_Chumi
-    case Morah_Shaindy
-    case Morah_Gitty
-    case Morah_Chaya_Raizy
-}
-
 class LoginViewController: UIViewController {
     
+    // MARK: - Properties
     /// to know what class in the array was selected
+    let groupIdKeyLiteral = "groupIdKey"
     
-    let groupIdKeyText = "groupIdKey"
+    var groupID: Int?
+    
     
     var schoolClasses: [SchoolClass] = []
 
+
+
+    // MARK: - Life Cycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+//        if let xx = getGroupId() {
+//            print("It is there")
+//            doAnimate()
+//        } else {
+//            getClasses()
+//        }
      }
     
+    
+    // MARK: - Screen Buttons
     @IBAction func loginPressed(_ sender: Any) {
-        // ShowSettings()
-        // getClasses()
-        doAnimate()
-
+          getClasses()
+        // doAnimate()
     }
     
-    func ShowSettings() {
-        let alertController = UIAlertController (title: "Class Selection Required", message: "Please select the class that will be setup", preferredStyle: .actionSheet)
-        
-        let settingsAction = UIAlertAction(title: "Morah Ilana", style: .default) { (_) -> Void in
-            print("Morah Elana")
-        }
-        
-        let settingsAction2 = UIAlertAction(title: "ssss", style: .default) { (action) in
-            print(action.title)
-        }
-
-        alertController.addAction(settingsAction)
-        alertController.addAction(settingsAction2)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alertController.addAction(cancelAction)
-        
-        ClassTeachers.allCases.forEach { (item) in
-            print(item.rawValue.replacingOccurrences(of: "_", with: " "))
-            
-            alertController.addAction(UIAlertAction(title: item.rawValue.replacingOccurrences(of: "_", with: " "), style: .default, handler: { (alert) in
-                print(alert.title)
-            }))
-        }
-        
-        present(alertController, animated: true, completion: nil)
+    @IBAction func doSegue(_ sender: Any) {
+        performSegue(withIdentifier: "returnWithClass", sender: nil)
     }
     
-    func doAnimate() -> Void {
+    // MARK: - Internal Helper Functions
+    fileprivate func doAnimate() -> Void {
         print("About to animate")
         
-        UIView.animate(withDuration: 2.0) {
-            self.view.alpha = 0.15
+//        UIView.animate(withDuration: 2.0) {
+//            self.view.alpha = 0.15
+//        }
+        
+//        UIView.animate(withDuration: 1.5, animations: {
+//            self.view.alpha = 0.05
+//        }) { (_) in
+//            print("finished animation")
+//            // self.dismiss(animated: true, completion: nil)
+//        }
+        
+        UIView.animate(withDuration: 3.5, animations: {
+            self.view.alpha = 0.0
+        }) { (completed) in
+            if completed {
+                print("completed")
+            }
         }
     }
-    
-    
-    
-    
-    
+
     fileprivate func getClasses() {
         print("about to get classes")
         
@@ -90,20 +79,31 @@ class LoginViewController: UIViewController {
                 
                 /// create the AlertController
                 let alertController = UIAlertController (title: "Class Selection Required", message: "Please select the class that will be setup", preferredStyle: .actionSheet)
-                
                 self.schoolClasses.forEach { (item) in
-                    
                     let alertAction = UIAlertAction(title: item.name, style: .default) { (alert) in
                         guard let theIdx = actionButtonArray.firstIndex(of: alert) else {fatalError()}
+                        self.saveGroupId(self.schoolClasses[theIdx].userGroupId)
+                        self.performSegue(withIdentifier: "returnFromLoginWithClass", sender: nil)
                         print(self.schoolClasses[theIdx].userGroupId)
                     }
-                    
                     actionButtonArray.append(alertAction)
                     alertController.addAction(alertAction)
                 }
+                
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
             }
         }
-    
      }
+    
+    func saveGroupId(_ groupID: Int) {
+        self.groupID = groupID
+        UserDefaults.standard.set(groupID, forKey: groupIdKeyLiteral)
+    }
+ 
+    func getGroupId() -> Int? {
+        let groupCode = UserDefaults.standard.integer(forKey: groupIdKeyLiteral)
+        print("the group code is \(groupCode)")
+        return groupCode != 0 ? groupCode : nil
+    }
 }

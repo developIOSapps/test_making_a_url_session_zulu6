@@ -9,6 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var grpCd = 0
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,8 +20,17 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if grpCd == 0 {
+            performSegue(withIdentifier: "loginScreen", sender: nil)
+        }
         
-        performSegue(withIdentifier: "loginScreen", sender: nil)
+    }
+    
+    @IBAction func returnWithClass(segue: UIStoryboardSegue) {
+        guard let vc = segue.source as? LoginViewController, let groupID = vc.groupID else { return  }
+        grpCd = groupID
+        print("Returned from Segue \(grpCd)")
+
     }
     
     
