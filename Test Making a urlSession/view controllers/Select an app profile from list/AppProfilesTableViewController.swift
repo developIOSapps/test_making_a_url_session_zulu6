@@ -9,6 +9,16 @@
 import UIKit
 
 class AppProfilesTableViewController: UITableViewController {
+    
+    let allProfiles = ["Profile-CTG-first", "Profile-CTG-second", "Profile-CTG-third", "Profile-Kiosk-first", "Profile-Kiosk-second", "Profile-Kiosk-third", "Profile-Kiosk-fourth", "Profile-Kiosk-fifth"]
+    
+    var ctgProfiles = [Profile]()
+    var kioskProfiles = [Profile]()
+    var profileArray = [[Profile]]()
+
+    var navBarSegmentedControl = UISegmentedControl()
+
+    
 
     var profiles:    [Profile] = []
     var expanded:    Bool = false
@@ -16,13 +26,28 @@ class AppProfilesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navBarSegmentedControl = UISegmentedControl(items: ["Category", "Kiosk"])
+        navBarSegmentedControl.sizeToFit()
+        navBarSegmentedControl.tintColor = UIColor(red:0.99, green:0.00, blue:0.25, alpha:1.00)
+        navBarSegmentedControl.selectedSegmentIndex = 0
+        navBarSegmentedControl.addTarget(self, action: #selector(AppProfilesTableViewController.segmentedValueChanged(_:)), for: .valueChanged)
+        // segment.setTitleTextAttributes([NSAttributedString.Key.font : UIFont(name: "ProximaNova-Light", size: 15)!], for: .normal)
+        self.navigationItem.titleView = navBarSegmentedControl
         
+        print(navBarSegmentedControl.selectedSegmentIndex)
+
         GetDataApi.getProfileListResponse { (xyz) in
             DispatchQueue.main.async {
                 guard let profilesResponse = xyz as? ProfilesResponse
                     else {fatalError("could not convert it to Profiles")}
                 self.profiles =
-                    profilesResponse.profiles.filter{$0.name.hasPrefix("Profile-App") }
+                    profilesResponse.profiles.filter{$0.name.hasPrefix(UserDefaultsHelper.appFilter) }
+                    // profilesResponse.profiles.filter{$0.name.hasPrefix("Profile-App") }
+
+                self.ctgProfiles = self.profiles.filter {$0.name.contains(UserDefaultsHelper.appMultipleFilter) }
+                self.kioskProfiles = self.profiles.filter {$0.name.contains(UserDefaultsHelper.appKioskFilter) }
+                self.profileArray.append(self.ctgProfiles)
+                self.profileArray.append(self.kioskProfiles)
                 
                 self.tableView.reloadData()
                 print(self.profiles[1].name)
@@ -38,6 +63,15 @@ class AppProfilesTableViewController: UITableViewController {
             }
         }
     }
+    
+    @objc func segmentedValueChanged(_ sender:UISegmentedControl!) {
+        print("Selected Segment Index is : \(sender.selectedSegmentIndex)")
+        rowSelected = nil
+//        tableView.beginUpdates()
+//        tableView.endUpdates()
+
+        tableView.reloadData()
+    }
 
     // MARK: - Table view data source
 
@@ -48,16 +82,47 @@ class AppProfilesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return profiles.count
+        
+        print(navBarSegmentedControl.selectedSegmentIndex)
+        if profileArray.count == 0 {
+            return 0
+        } else {
+            return profileArray[navBarSegmentedControl.selectedSegmentIndex].count
+        }
+//        switch navBarSegmentedControl.selectedSegmentIndex {
+//        case 0:
+//            return ctgProfiles.count
+//        case 1:
+//            return kioskProfiles.count
+//        default:
+//            return 0
+//        }
+
+        // return profiles.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell", for: indexPath) as! ProfileTableViewCell
         
-        let profile = profiles[indexPath.row]
-        cell.setup(appProfileModel: profile)
-//         cell.textLabel?.text = profile.name
+        let prf = profileArray[navBarSegmentedControl.selectedSegmentIndex][indexPath.row]
+        cell.setup(appProfileModel: prf)
+        
+//        switch navBarSegmentedControl.selectedSegmentIndex {
+//        case 0:
+//            let profile = ctgProfiles[indexPath.row]
+//            cell.setup(appProfileModel: profile)
+//       case 1:
+//            let profile = kioskProfiles[indexPath.row]
+//            cell.setup(appProfileModel: profile)
+//        default:
+//            break
+//        }
+
+
+        
+//        let profile = profiles[indexPath.row]
+//        cell.setup(appProfileModel: profile)
         
         return cell
     }

@@ -17,16 +17,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         var navigationBarAppearace = UINavigationBar.appearance()
 
+        registerDefaultsFromSettingsBundle()
+        
         // navigationBarAppearace.tintColor = UIColor(named: "myOrange")
         //navigationBarAppearace.barTintColor = uicolorFromHex(0x034517)
 
         // change navigation item title color
         //navigationBarAppearace.titleTextAttributes =[NSForegroundColorAttributeName:UIColor.whiteColor()]
         
-        
+        print("* * *", UserDefaultsHelper.appFilter)
+        print("* * *", UserDefaultsHelper.appMultipleFilter)
+        print("* * *", UserDefaultsHelper.appKioskFilter)
+//        print("* * *", UserDefaultsHelper.teacherSelected)
 
         return true
     }
+    
+    func registerDefaultsFromSettingsBundle()
+    {
+        let settingsUrl = Bundle.main.url(forResource: "Settings", withExtension: "bundle")!.appendingPathComponent("Root.plist")
+        let settingsPlist = NSDictionary(contentsOf:settingsUrl)!
+        let preferences = settingsPlist["PreferenceSpecifiers"] as! [NSDictionary]
+
+        var defaultsToRegister = Dictionary<String, Any>()
+
+        for preference in preferences {
+            guard let key = preference["Key"] as? String else {
+                NSLog("Key not fount")
+                continue
+            }
+            print( preference["Key"], "->" , preference["DefaultValue"])
+            defaultsToRegister[key] = preference["DefaultValue"]
+        }
+        UserDefaults.standard.register(defaults: defaultsToRegister)
+    }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -52,6 +52,8 @@
 		469CB55622A9BCD600631ACE /* deviceGroups.json in Resources */ = {isa = PBXBuildFile; fileRef = 469CB55522A9BCD600631ACE /* deviceGroups.json */; };
 		46A3237E237E3BC500D4F77E /* SchoolClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A3237D237E3BC500D4F77E /* SchoolClass.swift */; };
 		46A32380237E3BF700D4F77E /* SchoolClassResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A3237F237E3BF700D4F77E /* SchoolClassResponse.swift */; };
+		46BCCDA623992CFA0019E7BE /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */; };
+		46BCCDCA2399C8CA0019E7BE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46BCCDC92399C8CA0019E7BE /* Settings.bundle */; };
 		46C75CF3237ED19C00EE37CD /* StudentTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C75CF2237ED19C00EE37CD /* StudentTableTableViewController.swift */; };
 		46C75CF5237EDB5300EE37CD /* StudentProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C75CF4237EDB5300EE37CD /* StudentProfileViewController.swift */; };
 		46D56C422304E36A00CFF452 /* DeviceDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D56C412304E36A00CFF452 /* DeviceDetailResponse.swift */; };
@@ -111,6 +113,8 @@
 		469CB55522A9BCD600631ACE /* deviceGroups.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deviceGroups.json; sourceTree = "<group>"; };
 		46A3237D237E3BC500D4F77E /* SchoolClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolClass.swift; sourceTree = "<group>"; };
 		46A3237F237E3BF700D4F77E /* SchoolClassResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolClassResponse.swift; sourceTree = "<group>"; };
+		46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
+		46BCCDC92399C8CA0019E7BE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		46C75CF2237ED19C00EE37CD /* StudentTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTableTableViewController.swift; sourceTree = "<group>"; };
 		46C75CF4237EDB5300EE37CD /* StudentProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProfileViewController.swift; sourceTree = "<group>"; };
 		46D56C412304E36A00CFF452 /* DeviceDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailResponse.swift; sourceTree = "<group>"; };
@@ -273,6 +277,8 @@
 				4662C762228CBA7800D99B84 /* -customization-notneeded */,
 				4662C756228C997300D99B84 /* Info.plist */,
 				4622303823830B3B00B3DC70 /* DesignableButton.swift */,
+				46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */,
+				46BCCDC92399C8CA0019E7BE /* Settings.bundle */,
 			);
 			path = "Test Making a urlSession";
 			sourceTree = "<group>";
@@ -549,6 +555,7 @@
 				464C69D3238D548C00842071 /* Rubik-Bold.ttf in Resources */,
 				46F0445423908404007EB18B /* Not interested.storyboard in Resources */,
 				4662C752228C997300D99B84 /* Assets.xcassets in Resources */,
+				46BCCDCA2399C8CA0019E7BE /* Settings.bundle in Resources */,
 				4662C750228C996E00D99B84 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -588,6 +595,7 @@
 				4608FE35237EECC400EE7C80 /* Profile.swift in Sources */,
 				46C75CF5237EDB5300EE37CD /* StudentProfileViewController.swift in Sources */,
 				460C56072365FC9A00AC7606 /* Device.swift in Sources */,
+				46BCCDA623992CFA0019E7BE /* UserDefaultsHelper.swift in Sources */,
 				466B2C8D22FDA4B8009C19E4 /* DeviceGroup.swift in Sources */,
 				460C56052365FBBC00AC7606 /* DeviceListResponse.swift in Sources */,
 				4622303923830B3C00B3DC70 /* DesignableButton.swift in Sources */,

@@ -537,7 +537,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="developITlogo" translatesAutoresizingMaskIntoConstraints="NO" id="PAH-MA-Je2">
-                                <rect key="frame" x="57" y="52" width="300.00000000000006" height="97"/>
+                                <rect key="frame" x="57" y="52" width="300" height="97"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Sb6-DP-RFf"/>
                                     <constraint firstAttribute="width" secondItem="PAH-MA-Je2" secondAttribute="height" multiplier="108:35" id="yNh-Fe-FZ6"/>
@@ -612,9 +612,6 @@
         </namedColor>
         <namedColor name="tint">
             <color red="0.96899998188018799" green="0.57899999618530273" blue="0.11599999666213989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="tint">
-            <color red="0.79000002145767212" green="0.51800000667572021" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="tint1Contrast">
             <color red="0.061999998986721039" green="0.23899999260902405" blue="0.43999999761581421" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -29,9 +29,10 @@ class ProfileTableViewCell: UITableViewCell {
     }
     
     func setup(appProfileModel: Profile) {
-        titleLabel.text = appProfileModel.name
+        // appProfileModel.name.replacingOccurrences(of: "Profile-App-", with: "")
+        titleLabel.text = appProfileModel.name.replacingOccurrences(of: "Profile-App-", with: "")
         descrriptionLabel.text = appProfileModel.description.trimmingCharacters(in: .whitespacesAndNewlines)
-        
+        accessoryType = .none
         //        if let tripImage = tripModel.image {
         //            tripImageView.alpha = 0.3
         //            tripImageView.image = tripImage

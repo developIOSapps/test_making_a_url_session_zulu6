@@ -15,6 +15,10 @@ enum GetStringFromError: Error {
 }
 struct HelperFunctions {
     
+    static func logIt(functionName: String, message: String) {
+        print("* _ * _ * _", functionName, ":  \(message)")
+    }
+    
     static func getStringFrom(passedString: String, using delimiter: String = "~#~") throws -> (extractedString: String, cleanString: String) {
         
         guard let startIdx = passedString.range( of: delimiter,

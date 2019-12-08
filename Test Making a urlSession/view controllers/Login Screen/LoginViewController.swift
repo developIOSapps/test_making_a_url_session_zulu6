@@ -13,8 +13,19 @@ class LoginViewController: UIViewController {
     /// to know what class in the array was selected
     let groupIdKeyLiteral = "groupIdKey"
     
-    var groupID: Int?
-    var groupName: String?
+    var groupID: Int? {
+        didSet {
+            guard let groupID = groupID else { return  }
+            // UserDefaultsHelper.updateSelectedTeacher(groupID: groupID)
+            UserDefaultsHelper.setGroupID(groupID)
+        }
+    }
+    var groupName: String? {
+        didSet {
+            guard let groupName = groupName else { return  }
+            UserDefaultsHelper.setGroupName(groupName)
+        }
+    }
     
     var schoolClasses: [SchoolClass] = []
 
@@ -98,13 +109,16 @@ class LoginViewController: UIViewController {
     
     func saveGroupId(_ groupID: Int, andName name: String) {
         self.groupID = groupID
+        // UserDefaults.standard.set(groupID, forKey: "teacherSelected")
+        UserDefaultsHelper.setGroupID(groupID)
         self.groupName = name
-        UserDefaults.standard.set(groupID, forKey: groupIdKeyLiteral)
+//        UserDefaults.standard.set(groupID, forKey: groupIdKeyLiteral)
     }
  
     func getGroupId() -> Int? {
-        let groupCode = UserDefaults.standard.integer(forKey: groupIdKeyLiteral)
-        print("the group code is \(groupCode)")
+        // let groupCode = UserDefaults.standard.integer(forKey: groupIdKeyLiteral)
+        let groupCode = UserDefaultsHelper.getGroupID()
+        print("- - - the group code is \(groupCode)")
         return groupCode != 0 ? groupCode : nil
     }
 }

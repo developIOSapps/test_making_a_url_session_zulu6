@@ -39,6 +39,17 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+         //       print(UserDefaults.standard.object(forKey: "name_preference") as Any)
+//                UserDefaults.standard.set(20, forKey: "teacherSelected")
+//                print("- - - - - -", UserDefaults.standard.object(forKey: "teacherSelected") as Any)
+        //         UserDefaults.standard.set("NOOOO", forKey: "name_preference")
+         //       print(UserDefaults.standard.object(forKey: "name_preference") as Any)
+
+        
+//        UserDefaultsHelper.removeGroupID()
+//        UserDefaultsHelper.removeGroupName()
+        
         // Customize the navigation bar
         // navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         // navigationController?.navigationBar.shadowImage = UIImage()
@@ -46,9 +57,17 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         // navigationController?.hidesBarsOnSwipe = true
         navigationController?.navigationBar.tintColor = UIColor(named: "tintContrast")
         
-        
-
         print("in view did load")
+//        guard UserDefaultsHelper.groupID != nil else {
+//            print("it is nil")
+//            print("it is nil")
+//            return
+//        }
+//
+        
+        classGroupCodeInt = UserDefaultsHelper.groupID
+        className = UserDefaultsHelper.groupName
+        
          if classGroupCodeInt ==  nil {
             print("in about to perform segue")
              performSegue(withIdentifier: "loginScr", sender: nil)
@@ -57,7 +76,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
             // Register cell classes
             self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
-             title = navBarTitle
+             // title = navBarTitle
             let classGroupCodeStr = String(classGroupCodeInt)
             
             GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in

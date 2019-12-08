@@ -37,11 +37,11 @@ class StudentProfileStaticTableViewController: UITableViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
-        profileForDayLabel[0].text = student.mondayName
-        profileForDayLabel[1].text = student.tuesdayName
-        profileForDayLabel[2].text = student.wednesdayName
-        profileForDayLabel[3].text = student.thursdayName
-        profileForDayLabel[4].text = student.fridayName
+        profileForDayLabel[0].text = student.mondayName.replacingOccurrences(of: "Profile-App-", with: "")
+        profileForDayLabel[1].text = student.tuesdayName.replacingOccurrences(of: "Profile-App-", with: "")
+        profileForDayLabel[2].text = student.wednesdayName.replacingOccurrences(of: "Profile-App-", with: "")
+        profileForDayLabel[3].text = student.thursdayName.replacingOccurrences(of: "Profile-App-", with: "")
+        profileForDayLabel[4].text = student.fridayName.replacingOccurrences(of: "Profile-App-", with: "")
         notesLabel.text = student.notes
     }
  
@@ -107,7 +107,8 @@ extension StudentProfileStaticTableViewController {
         guard let appProfilesTableVC =  seque.source as? AppProfilesTableViewController  else {fatalError("Was not the AppProfilesTable VC")}
         print(appProfilesTableVC.profiles[appProfilesTableVC.rowSelected])
 
-        profileForDayLabel[daySelected].text = appProfilesTableVC.profiles[appProfilesTableVC.rowSelected].name
+        // profileForDayLabel[daySelected].text = appProfilesTableVC.profiles[appProfilesTableVC.rowSelected].name
+        profileForDayLabel[daySelected].text = appProfilesTableVC.profileArray[appProfilesTableVC.navBarSegmentedControl.selectedSegmentIndex][appProfilesTableVC.rowSelected].name.replacingOccurrences(of: "Profile-App-", with: "")
         daySelected = 99
         
         upDateStudentAppNotes()

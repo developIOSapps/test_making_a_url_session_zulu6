@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>StringsTable</key>
+	<string>Root</string>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Reset app</string>
+			<key>Key</key>
+			<string>RESET_APP_KEY</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>APP INFO</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Version</string>
+			<key>Key</key>
+			<string>version_preference</string>
+			<key>DefaultValue</key>
+			<string>1.0</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Build</string>
+			<key>Key</key>
+			<string>build_preference</string>
+			<key>DefaultValue</key>
+			<string>1.0</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Application Profiles Filter</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>App Profiles </string>
+			<key>Key</key>
+			<string>applicationProfiles</string>
+			<key>DefaultValue</key>
+			<string>Profile-App-</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>With Multiple Apps</string>
+			<key>Key</key>
+			<string>applicationProfilesMultiple</string>
+			<key>DefaultValue</key>
+			<string>CTG</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>With Single Apps</string>
+			<key>Key</key>
+			<string>applicationProfilesSingle</string>
+			<key>DefaultValue</key>
+			<string>Kiosk</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Teacher</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Teachers</string>
+			<key>Key</key>
+			<string>teacherSelected</string>
+			<key>DefaultValue</key>
+			<integer>18</integer>
+			<key>Titles</key>
+			<array>
+				<string>Morah_Ilana</string>
+				<string>Morah_Chaya</string>
+				<string>Morah_Chumi </string>
+				<string>Morah_Shaindy</string>
+				<string>Morah_Gitty</string>
+				<string>Morah_Chaya_Raizy</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<integer>17</integer>
+				<integer>18</integer>
+				<integer>19</integer>
+				<integer>20</integer>
+				<integer>21</integer>
+				<integer>22</integer>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
