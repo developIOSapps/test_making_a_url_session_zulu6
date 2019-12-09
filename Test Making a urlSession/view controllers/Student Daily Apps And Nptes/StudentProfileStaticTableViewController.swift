@@ -37,11 +37,11 @@ class StudentProfileStaticTableViewController: UITableViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
-        profileForDayLabel[0].text = student.mondayName.replacingOccurrences(of: "Profile-App-", with: "")
-        profileForDayLabel[1].text = student.tuesdayName.replacingOccurrences(of: "Profile-App-", with: "")
-        profileForDayLabel[2].text = student.wednesdayName.replacingOccurrences(of: "Profile-App-", with: "")
-        profileForDayLabel[3].text = student.thursdayName.replacingOccurrences(of: "Profile-App-", with: "")
-        profileForDayLabel[4].text = student.fridayName.replacingOccurrences(of: "Profile-App-", with: "")
+        profileForDayLabel[0].text = student.mondayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+        profileForDayLabel[1].text = student.tuesdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+        profileForDayLabel[2].text = student.wednesdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+        profileForDayLabel[3].text = student.thursdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+        profileForDayLabel[4].text = student.fridayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
         notesLabel.text = student.notes
     }
  
@@ -124,7 +124,7 @@ extension StudentProfileStaticTableViewController {
         
         var studentProfileListTemp = profileNoteDelimiter
         for item in profileArrayNoNulls {
-            studentProfileListTemp.append(item + ";")
+            studentProfileListTemp.append((item.isEmpty ? "" : UserDefaultsHelper.appFilter) + item + ";")
         }
         var studentProfileList = String(studentProfileListTemp.dropLast())
         studentProfileList.append(profileNoteDelimiter)
