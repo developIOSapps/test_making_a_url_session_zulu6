@@ -44,7 +44,7 @@ class TableViewController: UITableViewController {
         
         UserDefaults.standard.removeObject(forKey: "groupIdKey")
         
-        let whatToDo = 7
+        let whatToDo = 10
         
         switch whatToDo {
             
@@ -170,6 +170,21 @@ class TableViewController: UITableViewController {
                         print("*** Hooray Job well done")
                     }
                 }
+            case 10:
+                GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : "zzz" ]) )) { (deviceListResponse) in
+                    DispatchQueue.main.async {
+                        
+                        guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
+                        
+                        /// Just load in the users into this class if needed
+                        self.devices = deviceListResponse.devices
+                        /// Here we have what we need
+                        deviceListResponse.devices.forEach { print($0.serialNumber + "--" + $0.serialNumber) }
+                        print("got devices")
+                        // self.tableView.reloadData()
+                    }
+                }
+
 
         default:
             break
