@@ -44,7 +44,7 @@ class TableViewController: UITableViewController {
         
         UserDefaults.standard.removeObject(forKey: "groupIdKey")
         
-        let whatToDo = 10
+        let whatToDo = 11
         
         switch whatToDo {
             
@@ -184,6 +184,16 @@ class TableViewController: UITableViewController {
                         // self.tableView.reloadData()
                     }
                 }
+            case 11:
+                GetDataApi.getUserDetail(GeneratedReq.init(request: ValidReqs.userDetail(userId: "432"))) { (usrdtl) in
+                    guard let usrdtlResponse = usrdtl as? UserDetailResponse else {fatalError("could not convert it to devicedetail")}
+
+                    DispatchQueue.main.async {
+                        print("*** Hooray printed user detail-- well done")
+                        print("got user, the name is \(usrdtlResponse.user.firstName + " " + usrdtlResponse.user.lastName)")
+                    }
+                }
+
 
 
         default:

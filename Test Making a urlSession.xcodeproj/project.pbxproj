@@ -60,6 +60,7 @@
 		46D91FD7238764FF001E0597 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D91FD6238764FF001E0597 /* Student.swift */; };
 		46DD196C23874B4F0023C0EF /* StudentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DD196B23874B4F0023C0EF /* StudentCollectionViewCell.swift */; };
 		46DD196E23874EB20023C0EF /* StudentCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DD196D23874EB20023C0EF /* StudentCollectionViewController.swift */; };
+		46E1201E239FCFED00667E28 /* UserDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E1201D239FCFED00667E28 /* UserDetailResponse.swift */; };
 		46EF5FE622B28D1C001C45AF /* GetDeviceGroupResponseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */; };
 		46F0444E239082E8007EB18B /* oldWay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46F0444C239082E8007EB18B /* oldWay.storyboard */; };
 		46F0445423908404007EB18B /* Not interested.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46F0445223908404007EB18B /* Not interested.storyboard */; };
@@ -121,6 +122,7 @@
 		46D91FD6238764FF001E0597 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		46DD196B23874B4F0023C0EF /* StudentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCollectionViewCell.swift; sourceTree = "<group>"; };
 		46DD196D23874EB20023C0EF /* StudentCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCollectionViewController.swift; sourceTree = "<group>"; };
+		46E1201D239FCFED00667E28 /* UserDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailResponse.swift; sourceTree = "<group>"; };
 		46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDeviceGroupResponseApi.swift; sourceTree = "<group>"; };
 		46F0444D239082E8007EB18B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Test Making a urlSession/storyboards-assets/Base.lproj/oldWay.storyboard"; sourceTree = "<group>"; };
 		46F0445323908404007EB18B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Test Making a urlSession/storyboards-assets/Base.lproj/Not interested.storyboard"; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 		463F328822A98E2C0015092E /* models */ = {
 			isa = PBXGroup;
 			children = (
+				46E1201C239FCFB000667E28 /* User Detail */,
 				46D91FD5238764AB001E0597 /* student */,
 				4608FE2F237EEB4100EE7C80 /* profiles */,
 				46A3237C237E3B9400D4F77E /* SchoolClass */,
@@ -481,6 +484,14 @@
 			path = "Student collection View";
 			sourceTree = "<group>";
 		};
+		46E1201C239FCFB000667E28 /* User Detail */ = {
+			isa = PBXGroup;
+			children = (
+				46E1201D239FCFED00667E28 /* UserDetailResponse.swift */,
+			);
+			path = "User Detail";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -601,6 +612,7 @@
 				4622303923830B3C00B3DC70 /* DesignableButton.swift in Sources */,
 				46510BF52388320800838764 /* AppProfile.swift in Sources */,
 				46C75CF3237ED19C00EE37CD /* StudentTableTableViewController.swift in Sources */,
+				46E1201E239FCFED00667E28 /* UserDetailResponse.swift in Sources */,
 				466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */,
 				4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */,
 				46DD196E23874EB20023C0EF /* StudentCollectionViewController.swift in Sources */,

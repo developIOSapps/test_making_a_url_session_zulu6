@@ -19,6 +19,42 @@ struct GetDataApi {
     }
     
     
+    static func getUserDetail(_ generatedReq: GeneratedReq , then completion: @escaping (Codable) -> Void )  {
+        
+        /// Get the data
+        getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
+            
+            print("in the GetDataApi.getZuluDataWrapper before switch")
+            switch result {
+                
+            case .failure(let err):
+                print(err.localizedDescription)
+                print("in the GetDataApi.getZuluDataWrapper in switch error")
+                switch err {
+                case .decodingError:    print("decoding error")
+                case .domainError:      print("domiain error")
+                case .generalError:     print("HTTP error")
+                }
+                print(err)
+                
+                
+            case .success(let data):
+                print("in the GetDataApi.getZuluDataWrapper in switch success")
+                print(data.prettyPrintedJSONString)
+                print("we are updating notes")
+                
+                
+                let decoder = JSONDecoder()
+                
+                guard let UserDetailResponsxx = try? decoder.decode(UserDetailResponse.self, from: data) else {fatalError()}
+                guard let usrdtl = UserDetailResponsxx as? UserDetailResponse else {fatalError("could not convert it to Users")}
+                print("we are up to device detail response response")
+                completion(usrdtl)
+                
+            }
+        }
+    }
+
     static func getDeviceDetail(_ generatedReq: GeneratedReq , then completion: @escaping (Codable) -> Void )  {
         
         /// Get the data
@@ -54,6 +90,7 @@ struct GetDataApi {
             }
         }
     }
+
 
     
     static func updateNoteProperty(_ generatedReq: GeneratedReq , then completion: @escaping () -> Void )  {
