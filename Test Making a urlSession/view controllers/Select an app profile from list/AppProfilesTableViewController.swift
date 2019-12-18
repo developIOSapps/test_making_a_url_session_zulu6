@@ -18,11 +18,10 @@ class AppProfilesTableViewController: UITableViewController {
 
     var navBarSegmentedControl = UISegmentedControl()
 
-    
-
     var profiles:    [Profile] = []
     var expanded:    Bool = false
     var rowSelected: Int!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -6,43 +6,53 @@
 import UIKit
 
 class StudentProfileStaticTableViewController: UITableViewController {
-
     
+    // MARK: - Screen Properies
     @IBOutlet var profileForDayLabel: [UILabel]!
     @IBOutlet weak var notesLabel: UITextView!
     
-
+    
+    // MARK: -  Properies
     var user : User!
     var student : Student!
     var daySelected = 99
     var notesDelegate: NotesDelegate?
 
+    
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /// Setup Student With Application Profile By the Day
         student = Student.getStudentFromUser(user)
         dump(student)
-        
-//        navigationItem.title = "This is the title"
-        
-        navigationItem.prompt = "Setup the Student"
-        
-        /// Set navigation left bar button
+         
+        /// Set navigation bar
         ///
+        navigationItem.prompt = "Setup the Student"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: nil)
     
+        /// become a textView delegate
         notesLabel.delegate = self
         
+        /// Configure Taps to leave editing
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
+        /// Update the screen
+        for x in 0...4 {
+             profileForDayLabel[x].text = student.mondayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+        }
+        /*
         profileForDayLabel[0].text = student.mondayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
         profileForDayLabel[1].text = student.tuesdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
         profileForDayLabel[2].text = student.wednesdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
         profileForDayLabel[3].text = student.thursdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
         profileForDayLabel[4].text = student.fridayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+        */
         notesLabel.text = student.notes
+    
     }
  
 }
@@ -74,7 +84,9 @@ extension StudentProfileStaticTableViewController: UITextViewDelegate {
      }
 }
 
+
 extension StudentProfileStaticTableViewController {
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let appProfileVC = segue.destination as? AppProfilesTableViewController else {
@@ -102,12 +114,9 @@ extension StudentProfileStaticTableViewController {
         }
     }
     
+    
     @IBAction func backToStudentAppProfile(seque: UIStoryboardSegue)  {
-        print("in unwind segue")
-        guard let appProfilesTableVC =  seque.source as? AppProfilesTableViewController  else {fatalError("Was not the AppProfilesTable VC")}
-        print(appProfilesTableVC.profiles[appProfilesTableVC.rowSelected])
-
-        // profileForDayLabel[daySelected].text = appProfilesTableVC.profiles[appProfilesTableVC.rowSelected].name
+        guard let appProfilesTableVC =  seque.source as? AppProfilesTableViewController else {fatalError("Was not the AppProfilesTable VC")}
         profileForDayLabel[daySelected].text = appProfilesTableVC.profileArray[appProfilesTableVC.navBarSegmentedControl.selectedSegmentIndex][appProfilesTableVC.rowSelected].name.replacingOccurrences(of: "Profile-App-", with: "")
         daySelected = 99
         
