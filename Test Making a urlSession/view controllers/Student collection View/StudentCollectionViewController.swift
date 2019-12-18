@@ -165,16 +165,19 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         
         switch segue.identifier {
         case "goToStudentDetail":
-                    guard let studentProfileStaticTableVC = segue.destination as? StudentProfileStaticTableViewController else { fatalError(" could not segue ") }
+            guard let studentProfileStaticTableVC = segue.destination as? StudentProfileStaticTableViewController else { fatalError(" could not segue ") }
             // guard let studentProfileStaticTableVC = tabBarVC.customizableViewControllers?.first as? StudentProfileStaticTableViewController else {fatalError(" could not segue ")}
-             
-             studentProfileStaticTableVC.user = users[rowSelected]
-             studentProfileStaticTableVC.notesDelegate = self
-             
-             studentProfileStaticTableVC.navigationItem.title = users[rowSelected].firstName.trimmingCharacters(in: .whitespacesAndNewlines) + " " + users[rowSelected].lastName.trimmingCharacters(in: .whitespacesAndNewlines)
-
-             print("finished Segue")
-
+            
+            studentProfileStaticTableVC.user = users[rowSelected]
+            studentProfileStaticTableVC.usersSelected.append(users[rowSelected])
+//            let nextOne = rowSelected + 1
+//            studentProfileStaticTableVC.usersSelected.append(users[nextOne])
+            studentProfileStaticTableVC.notesDelegate = self
+            
+            studentProfileStaticTableVC.navigationItem.title = users[rowSelected].firstName.trimmingCharacters(in: .whitespacesAndNewlines) + " " + users[rowSelected].lastName.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            print("finished Segue")
+            
         default:
             break
         }

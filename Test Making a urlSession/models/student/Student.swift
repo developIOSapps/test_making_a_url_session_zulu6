@@ -78,8 +78,6 @@ struct Student: Codable {
        }
     
     
-    
-    
     static func getTheStudent() -> Student {
         if let jsonData = UserDefaults.standard.data(forKey: "student") {
             let jsonDecoder = JSONDecoder()
@@ -97,4 +95,23 @@ struct Student: Codable {
         UserDefaults.standard.set(jsonData, forKey: "student")
         UserDefaults.standard.synchronize()
     }
+    
+    mutating func setStudentAppProfileForDayNbr(_ dayNbr: Int, with profileForDay: String) {
+        
+        switch dayNbr {
+        case 0:
+            mondayName = profileForDay
+        case 1:
+            tuesdayName = profileForDay
+        case 2:
+            wednesdayName = profileForDay
+        case 3:
+            thursdayName = profileForDay
+        case 4:
+            fridayName = profileForDay
+        default:
+            break
+        }
+    }
+    
 }

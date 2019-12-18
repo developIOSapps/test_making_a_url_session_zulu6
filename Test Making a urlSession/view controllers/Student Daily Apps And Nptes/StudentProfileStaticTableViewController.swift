@@ -17,16 +17,15 @@ class StudentProfileStaticTableViewController: UITableViewController {
     var student : Student!
     var daySelected = 99
     var notesDelegate: NotesDelegate?
+    
+    /// New property to handle multiple selections and even one selection now
+    var usersSelected: [User] = [User]()
 
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// Setup Student With Application Profile By the Day
-        student = Student.getStudentFromUser(user)
-        dump(student)
-         
         /// Set navigation bar
         ///
         navigationItem.prompt = "Setup the Student"
@@ -40,32 +39,46 @@ class StudentProfileStaticTableViewController: UITableViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
-        /// Update the screen
-        for x in 0...4 {
+        
+        if usersSelected.count == 1 {
+            /// Setup Student With Application Profile By the Day
+            student = Student.getStudentFromUser(usersSelected.first!)
+            dump(student)
+            
+            /// Update the screen
+            /*
+             for x in 0...4 {
              profileForDayLabel[x].text = student.mondayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+             }
+             */
+            profileForDayLabel[0].text = student.mondayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+            profileForDayLabel[1].text = student.tuesdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+            profileForDayLabel[2].text = student.wednesdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+            profileForDayLabel[3].text = student.thursdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+            profileForDayLabel[4].text = student.fridayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+            notesLabel.text = student.notes
+        } else {
+            profileForDayLabel[0].text = "*** We are in multiple mode ***"
+            profileForDayLabel[1].text = "*** We are in multiple mode ***"
+            profileForDayLabel[2].text = "*** We are in multiple mode ***"
+            profileForDayLabel[3].text = "*** We are in multiple mode ***"
+            profileForDayLabel[4].text = "*** We are in multiple mode ***"
+            notesLabel.text = "*** We are in multiple mode ***"
         }
-        /*
-        profileForDayLabel[0].text = student.mondayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
-        profileForDayLabel[1].text = student.tuesdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
-        profileForDayLabel[2].text = student.wednesdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
-        profileForDayLabel[3].text = student.thursdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
-        profileForDayLabel[4].text = student.fridayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
-        */
-        notesLabel.text = student.notes
-    
     }
  
 }
 
 extension StudentProfileStaticTableViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
+
         print("we ended editing")
         
         /// Check if the note changed
         if notesLabel.text != student.notes {
             student.notes = notesLabel.text
             print(" Notes have changed")
-            upDateStudentAppNotes()
+            upDateStudentAppNotes(appProfileToUse: nil, for: usersSelected.first!)
         }
     /* Updated for Swift 4 */
 
@@ -93,22 +106,24 @@ extension StudentProfileStaticTableViewController {
             fatalError("could not cast the destination app segue")
         }
         
+        let forLiteral = usersSelected.count == 1 ? student.firstName : "Multiple Mode"
+        
         switch segue.identifier {
         case "monday":
             daySelected = 0
-            appProfileVC.navigationItem.prompt = "Monday apps for \(student.firstName)"
+            appProfileVC.navigationItem.prompt = "Monday apps for \(forLiteral)"
         case "tuesday":
             daySelected = 1
-            appProfileVC.navigationItem.prompt = "Tuesday apps for \(student.firstName)"
+            appProfileVC.navigationItem.prompt = "Tuesday apps for \(forLiteral)"
         case "wednesday":
             daySelected = 2
-            appProfileVC.navigationItem.prompt = "Wednesday apps for \(student.firstName)"
+            appProfileVC.navigationItem.prompt = "Wednesday apps for \(forLiteral)"
         case "thursday":
             daySelected = 3
-            appProfileVC.navigationItem.prompt = "Thursday apps for \(student.firstName)"
+            appProfileVC.navigationItem.prompt = "Thursday apps for \(forLiteral)"
         case "friday":
             daySelected = 4
-            appProfileVC.navigationItem.prompt = "Friday apps for \(student.firstName)"
+            appProfileVC.navigationItem.prompt = "Friday apps for \(forLiteral)"
         default:
             break
         }
@@ -116,16 +131,36 @@ extension StudentProfileStaticTableViewController {
     
     
     @IBAction func backToStudentAppProfile(seque: UIStoryboardSegue)  {
+        /// What we need
         guard let appProfilesTableVC =  seque.source as? AppProfilesTableViewController else {fatalError("Was not the AppProfilesTable VC")}
-        profileForDayLabel[daySelected].text = appProfilesTableVC.profileArray[appProfilesTableVC.navBarSegmentedControl.selectedSegmentIndex][appProfilesTableVC.rowSelected].name.replacingOccurrences(of: "Profile-App-", with: "")
-        daySelected = 99
         
-        upDateStudentAppNotes()
+        let segmentIdx = appProfilesTableVC.navBarSegmentedControl.selectedSegmentIndex
+        guard let row = appProfilesTableVC.rowSelected else { fatalError("There was no row selected")}
+        
+        /// get the profile name ,  use it to show on the screen so we take off the prefix
+        profileForDayLabel[daySelected].text = appProfilesTableVC.profileArray[segmentIdx][row].name.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+        
+        /// then Update the student
+        for user  in usersSelected {
+            upDateStudentAppNotes(appProfileToUse: appProfilesTableVC.profileArray[segmentIdx][row].name, for: user)
+        }
+        
+        daySelected = 99
     }
     
-    func upDateStudentAppNotes()  {
+    func upDateStudentAppNotes(appProfileToUse: String? = nil, for userToUpdate: User)  {
+        
+        var studentBeingUpdated = Student.getStudentFromUser(userToUpdate)
+        
         // Build the app profile portion of the note
         let profileNoteDelimiter = "~#~"
+
+        /// update the student record if doing this because of app profile change
+        if let appProfileToUse = appProfileToUse {
+            studentBeingUpdated.setStudentAppProfileForDayNbr(daySelected, with: appProfileToUse)
+        }
+        
+        /*
         guard let profileForDayLabel = profileForDayLabel else {fatalError("eeeee")}
         print(profileForDayLabel.count)
         let profileArrayNoNulls = profileForDayLabel.compactMap { $0.text }
@@ -137,20 +172,14 @@ extension StudentProfileStaticTableViewController {
         }
         var studentProfileList = String(studentProfileListTemp.dropLast())
         studentProfileList.append(profileNoteDelimiter)
+        */
         
+        let studentFullAppProfile = profileNoteDelimiter + studentBeingUpdated.makeNote + profileNoteDelimiter
+                
+        let trimmedNote = studentBeingUpdated.notes.trimmingCharacters(in: .whitespacesAndNewlines)
+        let fullNote = trimmedNote +  "   " + studentFullAppProfile
         
-//        var studentProfileList = profileArrayNoNulls.reduce(profileNoteDelimiter) { (x, y)  in
-//            x + (x == profileNoteDelimiter ? "" : ";") +  y
-//        }
-        
-        let trimmedNote = student.notes.trimmingCharacters(in: .whitespacesAndNewlines)
-        let fullNote = trimmedNote +  "   " + studentProfileList
-        print(fullNote)
-        
-        dump(student)
-        print(String(user.id))
-        
-        GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: String(student.id), propertyName: "notes", propertyValue: fullNote))) {
+        GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: String(studentBeingUpdated.id), propertyName: "notes", propertyValue: fullNote))) {
             DispatchQueue.main.async {
                 self.notesDelegate?.updateStudentNote(passedNoted: fullNote)
                 // self.presentAlertWithTitle("Update Done", message: "Update successful, student profile set")
