@@ -173,8 +173,9 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
 //            let nextOne = rowSelected + 1
 //            studentProfileStaticTableVC.usersSelected.append(users[nextOne])
             studentProfileStaticTableVC.notesDelegate = self
-            
-            studentProfileStaticTableVC.navigationItem.title = users[rowSelected].firstName.trimmingCharacters(in: .whitespacesAndNewlines) + " " + users[rowSelected].lastName.trimmingCharacters(in: .whitespacesAndNewlines)
+           
+            studentProfileStaticTableVC.navigationItem.title =
+                studentProfileStaticTableVC.usersSelected.count == 1 ? users[rowSelected].firstName.trimmingCharacters(in: .whitespacesAndNewlines) + " " + users[rowSelected].lastName.trimmingCharacters(in: .whitespacesAndNewlines) : "* * * Multiple * * *"
             
             print("finished Segue")
             

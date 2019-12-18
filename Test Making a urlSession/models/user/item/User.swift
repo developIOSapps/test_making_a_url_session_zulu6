@@ -21,3 +21,8 @@ struct User: OurCodable {
 
 }
 
+extension User: Equatable {
+  static func == (lhs: User, rhs: User) -> Bool {
+    return lhs.id == rhs.id 
+  }
+}

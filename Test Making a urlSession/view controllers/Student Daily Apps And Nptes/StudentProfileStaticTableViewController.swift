@@ -141,7 +141,7 @@ extension StudentProfileStaticTableViewController {
         profileForDayLabel[daySelected].text = appProfilesTableVC.profileArray[segmentIdx][row].name.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
         
         /// then Update the student
-        for user  in usersSelected {
+        for (position, user)  in usersSelected.enumerated() {
             upDateStudentAppNotes(appProfileToUse: appProfilesTableVC.profileArray[segmentIdx][row].name, for: user)
         }
         
@@ -184,6 +184,9 @@ extension StudentProfileStaticTableViewController {
                 self.notesDelegate?.updateStudentNote(passedNoted: fullNote)
                 // self.presentAlertWithTitle("Update Done", message: "Update successful, student profile set")
                 print("````````````Hooray Job well done")
+                if let idx = self.usersSelected.firstIndex(of: userToUpdate) {
+                    self.usersSelected[idx].notes = fullNote
+                }
             }
         }
     }
