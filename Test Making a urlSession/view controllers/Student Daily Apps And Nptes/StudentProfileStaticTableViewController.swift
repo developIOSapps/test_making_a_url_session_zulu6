@@ -184,10 +184,11 @@ extension StudentProfileStaticTableViewController {
         
         GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: String(studentBeingUpdated.id), propertyName: "notes", propertyValue: fullNote))) {
             DispatchQueue.main.async {
-                self.notesDelegate?.updateStudentNote(passedNoted: fullNote, user: userToUpdate )
+                /// Update local versions of note being kept in the student collection list and here in the student profile
+                self.notesDelegate?.updateStudentNote(passedNoted: fullNote, user: userToUpdate )   //Update local versions of note being kept in the student collection list
                 if let idx = self.usersSelected.firstIndex(of: userToUpdate) {
                     self.usersSelected[idx].notes = fullNote
-                }
+                }   //   and here in the student profile
 
                 // self.presentAlertWithTitle("Update Done", message: "Update successful, student profile set")
                 print("````````````Hooray Job well done")

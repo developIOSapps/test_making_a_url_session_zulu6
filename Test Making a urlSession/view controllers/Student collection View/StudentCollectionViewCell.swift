@@ -46,10 +46,12 @@ class StudentCollectionViewCell: UICollectionViewCell {
     
     func showIcon() {
         checkmarkImageView.alpha = 1.0
+        studentImageView.alpha = 0.5
     }
     
     func hideIcon() {
         checkmarkImageView.alpha = 0.0
+        studentImageView.alpha = 1.0
     }
     
 
