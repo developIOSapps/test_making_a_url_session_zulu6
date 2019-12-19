@@ -3,4 +3,70 @@
    uuid = "7F0F9D7B-8839-4DE0-9BCA-95BCF07438EC"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6838FE5D-C1B3-444D-AF67-50E04ED5887A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Test Making a urlSession/view controllers/Student Daily Apps And Nptes/StudentProfileStaticTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "backToStudentAppProfile(seque:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7829E3DC-41CE-47C1-854E-15118061B23F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Test Making a urlSession/view controllers/Student Daily Apps And Nptes/StudentProfileStaticTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "upDateStudentAppNotes(appProfileToUse:for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7829E3DC-41CE-47C1-854E-15118061B23F - 1083f542a8c10198"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Test_Making_a_urlSession.StudentProfileStaticTableViewController.upDateStudentAppNotes(appProfileToUse: Swift.Optional&lt;Swift.String&gt;, for: Test_Making_a_urlSession.User) -&gt; ()"
+                  moduleName = "Test Making a urlSession"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevenhertz/Desktop/XcodeProjects/Work/test_making_a_url_session_zulu4/Test%20Making%20a%20urlSession/view%20controllers/Student%20Daily%20Apps%20And%20Nptes/StudentProfileStaticTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "182"
+                  endingLineNumber = "182"
+                  offsetFromSymbolStart = "1269">
+               </Location>
+               <Location
+                  uuid = "7829E3DC-41CE-47C1-854E-15118061B23F - 77661f6546b8ff4d"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Test_Making_a_urlSession.StudentProfileStaticTableViewController.upDateStudentAppNotes(appProfileToUse: Swift.Optional&lt;Swift.String&gt;, for: Test_Making_a_urlSession.User) -&gt; ()"
+                  moduleName = "Test Making a urlSession"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stevenhertz/Desktop/XcodeProjects/Work/test_making_a_url_session_zulu4/Test%20Making%20a%20urlSession/view%20controllers/Student%20Daily%20Apps%20And%20Nptes/StudentProfileStaticTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "183"
+                  endingLineNumber = "183"
+                  offsetFromSymbolStart = "202">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -11,10 +11,76 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 protocol NotesDelegate {
-        func updateStudentNote(passedNoted: String)
+    func updateStudentNote(passedNoted: String, user: User)
 }
 
 class StudentCollectionViewController: UICollectionViewController, NotesDelegate {
+    
+    enum SelectionMode {
+        
+        case multipleEnabled
+        case multipleDisabled
+               
+        var allTitles: (buttonTitle: String, barTitle: String) {
+            switch self {
+            case .multipleDisabled:
+                return ("Select", UserDefaultsHelper.groupName ?? "Students")
+            case .multipleEnabled:
+                return ("Cancel", "Select Items")
+            }
+        }
+
+        var allowsMultipleSelection: Bool {
+            switch self {
+            case .multipleDisabled:
+                return false
+            case .multipleEnabled:
+                return true
+            }
+        }
+
+        mutating func toggle()  {
+            switch self {
+            case .multipleEnabled:
+                self = .multipleDisabled
+            case .multipleDisabled:
+                self = .multipleEnabled
+            }
+        }
+    }
+    
+    var selectionMode : SelectionMode = .multipleDisabled {
+        
+        willSet {
+            switch newValue {
+            case .multipleDisabled:
+                collectionView.indexPathsForSelectedItems?.forEach{
+                    if let cell = collectionView.cellForItem(at: $0) as? StudentCollectionViewCell {
+                        cell.hideIcon()
+                    }
+                    collectionView.deselectItem(at: $0, animated: false)
+                }
+                navigationController?.setToolbarHidden(true, animated: true)
+            case .multipleEnabled:
+                addBarButton.isEnabled = false
+                navigationController?.setToolbarHidden(false, animated: true)
+                
+                print("multiple enablled")
+            }
+        }
+        
+        didSet {
+            collectionView.allowsMultipleSelection = selectionMode.allowsMultipleSelection
+            barButtonSelectCancel.title = selectionMode.allTitles.buttonTitle
+            navigationItem.title = selectionMode.allTitles.barTitle
+        }
+    }
+
+    
+    var addBarButton: UIBarButtonItem = UIBarButtonItem()
+    
+    @IBOutlet weak var barButtonSelectCancel: UIBarButtonItem!
+
     
     var navBarTitle = ""
     
@@ -65,6 +131,20 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
 //        }
 //
         
+        
+        
+        
+        addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        addBarButton.isEnabled = false
+        toolbarItems = [addBarButton, spacer]
+        navigationController?.setToolbarHidden(true, animated: false)
+                
+        barButtonSelectCancel.title = "Select"
+        collectionView.allowsMultipleSelection = false
+        
+        
+        
         classGroupCodeInt = UserDefaultsHelper.groupID
         className = UserDefaultsHelper.groupName
         
@@ -96,11 +176,28 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                      self.collectionView.reloadData()
                 }
             }
-
         }
     }
-
     
+
+    @IBAction func buttonClicked(_ sender: UIBarButtonItem) {
+        selectionMode.toggle()
+        print(selectionMode)
+        // sender.title = selectionMode.buttonTitle
+        print(sender.title)
+    }
+    
+    @objc func addTapped() {
+        print("button tapped")
+        performSegue(withIdentifier: "goToStudentDetail", sender: nil)
+    }
+    
+    func setBarButtonSelected() {
+        barButtonSelectCancel.title = "Select"
+        selectionMode = .multipleDisabled
+    }
+    
+
     
      
     @IBAction func returnFromLoginWithClass(segue: UIStoryboardSegue) {
@@ -136,8 +233,12 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     }
     
 
-    func updateStudentNote(passedNoted: String) {
-        users[rowSelected].notes = passedNoted
+    func updateStudentNote(passedNoted: String, user: User) {
+        
+        if let idx = self.users.firstIndex(of: user) {
+            users[idx].notes = passedNoted
+            print("Updating in the delegate the student at position \(idx) with note \(passedNoted)")
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -155,18 +256,114 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         return cell
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+//           if let cell = collectionView.cellForItem(at: indexPath) {
+//               cell.contentView.backgroundColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
+//           }
+           print("itemhightlighted")
+           
+       }
+       
+    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+           if let cell = collectionView.cellForItem(at: indexPath) {
+               cell.contentView.backgroundColor = nil
+           }
+           print("itemUNhightlighted")
+       }
+       
+    
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("in did select item and the item in \(indexPath.row)")
-        rowSelected = indexPath.row
-        performSegue(withIdentifier: "goToStudentDetail", sender: nil)
+        
+        switch selectionMode {
+        case .multipleDisabled:
+            rowSelected = indexPath.row
+            collectionView.deselectItem(at: indexPath, animated: false)
+            performSegue(withIdentifier: "goToStudentDetail", sender: nil)
+            
+        case .multipleEnabled:
+            print("itemselected")
+            if let cell = collectionView.cellForItem(at: indexPath) as? StudentCollectionViewCell {
+                cell.showIcon()
+            }
+            addBarButton.isEnabled = true
+        }
+        
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("itemDeselected")
+        if let cell = collectionView.cellForItem(at: indexPath) as? StudentCollectionViewCell {
+            cell.hideIcon()
+        }
+        guard let count = collectionView.indexPathsForSelectedItems?.count else {return}
+        if count < 1 {
+            addBarButton.isEnabled = false
+        }
+    }
+
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        switch selectionMode {
+            
+        case .multipleDisabled:
+            switch segue.identifier {
+            case "goToStudentDetail":
+                guard let studentProfileStaticTableVC = segue.destination as? StudentProfileStaticTableViewController else { fatalError(" could not segue ") }
+                studentProfileStaticTableVC.user = users[rowSelected]
+                studentProfileStaticTableVC.usersSelected.append(users[rowSelected])
+                studentProfileStaticTableVC.notesDelegate = self
+                
+                studentProfileStaticTableVC.navigationItem.title =
+                    studentProfileStaticTableVC.usersSelected.count == 1 ? users[rowSelected].firstName.trimmingCharacters(in: .whitespacesAndNewlines) + " " + users[rowSelected].lastName.trimmingCharacters(in: .whitespacesAndNewlines) : "* * * Multiple * * *"
+                
+                print("finished Segue")
+            default:
+                break
+            }
+            
+        case .multipleEnabled:
+            switch segue.identifier {
+            case "goToStudentDetail":
+                
+                guard let studentProfileStaticTableVC = segue.destination as? StudentProfileStaticTableViewController else { fatalError(" could not segue ") }
+                guard let indexPaths = collectionView.indexPathsForSelectedItems else {fatalError("Could not get the index paths")}
+                for indexPath in indexPaths {
+                    studentProfileStaticTableVC.usersSelected.append(users[indexPath.row])
+                }
+                
+                studentProfileStaticTableVC.notesDelegate = self
+                
+                studentProfileStaticTableVC.navigationItem.title =
+                    studentProfileStaticTableVC.usersSelected.count == 1 ? users[rowSelected].firstName.trimmingCharacters(in: .whitespacesAndNewlines) + " " + users[rowSelected].lastName.trimmingCharacters(in: .whitespacesAndNewlines) : "* * * Multiple * * *"
+                selectionMode.toggle()
+                print("finished Segue")
+            default:
+                break
+            }
+            
+        }
+    }
+
+    /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier {
         case "goToStudentDetail":
             guard let studentProfileStaticTableVC = segue.destination as? StudentProfileStaticTableViewController else { fatalError(" could not segue ") }
-            // guard let studentProfileStaticTableVC = tabBarVC.customizableViewControllers?.first as? StudentProfileStaticTableViewController else {fatalError(" could not segue ")}
             
             studentProfileStaticTableVC.user = users[rowSelected]
             studentProfileStaticTableVC.usersSelected.append(users[rowSelected])
@@ -182,9 +379,6 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         default:
             break
         }
-        
     }
-
-
-
+    */
 }

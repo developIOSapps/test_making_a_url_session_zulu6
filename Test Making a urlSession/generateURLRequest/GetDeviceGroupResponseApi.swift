@@ -129,6 +129,7 @@ struct GetDataApi {
       getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
           
           print("in the GetDataApi.getZuluDataWrapper before switch")
+         
           switch result {
               
           case .failure(let err):

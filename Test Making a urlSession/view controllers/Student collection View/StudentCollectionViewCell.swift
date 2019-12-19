@@ -14,13 +14,43 @@ class StudentCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var studentNameLabel: UILabel!
     
+    @IBOutlet weak var checkmarkImageView: UIImageView! {
+        didSet {
+            checkmarkImageView.alpha = 0.0
+            let tintableImage = checkmarkImageView.image?.withRenderingMode(.alwaysTemplate)
+            print("set it tintable")
+            checkmarkImageView.image = tintableImage
+            checkmarkImageView.tintColor = UIColor.blue
+
+           //  checkImage.image = UIImage(systemName: <#T##String#>, withConfiguration: UIImage.Configuration?)  //UIImage(imageLiteralResourceName: "myImageName").withRenderingMode(.alwaysTemplate)
+            // checkImage.tintColor = UIColor.red
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //selectedBackgroundView = UIView()
-        //selectedBackgroundView?.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        
+//        let redView = UIView(frame: bounds)
+//        redView.backgroundColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+//        backgroundView = redView
+//
+//        let blueView = UIView(frame: bounds)
+//        blueView.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+//        selectedBackgroundView = blueView
+        
+        
         studentImageView.layer.cornerRadius = 60
         studentImageView.layer.masksToBounds = true
     }
+    
+    
+    func showIcon() {
+        checkmarkImageView.alpha = 1.0
+    }
+    
+    func hideIcon() {
+        checkmarkImageView.alpha = 0.0
+    }
+    
 
 }

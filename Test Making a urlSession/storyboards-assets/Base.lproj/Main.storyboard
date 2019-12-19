@@ -105,9 +105,18 @@
                                             <color key="textColor" name="tintContrast"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="J5I-gY-XTH">
+                                            <rect key="frame" x="107" y="133.5" width="24" height="23"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="24" id="ZWS-bE-U31"/>
+                                                <constraint firstAttribute="height" constant="24" id="Zgn-oh-Rnk"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="J5I-gY-XTH" secondAttribute="bottom" constant="1" id="1Gf-fV-MSl"/>
                                         <constraint firstItem="4gT-9g-zUB" firstAttribute="bottom" secondItem="EZi-3c-852" secondAttribute="bottomMargin" id="3Fd-Zk-sy0"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="J5I-gY-XTH" secondAttribute="trailing" constant="1" id="6st-CK-YdY"/>
                                         <constraint firstItem="BKZ-at-STG" firstAttribute="top" secondItem="EZi-3c-852" secondAttribute="topMargin" id="Ioe-wj-AEz"/>
                                         <constraint firstItem="BKZ-at-STG" firstAttribute="leading" secondItem="EZi-3c-852" secondAttribute="leadingMargin" id="Jvd-nQ-tMD"/>
                                         <constraint firstItem="BKZ-at-STG" firstAttribute="trailing" secondItem="EZi-3c-852" secondAttribute="trailingMargin" id="Oe5-Jf-LH2"/>
@@ -116,6 +125,7 @@
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <connections>
+                                    <outlet property="checkmarkImageView" destination="J5I-gY-XTH" id="QPW-nG-kbe"/>
                                     <outlet property="studentImageView" destination="BKZ-at-STG" id="RfB-cO-4Rx"/>
                                     <outlet property="studentNameLabel" destination="4gT-9g-zUB" id="dVN-38-OUb"/>
                                 </connections>
@@ -126,8 +136,15 @@
                             <outlet property="delegate" destination="2id-1p-veB" id="Hzo-Pd-9Lz"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Students" id="hFx-JN-cAJ"/>
+                    <navigationItem key="navigationItem" title="Students" id="hFx-JN-cAJ">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="cBx-SD-RbS">
+                            <connections>
+                                <action selector="buttonClicked:" destination="2id-1p-veB" id="6si-OU-Nal"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="barButtonSelectCancel" destination="cBx-SD-RbS" id="WDM-Nh-zgC"/>
                         <segue destination="7mN-Ga-Sy5" kind="show" identifier="goToStudentDetail" id="adg-QJ-vew"/>
                         <segue destination="Tdd-nm-J6F" kind="presentation" identifier="loginScr" id="FUa-P2-vzQ"/>
                     </connections>
@@ -537,7 +554,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="developITlogo" translatesAutoresizingMaskIntoConstraints="NO" id="PAH-MA-Je2">
-                                <rect key="frame" x="57" y="52" width="300" height="97"/>
+                                <rect key="frame" x="57" y="52" width="300.00000000000006" height="97"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Sb6-DP-RFf"/>
                                     <constraint firstAttribute="width" secondItem="PAH-MA-Je2" secondAttribute="height" multiplier="108:35" id="yNh-Fe-FZ6"/>
@@ -633,6 +650,7 @@
     </scenes>
     <resources>
         <image name="arrow.up.doc" catalog="system" width="56" height="64"/>
+        <image name="checkmark.circle" catalog="system" width="64" height="60"/>
         <image name="developITlogo" width="347" height="145"/>
         <image name="images-12" width="94.5" height="133.5"/>
         <namedColor name="textColor">

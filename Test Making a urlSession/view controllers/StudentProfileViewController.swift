@@ -95,7 +95,7 @@ class StudentProfileViewController: UIViewController {
 
         GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: String(student.id), propertyName: "notes", propertyValue: newNote))) {
             DispatchQueue.main.async {
-                self.notesDelegate?.updateStudentNote(passedNoted: newNote)
+                self.notesDelegate?.updateStudentNote(passedNoted: newNote, user: self.student)
                 self.presentAlertWithTitle("Update Done", message: "Update successful, student profile set")
                 print("````````````Hooray Job well done")
             }
