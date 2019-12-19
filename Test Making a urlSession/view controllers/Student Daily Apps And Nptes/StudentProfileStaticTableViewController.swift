@@ -57,6 +57,7 @@ class StudentProfileStaticTableViewController: UITableViewController {
             profileForDayLabel[3].text = student.thursdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
             profileForDayLabel[4].text = student.fridayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
             notesLabel.text = student.notes
+            notesLabel.isEditable = true
         } else {
             profileForDayLabel[0].text = "*** We are in multiple mode ***"
             profileForDayLabel[1].text = "*** We are in multiple mode ***"
@@ -64,6 +65,7 @@ class StudentProfileStaticTableViewController: UITableViewController {
             profileForDayLabel[3].text = "*** We are in multiple mode ***"
             profileForDayLabel[4].text = "*** We are in multiple mode ***"
             notesLabel.text = "*** We are in multiple mode ***"
+            notesLabel.isEditable = falsev
         }
     }
  
