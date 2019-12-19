@@ -135,7 +135,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         
         
        // addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-        addBarButton = UIBarButtonItem(title: "Select Appp Prolfiles", style: .plain, target: self, action: #selector(addTapped))
+        addBarButton = UIBarButtonItem(title: "Select App Prolfiles", style: .plain, target: self, action: #selector(addTapped))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         addBarButton.isEnabled = false
         toolbarItems = [addBarButton, spacer]
