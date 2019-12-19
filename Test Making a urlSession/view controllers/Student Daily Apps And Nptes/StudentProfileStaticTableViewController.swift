@@ -185,6 +185,9 @@ extension StudentProfileStaticTableViewController {
         GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: String(studentBeingUpdated.id), propertyName: "notes", propertyValue: fullNote))) {
             DispatchQueue.main.async {
                 self.notesDelegate?.updateStudentNote(passedNoted: fullNote, user: userToUpdate )
+                if let idx = self.usersSelected.firstIndex(of: userToUpdate) {
+                    self.usersSelected[idx].notes = fullNote
+                }
 
                 // self.presentAlertWithTitle("Update Done", message: "Update successful, student profile set")
                 print("````````````Hooray Job well done")
