@@ -44,7 +44,7 @@ class TableViewController: UITableViewController {
         
         UserDefaults.standard.removeObject(forKey: "groupIdKey")
         
-        let whatToDo = 11
+        let whatToDo = 10
         
         switch whatToDo {
             
@@ -171,7 +171,7 @@ class TableViewController: UITableViewController {
                     }
                 }
             case 10:
-                GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : "zzz" ]) )) { (deviceListResponse) in
+                GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : "18" ]) )) { (deviceListResponse) in
                     DispatchQueue.main.async {
                         
                         guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}

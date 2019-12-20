@@ -13,8 +13,14 @@ struct Device: OurCodable {
         print("do convert")
     }
     
-    let serialNumber:             String
-
+    let serialNumber      : String
+    let UDID              : String
+    let name              : String
+    let batteryLevel      : Double
+    let totalCapacity     : Double
+    let lastCheckin       : String
+    let modified          : String
+    
 }
 
 

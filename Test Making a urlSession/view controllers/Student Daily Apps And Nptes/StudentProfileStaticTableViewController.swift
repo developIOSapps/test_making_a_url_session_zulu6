@@ -65,7 +65,7 @@ class StudentProfileStaticTableViewController: UITableViewController {
             profileForDayLabel[3].text = "*** We are in multiple mode ***"
             profileForDayLabel[4].text = "*** We are in multiple mode ***"
             notesLabel.text = "*** We are in multiple mode ***"
-            notesLabel.isEditable = falsev
+            notesLabel.isEditable = false
         }
     }
  
