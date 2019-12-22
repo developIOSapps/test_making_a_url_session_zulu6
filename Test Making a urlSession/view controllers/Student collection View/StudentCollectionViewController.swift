@@ -65,7 +65,15 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
              }
          }
 
-         
+         var segueTo: String {
+             switch self {
+             case .devices:
+                 return "goToStudentDetail"
+             case .students:
+                 return "goToAppProfile"
+             }
+         }
+
          var allowsMultipleSelection: Bool {
              switch self {
              case .devices:
@@ -241,7 +249,12 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     }
     
     @objc func addTapped() {
-        performSegue(withIdentifier: "goToStudentDetail", sender: nil)
+        switch itemsToDisplay {
+        case .students:
+            performSegue(withIdentifier: "goToStudentDetail", sender: nil)
+        case .devices:
+            performSegue(withIdentifier: "goToAppProfile", sender: nil)
+        }
     }
     
 //    func setBarButtonSelected() {
@@ -436,6 +449,7 @@ extension StudentCollectionViewController {
 
             guard let appProfilesTableVC = segue.destination as? AppProfilesTableViewController else { fatalError(" could not segue ") }
 
+            
             print("Going to app profile because dealing ith devices")
             switch selectionMode {
             case .multipleDisabled:
@@ -514,75 +528,27 @@ extension StudentCollectionViewController {
         /// get the profile name ,  use it to show on the screen so we take off the prefix
         let selectedappProfile = appProfilesTableVC.profileArray[segmentIdx][row].name.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
         print("**********",selectedappProfile)
-        /*
-  
-        /// then Update the student
-        for (position, user)  in usersSelected.enumerated() {
-            upDateStudentAppNotes(appProfileToUse: appProfilesTableVC.profileArray[segmentIdx][row].name, for: user)
+        for device in devicesSelected {
+            print(device.UDID)
         }
         
-        daySelected = 99
-      */
+  
+        ///  Update the device
+        for (position, device)  in devicesSelected.enumerated() {
+            upDateDeviceNotes(appProfileToUse: appProfilesTableVC.profileArray[segmentIdx][row].name, for: device)
+        }
+      
     }
     
-    func upDateStudentAppNotes(appProfileToUse: String? = nil, for userToUpdate: User)  {
+    func upDateDeviceNotes(appProfileToUse: String , for deviceToUpdate: Device)  {
       
          
          //*** Real Update moveiPadIntoDeviceGroup - Update its notes property
-//          GetDataApi.updateNoteProperty(GeneratedReq.init(request: ValidReqs.updateDeviceProperty(deviceId: self.ipadID, propertyName: "notes", propertyValue: levl))) {
-//              DispatchQueue.main.async {
-//                  self.debugLabel.text! +=  "```*** Updated the notes property of this iPad - Hooray Job well done"
-//              }
-//          }
-         
-         
-         
-         
-        var studentBeingUpdated = Student.getStudentFromUser(userToUpdate)
-        
-        // Build the app profile portion of the note
-        let profileNoteDelimiter = "~#~"
-
-        /// update the student record if doing this because of app profile change
-        if let appProfileToUse = appProfileToUse {
-//            studentBeingUpdated.setStudentAppProfileForDayNbr(daySelected, with: appProfileToUse)
-        }
-        
-        /*
-        guard let profileForDayLabel = profileForDayLabel else {fatalError("eeeee")}
-        print(profileForDayLabel.count)
-        let profileArrayNoNulls = profileForDayLabel.compactMap { $0.text }
-        print(profileArrayNoNulls)
-        
-        var studentProfileListTemp = profileNoteDelimiter
-        for item in profileArrayNoNulls {
-            studentProfileListTemp.append((item.isEmpty ? "" : UserDefaultsHelper.appFilter) + item + ";")
-        }
-        var studentProfileList = String(studentProfileListTemp.dropLast())
-        studentProfileList.append(profileNoteDelimiter)
-        
-        
-        let studentFullAppProfile = profileNoteDelimiter + studentBeingUpdated.makeNote + profileNoteDelimiter
-                
-        let trimmedNote = studentBeingUpdated.notes.trimmingCharacters(in: .whitespacesAndNewlines)
-        let fullNote = trimmedNote +  "   " + studentFullAppProfile
-        
-        
-        print("~*~~~~~", fullNote)
-        
-        GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: String(studentBeingUpdated.id), propertyName: "notes", propertyValue: fullNote))) {
-            DispatchQueue.main.async {
-                /// Update local versions of note being kept in the student collection list and here in the student profile
-                self.notesDelegate?.updateStudentNote(passedNoted: fullNote, user: userToUpdate )   //Update local versions of note being kept in the student collection list
-                if let idx = self.usersSelected.firstIndex(of: userToUpdate) {
-                    self.usersSelected[idx].notes = fullNote
-                }   //   and here in the student profile
-
-                // self.presentAlertWithTitle("Update Done", message: "Update successful, student profile set")
-                print("````````````Hooray Job well done")
-            }
-        }
-    */
+        GetDataApi.updateNoteProperty(GeneratedReq.init(request: ValidReqs.updateDeviceProperty(deviceId: deviceToUpdate.UDID, propertyName: "notes", propertyValue: appProfileToUse))) {
+              DispatchQueue.main.async {
+                  print( "```*** Updated the notes property of this iPad - Hooray Job well done")
+              }
+          }
  }
 }
 
