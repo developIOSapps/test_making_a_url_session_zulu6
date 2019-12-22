@@ -25,6 +25,7 @@ class StudentProfileStaticTableViewController: UITableViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.isHidden = true
         
         /// Set navigation bar
         ///

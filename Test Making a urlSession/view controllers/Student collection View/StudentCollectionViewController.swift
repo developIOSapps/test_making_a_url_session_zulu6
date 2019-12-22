@@ -61,9 +61,11 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                     }
                     collectionView.deselectItem(at: $0, animated: false)
                 }
+                self.tabBarController?.tabBar.isHidden = false
                 navigationController?.setToolbarHidden(true, animated: true)
             case .multipleEnabled:
                 addBarButton.isEnabled = false
+                self.tabBarController?.tabBar.isHidden = true
                 navigationController?.setToolbarHidden(false, animated: true)
                 
                 print("multiple enablled")
@@ -95,6 +97,11 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
 
     @IBOutlet weak var barButtonSelectCancel: UIBarButtonItem!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
          super.viewDidAppear(animated)
          if classGroupCodeInt ==  nil {
@@ -108,6 +115,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         addBarButton.isEnabled = false
         toolbarItems = [addBarButton, spacer]
+        self.tabBarController?.tabBar.isHidden = false
         navigationController?.setToolbarHidden(true, animated: false)
     }
     
