@@ -31,6 +31,7 @@
 		46510BF02388300100838764 /* AppProfilesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46510BEF2388300100838764 /* AppProfilesTableViewController.swift */; };
 		46510BF32388319900838764 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46510BF22388319900838764 /* ProfileTableViewCell.swift */; };
 		46510BF52388320800838764 /* AppProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46510BF42388320800838764 /* AppProfile.swift */; };
+		465E121623AF97620063DE3E /* NotesUpdateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E121523AF97620063DE3E /* NotesUpdateable.swift */; };
 		465F7474238309A3005C6132 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465F7473238309A2005C6132 /* UIViewController.swift */; };
 		4662C74B228C996E00D99B84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662C74A228C996E00D99B84 /* AppDelegate.swift */; };
 		4662C74D228C996E00D99B84 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662C74C228C996E00D99B84 /* TableViewController.swift */; };
@@ -91,6 +92,7 @@
 		46510BEF2388300100838764 /* AppProfilesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProfilesTableViewController.swift; sourceTree = "<group>"; };
 		46510BF22388319900838764 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		46510BF42388320800838764 /* AppProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProfile.swift; sourceTree = "<group>"; };
+		465E121523AF97620063DE3E /* NotesUpdateable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesUpdateable.swift; sourceTree = "<group>"; };
 		465F7473238309A2005C6132 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		4662C747228C996E00D99B84 /* Test Making a urlSession.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test Making a urlSession.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4662C74A228C996E00D99B84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -239,6 +241,13 @@
 			path = "Select an app profile from list";
 			sourceTree = "<group>";
 		};
+		465E121423AF97470063DE3E /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		465F7472238309A2005C6132 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +344,7 @@
 		466B2C8E22FDAA5C009C19E4 /* protocols and extensions */ = {
 			isa = PBXGroup;
 			children = (
+				465E121423AF97470063DE3E /* model */,
 				466B2C9922FDBAA0009C19E4 /* data */,
 				466B2C8F22FDAA75009C19E4 /* coding and decoding */,
 			);
@@ -362,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				466B2C9522FDAF19009C19E4 /* User.swift */,
+				465E121523AF97620063DE3E /* NotesUpdateable.swift */,
 			);
 			path = item;
 			sourceTree = "<group>";
@@ -602,6 +613,7 @@
 				4662C74B228C996E00D99B84 /* AppDelegate.swift in Sources */,
 				463F328C22A9A5C60015092E /* DeviceGroupResponse.swift in Sources */,
 				4662C761228CB95400D99B84 /* HTTPMethod.swift in Sources */,
+				465E121623AF97620063DE3E /* NotesUpdateable.swift in Sources */,
 				4662C764228CBAAB00D99B84 /* QueryType.swift in Sources */,
 				4608FE35237EECC400EE7C80 /* Profile.swift in Sources */,
 				46C75CF5237EDB5300EE37CD /* StudentProfileViewController.swift in Sources */,

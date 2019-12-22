@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct User: OurCodable {
+struct User: OurCodable, NotesUpdateable {
     static func doConvert() {
         print("do convert")
     }
@@ -18,6 +18,9 @@ struct User: OurCodable {
     let lastName:       String
     let username:       String
     var notes:          String
+    var title:          String  { firstName }
+    var picName:        String  { username  }
+    var identity:       String  {String(id) }
 
 }
 

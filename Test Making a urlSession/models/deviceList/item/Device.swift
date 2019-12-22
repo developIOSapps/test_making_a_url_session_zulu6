@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Device: OurCodable {
+struct Device: OurCodable, NotesUpdateable {
+    
     static func doConvert() {
         print("do convert")
     }
@@ -20,6 +21,11 @@ struct Device: OurCodable {
     let totalCapacity     : Double
     let lastCheckin       : String
     let modified          : String
+    var notes             : String
+    var title:          String  { name }
+    var picName:        String  { "ipadGraphic"  }
+    var identity:       String  { UDID }
+
     
 }
 

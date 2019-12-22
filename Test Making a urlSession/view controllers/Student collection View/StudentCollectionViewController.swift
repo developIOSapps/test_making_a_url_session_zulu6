@@ -89,7 +89,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     }
 
     var devices: [Device] = []
-    var users: [User] = []
+    var users: [NotesUpdateable] = []
     
     var rowSelected = 0
 
@@ -148,10 +148,11 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                     
                     guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
                     /// Just load in the users into this class if needed
-                    self.users = usrResponse.users
-                    self.users.sort {
-                        $0.lastName < $1.lastName
-                    }
+                    self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
+//                    self.users = usrResponse.users
+//                    self.users.sort {
+//                        $0.lastName < $1.lastName
+//                    }
                     /// Here we have what we need
                     usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
                     self.collectionView.reloadData()
@@ -217,8 +218,8 @@ extension StudentCollectionViewController {
     
         // Configure the cell
         let student = users[indexPath.row]
-        cell.studentImageView.image = UIImage(named: student.username)
-        cell.studentNameLabel.text = student.firstName // + " " + student.lastName
+        cell.studentImageView.image = UIImage(named: student.picName)
+        cell.studentNameLabel.text = student.title // + " " + student.lastName
         return cell
     }
     
@@ -290,10 +291,12 @@ extension StudentCollectionViewController {
                 guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
                 
                 /// Just load in the users into this class if needed
-                self.users = usrResponse.users
-                self.users.sort {
-                    $0.lastName < $1.lastName
-                }
+                self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
+
+//                self.users = usrResponse.users
+//                self.users.sort {
+//                    $0.lastName < $1.lastName
+//                }
 
                 /// Here we have what we need
                 usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
@@ -304,9 +307,12 @@ extension StudentCollectionViewController {
     }
     
     func updateStudentNote(passedNoted: String, user: User) {
+        guard let users = self.users as? [User] else {
+            fatalError(" can not convert it to user type")
+        }
         
-        if let idx = self.users.firstIndex(of: user) {
-            users[idx].notes = passedNoted
+        if let idx = users.firstIndex(of: user) {
+            self.users[idx].notes = passedNoted
             print("Updating in the delegate the student at position \(idx) with note \(passedNoted)")
         }
     }
@@ -314,8 +320,21 @@ extension StudentCollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        switch users[rowSelected] {
+        case is User:
+            print("IT Is **USER**")
+        default:
+            break
+        }
+        
+        
         switch segue.identifier  {
+            
         case "goToStudentDetail":
+            guard let users = self.users as? [User] else {
+                return
+            }
+
             guard let studentProfileStaticTableVC = segue.destination as? StudentProfileStaticTableViewController else { fatalError(" could not segue ") }
             studentProfileStaticTableVC.notesDelegate = self
              switch selectionMode {
