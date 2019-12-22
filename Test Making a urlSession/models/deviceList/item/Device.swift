@@ -23,10 +23,8 @@ struct Device: OurCodable, NotesUpdateable {
     let modified          : String
     var notes             : String
     var title:          String  { name }
-    var picName:        String  { "ipadGraphic"  }
+    var picName:        String  { "iPadGraphic"  }
     var identity:       String  { UDID }
-
-    
 }
 
 

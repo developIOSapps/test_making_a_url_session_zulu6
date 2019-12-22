@@ -131,7 +131,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         
         classGroupCodeInt = UserDefaultsHelper.groupID
         className = UserDefaultsHelper.groupName
-        
+       // /*
         if classGroupCodeInt ==  nil {
             print("in about to perform segue")
             performSegue(withIdentifier: "loginScr", sender: nil)
@@ -160,8 +160,8 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
             }
             
         }
-       
-          /*
+      // */
+        /*
         if classGroupCodeInt ==  nil {
             print("in about to perform segue")
             performSegue(withIdentifier: "loginScr", sender: nil)
@@ -179,16 +179,15 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                     guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
                     
                     /// Just load in the users into this class if needed
-                    self.devices = deviceListResponse.devices
+                    self.users = deviceListResponse.devices
                     /// Here we have what we need
                     deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
                     print("got devices")
-                    // self.collectionView.reloadData()
+                    self.collectionView.reloadData()
                 }
             }
-
         }
- */
+    */
     }
     
 
@@ -284,7 +283,7 @@ extension StudentCollectionViewController {
 
          // title = navBarTitle
         let classGroupCodeStr = String(classGroupCodeInt)
-        
+        // /*
         GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
             DispatchQueue.main.async {
                 
@@ -292,18 +291,29 @@ extension StudentCollectionViewController {
                 
                 /// Just load in the users into this class if needed
                 self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
-
-//                self.users = usrResponse.users
-//                self.users.sort {
-//                    $0.lastName < $1.lastName
-//                }
-
                 /// Here we have what we need
                 usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
                 
                  self.collectionView.reloadData()
             }
         }
+       //  */
+        /*
+        GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : "18" ]) )) { (deviceListResponse) in
+            DispatchQueue.main.async {
+                
+                guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
+                
+                /// Just load in the users into this class if needed
+                self.users = deviceListResponse.devices
+                /// Here we have what we need
+                deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
+                print("got devices")
+                self.collectionView.reloadData()
+            }
+        }
+    */
+
     }
     
     func updateStudentNote(passedNoted: String, user: User) {
@@ -317,15 +327,32 @@ extension StudentCollectionViewController {
         }
     }
 
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        print("in should perform segue")
+               switch users[rowSelected] {
+               case is User:
+                   print("IT Is **USER**")
+                    return true
+               case is Device:
+                   print("IT Is **Device**")
+                   return false
+               default:
+                   return false
+               }
+        
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        switch users[rowSelected] {
-        case is User:
-            print("IT Is **USER**")
-        default:
-            break
-        }
+              print("in should perform segue")
+                      switch users[rowSelected] {
+                      case is User:
+                          print("IT Is **USER**")
+                      case is Device:
+                          print("IT Is **Device**")
+                      default:
+                          break
+                      }
         
         
         switch segue.identifier  {
