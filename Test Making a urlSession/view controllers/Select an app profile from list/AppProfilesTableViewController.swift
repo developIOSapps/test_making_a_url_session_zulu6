@@ -22,7 +22,7 @@ class AppProfilesTableViewController: UITableViewController {
 
     var profiles:    [Profile] = []
     var expanded:    Bool = false
-    var rowSelected: Int!
+    var rowSelected: Int?
     
     
     override func viewDidLoad() {
@@ -75,6 +75,10 @@ class AppProfilesTableViewController: UITableViewController {
     }
 
     @IBAction func saveButtonTapped(_ sender: Any) {
+        if rowSelected == nil {
+            return
+        }
+        
         if itemsToDisplay == "Devices" {
             performSegue(withIdentifier: "backToDeviceList", sender: nil)
         } else {
@@ -144,16 +148,18 @@ class AppProfilesTableViewController: UITableViewController {
                  cell.accessoryType = .checkmark
                  expanded = true
                  print("set to checked")
+                rowSelected = indexPath.row
              case .checkmark:
                  cell.accessoryType = .none
                  expanded = false
                  print("set to none")
+                rowSelected = nil
              default:
                  break
              }
          }
          
-         rowSelected = indexPath.row
+         // rowSelected = indexPath.row
          // expanded.toggle()
          
          tableView.beginUpdates()
