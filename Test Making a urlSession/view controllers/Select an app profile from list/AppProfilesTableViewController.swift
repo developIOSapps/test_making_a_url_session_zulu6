@@ -10,6 +10,8 @@ import UIKit
 
 class AppProfilesTableViewController: UITableViewController {
     
+    var itemsToDisplay: String = ""
+    
     let allProfiles = ["Profile-CTG-first", "Profile-CTG-second", "Profile-CTG-third", "Profile-Kiosk-first", "Profile-Kiosk-second", "Profile-Kiosk-third", "Profile-Kiosk-fourth", "Profile-Kiosk-fifth"]
     
     var ctgProfiles = [Profile]()
@@ -72,6 +74,15 @@ class AppProfilesTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        if itemsToDisplay == "Devices" {
+            performSegue(withIdentifier: "backToDeviceList", sender: nil)
+        } else {
+            performSegue(withIdentifier: "backToStudentAppProfile", sender: nil)
+        }
+    }
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

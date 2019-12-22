@@ -50,6 +50,44 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         
     }
     
+    enum ItemsToDisplay {
+         
+         case students
+         case devices
+         
+        
+         var allTitles: (buttonTitle: String, barTitle: String) {
+             switch self {
+             case .devices:
+                 return ("Select", "Hello")
+             case .students:
+                 return ("Cancel", "Select Items")
+             }
+         }
+
+         
+         var allowsMultipleSelection: Bool {
+             switch self {
+             case .devices:
+                 return false
+             case .students:
+                 return true
+             }
+         }
+
+         mutating func toggle()  {
+             switch self {
+             case .students:
+                 self = .devices
+             case .devices:
+                 self = .students
+             }
+         }
+         
+     }
+     
+    var itemsToDisplay: ItemsToDisplay = .students
+    
     var selectionMode : SelectionMode = .multipleDisabled {
         
         willSet {
@@ -90,10 +128,11 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         }
     }
 
-    var devices: [Device] = []
+    // var devices: [NotesUpdateable] = []
     var users: [NotesUpdateable] = []
     
     var rowSelected = 0
+    var devicesSelected: [Device] = [Device]()
 
     @IBOutlet weak var barButtonSelectCancel: UIBarButtonItem!
     
@@ -139,63 +178,61 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         
         classGroupCodeInt = UserDefaultsHelper.groupID
         className = UserDefaultsHelper.groupName
-       // /*
-        if classGroupCodeInt ==  nil {
-            print("in about to perform segue")
-            performSegue(withIdentifier: "loginScr", sender: nil)
-        } else {
-            
-            // Register cell classes
-            self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-            
-            // title = navBarTitle
-            let classGroupCodeStr = String(classGroupCodeInt)
-            
-            GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
-                DispatchQueue.main.async {
+
+        switch itemsToDisplay {
+            case .students:
+                if classGroupCodeInt ==  nil {
+                    print("in about to perform segue")
+                    performSegue(withIdentifier: "loginScr", sender: nil)
+                } else {
                     
-                    guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
-                    /// Just load in the users into this class if needed
-                    self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
-//                    self.users = usrResponse.users
-//                    self.users.sort {
-//                        $0.lastName < $1.lastName
-//                    }
-                    /// Here we have what we need
-                    usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
-                    self.collectionView.reloadData()
-                }
+                    // Register cell classes
+                    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+                    
+                    // title = navBarTitle
+                    let classGroupCodeStr = String(classGroupCodeInt)
+                    
+                    GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
+                        DispatchQueue.main.async {
+                            
+                            guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
+                            /// Just load in the users into this class if needed
+                            self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
+                            /// Here we have what we need
+                            usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
+                            self.collectionView.reloadData()
+                        }
+                    }
+            }
+            case .devices:
+                if classGroupCodeInt ==  nil {
+                    print("in about to perform segue")
+                    performSegue(withIdentifier: "loginScr", sender: nil)
+                } else {
+                    
+                    // Register cell classes
+                    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+                    
+                    // title = navBarTitle
+                    let classGroupCodeStr = String(classGroupCodeInt)
+                    
+                    GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : "18" ]) )) { (deviceListResponse) in
+                        DispatchQueue.main.async {
+                            
+                            guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
+                            
+                            /// Just load in the users into this class if needed
+                            self.users = deviceListResponse.devices
+                            /// Here we have what we need
+                            deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
+                            print("got devices")
+                            self.collectionView.reloadData()
+                        }
+                    }
             }
             
         }
-      // */
-        /*
-        if classGroupCodeInt ==  nil {
-            print("in about to perform segue")
-            performSegue(withIdentifier: "loginScr", sender: nil)
-        } else {
-            
-            // Register cell classes
-            self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-            
-            // title = navBarTitle
-            let classGroupCodeStr = String(classGroupCodeInt)
-            
-            GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : "18" ]) )) { (deviceListResponse) in
-                DispatchQueue.main.async {
-                    
-                    guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
-                    
-                    /// Just load in the users into this class if needed
-                    self.users = deviceListResponse.devices
-                    /// Here we have what we need
-                    deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
-                    print("got devices")
-                    self.collectionView.reloadData()
-                }
-            }
-        }
-    */
+
     }
     
 
@@ -252,8 +289,13 @@ extension StudentCollectionViewController {
         case .multipleDisabled:
             rowSelected = indexPath.row
             collectionView.deselectItem(at: indexPath, animated: false)
-            performSegue(withIdentifier: "goToStudentDetail", sender: nil)
-            
+            switch itemsToDisplay {
+            case .students:
+                performSegue(withIdentifier: "goToStudentDetail", sender: nil)
+            case .devices:
+                performSegue(withIdentifier: "goToAppProfile", sender: nil)
+            }
+
         case .multipleEnabled:
             print("itemselected")
             if let cell = collectionView.cellForItem(at: indexPath) as? StudentCollectionViewCell {
@@ -291,37 +333,38 @@ extension StudentCollectionViewController {
 
          // title = navBarTitle
         let classGroupCodeStr = String(classGroupCodeInt)
-        // /*
-        GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
-            DispatchQueue.main.async {
-                
-                guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
-                
-                /// Just load in the users into this class if needed
-                self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
-                /// Here we have what we need
-                usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
-                
-                 self.collectionView.reloadData()
-            }
-        }
-       //  */
-        /*
-        GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : "18" ]) )) { (deviceListResponse) in
-            DispatchQueue.main.async {
-                
-                guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
-                
-                /// Just load in the users into this class if needed
-                self.users = deviceListResponse.devices
-                /// Here we have what we need
-                deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
-                print("got devices")
-                self.collectionView.reloadData()
-            }
-        }
-    */
 
+        switch itemsToDisplay {
+            case .students:
+                GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
+                    DispatchQueue.main.async {
+                        
+                        guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
+                        
+                        /// Just load in the users into this class if needed
+                        self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
+                        /// Here we have what we need
+                        usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
+                        
+                        self.collectionView.reloadData()
+                    }
+                }
+            case .devices:
+                GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : "18" ]) )) { (deviceListResponse) in
+                    DispatchQueue.main.async {
+                        
+                        guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
+                        
+                        /// Just load in the users into this class if needed
+                        self.users = deviceListResponse.devices
+                        /// Here we have what we need
+                        deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
+                        print("got devices")
+                        self.collectionView.reloadData()
+                    }
+            }
+        }
+      
     }
     
     func updateStudentNote(passedNoted: String, user: User) {
@@ -335,21 +378,21 @@ extension StudentCollectionViewController {
         }
     }
 
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        print("in should perform segue")
-               switch users[rowSelected] {
-               case is User:
-                   print("IT Is **USER**")
-                    return true
-               case is Device:
-                   print("IT Is **Device**")
-                   return false
-               default:
-                   return false
-               }
-        
-    }
-    
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//        print("in should perform segue")
+//               switch users[rowSelected] {
+//               case is User:
+//                   print("IT Is **USER**")
+//                    return true
+//               case is Device:
+//                   print("IT Is **Device**")
+//                   return false
+//               default:
+//                   return false
+//               }
+//
+//    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
               print("in should perform segue")
@@ -385,9 +428,31 @@ extension StudentCollectionViewController {
             }
             studentProfileStaticTableVC.navigationItem.title =
                 studentProfileStaticTableVC.usersSelected.count == 1 ? users[rowSelected].firstName.trimmingCharacters(in: .whitespacesAndNewlines) + " " + users[rowSelected].lastName.trimmingCharacters(in: .whitespacesAndNewlines) : "* * * Multiple * * *"
+        
+        case "goToAppProfile":
+            guard let devices = self.users as? [Device] else {
+                return
+            }
+
+            guard let appProfilesTableVC = segue.destination as? AppProfilesTableViewController else { fatalError(" could not segue ") }
+
+            print("Going to app profile because dealing ith devices")
+            switch selectionMode {
+            case .multipleDisabled:
+              self.devicesSelected.append(devices[rowSelected])
+            case .multipleEnabled:
+               guard let indexPaths = collectionView.indexPathsForSelectedItems else {fatalError("Could not get the index paths")}
+               devicesSelected.removeAll()
+               for indexPath in indexPaths {
+                   devicesSelected.append(devices[indexPath.row])
+               }
+               selectionMode.toggle()
+            }
+            appProfilesTableVC.itemsToDisplay = "Devices"
         default:
             break
         }
+        
 
         /*
         switch selectionMode {
@@ -431,4 +496,94 @@ extension StudentCollectionViewController {
         }
        */
     }
+
 }
+
+   extension StudentCollectionViewController {
+    
+    @IBAction func backToDeviceList(seque: UIStoryboardSegue)  {
+        
+        print("came back from app profile")
+       
+        /// What we need
+        guard let appProfilesTableVC =  seque.source as? AppProfilesTableViewController else {fatalError("Was not the AppProfilesTable VC")}
+        
+        let segmentIdx = appProfilesTableVC.navBarSegmentedControl.selectedSegmentIndex
+        guard let row = appProfilesTableVC.rowSelected else { fatalError("There was no row selected")}
+        
+        /// get the profile name ,  use it to show on the screen so we take off the prefix
+        let selectedappProfile = appProfilesTableVC.profileArray[segmentIdx][row].name.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+        print("**********",selectedappProfile)
+        /*
+  
+        /// then Update the student
+        for (position, user)  in usersSelected.enumerated() {
+            upDateStudentAppNotes(appProfileToUse: appProfilesTableVC.profileArray[segmentIdx][row].name, for: user)
+        }
+        
+        daySelected = 99
+      */
+    }
+    
+    func upDateStudentAppNotes(appProfileToUse: String? = nil, for userToUpdate: User)  {
+      
+         
+         //*** Real Update moveiPadIntoDeviceGroup - Update its notes property
+//          GetDataApi.updateNoteProperty(GeneratedReq.init(request: ValidReqs.updateDeviceProperty(deviceId: self.ipadID, propertyName: "notes", propertyValue: levl))) {
+//              DispatchQueue.main.async {
+//                  self.debugLabel.text! +=  "```*** Updated the notes property of this iPad - Hooray Job well done"
+//              }
+//          }
+         
+         
+         
+         
+        var studentBeingUpdated = Student.getStudentFromUser(userToUpdate)
+        
+        // Build the app profile portion of the note
+        let profileNoteDelimiter = "~#~"
+
+        /// update the student record if doing this because of app profile change
+        if let appProfileToUse = appProfileToUse {
+//            studentBeingUpdated.setStudentAppProfileForDayNbr(daySelected, with: appProfileToUse)
+        }
+        
+        /*
+        guard let profileForDayLabel = profileForDayLabel else {fatalError("eeeee")}
+        print(profileForDayLabel.count)
+        let profileArrayNoNulls = profileForDayLabel.compactMap { $0.text }
+        print(profileArrayNoNulls)
+        
+        var studentProfileListTemp = profileNoteDelimiter
+        for item in profileArrayNoNulls {
+            studentProfileListTemp.append((item.isEmpty ? "" : UserDefaultsHelper.appFilter) + item + ";")
+        }
+        var studentProfileList = String(studentProfileListTemp.dropLast())
+        studentProfileList.append(profileNoteDelimiter)
+        
+        
+        let studentFullAppProfile = profileNoteDelimiter + studentBeingUpdated.makeNote + profileNoteDelimiter
+                
+        let trimmedNote = studentBeingUpdated.notes.trimmingCharacters(in: .whitespacesAndNewlines)
+        let fullNote = trimmedNote +  "   " + studentFullAppProfile
+        
+        
+        print("~*~~~~~", fullNote)
+        
+        GetDataApi.updateUserProperty(GeneratedReq.init(request: ValidReqs.updateUserProperty(userId: String(studentBeingUpdated.id), propertyName: "notes", propertyValue: fullNote))) {
+            DispatchQueue.main.async {
+                /// Update local versions of note being kept in the student collection list and here in the student profile
+                self.notesDelegate?.updateStudentNote(passedNoted: fullNote, user: userToUpdate )   //Update local versions of note being kept in the student collection list
+                if let idx = self.usersSelected.firstIndex(of: userToUpdate) {
+                    self.usersSelected[idx].notes = fullNote
+                }   //   and here in the student profile
+
+                // self.presentAlertWithTitle("Update Done", message: "Update successful, student profile set")
+                print("````````````Hooray Job well done")
+            }
+        }
+    */
+ }
+}
+
+

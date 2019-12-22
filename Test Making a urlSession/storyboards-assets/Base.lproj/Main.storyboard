@@ -147,11 +147,12 @@
                         <outlet property="barButtonSelectCancel" destination="cBx-SD-RbS" id="WDM-Nh-zgC"/>
                         <segue destination="7mN-Ga-Sy5" kind="show" identifier="goToStudentDetail" id="adg-QJ-vew"/>
                         <segue destination="Tdd-nm-J6F" kind="presentation" identifier="loginScr" id="FUa-P2-vzQ"/>
+                        <segue destination="Pg4-jT-3Tl" kind="show" identifier="goToAppProfile" id="Tby-EC-8KV"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ea8-9Z-pXf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4939.130434782609" y="-70.3125"/>
+            <point key="canvasLocation" x="4993" y="-86"/>
         </scene>
         <!--Student Name-->
         <scene sceneID="9F1-lu-xek">
@@ -387,7 +388,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TlZ-ue-jLx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5900.0000000000009" y="-70.3125"/>
+            <point key="canvasLocation" x="5922" y="-457"/>
         </scene>
         <!--App Profiles-->
         <scene sceneID="pdB-au-qbq">
@@ -449,20 +450,24 @@
                         <barButtonItem key="backBarButtonItem" systemItem="cancel" id="DJ0-2E-TWu"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="0Qy-2A-9FI">
                             <connections>
-                                <segue destination="xyE-SG-GVN" kind="unwind" unwindAction="backToStudentAppProfileWithSeque:" id="kgZ-aw-mik"/>
+                                <action selector="saveButtonTapped:" destination="Pg4-jT-3Tl" id="GN8-og-FlG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="xyE-SG-GVN" kind="unwind" identifier="backToStudentAppProfile" unwindAction="backToStudentAppProfileWithSeque:" id="tQS-Yj-SE7"/>
+                        <segue destination="xyE-SG-GVN" kind="unwind" identifier="backToDeviceList" unwindAction="backToDeviceListWithSeque:" id="Anz-Hd-rDP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uay-ll-6u0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="xyE-SG-GVN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="7139.130434782609" y="-70.3125"/>
+            <point key="canvasLocation" x="7638" y="-131"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--My Tab Bar Controller-->
         <scene sceneID="8za-8U-5sm">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="FZd-Wm-LJf" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="FZd-Wm-LJf" customClass="MyTabBarController" customModule="Test_Making_a_urlSession" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Jfy-0K-ZxJ">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -650,19 +655,21 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QnX-ov-Rxn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5259" y="-744"/>
+            <point key="canvasLocation" x="3910" y="-825"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--My Tab Bar Controller-->
         <scene sceneID="c04-4r-CeY">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="CsT-tC-tgJ" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="CsT-tC-tgJ" customClass="MyTabBarController" customModule="Test_Making_a_urlSession" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ROM-Pd-Ep3">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="OdC-3w-RhN" kind="relationship" relationship="viewControllers" id="YPh-dj-d52"/>
+                        <segue destination="OdC-3w-RhN" kind="relationship" relationship="viewControllers" id="E65-f5-ISL"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoH-us-ocx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -689,6 +696,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FsX-g1-57h"/>
+        <segue reference="YPh-dj-d52"/>
+        <segue reference="Tby-EC-8KV"/>
     </inferredMetricsTieBreakers>
 </document>
