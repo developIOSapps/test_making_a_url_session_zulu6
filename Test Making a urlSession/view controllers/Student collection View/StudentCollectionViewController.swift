@@ -56,12 +56,12 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
          case devices
          
         
-         var allTitles: (buttonTitle: String, barTitle: String) {
+         var barTitle: String {
              switch self {
              case .devices:
-                 return ("Select", "Hello")
+                 return "Devices"
              case .students:
-                 return ("Cancel", "Select Items")
+                 return "Students"
              }
          }
 
@@ -94,7 +94,11 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
          
      }
      
-    var itemsToDisplay: ItemsToDisplay = .students
+    var itemsToDisplay: ItemsToDisplay = .students {
+        didSet {
+            navigationItem.title = itemsToDisplay.barTitle
+        }
+    }
     
     var selectionMode : SelectionMode = .multipleDisabled {
         
@@ -121,7 +125,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         didSet {
             collectionView.allowsMultipleSelection = selectionMode.allowsMultipleSelection
             barButtonSelectCancel.title = selectionMode.allTitles.buttonTitle
-            navigationItem.title = selectionMode.allTitles.barTitle
+            // navigationItem.title = selectionMode.allTitles.barTitle
         }
     }
 
@@ -132,7 +136,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     var classGroupCodeInt: Int!
     var className: String! {
         didSet {
-            navigationItem.title = className
+//            navigationItem.title = className
         }
     }
 
@@ -342,7 +346,7 @@ extension StudentCollectionViewController {
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
-        navigationItem.title = className
+        navigationItem.title = itemsToDisplay.barTitle
 
          // title = navBarTitle
         let classGroupCodeStr = String(classGroupCodeInt)
