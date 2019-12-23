@@ -14,8 +14,8 @@
             filePath = "../Test Making a urlSession/view controllers/Student Daily Apps And Nptes/StudentProfileStaticTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "backToStudentAppProfile(seque:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "../Test Making a urlSession/view controllers/Student Daily Apps And Nptes/StudentProfileStaticTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "upDateStudentAppNotes(appProfileToUse:for:)"
             landmarkType = "7">
             <Locations>

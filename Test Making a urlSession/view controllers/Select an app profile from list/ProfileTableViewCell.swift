@@ -28,9 +28,9 @@ class ProfileTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setup(appProfileModel: Profile) {
+    func setup(appProfileModel: Profile, hideThisString stringToReplace: String) {
         // appProfileModel.name.replacingOccurrences(of: "Profile-App-", with: "")
-        titleLabel.text = appProfileModel.name.replacingOccurrences(of: "Profile-App-", with: "")
+        titleLabel.text = appProfileModel.name.replacingOccurrences(of: stringToReplace, with: "")
         descrriptionLabel.text = appProfileModel.description.trimmingCharacters(in: .whitespacesAndNewlines)
         accessoryType = .none
         //        if let tripImage = tripModel.image {

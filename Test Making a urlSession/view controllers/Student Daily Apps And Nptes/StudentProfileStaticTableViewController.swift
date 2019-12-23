@@ -130,6 +130,8 @@ extension StudentProfileStaticTableViewController {
         default:
             break
         }
+        
+        appProfileVC.itemsToDisplay = .students
     }
     
     

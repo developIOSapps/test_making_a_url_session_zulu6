@@ -21,6 +21,8 @@ struct UserDefaultsHelper {
     static let applicationProfilesKey = "applicationProfiles"
     static let applicationProfilesMultipleKey = "applicationProfilesMultiple"
     static let applicationProfilesSingleKey = "applicationProfilesSingle"
+    static let applicationProfilesKioskKey = "applicationProfilesKiosk"
+
     // static let teacherSelectedKey = "teacherSelected"
 
     
@@ -41,8 +43,10 @@ struct UserDefaultsHelper {
     static var appKioskFilter: String  {
         return getAppKioskFilterString()
     }
-    
-    
+    static var app1KioskFilter: String  {
+        return getApp1KioskFilterString()
+    }
+
     static var teacherNames: [Int:String] = [
         17: "Morah Ilana" ,  18: "Morah Chaya" ,  19: "Morah Chumie" ,  20: "Morah Shaindy" ,  21: "Morah Gitty" , 22: "Morah Chaya Raizy"
     ]
@@ -103,6 +107,12 @@ struct UserDefaultsHelper {
         HelperFunctions.logIt(functionName: #function, message: "Get App Kiosk Filter String")
         return defaults.object(forKey: applicationProfilesSingleKey) as! String
     }
+
+    static func getApp1KioskFilterString() -> String {
+        HelperFunctions.logIt(functionName: #function, message: "Get App 1Kiosk Filter String")
+        return defaults.object(forKey: applicationProfilesKioskKey) as! String
+    }
+
 
 //    static func getteacherSelected() -> Int? {
 //        HelperFunctions.logIt(functionName: #function, message: "Get Teacher Selected")

@@ -466,7 +466,8 @@ extension StudentCollectionViewController {
                }
                selectionMode.toggle()
             }
-            appProfilesTableVC.itemsToDisplay = "Devices"
+            appProfilesTableVC.itemsToDisplay = .devices
+            
         default:
             break
         }

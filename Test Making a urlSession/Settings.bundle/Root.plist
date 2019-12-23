@@ -80,6 +80,16 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>With Kisok</string>
+			<key>Key</key>
+			<string>applicationProfilesKiosk</string>
+			<key>DefaultValue</key>
+			<string>1Kiosk</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Teacher</string>
