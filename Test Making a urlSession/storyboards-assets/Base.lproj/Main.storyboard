@@ -559,7 +559,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="developITlogo" translatesAutoresizingMaskIntoConstraints="NO" id="PAH-MA-Je2">
-                                <rect key="frame" x="57" y="52" width="300.00000000000006" height="97"/>
+                                <rect key="frame" x="57" y="52" width="300" height="97"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Sb6-DP-RFf"/>
                                     <constraint firstAttribute="width" secondItem="PAH-MA-Je2" secondAttribute="height" multiplier="108:35" id="yNh-Fe-FZ6"/>

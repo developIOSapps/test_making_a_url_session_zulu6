@@ -17,7 +17,7 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         let myTabBarItem0 = (self.tabBar.items?[0])! as UITabBarItem
         myTabBarItem0.image = UIImage(named: "students")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-        myTabBarItem0.selectedImage = UIImage(named: "students")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+        myTabBarItem0.selectedImage = UIImage(named: "students")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         myTabBarItem0.title = "Students"
         
         let myTabBarItem1 = (self.tabBar.items?[1])! as UITabBarItem
