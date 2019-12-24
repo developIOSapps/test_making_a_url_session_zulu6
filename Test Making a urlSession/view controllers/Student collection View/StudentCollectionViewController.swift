@@ -342,16 +342,18 @@ extension StudentCollectionViewController {
                 count -= 1
                 selectionMode = .multipleEnabled(count: count)
                 if count > 0 {
+                    addBarButton.isEnabled = true
                     navigationItem.title = "\(count) Selected"
                 } else {
+                    addBarButton.isEnabled = false
                     navigationItem.title = "Select Items"
                 }
             }
         }
-        guard let count = collectionView.indexPathsForSelectedItems?.count else {return}
-        if count < 1 {
-            addBarButton.isEnabled = false
-        }
+//        guard let count = collectionView.indexPathsForSelectedItems?.count else {return}
+//        if count < 1 {
+//            addBarButton.isEnabled = false
+//        }
     }
 }
 
