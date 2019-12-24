@@ -29,7 +29,7 @@ class StudentProfileStaticTableViewController: UITableViewController {
         
         /// Set navigation bar
         ///
-        navigationItem.prompt = "Setup the Student"
+        navigationItem.prompt = "Click on \">\" to select the app profile for the day"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: nil)
     
         /// become a textView delegate
@@ -114,19 +114,19 @@ extension StudentProfileStaticTableViewController {
         switch segue.identifier {
         case "monday":
             daySelected = 0
-            appProfileVC.navigationItem.prompt = "Monday apps for \(forLiteral)"
+            appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Mondays"
         case "tuesday":
             daySelected = 1
-            appProfileVC.navigationItem.prompt = "Tuesday apps for \(forLiteral)"
+            appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Tuesdays"
         case "wednesday":
             daySelected = 2
-            appProfileVC.navigationItem.prompt = "Wednesday apps for \(forLiteral)"
+            appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Wednesdays"
         case "thursday":
             daySelected = 3
-            appProfileVC.navigationItem.prompt = "Thursday apps for \(forLiteral)"
+            appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Thursdays"
         case "friday":
             daySelected = 4
-            appProfileVC.navigationItem.prompt = "Friday apps for \(forLiteral)"
+            appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Fridays"
         default:
             break
         }

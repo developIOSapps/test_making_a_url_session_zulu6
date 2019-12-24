@@ -103,7 +103,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
-                            <tableViewSection headerTitle="Apps per day" id="Rqs-6S-XqB">
+                            <tableViewSection headerTitle="App Profile For the Day" id="Rqs-6S-XqB">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="70" id="kRo-br-ytY">
                                         <rect key="frame" x="20" y="55.5" width="374" height="70"/>
@@ -350,7 +350,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="755" verticalCompressionResistancePriority="755" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTG-Ya-0ZY">
                                             <rect key="frame" x="20" y="15" width="342" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="hcD-51-53m"/>
+                                                <constraint firstAttribute="height" priority="750" constant="21" id="hcD-51-53m"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
@@ -466,7 +466,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="developITlogo" translatesAutoresizingMaskIntoConstraints="NO" id="PAH-MA-Je2">
-                                <rect key="frame" x="57" y="52" width="300.00000000000006" height="97"/>
+                                <rect key="frame" x="57" y="52" width="300" height="97"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Sb6-DP-RFf"/>
                                     <constraint firstAttribute="width" secondItem="PAH-MA-Je2" secondAttribute="height" multiplier="108:35" id="yNh-Fe-FZ6"/>
@@ -575,6 +575,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YPh-dj-d52"/>
-        <segue reference="Tby-EC-8KV"/>
+        <segue reference="FBc-6k-1YY"/>
     </inferredMetricsTieBreakers>
 </document>
