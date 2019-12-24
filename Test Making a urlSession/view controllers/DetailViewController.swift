@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DtailViewController: UIViewController {
 
     var user : User! 
     

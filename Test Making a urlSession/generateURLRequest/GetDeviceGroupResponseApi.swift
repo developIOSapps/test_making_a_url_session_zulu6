@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum NetworkError: Error {
+    case domainError
+    case decodingError
+    case generalError
+}
 
 struct GetDataApi {
     

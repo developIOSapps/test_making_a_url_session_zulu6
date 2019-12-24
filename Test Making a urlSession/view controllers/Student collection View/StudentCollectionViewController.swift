@@ -18,7 +18,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
     enum SelectionMode {
         
-        case multipleEnabled
+        case multipleEnabled(count: Int)
         case multipleDisabled
                
         var allTitles: (buttonTitle: String, barTitle: String) {
@@ -44,7 +44,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
             case .multipleEnabled:
                 self = .multipleDisabled
             case .multipleDisabled:
-                self = .multipleEnabled
+                self = .multipleEnabled(count: 0)
             }
         }
         
@@ -54,7 +54,6 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
          
          case students
          case devices
-         
         
          var barTitle: String {
              switch self {
@@ -113,6 +112,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                 }
                 self.tabBarController?.tabBar.isHidden = false
                 navigationController?.setToolbarHidden(true, animated: true)
+                
             case .multipleEnabled:
                 addBarButton.isEnabled = false
                 self.tabBarController?.tabBar.isHidden = true
@@ -125,7 +125,12 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         didSet {
             collectionView.allowsMultipleSelection = selectionMode.allowsMultipleSelection
             barButtonSelectCancel.title = selectionMode.allTitles.buttonTitle
-            // navigationItem.title = selectionMode.allTitles.barTitle
+            switch selectionMode {
+            case .multipleEnabled:
+                navigationItem.title = selectionMode.allTitles.barTitle
+            case .multipleDisabled:
+                navigationItem.title = itemsToDisplay.barTitle
+            }
         }
     }
 
@@ -317,6 +322,12 @@ extension StudentCollectionViewController {
             print("itemselected")
             if let cell = collectionView.cellForItem(at: indexPath) as? StudentCollectionViewCell {
                 cell.showIcon()
+                if case .multipleEnabled(var count) = selectionMode {
+                    count += 1
+                    selectionMode = .multipleEnabled(count: count)
+                    navigationItem.title = "\(count) Selected"
+                }
+            
             }
             addBarButton.isEnabled = true
         }
@@ -327,6 +338,15 @@ extension StudentCollectionViewController {
         print("itemDeselected")
         if let cell = collectionView.cellForItem(at: indexPath) as? StudentCollectionViewCell {
             cell.hideIcon()
+            if case .multipleEnabled(var count) = selectionMode {
+                count -= 1
+                selectionMode = .multipleEnabled(count: count)
+                if count > 0 {
+                    navigationItem.title = "\(count) Selected"
+                } else {
+                    navigationItem.title = "Select Items"
+                }
+            }
         }
         guard let count = collectionView.indexPathsForSelectedItems?.count else {return}
         if count < 1 {

@@ -19,7 +19,7 @@ enum Literals: Int {
 }
 
 
-class StudentProfileViewController: UIViewController {
+class StdentProfileViewController: UIViewController {
     
     
     var student : User!

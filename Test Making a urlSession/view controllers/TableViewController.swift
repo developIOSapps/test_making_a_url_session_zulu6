@@ -17,7 +17,7 @@ enum NetworkError: Error {
     case generalError
 }
 
-class TableViewController: UITableViewController {
+class TaleViewController: UITableViewController {
 
     var deviceGroups: [DeviceGroup] = []
     var users: [User] = []

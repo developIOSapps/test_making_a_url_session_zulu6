@@ -12,7 +12,7 @@ protocol NotesDelegatex {
         func updateStudentNote(passedNoted: String)
 }
 
-class StudentTableTableViewController: UITableViewController, NotesDelegatex {
+class StdentTableTableViewController: UITableViewController, NotesDelegatex {
     
     var navBarTitle = ""
     
