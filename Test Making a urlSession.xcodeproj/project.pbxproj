@@ -61,6 +61,7 @@
 		46EF5FE622B28D1C001C45AF /* GetDeviceGroupResponseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */; };
 		46F0444E239082E8007EB18B /* oldWay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46F0444C239082E8007EB18B /* oldWay.storyboard */; };
 		46F0445423908404007EB18B /* Not interested.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46F0445223908404007EB18B /* Not interested.storyboard */; };
+		46F6140A23B3C11F00C4352D /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F6140923B3C11F00C4352D /* ActivityIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		46EF5FE522B28D1C001C45AF /* GetDeviceGroupResponseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDeviceGroupResponseApi.swift; sourceTree = "<group>"; };
 		46F0444D239082E8007EB18B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Test Making a urlSession/storyboards-assets/Base.lproj/oldWay.storyboard"; sourceTree = "<group>"; };
 		46F0445323908404007EB18B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Test Making a urlSession/storyboards-assets/Base.lproj/Not interested.storyboard"; sourceTree = "<group>"; };
+		46F6140923B3C11F00C4352D /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +284,7 @@
 				4662C74A228C996E00D99B84 /* AppDelegate.swift */,
 				4649F2092381DB4B00D12E80 /* HelperFunctions.swift */,
 				46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */,
+				46F6140923B3C11F00C4352D /* ActivityIndicator.swift */,
 				46241B1323AFC2570002B516 /* MyTabBarController.swift */,
 				46BCCDC92399C8CA0019E7BE /* Settings.bundle */,
 			);
@@ -577,6 +580,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46F6140A23B3C11F00C4352D /* ActivityIndicator.swift in Sources */,
 				46204ACC2394854E00E55690 /* LoginViewController.swift in Sources */,
 				466B2C9122FDAAB6009C19E4 /* OurCodable.swift in Sources */,
 				46D91FD7238764FF001E0597 /* Student.swift in Sources */,

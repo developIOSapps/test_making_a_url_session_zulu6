@@ -151,6 +151,8 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     var rowSelected = 0
     var devicesSelected: [Device] = [Device]()
 
+    let activityIndicator = ActivityIndicator.shared
+    
     @IBOutlet weak var barButtonSelectCancel: UIBarButtonItem!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -186,6 +188,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         // navigationController?.navigationBar.shadowImage = UIImage()
         // navigationController?.hidesBarsOnSwipe = true
         
+        activityIndicator.animateActivity(title: "Loading...", view: self.view, navigationItem: navigationItem)
         navigationController?.navigationBar.tintColor = UIColor(named: "tintContrast")
         barButtonSelectCancel.title = "Select"
         
@@ -217,6 +220,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                             self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
                             /// Here we have what we need
                             usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
+                            self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
                             self.collectionView.reloadData()
                         }
                     }
@@ -243,6 +247,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                             /// Here we have what we need
                             deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
                             print("got devices")
+                            self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
                             self.collectionView.reloadData()
                         }
                     }
@@ -384,7 +389,7 @@ extension StudentCollectionViewController {
                         self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
                         /// Here we have what we need
                         usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
-                        
+                        self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
                         self.collectionView.reloadData()
                     }
                 }
@@ -399,6 +404,7 @@ extension StudentCollectionViewController {
                         /// Here we have what we need
                         deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
                         print("got devices")
+                        self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
                         self.collectionView.reloadData()
                     }
             }
