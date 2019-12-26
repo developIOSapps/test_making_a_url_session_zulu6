@@ -475,9 +475,8 @@ extension StudentCollectionViewController {
                 studentProfileStaticTableVC.usersSelected.count == 1 ? users[rowSelected].firstName.trimmingCharacters(in: .whitespacesAndNewlines) + " " + users[rowSelected].lastName.trimmingCharacters(in: .whitespacesAndNewlines) : "* * * Multiple * * *"
         
         case "goToAppProfile":
-            guard let devices = self.users as? [Device] else {
-                return
-            }
+            
+            guard let devices = self.users as? [Device] else { return }
 
             guard let appProfilesTableVC = segue.destination as? AppProfilesTableViewController else { fatalError(" could not segue ") }
 
@@ -486,6 +485,8 @@ extension StudentCollectionViewController {
             switch selectionMode {
             case .multipleDisabled:
               self.devicesSelected.append(devices[rowSelected])
+              appProfilesTableVC.navigationItem.prompt = "Select the kiosk mode app for \(devices[rowSelected].name) device"
+                
             case .multipleEnabled:
                guard let indexPaths = collectionView.indexPathsForSelectedItems else {fatalError("Could not get the index paths")}
                devicesSelected.removeAll()
@@ -493,6 +494,7 @@ extension StudentCollectionViewController {
                    devicesSelected.append(devices[indexPath.row])
                }
                selectionMode.toggle()
+                appProfilesTableVC.navigationItem.prompt = "Select the kiosk mode app for multiple devices"
             }
             appProfilesTableVC.itemsToDisplay = .devices
             
