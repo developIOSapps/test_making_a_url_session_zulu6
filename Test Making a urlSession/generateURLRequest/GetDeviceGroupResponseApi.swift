@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum NetworkError: Error {
     case domainError
@@ -42,55 +43,32 @@ struct GetDataApi {
             print("in the GetDataApi.getZuluDataWrapper before switch")
             switch result {
                 
-            case .failure(let err):
-                print(err.localizedDescription)
-                print("in the GetDataApi.getZuluDataWrapper in switch error")
-                switch err {
-                case .decodingError:    print("decoding error")
-                case .domainError:      print("domiain error")
-                case .generalError:     print("HTTP error")
-                default: break
-                }
-                print(err)
-                
+            case .failure(let error):
+                processReturnError(error)
                 
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
                 print(data.prettyPrintedJSONString)
-                print("we are updating notes")
-                
-                
+
                 let decoder = JSONDecoder()
-                
                 guard let UserDetailResponsxx = try? decoder.decode(UserDetailResponse.self, from: data) else {fatalError()}
                 guard let usrdtl = UserDetailResponsxx as? UserDetailResponse else {fatalError("could not convert it to Users")}
-                print("we are up to device detail response response")
                 completion(usrdtl)
-                
             }
         }
     }
 
+    
     static func getDeviceDetail(_ generatedReq: GeneratedReq , then completion: @escaping (Codable) -> Void )  {
         
-        /// Get the data
         getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
             
             print("in the GetDataApi.getZuluDataWrapper before switch")
             switch result {
                 
-            case .failure(let err):
-                print(err.localizedDescription)
-                print("in the GetDataApi.getZuluDataWrapper in switch error")
-                switch err {
-                case .decodingError:    print("decoding error")
-                case .domainError:      print("domiain error")
-                case .generalError:     print("HTTP error")
-                default: break
-                }
-                print(err)
-                
-                
+             case .failure(let error):
+                processReturnError(error)
+
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
                 print(data.prettyPrintedJSONString)
@@ -108,7 +86,6 @@ struct GetDataApi {
         }
     }
 
-
     
     static func updateNoteProperty(_ generatedReq: GeneratedReq , then completion: @escaping () -> Void )  {
         
@@ -118,30 +95,21 @@ struct GetDataApi {
             print("in the GetDataApi.getZuluDataWrapper before switch")
             switch result {
                 
-            case .failure(let err):
-                print(err.localizedDescription)
-                print("in the GetDataApi.getZuluDataWrapper in switch error")
-                switch err {
-                case .decodingError:    print("decoding error")
-                case .domainError:      print("domiain error")
-                case .generalError:     print("HTTP error")
-                default: break
-                }
-                print(err)
-                
+            case .failure(let error):
+                processReturnError(error)
+
                 
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
                 print(data.prettyPrintedJSONString)
                 print("we are updating notes")
                 completion()
-                
             }
         }
     }
+
     
-  
-  static func updateUserProperty(_ generatedReq: GeneratedReq , then completion: @escaping () -> Void )  {
+    static func updateUserProperty(_ generatedReq: GeneratedReq , then completion: @escaping () -> Void )  {
       
       /// Get the data
       getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
@@ -150,17 +118,9 @@ struct GetDataApi {
          
           switch result {
               
-          case .failure(let err):
-              print(err.localizedDescription)
-              print("in the GetDataApi.getZuluDataWrapper in switch error")
-              switch err {
-              case .decodingError:    print("decoding error")
-              case .domainError:      print("domiain error")
-              case .generalError:     print("HTTP error")
-              default: break
-              }
-              print(err)
-              
+          case .failure(let error):
+              processReturnError(error)
+
               
           case .success(let data):
               print("in the GetDataApi.getZuluDataWrapper in switch success")
@@ -173,39 +133,31 @@ struct GetDataApi {
   }
 
     
-        static func getSchoolClassListResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.classes), then completion: @escaping (OurCodable) -> Void )  {
+    static func getSchoolClassListResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.classes), then completion: @escaping (OurCodable) -> Void )  {
+        
+        /// Get the data
+        getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
             
-            /// Get the data
-            getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
+            print("in the GetDataApi.getZuluDataWrapper before switch")
+            switch result {
                 
-                print("in the GetDataApi.getZuluDataWrapper before switch")
-                switch result {
-                    
-                case .failure(let err):
-                    print("in the GetDataApi.getZuluDataWrapper in switch error")
-                    switch err {
-                    case .decodingError:    print("decoding error")
-                    case .domainError:      print("domiain error")
-                    case .generalError:     print("HTTP error")
-                    default: break
-                    }
-                    print(err)
-                    
-                    
-                case .success(let data):
-                    print("in the GetDataApi.getZuluDataWrapper in switch success")
-                    print(data.prettyPrintedJSONString)
+            case .failure(let error):
+                processReturnError(error)
 
-                    let decoder = JSONDecoder()
+            case .success(let data):
+                print("in the GetDataApi.getZuluDataWrapper in switch success")
+                print(data.prettyPrintedJSONString)
 
-                    guard let schoolClassResponsxx = try? decoder.decode(SchoolClassResponse.self, from: data) else {fatalError()}
-                    guard let schoolClss = schoolClassResponsxx as? SchoolClassResponse else {fatalError("could not convert it to Users")}
-                    print("we are up to schoolClss response")
-                    completion(schoolClss)
-                    
-                }
+                let decoder = JSONDecoder()
+
+                guard let schoolClassResponsxx = try? decoder.decode(SchoolClassResponse.self, from: data) else {fatalError()}
+                guard let schoolClss = schoolClassResponsxx as? SchoolClassResponse else {fatalError("could not convert it to Users")}
+                print("we are up to schoolClss response")
+                completion(schoolClss)
+                
             }
         }
+    }
 
     
     static func getProfileListResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.profiles), then completion: @escaping (OurCodable) -> Void )  {
@@ -216,17 +168,9 @@ struct GetDataApi {
             print("in the GetDataApi.getZuluDataWrapper before switch")
             switch result {
                 
-            case .failure(let err):
-                print("in the GetDataApi.getZuluDataWrapper in switch error")
-                switch err {
-                case .decodingError:    print("decoding error")
-                case .domainError:      print("domiain error")
-                case .generalError:     print("HTTP error")
-                default: break
-                }
-                print(err)
-                
-                
+            case .failure(let error):
+                processReturnError(error)
+
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
                 print(data.prettyPrintedJSONString)
@@ -251,17 +195,9 @@ struct GetDataApi {
             print("in the GetDataApi.getZuluDataWrapper before switch")
             switch result {
                 
-            case .failure(let err):
-                print("in the GetDataApi.getZuluDataWrapper in switch error")
-                switch err {
-                case .decodingError:    print("decoding error")
-                case .domainError:      print("domiain error")
-                case .generalError:     print("HTTP error")
-                    default: break
-                }
-                print(err)
-                
-                
+            case .failure(let error):
+                processReturnError(error)
+
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
 //                print(data.prettyPrintedJSONString)
@@ -287,16 +223,7 @@ struct GetDataApi {
             switch result {
                 
             case .failure(let error):
-                print("in the GetDataApi.getZuluDataWrapper in switch error")
-                switch error {
-                case .decodingError:    print("decoding error")
-                case .domainError:      print("domiain error")
-                case .generalError:     print("HTTP error")
-                    default: break
-                }
-                print(error.localizedDescription)
-                print(error)
-                
+                processReturnError(error)
                 
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
@@ -322,17 +249,9 @@ struct GetDataApi {
             print("in the GetDataApi.getZuluDataWrapper before switch")
             switch result {
                 
-            case .failure(let err):
-                print("in the GetDataApi.getZuluDataWrapper in switch error")
-                switch err {
-                case .decodingError:    print("decoding error")
-                case .domainError:      print("domiain error")
-                case .generalError:     print("HTTP error")
-                    default: break
-                }
-                print(err)
-                
-                
+            case .failure(let error):
+                processReturnError(error)
+
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
                 //                print(data.prettyPrintedJSONString)
@@ -347,6 +266,7 @@ struct GetDataApi {
             }
         }
     }
+
     
     static func getDeviceListByAssetResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : "zzz"])), then completion: @escaping (OurCodable) -> Void )  {
         
@@ -356,17 +276,9 @@ struct GetDataApi {
             print("in the GetDataApi.getZuluDataWrapper before switch")
             switch result {
                 
-            case .failure(let err):
-                print("in the GetDataApi.getZuluDataWrapper in switch error")
-                switch err {
-                case .decodingError:    print("decoding error")
-                case .domainError:      print("domiain error")
-                case .generalError:     print("HTTP error")
-                    default: break
-                }
-                print(err)
-                
-                
+            case .failure(let error):
+                processReturnError(error)
+
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
                 //                print(data.prettyPrintedJSONString)
@@ -391,10 +303,8 @@ struct GetDataApi {
             print("in the GetDataApi.getZuluDataWrapper before switch")
             switch result {
                 
-            case .failure(let err):
-                processReturnError(err)
-                print("in the GetDataApi.getZuluDataWrapper in switch error - \(err)")
-                print(err)
+            case .failure(let error):
+                processReturnError(error)
 
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
@@ -413,15 +323,27 @@ struct GetDataApi {
         switch error {
         case .networkingError(let error):
             print("A networking error. The error description: \(error.localizedDescription)")
+            sendAlert(errorMessgae: "A networking error. The error description: \(error.localizedDescription)")
         case .invalidResponse:
             print("Invalid Response. Either not a HTTPURLResponse or no data")
+            sendAlert(errorMessgae: "Invalid Response. Either not a HTTPURLResponse or no data")
         case .requestError(let code, let body):
-            print("Request Error. The code is: \(code) and the body is \(body). Also error decription is \(HTTPURLResponse.localizedString(forStatusCode: code))")
+            print("Request Error. The code is: \(code) and the body is \(body). Error decription is \(HTTPURLResponse.localizedString(forStatusCode: code))")
+            sendAlert(errorMessgae: "Request Error. The code is: \(code) and the body is \(body). Error decription is \(HTTPURLResponse.localizedString(forStatusCode: code))")
         case .serverError:
-            print("It is a serveer error")
+            print("Received a server error")
+            sendAlert(errorMessgae: "Received a server error")
+            
         default:
             break
         }
+        print("in the GetDataApi.getZuluDataWrapper in switch error - \(error)")
+    }
+    
+    static func sendAlert(title: String = "Error In URL Request", errorMessgae msg: String ) {
+        let alertVC = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        UIApplication.topViewController()?.present(alertVC, animated: true, completion: nil)
     }
 
     

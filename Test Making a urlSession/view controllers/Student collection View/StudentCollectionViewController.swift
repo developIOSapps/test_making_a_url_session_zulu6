@@ -237,7 +237,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                     // title = navBarTitle
                     let classGroupCodeStr = String(classGroupCodeInt)
                     
-                    GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : "18" ]) )) { (deviceListResponse) in
+                    GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : classGroupCodeStr ]) )) { (deviceListResponse) in
                         DispatchQueue.main.async {
                             
                             guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
@@ -394,7 +394,7 @@ extension StudentCollectionViewController {
                     }
                 }
             case .devices:
-                GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : "18" ]) )) { (deviceListResponse) in
+                GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : classGroupCodeStr ]) )) { (deviceListResponse) in
                     DispatchQueue.main.async {
                         
                         guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
