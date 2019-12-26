@@ -43,10 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         for preference in preferences {
             guard let key = preference["Key"] as? String else {
-                NSLog("Key not fount")
+                NSLog("Key not found")
                 continue
             }
-            print( preference["Key"], "->" , preference["DefaultValue"])
+            print(preference["Key"], "->" , preference["DefaultValue"])
             defaultsToRegister[key] = preference["DefaultValue"]
         }
         UserDefaults.standard.register(defaults: defaultsToRegister)

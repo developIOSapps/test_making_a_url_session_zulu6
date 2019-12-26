@@ -14,11 +14,21 @@ enum NetworkError: Error {
     case generalError
 }
 
+enum APIError : Error {
+    case networkingError(Error)
+    case serverError // HTTP 5xx
+    case requestError(Int, String) // HTTP 4xx
+    case invalidResponse
+    case generalError, domainError, decodingError
+}
+
 struct GetDataApi {
     
     
     static private var session: URLSession {
         let config = URLSessionConfiguration.default
+//        config.timeoutIntervalForRequest = 20.0
+//        config.timeoutIntervalForResource = 20.0
         let urlSession = URLSession(configuration: config)
         return urlSession
     }
@@ -39,6 +49,7 @@ struct GetDataApi {
                 case .decodingError:    print("decoding error")
                 case .domainError:      print("domiain error")
                 case .generalError:     print("HTTP error")
+                default: break
                 }
                 print(err)
                 
@@ -75,6 +86,7 @@ struct GetDataApi {
                 case .decodingError:    print("decoding error")
                 case .domainError:      print("domiain error")
                 case .generalError:     print("HTTP error")
+                default: break
                 }
                 print(err)
                 
@@ -113,6 +125,7 @@ struct GetDataApi {
                 case .decodingError:    print("decoding error")
                 case .domainError:      print("domiain error")
                 case .generalError:     print("HTTP error")
+                default: break
                 }
                 print(err)
                 
@@ -144,6 +157,7 @@ struct GetDataApi {
               case .decodingError:    print("decoding error")
               case .domainError:      print("domiain error")
               case .generalError:     print("HTTP error")
+              default: break
               }
               print(err)
               
@@ -173,6 +187,7 @@ struct GetDataApi {
                     case .decodingError:    print("decoding error")
                     case .domainError:      print("domiain error")
                     case .generalError:     print("HTTP error")
+                    default: break
                     }
                     print(err)
                     
@@ -207,6 +222,7 @@ struct GetDataApi {
                 case .decodingError:    print("decoding error")
                 case .domainError:      print("domiain error")
                 case .generalError:     print("HTTP error")
+                default: break
                 }
                 print(err)
                 
@@ -241,6 +257,7 @@ struct GetDataApi {
                 case .decodingError:    print("decoding error")
                 case .domainError:      print("domiain error")
                 case .generalError:     print("HTTP error")
+                    default: break
                 }
                 print(err)
                 
@@ -269,14 +286,16 @@ struct GetDataApi {
             print("in the GetDataApi.getZuluDataWrapper before switch")
             switch result {
                 
-            case .failure(let err):
+            case .failure(let error):
                 print("in the GetDataApi.getZuluDataWrapper in switch error")
-                switch err {
+                switch error {
                 case .decodingError:    print("decoding error")
                 case .domainError:      print("domiain error")
                 case .generalError:     print("HTTP error")
+                    default: break
                 }
-                print(err)
+                print(error.localizedDescription)
+                print(error)
                 
                 
             case .success(let data):
@@ -309,6 +328,7 @@ struct GetDataApi {
                 case .decodingError:    print("decoding error")
                 case .domainError:      print("domiain error")
                 case .generalError:     print("HTTP error")
+                    default: break
                 }
                 print(err)
                 
@@ -342,6 +362,7 @@ struct GetDataApi {
                 case .decodingError:    print("decoding error")
                 case .domainError:      print("domiain error")
                 case .generalError:     print("HTTP error")
+                    default: break
                 }
                 print(err)
                 
@@ -360,10 +381,8 @@ struct GetDataApi {
             }
         }
     }
-
-
     
-    
+
     static func getDeviceGroupResponse(_ generatedReq: GeneratedReq = GeneratedReq(request: ValidReqs.deviceGroups), then completion: @escaping (OurCodable) -> Void )  {
         
         /// Get the data
@@ -373,15 +392,10 @@ struct GetDataApi {
             switch result {
                 
             case .failure(let err):
-                print("in the GetDataApi.getZuluDataWrapper in switch error")
-                switch err {
-                case .decodingError:    print("decoding error")
-                case .domainError:      print("domiain error")
-                case .generalError:     print("HTTP error")
-                }
+                processReturnError(err)
+                print("in the GetDataApi.getZuluDataWrapper in switch error - \(err)")
                 print(err)
-                
-                
+
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
                 let decoder = JSONDecoder()
@@ -395,50 +409,94 @@ struct GetDataApi {
         }
     }
     
+    static func processReturnError(_ error: APIError) -> Void  {
+        switch error {
+        case .networkingError(let error):
+            print("A networking error. The error description: \(error.localizedDescription)")
+        case .invalidResponse:
+            print("Invalid Response. Either not a HTTPURLResponse or no data")
+        case .requestError(let code, let body):
+            print("Request Error. The code is: \(code) and the body is \(body). Also error decription is \(HTTPURLResponse.localizedString(forStatusCode: code))")
+        case .serverError:
+            print("It is a serveer error")
+        default:
+            break
+        }
+    }
+
     
     // 2
     static func getZuluDataWrapper(with urlRequest: URLRequest,
-                                   then completion: @escaping (Result<Data, NetworkError>) -> Void) {
+                                   then completion: @escaping (Result<Data, APIError>) -> Void) {
         
-        func getZuluData(with urlRequest: URLRequest,
-                                then completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-            
-            /// create a data session
+        func getZuluData(with urlRequest: URLRequest, then completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
             let task = session.dataTask(with: urlRequest) { (data, response, err) in
                 completion(data, response, err)
             }
             task.resume()
         }
         
-        
-        
         getZuluData(with: urlRequest) { (data, response, err) in
             
-            if let myResponse = response as? HTTPURLResponse {
-                print(myResponse.statusCode)
-                print(HTTPURLResponse.localizedString(forStatusCode: myResponse.statusCode))
-
-                print("************************")
-            }
-            
-            
-            guard let data = data, err == nil  else {
-    
-                if let err = err as NSError?, err.domain == NSURLErrorDomain {
-                    completion(.failure(NetworkError.domainError))
-                } else {
-                    completion(.failure(NetworkError.decodingError))
+            if let error = err {
+                DispatchQueue.main.async {
+                    completion(.failure(.networkingError(error)))
                 }
                 return
             }
             
-            guard let response = response as? HTTPURLResponse else {fatalError(" Could not convert response to http url response") }
-            
-            if response.statusCode == 200 {
-                completion(.success(data))
-            } else {
-                completion(.failure(NetworkError.generalError))
+            guard let http = response as? HTTPURLResponse, let data = data else {
+                DispatchQueue.main.async {
+                    completion(.failure(.invalidResponse))
+                }
+                return
             }
+            
+            switch http.statusCode {
+            case 200:
+                DispatchQueue.main.async {
+                    completion(.success(data))
+                }
+            case 400...499:
+                let body = String(data: data, encoding: .utf8)
+                DispatchQueue.main.async {
+                    completion(.failure(.requestError(http.statusCode, body ?? "<no body>")))
+                }
+            case 500...599:
+                DispatchQueue.main.async {
+                    completion(.failure(.serverError))
+                }
+                
+            default:
+                fatalError("Unhandled Error Code")
+                
+            }
+            
+//            if let myResponse = response as? HTTPURLResponse {
+//                print(myResponse.statusCode)
+//                print(HTTPURLResponse.localizedString(forStatusCode: myResponse.statusCode))
+//
+//                print("************************")
+//            }
+            
+            
+//            guard let data = data, err == nil  else {
+//
+//                if let err = err as NSError?, err.domain == NSURLErrorDomain {
+//                    completion(.failure(NetworkError.domainError))
+//                } else {
+//                    completion(.failure(NetworkError.decodingError))
+//                }
+//                return
+//            }
+//
+//            guard let response = response as? HTTPURLResponse else {fatalError(" Could not convert response to http url response") }
+//
+//            if response.statusCode == 200 {
+//                completion(.success(data))
+//            } else {
+//                completion(.failure(NetworkError.generalError))
+//            }
             
             
             
