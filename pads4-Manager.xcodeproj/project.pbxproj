@@ -90,7 +90,7 @@
 		46510BF42388320800838764 /* AppProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProfile.swift; sourceTree = "<group>"; };
 		465E121523AF97620063DE3E /* NotesUpdateable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesUpdateable.swift; sourceTree = "<group>"; };
 		465F7473238309A2005C6132 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		4662C747228C996E00D99B84 /* Test Making a urlSession.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test Making a urlSession.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4662C747228C996E00D99B84 /* Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Manager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4662C74A228C996E00D99B84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4662C74F228C996E00D99B84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4662C751228C997300D99B84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -263,7 +263,7 @@
 		4662C748228C996E00D99B84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4662C747228C996E00D99B84 /* Test Making a urlSession.app */,
+				4662C747228C996E00D99B84 /* Manager.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -511,7 +511,7 @@
 			);
 			name = "Test Making a urlSession";
 			productName = "Test Making a urlSession";
-			productReference = 4662C747228C996E00D99B84 /* Test Making a urlSession.app */;
+			productReference = 4662C747228C996E00D99B84 /* Manager.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -529,7 +529,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4662C742228C996E00D99B84 /* Build configuration list for PBXProject "Test Making a urlSession" */;
+			buildConfigurationList = 4662C742228C996E00D99B84 /* Build configuration list for PBXProject "pads4-Manager" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -787,8 +787,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dia.Test-Making-a-urlSession";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ipads4-Manager";
+				PRODUCT_NAME = Manager;
 				SWIFT_SUPPRESS_WARNINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -808,8 +808,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dia.Test-Making-a-urlSession";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ipads4-Manager";
+				PRODUCT_NAME = Manager;
 				SWIFT_SUPPRESS_WARNINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -819,7 +819,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4662C742228C996E00D99B84 /* Build configuration list for PBXProject "Test Making a urlSession" */ = {
+		4662C742228C996E00D99B84 /* Build configuration list for PBXProject "pads4-Manager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4662C757228C997300D99B84 /* Debug */,
