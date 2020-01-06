@@ -155,6 +155,9 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
     @IBOutlet weak var barButtonSelectCancel: UIBarButtonItem!
     
+    
+    // MARK: - View Controller Life Cycle
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false

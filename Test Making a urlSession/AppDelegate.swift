@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("* * *", UserDefaultsHelper.appKioskFilter)
 //        print("* * *", UserDefaultsHelper.teacherSelected)
 
+        FirebaseApp.configure()
         return true
     }
     
