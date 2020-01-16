@@ -39,7 +39,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gT-9g-zUB">
-                                            <rect key="frame" x="8" y="137.5" width="124" height="20.5"/>
+                                            <rect key="frame" x="8" y="136.5" width="124" height="21.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" name="tintContrast"/>
@@ -53,16 +53,31 @@
                                                 <constraint firstAttribute="width" constant="24" id="ab2-4Q-yaW"/>
                                             </constraints>
                                         </imageView>
+                                        <view hidden="YES" alpha="0.90000000000000002" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M4N-zz-yqJ">
+                                            <rect key="frame" x="28" y="19" width="85" height="103"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="4gT-9g-zUB" firstAttribute="bottom" secondItem="EZi-3c-852" secondAttribute="bottomMargin" id="3Fd-Zk-sy0"/>
+                                        <constraint firstItem="4gT-9g-zUB" firstAttribute="top" secondItem="M4N-zz-yqJ" secondAttribute="bottom" constant="15.5" id="FHE-9B-CIW"/>
                                         <constraint firstItem="BKZ-at-STG" firstAttribute="top" secondItem="EZi-3c-852" secondAttribute="topMargin" id="Ioe-wj-AEz"/>
                                         <constraint firstItem="BKZ-at-STG" firstAttribute="leading" secondItem="EZi-3c-852" secondAttribute="leadingMargin" id="Jvd-nQ-tMD"/>
+                                        <constraint firstItem="M4N-zz-yqJ" firstAttribute="top" secondItem="EZi-3c-852" secondAttribute="top" constant="19" id="LIE-8z-Xjs"/>
                                         <constraint firstItem="BKZ-at-STG" firstAttribute="trailing" secondItem="EZi-3c-852" secondAttribute="trailingMargin" id="Oe5-Jf-LH2"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="4gT-9g-zUB" secondAttribute="trailing" id="TlA-QA-Y7H"/>
                                         <constraint firstItem="4gT-9g-zUB" firstAttribute="leading" secondItem="EZi-3c-852" secondAttribute="leadingMargin" id="aca-T4-8V3"/>
                                         <constraint firstItem="J5I-gY-XTH" firstAttribute="centerX" secondItem="EZi-3c-852" secondAttribute="centerX" id="hN5-yg-iE9"/>
+                                        <constraint firstItem="M4N-zz-yqJ" firstAttribute="centerX" secondItem="J5I-gY-XTH" secondAttribute="centerX" id="iEq-nY-rzU"/>
                                         <constraint firstItem="J5I-gY-XTH" firstAttribute="centerY" secondItem="EZi-3c-852" secondAttribute="centerY" id="lOc-FC-cUV"/>
+                                        <constraint firstItem="M4N-zz-yqJ" firstAttribute="leading" secondItem="EZi-3c-852" secondAttribute="leading" constant="28" id="sqE-bb-2J6"/>
+                                        <constraint firstItem="M4N-zz-yqJ" firstAttribute="centerY" secondItem="BKZ-at-STG" secondAttribute="centerY" id="xfM-i7-Y9r"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <connections>
@@ -93,7 +108,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ea8-9Z-pXf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5014" y="-70"/>
+            <point key="canvasLocation" x="5013.04347826087" y="-70.3125"/>
         </scene>
         <!--Student Name-->
         <scene sceneID="9F1-lu-xek">
