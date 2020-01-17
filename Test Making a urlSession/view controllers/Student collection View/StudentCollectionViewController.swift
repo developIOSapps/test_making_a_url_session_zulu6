@@ -454,15 +454,19 @@ extension StudentCollectionViewController {
                       }
         
         
+        
+        /// This meansI am selecting students
         switch segue.identifier  {
             
         case "goToStudentDetail":
-            guard let users = self.users as? [User] else {
+           
+                         guard let users = self.users as? [User] else {
                 return
             }
 
             guard let studentProfileStaticTableVC = segue.destination as? StudentProfileStaticTableViewController else { fatalError(" could not segue ") }
-            studentProfileStaticTableVC.notesDelegate = self
+            
+                         studentProfileStaticTableVC.notesDelegate = self
              switch selectionMode {
              case .multipleDisabled:
                 studentProfileStaticTableVC.user = users[rowSelected]
@@ -475,22 +479,25 @@ extension StudentCollectionViewController {
                 selectionMode.toggle()
             }
             studentProfileStaticTableVC.navigationItem.title =
-                studentProfileStaticTableVC.usersSelected.count == 1 ? users[rowSelected].firstName.trimmingCharacters(in: .whitespacesAndNewlines) + " " : "* * * Multiple * * *"
-//            studentProfileStaticTableVC.usersSelected.count == 1 ? users[rowSelected].firstName.trimmingCharacters(in: .whitespacesAndNewlines) + " " + users[rowSelected].lastName.trimmingCharacters(in: .whitespacesAndNewlines) : "* * * Multiple * * *"
+                studentProfileStaticTableVC.usersSelected.count == 1 ?
+                    users[rowSelected].firstName.trimmingCharacters(in: .whitespacesAndNewlines) + " " + users[rowSelected].lastName.trimmingCharacters(in: .whitespacesAndNewlines)
+                    : "* * * Multiple * * *"
 
         
         case "goToAppProfile":
             
-            guard let devices = self.users as? [Device] else { return }
+            guard let devices = self.users as? [Device] else {
+                return
+            }
 
             guard let appProfilesTableVC = segue.destination as? AppProfilesTableViewController else { fatalError(" could not segue ") }
 
-            
             print("Going to app profile because dealing ith devices")
             switch selectionMode {
             case .multipleDisabled:
-              self.devicesSelected.append(devices[rowSelected])
-              appProfilesTableVC.navigationItem.prompt = "Select the kiosk mode app for \(devices[rowSelected].name) device"
+                devicesSelected.removeAll()
+                devicesSelected.append(devices[rowSelected])
+                appProfilesTableVC.navigationItem.prompt = "Select the kiosk mode app for \(devices[rowSelected].name) device"
                 
             case .multipleEnabled:
                guard let indexPaths = collectionView.indexPathsForSelectedItems else {fatalError("Could not get the index paths")}
@@ -506,7 +513,6 @@ extension StudentCollectionViewController {
         default:
             break
         }
-        
 
         /*
         switch selectionMode {

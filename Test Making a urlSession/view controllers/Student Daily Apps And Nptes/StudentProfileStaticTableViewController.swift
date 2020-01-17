@@ -81,7 +81,7 @@ extension StudentProfileStaticTableViewController: UITextViewDelegate {
         if notesLabel.text != student.notes {
             student.notes = notesLabel.text
             print(" Notes have changed")
-            upDateStudentAppNotes(appProfileToUse: nil, for: usersSelected.first!)
+            upDateStudentAppNotes(appProfileToUse: nil, for: usersSelected.first!, personalNote: notesLabel.text )
         }
     /* Updated for Swift 4 */
 
@@ -153,9 +153,12 @@ extension StudentProfileStaticTableViewController {
         daySelected = 99
     }
     
-    func upDateStudentAppNotes(appProfileToUse: String? = nil, for userToUpdate: User)  {
+    func upDateStudentAppNotes(appProfileToUse: String? = nil, for userToUpdate: User, personalNote: String? = nil)  {
         
         var studentBeingUpdated = Student.getStudentFromUser(userToUpdate)
+        if let personalNote = personalNote {
+            studentBeingUpdated.notes = personalNote
+        }
         
         // Build the app profile portion of the note
         let profileNoteDelimiter = "~#~"
