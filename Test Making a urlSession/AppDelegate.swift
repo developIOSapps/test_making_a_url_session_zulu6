@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //navigationBarAppearace.titleTextAttributes =[NSForegroundColorAttributeName:UIColor.whiteColor()]
         
         print("* * *", UserDefaultsHelper.appFilter)
-        print("* * *", UserDefaultsHelper.appMultipleFilter)
+        print("* * *", UserDefaultsHelper.appCtgFilter)
         print("* * *", UserDefaultsHelper.appKioskFilter)
 //        print("* * *", UserDefaultsHelper.teacherSelected)
 

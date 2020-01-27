@@ -37,8 +37,8 @@ struct UserDefaultsHelper {
     static var appFilter: String  {
         return getAppFilterString()
     }
-    static var appMultipleFilter: String  {
-        return getAppMultipleFilterString()
+    static var appCtgFilter: String  {
+        return getAppCtgFilterString()
     }
     static var appKioskFilter: String  {
         return getAppKioskFilterString()
@@ -94,22 +94,22 @@ struct UserDefaultsHelper {
     
     
     static func getAppFilterString() -> String {
-        HelperFunctions.logIt(functionName: #function, message: "Get App Filter String")
+        HelperFunctions.logIt(functionName: #function, message: "Get App Filter String \(defaults.object(forKey: applicationProfilesKey) as! String)")
         return  defaults.object(forKey: applicationProfilesKey) as! String
     }
     
-    static func getAppMultipleFilterString() -> String {
-        HelperFunctions.logIt(functionName: #function, message: "Get App Category Filter String")
+    static func getAppCtgFilterString() -> String {
+        HelperFunctions.logIt(functionName: #function, message: "Get App Category Filter String \(defaults.object(forKey: applicationProfilesMultipleKey) as! String)")
         return defaults.object(forKey: applicationProfilesMultipleKey) as! String
     }
     
     static func getAppKioskFilterString() -> String {
-        HelperFunctions.logIt(functionName: #function, message: "Get App Kiosk Filter String")
+        HelperFunctions.logIt(functionName: #function, message: "Get App Kiosk Filter String \(defaults.object(forKey: applicationProfilesSingleKey) as! String)")
         return defaults.object(forKey: applicationProfilesSingleKey) as! String
     }
 
     static func getApp1KioskFilterString() -> String {
-        HelperFunctions.logIt(functionName: #function, message: "Get App 1Kiosk Filter String")
+        HelperFunctions.logIt(functionName: #function, message: "Get App 1Kiosk Filter String \(defaults.object(forKey: applicationProfilesKioskKey) as! String)")
         return defaults.object(forKey: applicationProfilesKioskKey) as! String
     }
 

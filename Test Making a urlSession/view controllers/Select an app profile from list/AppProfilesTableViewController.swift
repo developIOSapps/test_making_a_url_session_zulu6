@@ -15,7 +15,6 @@ class AppProfilesTableViewController: UITableViewController {
          case students
          case devices
          
-        
          var barTitle: String {
              switch self {
              case .devices:
@@ -33,16 +32,14 @@ class AppProfilesTableViewController: UITableViewController {
                 return UserDefaultsHelper.appFilter
              }
          }
-
-         
      }
 
-        var itemsToDisplay: ItemsToDisplay = .students {
-              didSet {
-               print("Set items to display")
-                  // navigationItem.title = itemsToDisplay.barTitle
-              }
-          }
+    var itemsToDisplay: ItemsToDisplay = .students {
+            didSet {
+            print("Set items to display")
+                // navigationItem.title = itemsToDisplay.barTitle
+            }
+        }
     
     
     
@@ -60,7 +57,9 @@ class AppProfilesTableViewController: UITableViewController {
     var profiles:    [Profile] = []
     var expanded:    Bool = false
     var rowSelected: Int?
-    
+    var fullStringPrefixCtg = ""
+    var fullStringPrefixKiosk = ""
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,14 +81,20 @@ class AppProfilesTableViewController: UITableViewController {
                     else {fatalError("could not convert it to Profiles")}
                 self.profiles =
                     profilesResponse.profiles.filter{$0.name.hasPrefix(self.itemsToDisplay.appFilterText) }
+                self.profiles.sort()
                     // profilesResponse.profiles.filter{$0.name.hasPrefix("Profile-App") }
                 
                 switch self.itemsToDisplay {
                     
                 case .students:
                     self.navigationItem.titleView = self.navBarSegmentedControl
-                    self.ctgProfiles = self.profiles.filter {$0.name.contains(UserDefaultsHelper.appMultipleFilter) }
-                    self.kioskProfiles = self.profiles.filter {$0.name.contains(UserDefaultsHelper.appKioskFilter) }
+                    
+                    self.fullStringPrefixCtg = self.itemsToDisplay.appFilterText + UserDefaultsHelper.appCtgFilter
+                    self.ctgProfiles = self.profiles.filter {$0.name.contains(self.fullStringPrefixCtg) }
+                    
+                    self.fullStringPrefixKiosk = self.itemsToDisplay.appFilterText + UserDefaultsHelper.appKioskFilter
+                    self.kioskProfiles = self.profiles.filter {$0.name.contains(self.fullStringPrefixKiosk) }
+                    
                     self.profileArray.append(self.ctgProfiles)
                     self.profileArray.append(self.kioskProfiles)
                     
@@ -170,7 +175,25 @@ class AppProfilesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell", for: indexPath) as! ProfileTableViewCell
         
         let prf = profileArray[navBarSegmentedControl.selectedSegmentIndex][indexPath.row]
-        cell.setup(appProfileModel: prf, hideThisString: itemsToDisplay.appFilterText)
+        
+        switch self.itemsToDisplay {
+            
+        case .students:
+            switch navBarSegmentedControl.selectedSegmentIndex {
+            case 0:
+                cell.setup(appProfileModel: prf, hideThisString: fullStringPrefixCtg)
+            case 1:
+                cell.setup(appProfileModel: prf, hideThisString: fullStringPrefixKiosk)
+            default:
+                break
+            }
+            
+        case .devices:
+            cell.setup(appProfileModel: prf, hideThisString: itemsToDisplay.appFilterText)
+        }
+
+        
+//        cell.setup(appProfileModel: prf, hideThisString: itemsToDisplay.appFilterText)
 
         
 //        switch navBarSegmentedControl.selectedSegmentIndex {

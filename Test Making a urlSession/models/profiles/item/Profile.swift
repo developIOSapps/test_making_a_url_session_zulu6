@@ -18,3 +18,13 @@ struct Profile: OurCodable {
     let description:        String
 
 }
+extension Profile: Equatable {
+  static func == (lhs: Profile, rhs: Profile) -> Bool {
+    return lhs.id == rhs.id
+  }
+}
+extension Profile: Comparable {
+    static func < (lhs: Profile, rhs: Profile) -> Bool {
+        lhs.name < rhs.name
+    }
+}

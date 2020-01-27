@@ -31,6 +31,7 @@ class ProfileTableViewCell: UITableViewCell {
     func setup(appProfileModel: Profile, hideThisString stringToReplace: String) {
         // appProfileModel.name.replacingOccurrences(of: "Profile-App-", with: "")
         titleLabel.text = appProfileModel.name.replacingOccurrences(of: stringToReplace, with: "")
+        print("### This is the the replaced text in title \(titleLabel.text)")
         descrriptionLabel.text = appProfileModel.description.trimmingCharacters(in: .whitespacesAndNewlines)
         accessoryType = .none
         //        if let tripImage = tripModel.image {
