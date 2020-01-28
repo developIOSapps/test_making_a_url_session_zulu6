@@ -44,8 +44,9 @@ enum GeneratedReq  {
     
     init(request: ValidReqs) {
         
-        let headerDict: [String: String] = ["Authorization": "Basic NTM3MjI0NjA6RVBUTlpaVEdYV1U1VEo0Vk5RUDMyWDVZSEpSVjYyMkU=", "X-Server-Protocol-Version": "3", "Content-Type": "text/plain; charset=utf-8" ]
-        
+        let headerDict: [String: String] = ["Authorization": "Basic NTM3MjI0NjA6N1lFMkpVREdaNUFFWlY0TVhLUUNRNDdOWU03S0ozWFU=", "X-Server-Protocol-Version": "3", "Content-Type": "text/plain; charset=utf-8" ]
+//        let headerDict: [String: String] = ["Authorization": "Basic NTM3MjI0NjA6RVBUTlpaVEdYV1U1VEo0Vk5RUDMyWDVZSEpSVjYyMkU=", "X-Server-Protocol-Version": "3", "Content-Type": "text/plain; charset=utf-8" ]
+
 
         switch request {
         case .deviceGroups :
@@ -95,8 +96,9 @@ enum GeneratedReq  {
     fileprivate static let baseURLStr: String = "https://api.zuludesk.com"
     
     /// for urlRequest
-    fileprivate static let headerDict: [String: String] = ["Authorization": "Basic NTM3MjI0NjA6RVBUTlpaVEdYV1U1VEo0Vk5RUDMyWDVZSEpSVjYyMkU=", "X-Server-Protocol-Version": "2", "Content-Type": "text/plain; charset=utf-8" ]
-    
+    fileprivate static let headerDict: [String: String] = ["Authorization": "Basic NTM3MjI0NjA6N1lFMkpVREdaNUFFWlY0TVhLUUNRNDdOWU03S0ozWFU==", "X-Server-Protocol-Version": "2", "Content-Type": "text/plain; charset=utf-8" ]
+//    fileprivate static let headerDict: [String: String] = ["Authorization": "Basic NTM3MjI0NjA6RVBUTlpaVEdYV1U1VEo0Vk5RUDMyWDVZSEpSVjYyMkU=", "X-Server-Protocol-Version": "2", "Content-Type": "text/plain; charset=utf-8" ]
+
     
     fileprivate var generatedPath : String {
         switch self {

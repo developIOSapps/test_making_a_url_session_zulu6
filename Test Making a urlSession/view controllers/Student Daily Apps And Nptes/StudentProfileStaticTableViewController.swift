@@ -52,11 +52,11 @@ class StudentProfileStaticTableViewController: UITableViewController {
              profileForDayLabel[x].text = student.mondayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
              }
              */
-            profileForDayLabel[0].text = student.mondayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "").replacingOccurrences(of: "CTG", with: "Category:").replacingOccurrences(of: "Kiosk", with: "Kiosk:")
-            profileForDayLabel[1].text = student.tuesdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "").replacingOccurrences(of: "CTG", with: "Category:").replacingOccurrences(of: "Kiosk", with: "Kiosk:")
-            profileForDayLabel[2].text = student.wednesdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "").replacingOccurrences(of: "CTG", with: "Category:").replacingOccurrences(of: "Kiosk", with: "Kiosk:")
-            profileForDayLabel[3].text = student.thursdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "").replacingOccurrences(of: "CTG", with: "Category:").replacingOccurrences(of: "Kiosk", with: "Kiosk:")
-            profileForDayLabel[4].text = student.fridayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "").replacingOccurrences(of: "CTG", with: "Category:").replacingOccurrences(of: "Kiosk", with: "Kiosk:")
+            profileForDayLabel[0].text = student.mondayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "").replacingOccurrences(of: UserDefaultsHelper.appCtgFilter, with: "Category:").replacingOccurrences(of: UserDefaultsHelper.appKioskFilter, with: UserDefaultsHelper.appKioskFilter + ":")
+            profileForDayLabel[1].text = student.tuesdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "").replacingOccurrences(of: UserDefaultsHelper.appCtgFilter, with: "Category:").replacingOccurrences(of: UserDefaultsHelper.appKioskFilter, with: UserDefaultsHelper.appKioskFilter + ":")
+            profileForDayLabel[2].text = student.wednesdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "").replacingOccurrences(of: UserDefaultsHelper.appCtgFilter, with: "Category:").replacingOccurrences(of: UserDefaultsHelper.appKioskFilter, with: UserDefaultsHelper.appKioskFilter + ":")
+            profileForDayLabel[3].text = student.thursdayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "").replacingOccurrences(of: UserDefaultsHelper.appCtgFilter, with: "Category:").replacingOccurrences(of: UserDefaultsHelper.appKioskFilter, with: UserDefaultsHelper.appKioskFilter + ":")
+            profileForDayLabel[4].text = student.fridayName.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "").replacingOccurrences(of: UserDefaultsHelper.appCtgFilter, with: "Category:").replacingOccurrences(of: UserDefaultsHelper.appKioskFilter, with: UserDefaultsHelper.appKioskFilter + ":")
             notesLabel.text = student.notes
             notesLabel.isEditable = true
         } else {
@@ -143,7 +143,7 @@ extension StudentProfileStaticTableViewController {
         guard let row = appProfilesTableVC.rowSelected else { fatalError("There was no row selected")}
         
         /// get the profile name ,  use it to show on the screen so we take off the prefix
-        profileForDayLabel[daySelected].text = (appProfilesTableVC.profileArray[segmentIdx][row].name.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")).replacingOccurrences(of: "CTG", with: "Category:").replacingOccurrences(of: "Kiosk", with: "Kiosk:")
+        profileForDayLabel[daySelected].text = (appProfilesTableVC.profileArray[segmentIdx][row].name.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")).replacingOccurrences(of: UserDefaultsHelper.appCtgFilter, with: "Category:").replacingOccurrences(of: UserDefaultsHelper.appKioskFilter, with: UserDefaultsHelper.appKioskFilter + ":")
         
         /// then Update the student
         for (position, user)  in usersSelected.enumerated() {
