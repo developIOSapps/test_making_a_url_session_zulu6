@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -49,6 +49,7 @@
 		466B2C9622FDAF19009C19E4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B2C9522FDAF19009C19E4 /* User.swift */; };
 		466B2C9822FDAF33009C19E4 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B2C9722FDAF33009C19E4 /* UserResponse.swift */; };
 		466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B2C9A22FDBAD9009C19E4 /* PrettyPrintingJson.swift */; };
+		4680FC4B23E1C6D700E333DA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4680FC4A23E1C6D700E333DA /* Constants.swift */; };
 		4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4694D91C2302E58000FEE622 /* GenerateReq.swift */; };
 		469CB55622A9BCD600631ACE /* deviceGroups.json in Resources */ = {isa = PBXBuildFile; fileRef = 469CB55522A9BCD600631ACE /* deviceGroups.json */; };
 		46A3237E237E3BC500D4F77E /* SchoolClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A3237D237E3BC500D4F77E /* SchoolClass.swift */; };
@@ -95,7 +96,7 @@
 		46510BF42388320800838764 /* AppProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProfile.swift; sourceTree = "<group>"; };
 		465E121523AF97620063DE3E /* NotesUpdateable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesUpdateable.swift; sourceTree = "<group>"; };
 		465F7473238309A2005C6132 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		4662C747228C996E00D99B84 /* Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Manager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4662C747228C996E00D99B84 /* Teacher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Teacher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4662C74A228C996E00D99B84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4662C74F228C996E00D99B84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4662C751228C997300D99B84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -112,6 +113,7 @@
 		466B2C9522FDAF19009C19E4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		466B2C9722FDAF33009C19E4 /* UserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		466B2C9A22FDBAD9009C19E4 /* PrettyPrintingJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyPrintingJson.swift; sourceTree = "<group>"; };
+		4680FC4A23E1C6D700E333DA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4694D91C2302E58000FEE622 /* GenerateReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateReq.swift; sourceTree = "<group>"; };
 		469CB55522A9BCD600631ACE /* deviceGroups.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deviceGroups.json; sourceTree = "<group>"; };
 		46A3237D237E3BC500D4F77E /* SchoolClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolClass.swift; sourceTree = "<group>"; };
@@ -272,7 +274,7 @@
 		4662C748228C996E00D99B84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4662C747228C996E00D99B84 /* Manager.app */,
+				4662C747228C996E00D99B84 /* Teacher.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -289,6 +291,7 @@
 				469CB55722A9C25500631ACE /* resources */,
 				4662C762228CBA7800D99B84 /* -customization-notneeded */,
 				4662C756228C997300D99B84 /* Info.plist */,
+				4680FC4A23E1C6D700E333DA /* Constants.swift */,
 				4622303823830B3B00B3DC70 /* DesignableButton.swift */,
 				4662C74A228C996E00D99B84 /* AppDelegate.swift */,
 				4649F2092381DB4B00D12E80 /* HelperFunctions.swift */,
@@ -518,7 +521,6 @@
 				3E27CC2A9F2C7BAAAEFA1DE8 /* Pods-Test Making a urlSession.debug.xcconfig */,
 				195E12B1EFD1A35AA3908A27 /* Pods-Test Making a urlSession.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -541,7 +543,7 @@
 			);
 			name = "Test Making a urlSession";
 			productName = "Test Making a urlSession";
-			productReference = 4662C747228C996E00D99B84 /* Manager.app */;
+			productReference = 4662C747228C996E00D99B84 /* Teacher.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -654,6 +656,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46F6140A23B3C11F00C4352D /* ActivityIndicator.swift in Sources */,
+				4680FC4B23E1C6D700E333DA /* Constants.swift in Sources */,
 				46204ACC2394854E00E55690 /* LoginViewController.swift in Sources */,
 				466B2C9122FDAAB6009C19E4 /* OurCodable.swift in Sources */,
 				46D91FD7238764FF001E0597 /* Student.swift in Sources */,
@@ -861,8 +864,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ipads4-Manager";
-				PRODUCT_NAME = Manager;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appi4.teacher;
+				PRODUCT_NAME = Teacher;
 				SWIFT_SUPPRESS_WARNINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -883,8 +887,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ipads4-Manager";
-				PRODUCT_NAME = Manager;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appi4.teacher;
+				PRODUCT_NAME = Teacher;
 				SWIFT_SUPPRESS_WARNINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

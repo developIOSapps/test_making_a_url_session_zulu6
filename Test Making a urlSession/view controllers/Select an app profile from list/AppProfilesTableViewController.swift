@@ -64,8 +64,9 @@ class AppProfilesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = true
-        
-        navBarSegmentedControl = UISegmentedControl(items: ["Category", "Kiosk"])
+
+        // navBarSegmentedControl = UISegmentedControl(items: ["Category", "Kiosk"])
+        navBarSegmentedControl = UISegmentedControl(items: [Constants.appsCategory, Constants.appsOne])
         navBarSegmentedControl.sizeToFit()
         navBarSegmentedControl.tintColor = UIColor(red:0.99, green:0.00, blue:0.25, alpha:1.00)
         navBarSegmentedControl.selectedSegmentIndex = 0
