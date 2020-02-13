@@ -111,6 +111,7 @@
 				<string>Morah_Shaindy</string>
 				<string>Morah_Gitty</string>
 				<string>Morah_Chaya_Raizy</string>
+				<string>Morah_test</string>
 			</array>
 			<key>Values</key>
 			<array>
@@ -120,6 +121,7 @@
 				<integer>20</integer>
 				<integer>21</integer>
 				<integer>22</integer>
+				<integer>29</integer>
 			</array>
 		</dict>
 	</array>
