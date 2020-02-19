@@ -14,8 +14,9 @@ struct Profile: OurCodable {
     }
     
     let id:                 Int
-    let name:               String
+    var name:               String
     let description:        String
+    var ctgNum:             String?
 
 }
 extension Profile: Equatable {

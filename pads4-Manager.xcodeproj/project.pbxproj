@@ -18,6 +18,7 @@
 		462F3BF123C299E60053462E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 462F3BF023C299E60053462E /* GoogleService-Info.plist */; };
 		463F328C22A9A5C60015092E /* DeviceGroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F328B22A9A5C60015092E /* DeviceGroupResponse.swift */; };
 		4649F20A2381DB4B00D12E80 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4649F2092381DB4B00D12E80 /* HelperFunctions.swift */; };
+		464BAF9A23FCABBA005E7CF9 /* String xTensn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464BAF9923FCABBA005E7CF9 /* String xTensn.swift */; };
 		464C69CB238D548C00842071 /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 464C69C1238D548B00842071 /* Rubik-BlackItalic.ttf */; };
 		464C69CC238D548C00842071 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 464C69C2238D548B00842071 /* Rubik-MediumItalic.ttf */; };
 		464C69CD238D548C00842071 /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 464C69C3238D548B00842071 /* Rubik-BoldItalic.ttf */; };
@@ -80,6 +81,7 @@
 		462F3BF023C299E60053462E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		463F328B22A9A5C60015092E /* DeviceGroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceGroupResponse.swift; sourceTree = "<group>"; };
 		4649F2092381DB4B00D12E80 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		464BAF9923FCABBA005E7CF9 /* String xTensn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String xTensn.swift"; sourceTree = "<group>"; };
 		464C69C1238D548B00842071 /* Rubik-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BlackItalic.ttf"; sourceTree = "<group>"; };
 		464C69C2238D548B00842071 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		464C69C3238D548B00842071 /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -207,6 +209,14 @@
 				460C56082365FCFC00AC7606 /* deviceList */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		464BAF9823FCAB7D005E7CF9 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				464BAF9923FCABBA005E7CF9 /* String xTensn.swift */,
+			);
+			path = String;
 			sourceTree = "<group>";
 		};
 		464C69C0238D541100842071 /* fonts */ = {
@@ -353,6 +363,7 @@
 		466B2C8E22FDAA5C009C19E4 /* protocols and extensions */ = {
 			isa = PBXGroup;
 			children = (
+				464BAF9823FCAB7D005E7CF9 /* String */,
 				465E121423AF97470063DE3E /* model */,
 				466B2C9922FDBAA0009C19E4 /* data */,
 				466B2C8F22FDAA75009C19E4 /* coding and decoding */,
@@ -691,6 +702,7 @@
 				46E1201E239FCFED00667E28 /* UserDetailResponse.swift in Sources */,
 				466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */,
 				4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */,
+				464BAF9A23FCABBA005E7CF9 /* String xTensn.swift in Sources */,
 				46DD196E23874EB20023C0EF /* StudentCollectionViewController.swift in Sources */,
 				4662C75D228CA8E900D99B84 /* APIClient.swift in Sources */,
 			);

@@ -80,8 +80,17 @@ class AppProfilesTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 guard let profilesResponse = xyz as? ProfilesResponse
                     else {fatalError("could not convert it to Profiles")}
-                self.profiles =
+                let tempprfs =
                     profilesResponse.profiles.filter{$0.name.hasPrefix(self.itemsToDisplay.appFilterText) }
+                self.profiles = tempprfs.map({ (prf)  in
+                    var newPrf = prf
+                    newPrf.name = prf.name.removeFrom(chars: "_#")
+                    if let ctgNum = prf.name.removeTo(chars: "_#") {
+                        newPrf.ctgNum = ctgNum
+                    }
+                    return newPrf
+                })
+                
                 self.profiles.sort()
                     // profilesResponse.profiles.filter{$0.name.hasPrefix("Profile-App") }
                 

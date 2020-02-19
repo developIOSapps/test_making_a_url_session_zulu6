@@ -182,7 +182,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         // UserDefaultsHelper.removeGroupID()
         // UserDefaultsHelper.removeGroupName()
         
