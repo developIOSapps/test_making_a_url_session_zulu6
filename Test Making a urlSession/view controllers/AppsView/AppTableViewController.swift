@@ -8,26 +8,9 @@
 
 import UIKit
 
-class AppTableViewController: UITableViewController, GestureRecognizerDelegate, AppTableViewDelegate {
+class AppTableViewController: UITableViewController, GestureRecognizerDelegate {
     
-    func cellHeaderButtonTapped(cell: HeaderTableViewCell) {
-        let ip = tableView.indexPath(for: cell)
-        print("i am the delegate")
-        print(ip?.row, "row")
-        print(ip?.section, "header")
-        print("The category to display is \(catgToDisplay)")
-
-    }
-    
-    
-    func cellRowButtonTapped(cell: AppTableViewCell) {
-        let ip = tableView.indexPath(for: cell)
-        print("i am the delegate cell")
-        print(ip?.row)
-        print(appsByCatg[catgToDisplay][ip!.row].name)
-    }
-    
-    
+   
     var appCategoryStore: AppCategoryStore!
     var appStore: AppStore!
     
@@ -138,7 +121,9 @@ class AppTableViewController: UITableViewController, GestureRecognizerDelegate, 
         return 180
     }
 
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("the row was clicked")
+    }
 
     // MARK: - Navigation
 
@@ -157,4 +142,19 @@ class AppTableViewController: UITableViewController, GestureRecognizerDelegate, 
     }
 
 
+}
+
+extension AppTableViewController: AppTableViewDelegate {
+    
+    /// Called From Header Cell
+    func cellHeaderButtonTapped(cell: HeaderTableViewCell) {
+        print("The category to display is \(catgToDisplay)")
+    }
+    
+    /// called from app cell
+    func cellRowButtonTapped(cell: AppTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { fatalError("Failed getting the indexpax of the cell")}
+        print(appsByCatg[catgToDisplay][indexPath.row].name)
+    }
+    
 }
