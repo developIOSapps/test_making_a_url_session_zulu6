@@ -16,13 +16,15 @@ class AppTableViewController: UITableViewController, GestureRecognizerDelegate, 
         print(ip?.row, "row")
         print(ip?.section, "header")
         print("The category to display is \(catgToDisplay)")
+
     }
     
     
     func cellRowButtonTapped(cell: AppTableViewCell) {
         let ip = tableView.indexPath(for: cell)
-        print("i am the delegate")
+        print("i am the delegate cell")
         print(ip?.row)
+        print(appsByCatg[catgToDisplay][ip!.row].name)
     }
     
     
