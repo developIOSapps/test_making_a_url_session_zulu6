@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol AppTableViewDelegate {
+    func cellRowButtonTapped(cell: AppTableViewCell)
+    func cellHeaderButtonTapped(cell: HeaderTableViewCell)
+}
+
 class AppTableViewCell: UITableViewCell {
 
     @IBOutlet weak var iconImage: UIImageView!
@@ -16,7 +21,9 @@ class AppTableViewCell: UITableViewCell {
     
     @IBOutlet weak var subtitle: UILabel!
     
+    @IBOutlet weak var selectButton: DesignableButton!
     
+    var delegate: AppTableViewDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,4 +36,9 @@ class AppTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func selectButtonPressed(_ sender: DesignableButton) {
+    
+        delegate?.cellRowButtonTapped(cell: self)
+        
+    }
 }

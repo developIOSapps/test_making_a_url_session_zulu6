@@ -8,7 +8,23 @@
 
 import UIKit
 
-class AppTableViewController: UITableViewController, GestureRecognizerDelegate {
+class AppTableViewController: UITableViewController, GestureRecognizerDelegate, AppTableViewDelegate {
+    
+    func cellHeaderButtonTapped(cell: HeaderTableViewCell) {
+        let ip = tableView.indexPath(for: cell)
+        print("i am the delegate")
+        print(ip?.row, "row")
+        print(ip?.section, "header")
+        print("The category to display is \(catgToDisplay)")
+    }
+    
+    
+    func cellRowButtonTapped(cell: AppTableViewCell) {
+        let ip = tableView.indexPath(for: cell)
+        print("i am the delegate")
+        print(ip?.row)
+    }
+    
     
     var appCategoryStore: AppCategoryStore!
     var appStore: AppStore!
@@ -97,6 +113,7 @@ class AppTableViewController: UITableViewController, GestureRecognizerDelegate {
         cell.title.text = app.name
         cell.subtitle.text = app.description
         cell.iconImage.image = UIImage(named: app.name.replacingOccurrences(of: "/", with: ""))
+        cell.delegate = self
         
         
         return cell
@@ -110,6 +127,7 @@ class AppTableViewController: UITableViewController, GestureRecognizerDelegate {
         
         headerCell.setup(with: appCategoryStore.appCategories[catgToDisplay])
         headerCell.delegate = self
+        headerCell.tbldelegate = self
         return headerCell
     }
     

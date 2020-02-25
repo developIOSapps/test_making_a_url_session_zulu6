@@ -21,6 +21,7 @@ class HeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     
     var delegate: GestureRecognizerDelegate?
+    var tbldelegate: AppTableViewDelegate?
     
     
     
@@ -79,6 +80,13 @@ class HeaderTableViewCell: UITableViewCell {
         delegate?.proccesSwipe(with: swipe)
         
     }
+    
+    @IBAction func selectButtonPressed(_ sender: DesignableButton) {
+    
+        tbldelegate?.cellHeaderButtonTapped(cell: self)
+        
+    }
+
     
     
 }
