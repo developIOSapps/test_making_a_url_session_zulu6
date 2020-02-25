@@ -55,6 +55,13 @@
 		469CB55622A9BCD600631ACE /* deviceGroups.json in Resources */ = {isa = PBXBuildFile; fileRef = 469CB55522A9BCD600631ACE /* deviceGroups.json */; };
 		46A3237E237E3BC500D4F77E /* SchoolClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A3237D237E3BC500D4F77E /* SchoolClass.swift */; };
 		46A32380237E3BF700D4F77E /* SchoolClassResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A3237F237E3BF700D4F77E /* SchoolClassResponse.swift */; };
+		46A96F2F240495E1005A8AC1 /* AppCategoriesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A96F2D240495E1005A8AC1 /* AppCategoriesStore.swift */; };
+		46A96F30240495E1005A8AC1 /* AppCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A96F2E240495E1005A8AC1 /* AppCategory.swift */; };
+		46A96F34240495F4005A8AC1 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A96F32240495F4005A8AC1 /* AppStore.swift */; };
+		46A96F35240495F4005A8AC1 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A96F33240495F4005A8AC1 /* App.swift */; };
+		46A96F3C24049C23005A8AC1 /* AppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A96F3924049C23005A8AC1 /* AppTableViewCell.swift */; };
+		46A96F3D24049C23005A8AC1 /* AppTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A96F3A24049C23005A8AC1 /* AppTableViewController.swift */; };
+		46A96F3E24049C23005A8AC1 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A96F3B24049C23005A8AC1 /* HeaderTableViewCell.swift */; };
 		46BCCDA623992CFA0019E7BE /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */; };
 		46BCCDCA2399C8CA0019E7BE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46BCCDC92399C8CA0019E7BE /* Settings.bundle */; };
 		46D56C422304E36A00CFF452 /* DeviceDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D56C412304E36A00CFF452 /* DeviceDetailResponse.swift */; };
@@ -120,6 +127,13 @@
 		469CB55522A9BCD600631ACE /* deviceGroups.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deviceGroups.json; sourceTree = "<group>"; };
 		46A3237D237E3BC500D4F77E /* SchoolClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolClass.swift; sourceTree = "<group>"; };
 		46A3237F237E3BF700D4F77E /* SchoolClassResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolClassResponse.swift; sourceTree = "<group>"; };
+		46A96F2D240495E1005A8AC1 /* AppCategoriesStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCategoriesStore.swift; sourceTree = "<group>"; };
+		46A96F2E240495E1005A8AC1 /* AppCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCategory.swift; sourceTree = "<group>"; };
+		46A96F32240495F4005A8AC1 /* AppStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
+		46A96F33240495F4005A8AC1 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		46A96F3924049C23005A8AC1 /* AppTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTableViewCell.swift; sourceTree = "<group>"; };
+		46A96F3A24049C23005A8AC1 /* AppTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTableViewController.swift; sourceTree = "<group>"; };
+		46A96F3B24049C23005A8AC1 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		46BCCDC92399C8CA0019E7BE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		46D56C412304E36A00CFF452 /* DeviceDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailResponse.swift; sourceTree = "<group>"; };
@@ -199,6 +213,8 @@
 		463F328822A98E2C0015092E /* models */ = {
 			isa = PBXGroup;
 			children = (
+				46A96F31240495F4005A8AC1 /* App */,
+				46A96F2C240495E1005A8AC1 /* Category */,
 				46E1201C239FCFB000667E28 /* User Detail */,
 				46D91FD5238764AB001E0597 /* student */,
 				4608FE2F237EEB4100EE7C80 /* profiles */,
@@ -426,6 +442,7 @@
 		467881F822B6ABF600FA8DCF /* view controllers */ = {
 			isa = PBXGroup;
 			children = (
+				46A96F3824049C23005A8AC1 /* AppsView */,
 				46ABE62D23968F9800FCB1DB /* Login Screen */,
 				46D91FD8238780CB001E0597 /* Student collection View */,
 				46510BEE2388222500838764 /* Student Daily Apps And Nptes */,
@@ -467,6 +484,34 @@
 				46A3237F237E3BF700D4F77E /* SchoolClassResponse.swift */,
 			);
 			path = response;
+			sourceTree = "<group>";
+		};
+		46A96F2C240495E1005A8AC1 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				46A96F2D240495E1005A8AC1 /* AppCategoriesStore.swift */,
+				46A96F2E240495E1005A8AC1 /* AppCategory.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		46A96F31240495F4005A8AC1 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				46A96F32240495F4005A8AC1 /* AppStore.swift */,
+				46A96F33240495F4005A8AC1 /* App.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		46A96F3824049C23005A8AC1 /* AppsView */ = {
+			isa = PBXGroup;
+			children = (
+				46A96F3924049C23005A8AC1 /* AppTableViewCell.swift */,
+				46A96F3A24049C23005A8AC1 /* AppTableViewController.swift */,
+				46A96F3B24049C23005A8AC1 /* HeaderTableViewCell.swift */,
+			);
+			path = AppsView;
 			sourceTree = "<group>";
 		};
 		46ABE62D23968F9800FCB1DB /* Login Screen */ = {
@@ -681,27 +726,34 @@
 				46D56C422304E36A00CFF452 /* DeviceDetailResponse.swift in Sources */,
 				46510BF32388319900838764 /* ProfileTableViewCell.swift in Sources */,
 				4649F20A2381DB4B00D12E80 /* HelperFunctions.swift in Sources */,
+				46A96F3D24049C23005A8AC1 /* AppTableViewController.swift in Sources */,
+				46A96F3E24049C23005A8AC1 /* HeaderTableViewCell.swift in Sources */,
+				46A96F2F240495E1005A8AC1 /* AppCategoriesStore.swift in Sources */,
 				4662C766228CBD7300D99B84 /* APIRequest.swift in Sources */,
 				466B2C9622FDAF19009C19E4 /* User.swift in Sources */,
 				46241B1423AFC2570002B516 /* MyTabBarController.swift in Sources */,
 				4662C75F228CA90300D99B84 /* Config.swift in Sources */,
 				46510BED2388221E00838764 /* StudentProfileStaticTableViewController.swift in Sources */,
+				46A96F30240495E1005A8AC1 /* AppCategory.swift in Sources */,
 				466B2C9822FDAF33009C19E4 /* UserResponse.swift in Sources */,
 				4662C74B228C996E00D99B84 /* AppDelegate.swift in Sources */,
 				463F328C22A9A5C60015092E /* DeviceGroupResponse.swift in Sources */,
 				4662C761228CB95400D99B84 /* HTTPMethod.swift in Sources */,
 				465E121623AF97620063DE3E /* NotesUpdateable.swift in Sources */,
 				4662C764228CBAAB00D99B84 /* QueryType.swift in Sources */,
+				46A96F35240495F4005A8AC1 /* App.swift in Sources */,
 				4608FE35237EECC400EE7C80 /* Profile.swift in Sources */,
 				460C56072365FC9A00AC7606 /* Device.swift in Sources */,
 				46BCCDA623992CFA0019E7BE /* UserDefaultsHelper.swift in Sources */,
 				466B2C8D22FDA4B8009C19E4 /* DeviceGroup.swift in Sources */,
 				460C56052365FBBC00AC7606 /* DeviceListResponse.swift in Sources */,
+				46A96F34240495F4005A8AC1 /* AppStore.swift in Sources */,
 				4622303923830B3C00B3DC70 /* DesignableButton.swift in Sources */,
 				46510BF52388320800838764 /* AppProfile.swift in Sources */,
 				46E1201E239FCFED00667E28 /* UserDetailResponse.swift in Sources */,
 				466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */,
 				4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */,
+				46A96F3C24049C23005A8AC1 /* AppTableViewCell.swift in Sources */,
 				464BAF9A23FCABBA005E7CF9 /* String xTensn.swift in Sources */,
 				46DD196E23874EB20023C0EF /* StudentCollectionViewController.swift in Sources */,
 				4662C75D228CA8E900D99B84 /* APIClient.swift in Sources */,
@@ -876,7 +928,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3;
+				MARKETING_VERSION = 4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appi4.teacher;
 				PRODUCT_NAME = Teacher;
 				SWIFT_SUPPRESS_WARNINGS = NO;
@@ -899,7 +951,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3;
+				MARKETING_VERSION = 4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appi4.teacher;
 				PRODUCT_NAME = Teacher;
 				SWIFT_SUPPRESS_WARNINGS = NO;

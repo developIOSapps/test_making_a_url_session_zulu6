@@ -30,7 +30,7 @@ class StudentProfileStaticTableViewController: UITableViewController {
         /// Set navigation bar
         ///
         navigationItem.prompt = "Click on \">\" to select the app profile for the day"
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: nil)
+        //navigationItem.backBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: nil)
     
         /// become a textView delegate
         notesLabel.delegate = self
@@ -104,34 +104,58 @@ extension StudentProfileStaticTableViewController: UITextViewDelegate {
 extension StudentProfileStaticTableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard let appProfileVC = segue.destination as? AppProfilesTableViewController else {
-            fatalError("could not cast the destination app segue")
-        }
+        // FIXIT: - changes to test new app
         
         let forLiteral = usersSelected.count == 1 ? student.firstName : "Multiple Mode"
         
         switch segue.identifier {
         case "monday":
+            guard let appProfileVC = segue.destination as? AppProfilesTableViewController else {
+                fatalError("could not cast the destination app segue")
+            }
             daySelected = 0
             appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Mondays"
+            appProfileVC.itemsToDisplay = .students
         case "tuesday":
+            guard let appProfileVC = segue.destination as? AppProfilesTableViewController else {
+                fatalError("could not cast the destination app segue")
+            }
             daySelected = 1
             appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Tuesdays"
+            appProfileVC.itemsToDisplay = .students
         case "wednesday":
+            guard let appProfileVC = segue.destination as? AppProfilesTableViewController else {
+                fatalError("could not cast the destination app segue")
+            }
             daySelected = 2
             appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Wednesdays"
+            appProfileVC.itemsToDisplay = .students
         case "thursday":
+            guard let appProfileVC = segue.destination as? AppProfilesTableViewController else {
+                fatalError("could not cast the destination app segue")
+            }
             daySelected = 3
             appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Thursdays"
+            appProfileVC.itemsToDisplay = .students
         case "friday":
+            guard let appProfileVC = segue.destination as? AppProfilesTableViewController else {
+                fatalError("could not cast the destination app segue")
+            }
             daySelected = 4
             appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Fridays"
+            appProfileVC.itemsToDisplay = .students
+        case "friday2":
+            guard let appTableVC = segue.destination as? AppTableViewController else {
+                fatalError("could not cast the destination app segue")
+            }
+            daySelected = 4
+            appTableVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Fridays"
+            // appProfileVC.itemsToDisplay = .students
         default:
             break
         }
         
-        appProfileVC.itemsToDisplay = .students
+        
     }
     
     
