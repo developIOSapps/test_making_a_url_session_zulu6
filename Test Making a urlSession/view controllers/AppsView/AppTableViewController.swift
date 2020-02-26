@@ -8,7 +8,55 @@
 
 import UIKit
 
-class AppTableViewController: UITableViewController, GestureRecognizerDelegate {
+class AppTableViewController: UITableViewController {
+
+    enum ItemsToDisplay {
+        
+        case students
+        case devices
+        
+        var barTitle: String {
+            switch self {
+            case .devices:
+                return "Devices"
+            case .students:
+                return "Students"
+            }
+        }
+        
+        var ctgFilterText: String {
+            return UserDefaultsHelper.appFilter + UserDefaultsHelper.appCtgFilter + " "
+        }
+        var appFilterText: String {
+            switch self {
+            case .devices:
+                return UserDefaultsHelper.appFilter + UserDefaultsHelper.app1KioskFilter + " "
+            case .students:
+                return UserDefaultsHelper.appFilter + UserDefaultsHelper.appKioskFilter + " "
+            }
+        }
+        var segueIdentifierString : String {
+            switch self {
+            case .devices:
+                return "fromAppsListbackToDeviceListWithSeque"
+            case .students:
+                return "fromAppsListBackToStudentAppProfileWithSeque"
+            default: break
+
+            }
+            return "he"
+        }
+    }
+
+    var itemsToDisplay: ItemsToDisplay = .students {
+            didSet {
+            print("Set items to display")
+                // navigationItem.title = itemsToDisplay.barTitle
+            }
+        }
+    
+    
+
     
    
     var appCategoryStore: AppCategoryStore!
@@ -17,50 +65,13 @@ class AppTableViewController: UITableViewController, GestureRecognizerDelegate {
     lazy var appsByCatg = Array(repeating: Array<App>(), count: appCategoryStore.categories.count)
     var catgToDisplay = 3  // arbitrary starting point
     
-    @objc func proccesSwipe(with swipeGestureRecognizer: UISwipeGestureRecognizer){
-
-        let nbrOfItems = appCategoryStore.appCategories.count
-        switch swipeGestureRecognizer.direction {
-        case .left:
-            
-            // reset if at end so I could add 1
-            if !(catgToDisplay < nbrOfItems - 1)  {
-                catgToDisplay = -1
-            }
-            
-            // increment
-            catgToDisplay += 1
-            
-            // reload
-            tableView.reloadSections(IndexSet(0..<1), with: .left)
-            tableView.reloadData()
-            
-        case .right:
-            
-            // reset if at end so I could add 1
-            if !(catgToDisplay > 0)  {
-                catgToDisplay = nbrOfItems
-            }
-            
-            // decrement
-            catgToDisplay -= 1
-            
-            // reload
-            tableView.reloadSections(IndexSet(0..<1), with: .right)
-            tableView.reloadData()
-
-        default:
-            break
-        }
-        
-    }
-    
+    var selectedProfile = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "David's Monday Setup - Select App or Category"
-        navigationItem.prompt =  "Select App or Category"
+        //navigationItem.title = "David's Monday Setup - Select App or Category"
+        //navigationItem.prompt =  "Select App or Category"
         
         appCategoryStore = AppCategoryStore()
         appStore = AppStore()
@@ -110,12 +121,13 @@ class AppTableViewController: UITableViewController, GestureRecognizerDelegate {
         print("Im am in header proc and the catgcode is \(catgToDisplay)")
         guard let headerCell = tableView.dequeueReusableCell(withIdentifier: "header") as? HeaderTableViewCell else {fatalError("Unable to allocate a header cell")}
         
-        headerCell.setup(with: appCategoryStore.appCategories[catgToDisplay])
+        headerCell.setup(with: appCategoryStore.appCategories[catgToDisplay], studentOrDevice: itemsToDisplay)
         headerCell.delegate = self
         headerCell.tbldelegate = self
         return headerCell
     }
     
+
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
         return 180
@@ -141,20 +153,86 @@ class AppTableViewController: UITableViewController, GestureRecognizerDelegate {
         
     }
 
-
 }
 
 extension AppTableViewController: AppTableViewDelegate {
     
     /// Called From Header Cell
     func cellHeaderButtonTapped(cell: HeaderTableViewCell) {
-        print("The category to display is \(catgToDisplay)")
+        print("The category to display is \(itemsToDisplay.ctgFilterText + appCategoryStore.appCategories[catgToDisplay].name)")
+        selectedProfile = itemsToDisplay.ctgFilterText + appCategoryStore.appCategories[catgToDisplay].name
+        performSegue(withIdentifier: "fromAppsListBackToStudentAppProfileWithSeque", sender: self)
     }
     
     /// called from app cell
     func cellRowButtonTapped(cell: AppTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { fatalError("Failed getting the indexpax of the cell")}
-        print(appsByCatg[catgToDisplay][indexPath.row].name)
+        // print(appsByCatg[catgToDisplay][indexPath.row].name)
+        print(itemsToDisplay.appFilterText + appsByCatg[catgToDisplay][indexPath.row].name)
+        selectedProfile = itemsToDisplay.appFilterText + appsByCatg[catgToDisplay][indexPath.row].name
+        performSegue(withIdentifier: itemsToDisplay.segueIdentifierString, sender: self)
+//        print(UserDefaultsHelper.appCtgFilter)
+//        print(UserDefaultsHelper.appKioskFilter)
+//        print(UserDefaultsHelper.app1KioskFilter)
     }
     
+}
+
+extension AppTableViewController: GestureRecognizerDelegate {
+    
+    func proccesTap(tap: UITapGestureRecognizer) {
+        
+        let nbrOfItems = appCategoryStore.appCategories.count
+        // reset if at end so I could add 1
+        if !(catgToDisplay < nbrOfItems - 1)  {
+            catgToDisplay = -1
+        }
+        
+        // increment
+        catgToDisplay += 1
+        
+        // reload
+        tableView.reloadSections(IndexSet(0..<1), with: .left)
+        tableView.reloadData()
+        
+    }
+    
+    @objc func proccesSwipe(with swipeGestureRecognizer: UISwipeGestureRecognizer){
+
+        let nbrOfItems = appCategoryStore.appCategories.count
+        switch swipeGestureRecognizer.direction {
+        case .left:
+            
+            // reset if at end so I could add 1
+            if !(catgToDisplay < nbrOfItems - 1)  {
+                catgToDisplay = -1
+            }
+            
+            // increment
+            catgToDisplay += 1
+            
+            // reload
+            tableView.reloadSections(IndexSet(0..<1), with: .left)
+            tableView.reloadData()
+            
+        case .right:
+            
+            // reset if at end so I could add 1
+            if !(catgToDisplay > 0)  {
+                catgToDisplay = nbrOfItems
+            }
+            
+            // decrement
+            catgToDisplay -= 1
+            
+            // reload
+            tableView.reloadSections(IndexSet(0..<1), with: .right)
+            tableView.reloadData()
+
+        default:
+            break
+        }
+        
+    }
+
 }

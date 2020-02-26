@@ -89,6 +89,7 @@
                         <segue destination="7mN-Ga-Sy5" kind="show" identifier="goToStudentDetail" id="adg-QJ-vew"/>
                         <segue destination="Tdd-nm-J6F" kind="presentation" identifier="loginScr" id="FUa-P2-vzQ"/>
                         <segue destination="Pg4-jT-3Tl" kind="show" identifier="goToAppProfile" id="Tby-EC-8KV"/>
+                        <segue destination="Foy-Ko-G52" kind="show" identifier="gotoAppTable" id="r2q-14-f3y"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ea8-9Z-pXf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -555,7 +556,7 @@
             </objects>
             <point key="canvasLocation" x="3118.840579710145" y="-70.3125"/>
         </scene>
-        <!--David's Monday Setup - Select App or Category-->
+        <!--App Table View Controller-->
         <scene sceneID="Se1-uJ-LLd">
             <objects>
                 <tableViewController id="Foy-Ko-G52" customClass="AppTableViewController" customModule="Teacher" customModuleProvider="target" sceneMemberID="viewController">
@@ -564,25 +565,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="header" rowHeight="166" id="muG-2r-nZV" customClass="HeaderTableViewCell" customModule="Teacher" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="166" id="muG-2r-nZV" customClass="HeaderTableViewCell" customModule="Teacher" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="166"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="muG-2r-nZV" id="A85-r0-yUE">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="166"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="166"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1j-RM-0iZ" userLabel="backView">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="166"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="166"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="60d-uQ-2yf">
-                                                    <rect key="frame" x="8" y="161" width="367" height="2"/>
+                                                    <rect key="frame" x="8" y="161" width="398" height="2"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="2" id="QJa-0S-1l7"/>
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csI-F9-V20" customClass="DesignableButton" customModule="Teacher" customModuleProvider="target">
-                                                    <rect key="frame" x="261" y="123" width="114" height="30"/>
+                                                    <rect key="frame" x="263" y="123" width="115" height="30"/>
                                                     <color key="backgroundColor" red="0.11433278769999999" green="0.3709432185" blue="0.58936429020000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <state key="normal" title="Select">
@@ -600,13 +601,22 @@
                                                         <action selector="selectButtonPressed:" destination="muG-2r-nZV" eventType="touchUpInside" id="Sef-mV-pHr"/>
                                                     </connections>
                                                 </button>
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowshape.turn.up.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Uwo-kf-zLd">
+                                                    <rect key="frame" x="370" y="9" width="36" height="33.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="36" id="KCW-lk-P2K"/>
+                                                        <constraint firstAttribute="height" constant="36" id="dcB-tA-VZJ"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Uwo-kf-zLd" secondAttribute="trailing" constant="8" id="2vM-tG-29R"/>
                                                 <constraint firstAttribute="bottom" secondItem="60d-uQ-2yf" secondAttribute="bottom" constant="3" id="9ec-FC-Xul"/>
                                                 <constraint firstAttribute="trailing" secondItem="60d-uQ-2yf" secondAttribute="trailing" constant="8" id="Bmc-on-in9"/>
                                                 <constraint firstItem="60d-uQ-2yf" firstAttribute="leading" secondItem="d1j-RM-0iZ" secondAttribute="leading" constant="8" id="Nju-NV-gjd"/>
                                                 <constraint firstItem="60d-uQ-2yf" firstAttribute="top" secondItem="csI-F9-V20" secondAttribute="bottom" constant="8" id="jzF-uj-vMQ"/>
+                                                <constraint firstItem="Uwo-kf-zLd" firstAttribute="top" secondItem="d1j-RM-0iZ" secondAttribute="top" constant="8" id="oN6-qN-Jpk"/>
                                             </constraints>
                                         </view>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="5GT-tJ-XkX">
@@ -617,13 +627,13 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Numbers and Counting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYc-MN-OvZ">
-                                            <rect key="frame" x="90" y="25.5" width="285" height="20"/>
+                                            <rect key="frame" x="90" y="25.5" width="279" height="20"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gT-9l-BFQ">
-                                            <rect key="frame" x="90" y="53.5" width="285" height="52"/>
+                                            <rect key="frame" x="90" y="53.5" width="288" height="52"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="52" id="VQa-mu-toG"/>
                                             </constraints>
@@ -635,12 +645,12 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="d1j-RM-0iZ" firstAttribute="top" secondItem="A85-r0-yUE" secondAttribute="top" id="2Du-1F-dxt"/>
-                                        <constraint firstItem="uYc-MN-OvZ" firstAttribute="trailing" secondItem="A85-r0-yUE" secondAttribute="trailingMargin" id="4CV-vt-9lC"/>
+                                        <constraint firstItem="uYc-MN-OvZ" firstAttribute="trailing" secondItem="A85-r0-yUE" secondAttribute="trailingMargin" constant="-25" id="4CV-vt-9lC"/>
                                         <constraint firstItem="csI-F9-V20" firstAttribute="trailing" secondItem="3gT-9l-BFQ" secondAttribute="trailing" id="CT4-ea-h5w"/>
                                         <constraint firstItem="uYc-MN-OvZ" firstAttribute="top" secondItem="5GT-tJ-XkX" secondAttribute="top" multiplier="1.6" id="GEO-VP-mg2"/>
                                         <constraint firstItem="3gT-9l-BFQ" firstAttribute="top" secondItem="uYc-MN-OvZ" secondAttribute="bottom" constant="8" id="HBc-hA-XX4"/>
                                         <constraint firstItem="d1j-RM-0iZ" firstAttribute="leading" secondItem="A85-r0-yUE" secondAttribute="leading" id="SSF-bh-7T4"/>
-                                        <constraint firstItem="3gT-9l-BFQ" firstAttribute="trailing" secondItem="A85-r0-yUE" secondAttribute="trailingMargin" id="Ud1-w5-ihL"/>
+                                        <constraint firstItem="3gT-9l-BFQ" firstAttribute="trailing" secondItem="A85-r0-yUE" secondAttribute="trailingMargin" constant="-16" id="Ud1-w5-ihL"/>
                                         <constraint firstAttribute="bottom" secondItem="d1j-RM-0iZ" secondAttribute="bottom" id="XtV-Wm-BWk"/>
                                         <constraint firstItem="csI-F9-V20" firstAttribute="width" secondItem="3gT-9l-BFQ" secondAttribute="width" multiplier="0.4" id="aeR-Lm-HSQ"/>
                                         <constraint firstItem="5GT-tJ-XkX" firstAttribute="top" secondItem="A85-r0-yUE" secondAttribute="top" constant="16" id="djI-em-4e1"/>
@@ -653,6 +663,8 @@
                                 <connections>
                                     <outlet property="descriptionLabel" destination="3gT-9l-BFQ" id="kZg-wn-OMq"/>
                                     <outlet property="iconImageView" destination="5GT-tJ-XkX" id="8dS-SA-aF0"/>
+                                    <outlet property="nextImageView" destination="Uwo-kf-zLd" id="tPX-lE-kAV"/>
+                                    <outlet property="selectButton" destination="csI-F9-V20" id="BES-a1-Hcs"/>
                                     <outlet property="titleLabel" destination="uYc-MN-OvZ" id="i8L-Pq-Vy1"/>
                                 </connections>
                             </tableViewCell>
@@ -741,14 +753,20 @@
                             <outlet property="delegate" destination="Foy-Ko-G52" id="iUF-Dh-miw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="David's Monday Setup - Select App or Category" prompt="Select Category or App" largeTitleDisplayMode="never" id="EPt-tn-9Pp"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="EPt-tn-9Pp"/>
+                    <connections>
+                        <segue destination="3o1-bw-8TL" kind="unwind" identifier="fromAppsListBackToStudentAppProfileWithSeque" unwindAction="fromAppsListBackToStudentAppProfileWithSeque:" id="Dua-Td-xDQ"/>
+                        <segue destination="3o1-bw-8TL" kind="unwind" identifier="fromAppsListbackToDeviceListWithSeque" unwindAction="fromAppsListbackToDeviceListWithSeque:" id="zFI-LT-DMp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fk7-O7-UiO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="3o1-bw-8TL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="6348" y="977"/>
+            <point key="canvasLocation" x="6347.826086956522" y="976.33928571428567"/>
         </scene>
     </scenes>
     <resources>
+        <image name="arrowshape.turn.up.right" catalog="system" width="64" height="52"/>
         <image name="book" catalog="system" width="64" height="50"/>
         <image name="checkmark.circle" catalog="system" width="64" height="60"/>
         <image name="developITlogo" width="347" height="145"/>
@@ -767,7 +785,8 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="r2q-14-f3y"/>
         <segue reference="YPh-dj-d52"/>
-        <segue reference="aYO-y2-8XG"/>
+        <segue reference="Tby-EC-8KV"/>
     </inferredMetricsTieBreakers>
 </document>

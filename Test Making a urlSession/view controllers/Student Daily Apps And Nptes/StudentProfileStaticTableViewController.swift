@@ -149,15 +149,15 @@ extension StudentProfileStaticTableViewController {
                 fatalError("could not cast the destination app segue")
             }
             daySelected = 4
-            appTableVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Fridays"
-            // appProfileVC.itemsToDisplay = .students
+            appTableVC.navigationItem.title = "Friday Setup - Select Category or App"
+            appTableVC.navigationItem.prompt = "\(forLiteral)"
+            appTableVC.itemsToDisplay = .students
         default:
             break
         }
         
         
     }
-    
     
     @IBAction func backToStudentAppProfile(seque: UIStoryboardSegue)  {
         /// What we need
@@ -177,7 +177,22 @@ extension StudentProfileStaticTableViewController {
         daySelected = 99
     }
     
+    @IBAction func fromAppsListBackToStudentAppProfile(seque: UIStoryboardSegue)  {
+        /// What we need
+        guard let appTableViewController =  seque.source as? AppTableViewController else {fatalError("Was not the AppTableViewController VC")}
+        print(appTableViewController.selectedProfile, "0000000000000000000")
+        profileForDayLabel[daySelected].text = (appTableViewController.selectedProfile.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")).replacingOccurrences(of: UserDefaultsHelper.appCtgFilter, with: "Category:").replacingOccurrences(of: UserDefaultsHelper.appKioskFilter, with: UserDefaultsHelper.appKioskFilter + ":")
+
+        for (position, user)  in usersSelected.enumerated() {
+            upDateStudentAppNotes(appProfileToUse: appTableViewController.selectedProfile, for: user)
+        }
+
+        daySelected = 99
+    }
+    
     func upDateStudentAppNotes(appProfileToUse: String? = nil, for userToUpdate: User, personalNote: String? = nil)  {
+        
+        print("-x-x-x- the profile being passed is \(String(describing: appProfileToUse)) ")
         
         var studentBeingUpdated = Student.getStudentFromUser(userToUpdate)
         if let personalNote = personalNote {

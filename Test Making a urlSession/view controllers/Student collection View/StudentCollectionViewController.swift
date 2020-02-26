@@ -510,6 +510,32 @@ extension StudentCollectionViewController {
             }
             appProfilesTableVC.itemsToDisplay = .devices
             
+        case "gotoAppTable":
+            
+            guard let devices = self.users as? [Device] else {
+                return
+            }
+            
+            guard let appProfilesTableVC = segue.destination as? AppProfilesTableViewController else { fatalError(" could not segue ") }
+            
+            print("Going to app profile because dealing ith devices")
+            switch selectionMode {
+            case .multipleDisabled:
+                devicesSelected.removeAll()
+                devicesSelected.append(devices[rowSelected])
+                appProfilesTableVC.navigationItem.prompt = "Select the kiosk mode app for \(devices[rowSelected].name) device"
+                
+            case .multipleEnabled:
+                guard let indexPaths = collectionView.indexPathsForSelectedItems else {fatalError("Could not get the index paths")}
+                devicesSelected.removeAll()
+                for indexPath in indexPaths {
+                    devicesSelected.append(devices[indexPath.row])
+                }
+                selectionMode.toggle()
+                appProfilesTableVC.navigationItem.prompt = "Select the kiosk mode app for multiple devices"
+            }
+            appProfilesTableVC.itemsToDisplay = .devices
+            
         default:
             break
         }
@@ -560,6 +586,22 @@ extension StudentCollectionViewController {
 }
 
    extension StudentCollectionViewController {
+    
+    @IBAction func fromAppsListbackToDeviceList(seque: UIStoryboardSegue)  {
+        /// What we need
+        guard let appTableViewController =  seque.source as? AppTableViewController else {fatalError("Was not the AppTableViewController VC")}
+        print(appTableViewController.selectedProfile, "0000000000000000000")
+
+        let selectedappProfile = appTableViewController.selectedProfile.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
+        print("**********",selectedappProfile)
+
+        for (position, device)  in devicesSelected.enumerated() {
+            upDateDeviceNotes(appProfileToUse: appTableViewController.selectedProfile, for: device)
+        }
+
+    }
+    
+
     
     @IBAction func backToDeviceList(seque: UIStoryboardSegue)  {
         
