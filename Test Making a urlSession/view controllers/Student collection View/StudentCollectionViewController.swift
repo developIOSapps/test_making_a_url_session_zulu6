@@ -64,14 +64,14 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
              }
          }
 
-         var segueTo: String {
-             switch self {
-             case .devices:
-                 return "goToStudentDetail"
-             case .students:
-                 return "goToAppProfile"
-             }
-         }
+//         var segueTo: String {
+//             switch self {
+//             case .devices:
+//                 return "goToStudentDetail"
+//             case .students:
+//                 return "goToAppProfile"
+//             }
+//         }
 
          var allowsMultipleSelection: Bool {
              switch self {
@@ -270,7 +270,8 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         case .students:
             performSegue(withIdentifier: "goToStudentDetail", sender: nil)
         case .devices:
-            performSegue(withIdentifier: "goToAppProfile", sender: nil)
+            // performSegue(withIdentifier: "goToAppProfile", sender: nil)
+            performSegue(withIdentifier: "gotoAppTable", sender: nil)
         }
     }
     
@@ -323,7 +324,8 @@ extension StudentCollectionViewController {
             case .students:
                 performSegue(withIdentifier: "goToStudentDetail", sender: nil)
             case .devices:
-                performSegue(withIdentifier: "goToAppProfile", sender: nil)
+                // performSegue(withIdentifier: "goToAppProfile", sender: nil)
+                performSegue(withIdentifier: "gotoAppTable", sender: nil)
             }
 
         case .multipleEnabled:
@@ -516,14 +518,14 @@ extension StudentCollectionViewController {
                 return
             }
             
-            guard let appProfilesTableVC = segue.destination as? AppProfilesTableViewController else { fatalError(" could not segue ") }
+            guard let appTableVC = segue.destination as? AppTableViewController else { fatalError(" could not segue ") }
             
             print("Going to app profile because dealing ith devices")
             switch selectionMode {
             case .multipleDisabled:
                 devicesSelected.removeAll()
                 devicesSelected.append(devices[rowSelected])
-                appProfilesTableVC.navigationItem.prompt = "Select the kiosk mode app for \(devices[rowSelected].name) device"
+                appTableVC.navigationItem.prompt = "Select the kiosk mode app for \(devices[rowSelected].name) device"
                 
             case .multipleEnabled:
                 guard let indexPaths = collectionView.indexPathsForSelectedItems else {fatalError("Could not get the index paths")}
@@ -532,9 +534,9 @@ extension StudentCollectionViewController {
                     devicesSelected.append(devices[indexPath.row])
                 }
                 selectionMode.toggle()
-                appProfilesTableVC.navigationItem.prompt = "Select the kiosk mode app for multiple devices"
+                appTableVC.navigationItem.prompt = "Select the kiosk mode app for multiple devices"
             }
-            appProfilesTableVC.itemsToDisplay = .devices
+            appTableVC.itemsToDisplay = .devices
             
         default:
             break

@@ -69,6 +69,7 @@ class AppTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.isHidden = true
         
         //navigationItem.title = "David's Monday Setup - Select App or Category"
         //navigationItem.prompt =  "Select App or Category"
@@ -130,8 +131,13 @@ class AppTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
-        return 180
-    }
+        switch itemsToDisplay {
+        case .students:
+            return 180
+        case .devices:
+            return 140
+       }
+     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("the row was clicked")
