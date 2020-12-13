@@ -280,7 +280,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Foy-Ko-G52" kind="show" identifier="friday2" id="RSM-Js-4a2"/>
+                                            <segue destination="Pg4-jT-3Tl" kind="show" identifier="friday" id="wBt-nc-KgW"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -778,7 +778,6 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="r2q-14-f3y"/>
         <segue reference="YPh-dj-d52"/>
         <segue reference="Tby-EC-8KV"/>
     </inferredMetricsTieBreakers>

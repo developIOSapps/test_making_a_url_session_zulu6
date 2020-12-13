@@ -270,8 +270,8 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         case .students:
             performSegue(withIdentifier: "goToStudentDetail", sender: nil)
         case .devices:
-            // performSegue(withIdentifier: "goToAppProfile", sender: nil)
-            performSegue(withIdentifier: "gotoAppTable", sender: nil)
+             performSegue(withIdentifier: "goToAppProfile", sender: nil)
+//            performSegue(withIdentifier: "gotoAppTable", sender: nil)
         }
     }
     
@@ -324,8 +324,8 @@ extension StudentCollectionViewController {
             case .students:
                 performSegue(withIdentifier: "goToStudentDetail", sender: nil)
             case .devices:
-                // performSegue(withIdentifier: "goToAppProfile", sender: nil)
-                performSegue(withIdentifier: "gotoAppTable", sender: nil)
+                 performSegue(withIdentifier: "goToAppProfile", sender: nil)
+//                performSegue(withIdentifier: "gotoAppTable", sender: nil)
             }
 
         case .multipleEnabled:
