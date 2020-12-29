@@ -152,6 +152,25 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     var devicesSelected: [Device] = [Device]()
 
     let activityIndicator = ActivityIndicator.shared
+    var beingUpdatedAppProfile: String?
+    var beingUpdatedDevice: Device?
+    
+    
+    var tracker = "" {
+        didSet {
+            print("just entered the didSet - another 8 seconds until it fires off")
+            DispatchQueue.global().asyncAfter(deadline: .now() + 8) { [self] in
+                guard let beingUpdatedDevice = beingUpdatedDevice, let beingUpdatedAppProfile = beingUpdatedAppProfile else {fatalError("in double update")}
+                
+                GetDataApi.updateNoteProperty(GeneratedReq.init(request: ValidReqs.updateDeviceProperty(deviceId: beingUpdatedDevice.UDID, propertyName: "notes", propertyValue: beingUpdatedAppProfile))) {
+                    DispatchQueue.main.async {
+                        print( "```*** Updated the second second notes property of this iPad - Hooray Job well done")
+                    }
+                }
+            }
+        }
+    }
+
     
     @IBOutlet weak var barButtonSelectCancel: UIBarButtonItem!
     
@@ -631,15 +650,31 @@ extension StudentCollectionViewController {
     }
     
     func upDateDeviceNotes(appProfileToUse: String , for deviceToUpdate: Device)  {
-      
-         
-         //*** Real Update moveiPadIntoDeviceGroup - Update its notes property
-        GetDataApi.updateNoteProperty(GeneratedReq.init(request: ValidReqs.updateDeviceProperty(deviceId: deviceToUpdate.UDID, propertyName: "notes", propertyValue: appProfileToUse))) {
-              DispatchQueue.main.async {
-                  print( "```*** Updated the notes property of this iPad - Hooray Job well done")
-              }
-          }
- }
+        
+        // save profile and device being updated
+        beingUpdatedDevice = deviceToUpdate
+        beingUpdatedAppProfile = appProfileToUse
+        
+        // See if it is asking for student login
+        var appProfileToUseModified = appProfileToUse
+        var initiateSecondUpdate = false
+        
+        if appProfileToUse.contains("- Student Login") {
+            print("**********","it does contain student login profile")
+            appProfileToUseModified = "Profile-App-1Kiosk - All Apps"
+            initiateSecondUpdate = true
+        }
+        
+        //*** Real Update moveiPadIntoDeviceGroup - Update its notes property
+        GetDataApi.updateNoteProperty(GeneratedReq.init(request: ValidReqs.updateDeviceProperty(deviceId: deviceToUpdate.UDID, propertyName: "notes", propertyValue: appProfileToUseModified))) {
+            DispatchQueue.main.async {
+                print( "```*** Updated the notes property of this iPad - Hooray Job well done")
+                if initiateSecondUpdate {
+                    self.tracker = "y"
+                }
+            }
+        }
+    }
 }
 
 
