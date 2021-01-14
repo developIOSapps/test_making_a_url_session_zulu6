@@ -19,6 +19,7 @@ enum ValidReqs {
     case updateUserProperty(userId: String, propertyName: String, propertyValue: String)
     case users, apps, deviceGroups, classes, profiles
     case deviceDetail(deviceId: String)
+    case classDetail(classId: String)
     case userDetail(userId: String)
     case usersInDeviceGroup(parameterDict: [String: String])
     case devicesInDeviceGroup(parameterDict: [String: String])
@@ -37,6 +38,7 @@ enum GeneratedReq  {
     case updateDeviceProperty(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case updateUserProperty(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case deviceDetail(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
+    case classDetail(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case userDetail(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case usersInDeviceGroup(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
     case devicesInDeviceGroup(path: String, method: HttpMethod, header: [String: String], body: String?, queryItems: [String: String]?)
@@ -75,6 +77,9 @@ enum GeneratedReq  {
             self = .updateUserProperty(path: "/users/~~userId~~".replacingOccurrences(of: "~~userId~~", with: userId), method: HttpMethod.put, header: headerDict, body: bodyString, queryItems: nil)
         case .deviceDetail(let deviceId):
             self = .deviceDetail(path: "/devices/\(deviceId)", method: HttpMethod.get, header: headerDict, body: nil, queryItems: nil)
+
+        case .classDetail(let classId):
+            self = .classDetail(path: "/classes/\(classId)", method: HttpMethod.get, header: headerDict, body: nil, queryItems: nil)
 
         case .userDetail(let userId):
             self = .userDetail(path: "/users/\(userId)", method: HttpMethod.get, header: headerDict, body: nil, queryItems: nil)
@@ -118,7 +123,9 @@ enum GeneratedReq  {
             return path
         case .deviceDetail(let path, _, _, _, _):
             return path
-        case .userDetail(let path, _, _, _, _):
+        case .classDetail(let path, _, _, _, _):
+            return path
+      case .userDetail(let path, _, _, _, _):
             return path
         case .usersInDeviceGroup(let path, _, _, _, _):
             return path
@@ -147,6 +154,8 @@ enum GeneratedReq  {
         case .users(_ , let method, _, _, _):
             return method.rawValue
         case .deviceDetail(_ , let method, _, _, _):
+            return method.rawValue
+        case .classDetail(_ , let method, _, _, _):
             return method.rawValue
         case .userDetail(_ , let method, _, _, _):
             return method.rawValue
@@ -177,6 +186,8 @@ enum GeneratedReq  {
             return header
         case .deviceDetail(_ , _, let header, _, _):
             return header
+        case .classDetail(_ , _, let header, _, _):
+            return header
         case .userDetail(_ , _, let header, _, _):
             return header
         case .usersInDeviceGroup(_ , _, let header, _, _):
@@ -206,6 +217,8 @@ enum GeneratedReq  {
             return body
         case .deviceDetail(_ , _,  _, let body, _):
             return body
+        case .classDetail(_ , _,  _, let body, _):
+            return body
         case .userDetail(_ , _,  _, let body, _):
             return body
         case .usersInDeviceGroup(_ , _,  _, let body, _):
@@ -234,6 +247,8 @@ enum GeneratedReq  {
         case .users(_ , _,  _, _, let queryItems):
             return queryItems
         case .deviceDetail(_ , _,  _, _, let queryItems):
+            return queryItems
+        case .classDetail(_ , _,  _, _, let queryItems):
             return queryItems
         case .userDetail(_ , _,  _, _, let queryItems):
             return queryItems

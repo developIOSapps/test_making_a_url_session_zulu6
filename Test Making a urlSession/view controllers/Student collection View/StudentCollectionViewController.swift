@@ -147,6 +147,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
 
     // var devices: [NotesUpdateable] = []
     var users: [NotesUpdateable] = []
+    var students: [ClassDetailResponse.Clss.Student] = []
     
     var rowSelected = 0
     var devicesSelected: [Device] = [Device]()
@@ -232,6 +233,22 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                     self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
                     
                     // title = navBarTitle
+                    
+                    // FIXME: 01-13-21 Code to get student pictures - working
+                    /* -
+                    GetDataApi.getClassDetail(GeneratedReq.init(request: ValidReqs.classDetail(classId: "3813b0d4-280f-4a3d-ab55-a8274bc9ead6"))) { (classDetailResponse) in
+                        DispatchQueue.main.async {
+                                     
+                                     guard let classDetailResponse = classDetailResponse as? ClassDetailResponse else {fatalError("could not convert it to classDetailResponse")}
+                                     /// Just load in the users into this class if needed
+                                        self.students = classDetailResponse.class.students.sorted { $0.lastName < $1.lastName }
+                                     /// Here we have what we need
+                                    classDetailResponse.class.students.forEach { print($0.firstName + "--" + $0.lastName) }
+                                     self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
+                                     self.collectionView.reloadData()
+                                 }
+                    }
+                    */
                     let classGroupCodeStr = String(classGroupCodeInt)
                     
                     GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
@@ -246,6 +263,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                             self.collectionView.reloadData()
                         }
                     }
+                    
             }
             case .devices:
                 if classGroupCodeInt ==  nil {

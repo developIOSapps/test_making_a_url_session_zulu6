@@ -87,6 +87,34 @@ struct GetDataApi {
     }
 
     
+    static func getClassDetail(_ generatedReq: GeneratedReq , then completion: @escaping (Codable) -> Void )  {
+        
+        getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
+            
+            print("in the GetDataApi.getZuluDataWrapper before switch")
+            switch result {
+                
+             case .failure(let error):
+                processReturnError(error)
+
+            case .success(let data):
+                print("in the GetDataApi.getZuluDataWrapper in switch success")
+                print(data.prettyPrintedJSONString)
+                print("we are updating notes")
+                
+                
+                let decoder = JSONDecoder()
+                
+                guard let classDetailResponsxx = try? decoder.decode(ClassDetailResponse.self, from: data) else {fatalError()}
+                guard let cldtl = classDetailResponsxx as? ClassDetailResponse else {fatalError("could not convert it to Users")}
+                print("we are up to class detail response response")
+                completion(cldtl)
+                
+            }
+        }
+    }
+
+
     static func updateNoteProperty(_ generatedReq: GeneratedReq , then completion: @escaping () -> Void )  {
         
         /// Get the data

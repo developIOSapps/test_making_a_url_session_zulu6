@@ -64,6 +64,7 @@
 		46A96F3E24049C23005A8AC1 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A96F3B24049C23005A8AC1 /* HeaderTableViewCell.swift */; };
 		46BCCDA623992CFA0019E7BE /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */; };
 		46BCCDCA2399C8CA0019E7BE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46BCCDC92399C8CA0019E7BE /* Settings.bundle */; };
+		46BF594925AE929400AC6158 /* ClassDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF594825AE929400AC6158 /* ClassDetailResponse.swift */; };
 		46D56C422304E36A00CFF452 /* DeviceDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D56C412304E36A00CFF452 /* DeviceDetailResponse.swift */; };
 		46D91FD7238764FF001E0597 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D91FD6238764FF001E0597 /* Student.swift */; };
 		46DD196C23874B4F0023C0EF /* StudentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DD196B23874B4F0023C0EF /* StudentCollectionViewCell.swift */; };
@@ -136,6 +137,7 @@
 		46A96F3B24049C23005A8AC1 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		46BCCDC92399C8CA0019E7BE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		46BF594825AE929400AC6158 /* ClassDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDetailResponse.swift; sourceTree = "<group>"; };
 		46D56C412304E36A00CFF452 /* DeviceDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailResponse.swift; sourceTree = "<group>"; };
 		46D91FD6238764FF001E0597 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		46DD196B23874B4F0023C0EF /* StudentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				46D91FD5238764AB001E0597 /* student */,
 				4608FE2F237EEB4100EE7C80 /* profiles */,
 				46A3237C237E3B9400D4F77E /* SchoolClass */,
+				46BF594625AE921E00AC6158 /* class detail */,
 				46D56C3F2304E32A00CFF452 /* device detail */,
 				466B2C9222FDADBC009C19E4 /* user */,
 				466B2C8B22FDA46C009C19E4 /* deviceGroup */,
@@ -522,6 +525,22 @@
 			path = "Login Screen";
 			sourceTree = "<group>";
 		};
+		46BF594625AE921E00AC6158 /* class detail */ = {
+			isa = PBXGroup;
+			children = (
+				46BF594725AE926000AC6158 /* response */,
+			);
+			path = "class detail";
+			sourceTree = "<group>";
+		};
+		46BF594725AE926000AC6158 /* response */ = {
+			isa = PBXGroup;
+			children = (
+				46BF594825AE929400AC6158 /* ClassDetailResponse.swift */,
+			);
+			path = response;
+			sourceTree = "<group>";
+		};
 		46D56C3F2304E32A00CFF452 /* device detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -757,6 +776,7 @@
 				464BAF9A23FCABBA005E7CF9 /* String xTensn.swift in Sources */,
 				46DD196E23874EB20023C0EF /* StudentCollectionViewController.swift in Sources */,
 				4662C75D228CA8E900D99B84 /* APIClient.swift in Sources */,
+				46BF594925AE929400AC6158 /* ClassDetailResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

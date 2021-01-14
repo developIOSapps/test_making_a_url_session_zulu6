@@ -17,6 +17,8 @@ struct UserDefaultsHelper {
     /// literals
     static let groupIDKey = "teacherSelected"
     static let groupNameKey = "groupNameKey"
+    static let groupUUIDKey = "groupUUID"
+
 
     static let applicationProfilesKey = "applicationProfiles"
     static let applicationProfilesMultipleKey = "applicationProfilesMultiple"
@@ -33,6 +35,10 @@ struct UserDefaultsHelper {
     static var groupName: String? {
         guard let groupID = groupID, groupID != 0 else { return nil }
         return teacherNames[groupID]
+    }
+    static var groupUUID: String? {
+        guard let groupID = groupID, groupID != 0 else { return nil }
+        return getGroupUUID()
     }
     static var appFilter: String  {
         return getAppFilterString()
@@ -91,6 +97,20 @@ struct UserDefaultsHelper {
         defaults.removeObject(forKey: groupNameKey)
     }
     
+    static func getGroupUUID() -> String? {
+         HelperFunctions.logIt(functionName: #function, message: "Get The GroupUUID")
+         return defaults.object(forKey: groupUUIDKey) as? String
+     }
+     
+     static func setGroupUUID(_ groupUUID: String) {
+         HelperFunctions.logIt(functionName: #function, message: "Saving The GroupUUID")
+         defaults.set(groupUUID, forKey: groupUUIDKey)
+     }
+
+     static func removeGroupUUID() {
+         defaults.removeObject(forKey: groupUUIDKey)
+     }
+     
     
     
     static func getAppFilterString() -> String {
