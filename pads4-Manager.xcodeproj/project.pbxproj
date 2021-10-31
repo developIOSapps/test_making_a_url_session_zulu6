@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		329C3A6481CC92E942665CBD /* Pods_Test_Making_a_urlSession.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3BB485ECC306878DA988F3 /* Pods_Test_Making_a_urlSession.framework */; };
 		4608FE33237EEBC500EE7C80 /* ProfilesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4608FE32237EEBC500EE7C80 /* ProfilesResponse.swift */; };
 		4608FE35237EECC400EE7C80 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4608FE34237EECC400EE7C80 /* Profile.swift */; };
 		460C56052365FBBC00AC7606 /* DeviceListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460C56042365FBBC00AC7606 /* DeviceListResponse.swift */; };
@@ -74,11 +73,12 @@
 		46F0444E239082E8007EB18B /* oldWay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46F0444C239082E8007EB18B /* oldWay.storyboard */; };
 		46F0445423908404007EB18B /* Not interested.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46F0445223908404007EB18B /* Not interested.storyboard */; };
 		46F6140A23B3C11F00C4352D /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F6140923B3C11F00C4352D /* ActivityIndicator.swift */; };
+		E1C0D58896C1FDB1931B4122 /* Pods_Test_Making_a_urlSession.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F975D179DFA85666E6208660 /* Pods_Test_Making_a_urlSession.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		195E12B1EFD1A35AA3908A27 /* Pods-Test Making a urlSession.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test Making a urlSession.release.xcconfig"; path = "Target Support Files/Pods-Test Making a urlSession/Pods-Test Making a urlSession.release.xcconfig"; sourceTree = "<group>"; };
-		3E27CC2A9F2C7BAAAEFA1DE8 /* Pods-Test Making a urlSession.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test Making a urlSession.debug.xcconfig"; path = "Target Support Files/Pods-Test Making a urlSession/Pods-Test Making a urlSession.debug.xcconfig"; sourceTree = "<group>"; };
+		24EE9FACE921CFEEB944766C /* Pods-Test Making a urlSession.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test Making a urlSession.release.xcconfig"; path = "Target Support Files/Pods-Test Making a urlSession/Pods-Test Making a urlSession.release.xcconfig"; sourceTree = "<group>"; };
+		306656908CB13EF2E1AFE069 /* Pods-Test Making a urlSession.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test Making a urlSession.debug.xcconfig"; path = "Target Support Files/Pods-Test Making a urlSession/Pods-Test Making a urlSession.debug.xcconfig"; sourceTree = "<group>"; };
 		4608FE32237EEBC500EE7C80 /* ProfilesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesResponse.swift; sourceTree = "<group>"; };
 		4608FE34237EECC400EE7C80 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		460C56042365FBBC00AC7606 /* DeviceListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListResponse.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 		46F0444D239082E8007EB18B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Test Making a urlSession/storyboards-assets/Base.lproj/oldWay.storyboard"; sourceTree = "<group>"; };
 		46F0445323908404007EB18B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Test Making a urlSession/storyboards-assets/Base.lproj/Not interested.storyboard"; sourceTree = "<group>"; };
 		46F6140923B3C11F00C4352D /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
-		7B3BB485ECC306878DA988F3 /* Pods_Test_Making_a_urlSession.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Test_Making_a_urlSession.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F975D179DFA85666E6208660 /* Pods_Test_Making_a_urlSession.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Test_Making_a_urlSession.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,7 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				329C3A6481CC92E942665CBD /* Pods_Test_Making_a_urlSession.framework in Frameworks */,
+				E1C0D58896C1FDB1931B4122 /* Pods_Test_Making_a_urlSession.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,8 +295,8 @@
 				46F0444C239082E8007EB18B /* oldWay.storyboard */,
 				4662C749228C996E00D99B84 /* Test Making a urlSession */,
 				4662C748228C996E00D99B84 /* Products */,
-				F34F98C49926159DAC64D506 /* Pods */,
-				5D8B5B90A516A421E8C633ED /* Frameworks */,
+				5CB9BE8CEF66BDE56EC3AF7C /* Pods */,
+				ADE07DEF30DFE80C8579D862 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -582,21 +582,22 @@
 			path = "User Detail";
 			sourceTree = "<group>";
 		};
-		5D8B5B90A516A421E8C633ED /* Frameworks */ = {
+		5CB9BE8CEF66BDE56EC3AF7C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7B3BB485ECC306878DA988F3 /* Pods_Test_Making_a_urlSession.framework */,
+				306656908CB13EF2E1AFE069 /* Pods-Test Making a urlSession.debug.xcconfig */,
+				24EE9FACE921CFEEB944766C /* Pods-Test Making a urlSession.release.xcconfig */,
 			);
-			name = Frameworks;
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
-		F34F98C49926159DAC64D506 /* Pods */ = {
+		ADE07DEF30DFE80C8579D862 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3E27CC2A9F2C7BAAAEFA1DE8 /* Pods-Test Making a urlSession.debug.xcconfig */,
-				195E12B1EFD1A35AA3908A27 /* Pods-Test Making a urlSession.release.xcconfig */,
+				F975D179DFA85666E6208660 /* Pods_Test_Making_a_urlSession.framework */,
 			);
-			path = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -606,11 +607,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4662C759228C997300D99B84 /* Build configuration list for PBXNativeTarget "Test Making a urlSession" */;
 			buildPhases = (
-				62AA8EB15E47CAA2A4DF1CCA /* [CP] Check Pods Manifest.lock */,
+				887B79F98FCF309AF2968DFE /* [CP] Check Pods Manifest.lock */,
 				4662C743228C996E00D99B84 /* Sources */,
 				4662C744228C996E00D99B84 /* Frameworks */,
 				4662C745228C996E00D99B84 /* Resources */,
-				19E87DFADD917E477CB0C1DF /* [CP] Embed Pods Frameworks */,
+				7C36A005877FE3802873A245 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -684,7 +685,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		19E87DFADD917E477CB0C1DF /* [CP] Embed Pods Frameworks */ = {
+		7C36A005877FE3802873A245 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -701,7 +702,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Test Making a urlSession/Pods-Test Making a urlSession-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		62AA8EB15E47CAA2A4DF1CCA /* [CP] Check Pods Manifest.lock */ = {
+		887B79F98FCF309AF2968DFE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -936,7 +937,7 @@
 		};
 		4662C75A228C997300D99B84 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E27CC2A9F2C7BAAAEFA1DE8 /* Pods-Test Making a urlSession.debug.xcconfig */;
+			baseConfigurationReference = 306656908CB13EF2E1AFE069 /* Pods-Test Making a urlSession.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = NO;
@@ -960,7 +961,7 @@
 		};
 		4662C75B228C997300D99B84 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 195E12B1EFD1A35AA3908A27 /* Pods-Test Making a urlSession.release.xcconfig */;
+			baseConfigurationReference = 24EE9FACE921CFEEB944766C /* Pods-Test Making a urlSession.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = NO;

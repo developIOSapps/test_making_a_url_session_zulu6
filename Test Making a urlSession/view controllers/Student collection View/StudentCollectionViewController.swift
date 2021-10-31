@@ -139,6 +139,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     var navBarTitle = ""
     
     var classGroupCodeInt: Int!
+    
     var className: String! {
         didSet {
 //            navigationItem.title = className
