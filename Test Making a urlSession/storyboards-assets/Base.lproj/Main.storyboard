@@ -766,6 +766,17 @@
             <point key="canvasLocation" x="6347.826086956522" y="976.33928571428567"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="9fs-Uo-eMs">
+            <size key="intrinsicContentSize" width="40" height="30"/>
+        </designable>
+        <designable name="csI-F9-V20">
+            <size key="intrinsicContentSize" width="45" height="30"/>
+        </designable>
+        <designable name="feZ-J0-iNY">
+            <size key="intrinsicContentSize" width="45" height="30"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="YPh-dj-d52"/>
         <segue reference="Tby-EC-8KV"/>

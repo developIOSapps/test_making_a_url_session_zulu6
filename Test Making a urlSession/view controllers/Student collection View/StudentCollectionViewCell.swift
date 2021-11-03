@@ -10,6 +10,8 @@ import UIKit
 
 class StudentCollectionViewCell: UICollectionViewCell {
     
+    //@IBOutlet var spinner: UIActivityIndicatorView!
+    
     @IBOutlet weak var studentImageView: UIImageView!
     
     @IBOutlet weak var studentNameLabel: UILabel!
@@ -48,11 +50,21 @@ class StudentCollectionViewCell: UICollectionViewCell {
         checkmarkImageView.alpha = 1.0
         studentImageView.alpha = 0.5
     }
-    
+
     func hideIcon() {
         checkmarkImageView.alpha = 0.0
         studentImageView.alpha = 1.0
     }
     
-
+    func update(displaying image: UIImage?) {
+        if let imageToDisplay = image {
+            // spinner.stopAnimating()
+            studentImageView.image = imageToDisplay
+        } else {
+            // spinner.startAnimating()
+            studentImageView.image = nil
+        }
+    }
+    
 }
+

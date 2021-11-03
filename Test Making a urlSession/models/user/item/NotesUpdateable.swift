@@ -9,6 +9,7 @@
 import Foundation
 
 protocol NotesUpdateable {
+    // var id:         Int{get}
     var identity:   String {get}
     var title:      String {get}
     var picName:    String {get}

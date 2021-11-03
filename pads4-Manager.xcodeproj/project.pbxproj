@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,6 +43,14 @@
 		4662C761228CB95400D99B84 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662C760228CB95400D99B84 /* HTTPMethod.swift */; };
 		4662C764228CBAAB00D99B84 /* QueryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662C763228CBAAB00D99B84 /* QueryType.swift */; };
 		4662C766228CBD7300D99B84 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662C765228CBD7300D99B84 /* APIRequest.swift */; };
+		46656027272F4D470004CBEE /* ClassReturnObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656021272F4D470004CBEE /* ClassReturnObject.swift */; };
+		46656028272F4D470004CBEE /* GetAStudentPictute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656022272F4D470004CBEE /* GetAStudentPictute.swift */; };
+		46656029272F4D470004CBEE /* ConsumeURLDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656023272F4D470004CBEE /* ConsumeURLDataRequest.swift */; };
+		4665602A272F4D470004CBEE /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656024272F4D470004CBEE /* UIImageExt.swift */; };
+		4665602B272F4D470004CBEE /* HelperStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656025272F4D470004CBEE /* HelperStuff.swift */; };
+		4665602C272F4D470004CBEE /* StudentsOfClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656026272F4D470004CBEE /* StudentsOfClass.swift */; };
+		4665602E272F4DBA0004CBEE /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4665602D272F4DBA0004CBEE /* URLError.swift */; };
+		466560322731AD330004CBEE /* avatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 466560312731AD330004CBEE /* avatar.jpg */; };
 		466B2C8822FDA11D009C19E4 /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = 466B2C8722FDA11D009C19E4 /* users.json */; };
 		466B2C8D22FDA4B8009C19E4 /* DeviceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B2C8C22FDA4B8009C19E4 /* DeviceGroup.swift */; };
 		466B2C9122FDAAB6009C19E4 /* OurCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B2C9022FDAAB6009C19E4 /* OurCodable.swift */; };
@@ -117,6 +125,14 @@
 		4662C760228CB95400D99B84 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		4662C763228CBAAB00D99B84 /* QueryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryType.swift; sourceTree = "<group>"; };
 		4662C765228CBD7300D99B84 /* APIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		46656021272F4D470004CBEE /* ClassReturnObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassReturnObject.swift; sourceTree = "<group>"; };
+		46656022272F4D470004CBEE /* GetAStudentPictute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAStudentPictute.swift; sourceTree = "<group>"; };
+		46656023272F4D470004CBEE /* ConsumeURLDataRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumeURLDataRequest.swift; sourceTree = "<group>"; };
+		46656024272F4D470004CBEE /* UIImageExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
+		46656025272F4D470004CBEE /* HelperStuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperStuff.swift; sourceTree = "<group>"; };
+		46656026272F4D470004CBEE /* StudentsOfClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsOfClass.swift; sourceTree = "<group>"; };
+		4665602D272F4DBA0004CBEE /* URLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
+		466560312731AD330004CBEE /* avatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar.jpg; sourceTree = "<group>"; };
 		466B2C8722FDA11D009C19E4 /* users.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
 		466B2C8C22FDA4B8009C19E4 /* DeviceGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceGroup.swift; sourceTree = "<group>"; };
 		466B2C9022FDAAB6009C19E4 /* OurCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurCodable.swift; sourceTree = "<group>"; };
@@ -327,7 +343,9 @@
 				46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */,
 				46F6140923B3C11F00C4352D /* ActivityIndicator.swift */,
 				46241B1323AFC2570002B516 /* MyTabBarController.swift */,
+				466560312731AD330004CBEE /* avatar.jpg */,
 				462F3BF023C299E60053462E /* GoogleService-Info.plist */,
+				46656020272F4D470004CBEE /* Getting Students Picture */,
 				46BCCDC92399C8CA0019E7BE /* Settings.bundle */,
 			);
 			path = "Test Making a urlSession";
@@ -343,6 +361,19 @@
 				4662C763228CBAAB00D99B84 /* QueryType.swift */,
 			);
 			path = "-customization-notneeded";
+			sourceTree = "<group>";
+		};
+		46656020272F4D470004CBEE /* Getting Students Picture */ = {
+			isa = PBXGroup;
+			children = (
+				46656021272F4D470004CBEE /* ClassReturnObject.swift */,
+				46656022272F4D470004CBEE /* GetAStudentPictute.swift */,
+				46656023272F4D470004CBEE /* ConsumeURLDataRequest.swift */,
+				46656024272F4D470004CBEE /* UIImageExt.swift */,
+				46656025272F4D470004CBEE /* HelperStuff.swift */,
+				46656026272F4D470004CBEE /* StudentsOfClass.swift */,
+			);
+			path = "Getting Students Picture";
 			sourceTree = "<group>";
 		};
 		466B2C8522FC4369009C19E4 /* generateURLRequest */ = {
@@ -521,6 +552,7 @@
 			isa = PBXGroup;
 			children = (
 				46204ACB2394854E00E55690 /* LoginViewController.swift */,
+				4665602D272F4DBA0004CBEE /* URLError.swift */,
 			);
 			path = "Login Screen";
 			sourceTree = "<group>";
@@ -588,7 +620,6 @@
 				306656908CB13EF2E1AFE069 /* Pods-Test Making a urlSession.debug.xcconfig */,
 				24EE9FACE921CFEEB944766C /* Pods-Test Making a urlSession.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -676,6 +707,7 @@
 				464C69CC238D548C00842071 /* Rubik-MediumItalic.ttf in Resources */,
 				464C69D3238D548C00842071 /* Rubik-Bold.ttf in Resources */,
 				46F0445423908404007EB18B /* Not interested.storyboard in Resources */,
+				466560322731AD330004CBEE /* avatar.jpg in Resources */,
 				4662C752228C997300D99B84 /* Assets.xcassets in Resources */,
 				46BCCDCA2399C8CA0019E7BE /* Settings.bundle in Resources */,
 				4662C750228C996E00D99B84 /* Main.storyboard in Resources */,
@@ -733,6 +765,7 @@
 			files = (
 				46F6140A23B3C11F00C4352D /* ActivityIndicator.swift in Sources */,
 				4680FC4B23E1C6D700E333DA /* Constants.swift in Sources */,
+				4665602E272F4DBA0004CBEE /* URLError.swift in Sources */,
 				46204ACC2394854E00E55690 /* LoginViewController.swift in Sources */,
 				466B2C9122FDAAB6009C19E4 /* OurCodable.swift in Sources */,
 				46D91FD7238764FF001E0597 /* Student.swift in Sources */,
@@ -741,10 +774,12 @@
 				46510BF02388300100838764 /* AppProfilesTableViewController.swift in Sources */,
 				465F7474238309A3005C6132 /* UIViewController.swift in Sources */,
 				46A32380237E3BF700D4F77E /* SchoolClassResponse.swift in Sources */,
+				46656029272F4D470004CBEE /* ConsumeURLDataRequest.swift in Sources */,
 				4608FE33237EEBC500EE7C80 /* ProfilesResponse.swift in Sources */,
 				46A3237E237E3BC500D4F77E /* SchoolClass.swift in Sources */,
 				46D56C422304E36A00CFF452 /* DeviceDetailResponse.swift in Sources */,
 				46510BF32388319900838764 /* ProfileTableViewCell.swift in Sources */,
+				46656028272F4D470004CBEE /* GetAStudentPictute.swift in Sources */,
 				4649F20A2381DB4B00D12E80 /* HelperFunctions.swift in Sources */,
 				46A96F3D24049C23005A8AC1 /* AppTableViewController.swift in Sources */,
 				46A96F3E24049C23005A8AC1 /* HeaderTableViewCell.swift in Sources */,
@@ -753,10 +788,12 @@
 				466B2C9622FDAF19009C19E4 /* User.swift in Sources */,
 				46241B1423AFC2570002B516 /* MyTabBarController.swift in Sources */,
 				4662C75F228CA90300D99B84 /* Config.swift in Sources */,
+				4665602C272F4D470004CBEE /* StudentsOfClass.swift in Sources */,
 				46510BED2388221E00838764 /* StudentProfileStaticTableViewController.swift in Sources */,
 				46A96F30240495E1005A8AC1 /* AppCategory.swift in Sources */,
 				466B2C9822FDAF33009C19E4 /* UserResponse.swift in Sources */,
 				4662C74B228C996E00D99B84 /* AppDelegate.swift in Sources */,
+				4665602B272F4D470004CBEE /* HelperStuff.swift in Sources */,
 				463F328C22A9A5C60015092E /* DeviceGroupResponse.swift in Sources */,
 				4662C761228CB95400D99B84 /* HTTPMethod.swift in Sources */,
 				465E121623AF97620063DE3E /* NotesUpdateable.swift in Sources */,
@@ -776,8 +813,10 @@
 				46A96F3C24049C23005A8AC1 /* AppTableViewCell.swift in Sources */,
 				464BAF9A23FCABBA005E7CF9 /* String xTensn.swift in Sources */,
 				46DD196E23874EB20023C0EF /* StudentCollectionViewController.swift in Sources */,
+				4665602A272F4D470004CBEE /* UIImageExt.swift in Sources */,
 				4662C75D228CA8E900D99B84 /* APIClient.swift in Sources */,
 				46BF594925AE929400AC6158 /* ClassDetailResponse.swift in Sources */,
+				46656027272F4D470004CBEE /* ClassReturnObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

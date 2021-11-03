@@ -301,7 +301,7 @@ struct GetDataApi {
         /// Get the data
         getZuluDataWrapper(with: generatedReq.generatedReq) { (result) in
             
-            print("in the GetDataApi.getZuluDataWrapper before switch")
+            print("in the GetDataApi.getZuluDataWrapper before switch 2")
             switch result {
                 
             case .failure(let error):
@@ -313,7 +313,7 @@ struct GetDataApi {
                 
                 let decoder = JSONDecoder()
                 
-                guard let deviceListResponsexx = try? decoder.decode(DeviceListResponse.self, from: data) else {fatalError()}
+                guard let deviceListResponsexx = try? decoder.decode(DeviceListResponse.self, from: data) else {fatalError("deviceListResponsexx ")}
                 guard let dvc = deviceListResponsexx as? DeviceListResponse else {fatalError("could not convert it to DeviceList")}
                 print("we are up to users response")
                 completion(dvc)

@@ -174,6 +174,17 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     }
 
     
+    var studentsOfClass = StudentsOfClass()
+    var theClassReturnObject: ClassReturnObject?
+    var getAStudentPictute: GetAStudentPictute = GetAStudentPictute()
+   
+    //  MARK: -  URL Stuff
+    var url: URL = URL(string: "https://manage.zuludesk.com/storage/public/1049131/photos/647bba344396e7c8170902bcf2e15551.jpg")!
+    
+
+    
+    
+    
     @IBOutlet weak var barButtonSelectCancel: UIBarButtonItem!
     
     
@@ -186,10 +197,13 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
     override func viewDidAppear(_ animated: Bool) {
          super.viewDidAppear(animated)
+
+
          if classGroupCodeInt ==  nil {
             print("in about to perform segue")
              performSegue(withIdentifier: "loginScr", sender: nil)
          }
+        
      }
     
     fileprivate func setUpToolBar() {
@@ -203,99 +217,106 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        // UserDefaultsHelper.removeGroupID()
-        // UserDefaultsHelper.removeGroupName()
         
-        // Customize the navigation bar
-        // navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        // navigationController?.navigationBar.shadowImage = UIImage()
-        // navigationController?.hidesBarsOnSwipe = true
         
-        activityIndicator.animateActivity(title: "Loading...", view: self.view, navigationItem: navigationItem)
-        navigationController?.navigationBar.tintColor = UIColor(named: "tintContrast")
-        barButtonSelectCancel.title = "Select"
-        
-        setUpToolBar()
-        
-        collectionView.allowsMultipleSelection = false
-        
-        classGroupCodeInt = UserDefaultsHelper.groupID
-        className = UserDefaultsHelper.groupName
 
-        switch itemsToDisplay {
-            case .students:
-                if classGroupCodeInt ==  nil {
-                    print("in about to perform segue")
-                    performSegue(withIdentifier: "loginScr", sender: nil)
-                } else {
                     
-                    // Register cell classes
-                    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-                    
-                    // title = navBarTitle
-                    
-                    // FIXME: 01-13-21 Code to get student pictures - working
-                    /* -
-                    GetDataApi.getClassDetail(GeneratedReq.init(request: ValidReqs.classDetail(classId: "3813b0d4-280f-4a3d-ab55-a8274bc9ead6"))) { (classDetailResponse) in
-                        DispatchQueue.main.async {
-                                     
-                                     guard let classDetailResponse = classDetailResponse as? ClassDetailResponse else {fatalError("could not convert it to classDetailResponse")}
-                                     /// Just load in the users into this class if needed
-                                        self.students = classDetailResponse.class.students.sorted { $0.lastName < $1.lastName }
-                                     /// Here we have what we need
-                                    classDetailResponse.class.students.forEach { print($0.firstName + "--" + $0.lastName) }
-                                     self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
-                                     self.collectionView.reloadData()
-                                 }
-                    }
-                    */
-                    let classGroupCodeStr = String(classGroupCodeInt)
-                    
-                    GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
-                        DispatchQueue.main.async {
-                            
-                            guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
-                            /// Just load in the users into this class if needed
-                            self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
-                            /// Here we have what we need
-                            usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
-                            self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
-                            self.collectionView.reloadData()
-                        }
-                    }
-                    
-            }
-            case .devices:
-                if classGroupCodeInt ==  nil {
-                    print("in about to perform segue")
-                    performSegue(withIdentifier: "loginScr", sender: nil)
-                } else {
-                    
-                    // Register cell classes
-                    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-                    
-                    // title = navBarTitle
-                    let classGroupCodeStr = String(classGroupCodeInt)
-                    
-                    GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : classGroupCodeStr ]) )) { (deviceListResponse) in
-                        DispatchQueue.main.async {
-                            
-                            guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
-                            
-                            /// Just load in the users into this class if needed
-                            self.users = deviceListResponse.devices
-                            /// Here we have what we need
-                            deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
-                            print("got devices")
-                            self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
-                            self.collectionView.reloadData()
-                        }
-                    }
-            }
+            // UserDefaultsHelper.removeGroupID()
+            // UserDefaultsHelper.removeGroupName()
             
-        }
+            // Customize the navigation bar
+            // navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            // navigationController?.navigationBar.shadowImage = UIImage()
+            // navigationController?.hidesBarsOnSwipe = true
+            
+                self.activityIndicator.animateActivity(title: "Loading...", view: self.view, navigationItem: navigationItem)
+            navigationController?.navigationBar.tintColor = UIColor(named: "tintContrast")
+            barButtonSelectCancel.title = "Select"
+            
+            setUpToolBar()
+            
+            collectionView.allowsMultipleSelection = false
+            
+            classGroupCodeInt = UserDefaultsHelper.groupID
+            className = UserDefaultsHelper.groupName
 
+            switch itemsToDisplay {
+                case .students:
+                    if classGroupCodeInt ==  nil {
+                        print("in about to perform segue")
+                        performSegue(withIdentifier: "loginScr", sender: nil)
+                    } else {
+                        
+                        // Register cell classes
+                        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+                        
+                        // title = navBarTitle
+                        
+                        // FIXME: 01-13-21 Code to get student pictures - working
+                        /* -
+                        GetDataApi.getClassDetail(GeneratedReq.init(request: ValidReqs.classDetail(classId: "3813b0d4-280f-4a3d-ab55-a8274bc9ead6"))) { (classDetailResponse) in
+                            DispatchQueue.main.async {
+                                         
+                                         guard let classDetailResponse = classDetailResponse as? ClassDetailResponse else {fatalError("could not convert it to classDetailResponse")}
+                                         /// Just load in the users into this class if needed
+                                            self.students = classDetailResponse.class.students.sorted { $0.lastName < $1.lastName }
+                                         /// Here we have what we need
+                                        classDetailResponse.class.students.forEach { print($0.firstName + "--" + $0.lastName) }
+                                         self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
+                                         self.collectionView.reloadData()
+                                     }
+                        }
+                        */
+                        studentsOfClass.getTheClassFromWeb { [self] in
+                            // get the student from the class based on the username, then we could get the picture
+                            print("we got the class object")
+                        let classGroupCodeStr = String(classGroupCodeInt)
+                        print("*^* here")
+                        GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
+                            DispatchQueue.main.async {
+                                
+                                guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
+                                /// Just load in the users into this class if needed
+                                self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
+                                /// Here we have what we need
+                                usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName  + "--" + $0.username) }
+                                self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
+                                self.collectionView.reloadData()
+                            }
+                            }
+                        }
+                        
+                }
+                case .devices:
+                    if classGroupCodeInt ==  nil {
+                        print("in about to perform segue")
+                        performSegue(withIdentifier: "loginScr", sender: nil)
+                    } else {
+                        
+                        // Register cell classes
+                        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+                        
+                        // title = navBarTitle
+                        let classGroupCodeStr = String(classGroupCodeInt)
+                        
+                        GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : classGroupCodeStr ]) )) { (deviceListResponse) in
+                            DispatchQueue.main.async {
+                                
+                                guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
+                                
+                                /// Just load in the users into this class if needed
+                                self.users = deviceListResponse.devices
+                                /// Here we have what we need
+                                deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
+                                print("got devices")
+                                self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
+                                self.collectionView.reloadData()
+                            }
+                        }
+                }
+                
+            }
+        
     }
     
 
@@ -313,6 +334,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         }
     }
     
+    
 //    func setBarButtonSelected() {
 //        barButtonSelectCancel.title = "Select"
 //        selectionMode = .multipleDisabled
@@ -325,16 +347,104 @@ extension StudentCollectionViewController {
         // #warning Incomplete implementation, return the number of items
          return users.count
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if ItemsToDisplay.devices == itemsToDisplay {
+            return
+        }
+        print("*^* In will display\(indexPath.row)")
+        // Configure the cell
+        
+        // get the current student
+        let userStudent = users[indexPath.row]
+        
+        dump(userStudent)
+        // 2a Get the studentIdx to get the photo url and for future index path
+        guard let students: [ClassReturnObject.Clss.Student] = (self.studentsOfClass.theClassReturnObject?.class.students),
+              let studentIdxInClass = students.firstIndex(where: { $0.id == Int(userStudent.identity) } )
+        else {fatalError("couldn't find the student")}
+        
+
+        // 2b.1 get the photo url
+        let photoURL = students[studentIdxInClass].photo
+        
+        // if there is no picture uploaded for the student then set it to stub and leave
+        print("*^*^*^",photoURL.absoluteString)
+        if photoURL.absoluteString.contains(Constants.avatar) {
+            print("*^*^*^","its an avatar")
+            if let cell = cell as? StudentCollectionViewCell {
+                print("*^*^*^","update its an avatar")
+                cell.update(displaying: UIImage(named: "avatar"))
+            }
+            return
+        }
+        
+        
+        // 2b.2 make file url from photo url
+        let newFileURL: URL = {
+            let lp: String = { photoURL.lastPathComponent}()
+            let docURL: URL = {
+                return  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            }()
+            return docURL.appendingPathComponent(lp)
+        }()
+        
+        print("*^*^",newFileURL)
+        // 3 execute the function that takes the closure
+          self.getAStudentPictute.retreiveDataAsPictureFle(withURL: photoURL) { data in
+              DispatchQueue.main.async {
+                
+              
+                 let replaceImage = UIImage(data: data)
+
+                  // - get the index
+                  /*
+                  The index path for the photo might have changed between the
+                  time the request started and finished, so find the most
+                  recent index path
+                  */
+                  guard let students: [ClassReturnObject.Clss.Student] = (self.studentsOfClass.theClassReturnObject?.class.students),
+                      let studentIdxInClass = students.firstIndex(where: { $0.photo == photoURL } )
+                  else {fatalError("couldn't find the student")}
+              
+                  // - create the indexpath object
+                  let studentIndexPath = IndexPath(item: studentIdxInClass, section: 0)
+
+print(data)
+                  // - When the request finishes, only update the cell if it's still visible
+                  if let cell = self.collectionView.cellForItem(at: studentIndexPath)
+                                                               as? StudentCollectionViewCell {
+                    print("do cell ypdate")
+                      cell.update(displaying: replaceImage)
+                  }
+
+                 
+                  // cell.studentImageView.image = UIImage(data: data)
+                  // cell.studentNameLabel.text = student.title // + " " + student.lastName
+                 // return cell
+
+                  // return replaceImage
+                 //self.theStudentPic.image = replaceImage
+              }
+          }
+
+    }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as? StudentCollectionViewCell else {fatalError("could not deque")}
     
         // Configure the cell
         let student = users[indexPath.row]
-        cell.studentImageView.image = UIImage(named: student.picName)
+        // FIXME: Put in a stub image to test easier
+        if ItemsToDisplay.devices == itemsToDisplay {
+            cell.studentImageView.image = UIImage(named: student.picName)
+        }
+
+        // cell.studentImageView.image = UIImage(named: student.picName)
         cell.studentNameLabel.text = student.title // + " " + student.lastName
         return cell
     }
+
     
     override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
 //           if let cell = collectionView.cellForItem(at: indexPath) {

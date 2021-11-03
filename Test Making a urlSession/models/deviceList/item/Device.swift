@@ -25,6 +25,7 @@ struct Device: OurCodable, NotesUpdateable {
     var title:          String  { name }
     var picName:        String  { "iPadGraphic"  }
     var identity:       String  { UDID }
+//    var id:             Int 
 }
 
 

@@ -12,4 +12,5 @@ enum Constants {
     static var appsCategory: String {"Subject"}
     static var appsOne: String {"App"}
     static var appsKiosk: String {"Kiosk"}
+    static var avatar: String {"avatar"}
 }
