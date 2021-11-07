@@ -251,7 +251,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                     
                     // Register cell classes
                     self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-                    
+                    let classGroupCodeStr = String(classGroupCodeInt)
                     // title = navBarTitle
                     
                     // FIXME: 01-13-21 Code to get student pictures - working
@@ -269,24 +269,67 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                      }
                      }
                      */
-                    studentsOfClass.getTheClassFromWeb { [self] in
-                        // get the student from the class based on the username, then we could get the picture
-                        print("we got the class object")
-                        let classGroupCodeStr = String(classGroupCodeInt)
-                        print("*^* here")
-                        GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
-                            DispatchQueue.main.async {
-                                
-                                guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
-                                /// Just load in the users into this class if needed
-                                self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
-                                /// Here we have what we need
-                                usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName  + "--" + $0.username) }
-                                self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
-                                self.collectionView.reloadData()
-                            }
+                    
+                    
+                    // 1 - Get the list of classes
+                    let urlValues = URLValues.urlForListOfClasses
+                    webApiJsonDecoder.getTheClassFromWeb(with: urlValues.getUrlRequest(), andSession: urlValues.getSession() ) {(data) in
+                        // OK we are fine, we got data - so lets write it to a file so we can retieve it
+                        let aClassesReturnObject: ClassesReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
+                        self.webApiJsonDecoder.theClassesReturnObjct = aClassesReturnObject
+                        
+                        dump(self.webApiJsonDecoder.theClassesReturnObjct)
+                        
+                        guard let classes: [ClassesReturnObjct.Classe] = (self.webApiJsonDecoder.theClassesReturnObjct?.classes),
+                              let idx = classes.firstIndex(where: { $0.userGroupId == 18} )
+                        else {fatalError("couldn't find the student")}
+                        
+                        let classuuid = classes[idx].uuid
+                        print(classuuid)
+                        
+                        
+                        // 2 - Get the students in a class
+                        let urlValuesforClass = URLValues.urlForClassInfo(UUISString: classuuid)
+                        self.webApiJsonDecoder.getTheClassFromWeb(with: urlValuesforClass.getUrlRequest(), andSession: urlValuesforClass.getSession() ) {(data) in
+                            // OK we are fine, we got data - so lets write it to a file so we can retieve it
+                            let aClassReturnObjct: ClassReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
+                            self.webApiJsonDecoder.theClassReturnObjct = aClassReturnObjct
+                            dump(self.webApiJsonDecoder.theClassReturnObjct)
+                            
+                            let student = self.webApiJsonDecoder.theClassReturnObjct?.class.students[2]
+                            dump(student)
+                            
+              
+              
+              
+                            GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
+                                 DispatchQueue.main.async {
+                                     
+                                     guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
+                                     /// Just load in the users into this class if needed
+                                     self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
+                                     /// Here we have what we need
+                                     usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName  + "--" + $0.username) }
+                                     self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
+                                     self.collectionView.reloadData()
+                                 }
+                             }
+
+               
                         }
                     }
+
+                    
+                    //***** start
+//                    studentsOfClass.getTheClassFromWeb { [self] in
+//                        // get the student from the class based on the username, then we could get the picture
+//                        print("we got the class object")
+//                        let classGroupCodeStr = String(classGroupCodeInt)
+//                        print("*^* here")
+//                    //*******
+//
+//
+//                    }
                     
                 }
                 case .devices:
@@ -362,7 +405,7 @@ extension StudentCollectionViewController {
         
         dump(userStudent)
         // 2a Get the studentIdx to get the photo url and for future index path
-        guard let students: [ClassReturnObject.Clss.Student] = (self.studentsOfClass.theClassReturnObject?.class.students),
+        guard let students: [ClassReturnObjct.Clss.Student] = (self.webApiJsonDecoder.theClassReturnObjct?.class.students),
               let studentIdxInClass = students.firstIndex(where: { $0.id == Int(userStudent.identity) } )
         else {fatalError("couldn't find the student")}
         
@@ -405,7 +448,7 @@ extension StudentCollectionViewController {
                   time the request started and finished, so find the most
                   recent index path
                   */
-                  guard let students: [ClassReturnObject.Clss.Student] = (self.studentsOfClass.theClassReturnObject?.class.students),
+                  guard let students: [ClassReturnObjct.Clss.Student] = (self.webApiJsonDecoder.theClassReturnObjct?.class.students),
                       let studentIdxInClass = students.firstIndex(where: { $0.photo == photoURL } )
                   else {fatalError("couldn't find the student")}
               
