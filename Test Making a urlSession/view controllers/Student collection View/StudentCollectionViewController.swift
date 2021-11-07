@@ -281,7 +281,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                         dump(self.webApiJsonDecoder.theClassesReturnObjct)
                         
                         guard let classes: [ClassesReturnObjct.Classe] = (self.webApiJsonDecoder.theClassesReturnObjct?.classes),
-                              let idx = classes.firstIndex(where: { $0.userGroupId == 18} )
+                              let idx = classes.firstIndex(where: { $0.userGroupId == self.classGroupCodeInt} )
                         else {fatalError("couldn't find the student")}
                         
                         let classuuid = classes[idx].uuid
