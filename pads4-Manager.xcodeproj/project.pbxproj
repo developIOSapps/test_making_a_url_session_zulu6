@@ -32,6 +32,10 @@
 		46510BF02388300100838764 /* AppProfilesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46510BEF2388300100838764 /* AppProfilesTableViewController.swift */; };
 		46510BF32388319900838764 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46510BF22388319900838764 /* ProfileTableViewCell.swift */; };
 		46510BF52388320800838764 /* AppProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46510BF42388320800838764 /* AppProfile.swift */; };
+		4655243F2738100200FF2239 /* GetAStudentPicturw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655243E2738100200FF2239 /* GetAStudentPicturw.swift */; };
+		465524442738142E00FF2239 /* GenerateURLRequestSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46552441273811E900FF2239 /* GenerateURLRequestSession.swift */; };
+		465524452738143200FF2239 /* WebApiJsonDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46552442273811E900FF2239 /* WebApiJsonDecoder.swift */; };
+		465524462738143500FF2239 /* ClassReturnObjct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46552443273811E900FF2239 /* ClassReturnObjct.swift */; };
 		465E121623AF97620063DE3E /* NotesUpdateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E121523AF97620063DE3E /* NotesUpdateable.swift */; };
 		465F7474238309A3005C6132 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465F7473238309A2005C6132 /* UIViewController.swift */; };
 		4662C74B228C996E00D99B84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662C74A228C996E00D99B84 /* AppDelegate.swift */; };
@@ -112,6 +116,10 @@
 		46510BEF2388300100838764 /* AppProfilesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProfilesTableViewController.swift; sourceTree = "<group>"; };
 		46510BF22388319900838764 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		46510BF42388320800838764 /* AppProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProfile.swift; sourceTree = "<group>"; };
+		4655243E2738100200FF2239 /* GetAStudentPicturw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAStudentPicturw.swift; sourceTree = "<group>"; };
+		46552441273811E900FF2239 /* GenerateURLRequestSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateURLRequestSession.swift; sourceTree = "<group>"; };
+		46552442273811E900FF2239 /* WebApiJsonDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiJsonDecoder.swift; sourceTree = "<group>"; };
+		46552443273811E900FF2239 /* ClassReturnObjct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassReturnObjct.swift; sourceTree = "<group>"; };
 		465E121523AF97620063DE3E /* NotesUpdateable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesUpdateable.swift; sourceTree = "<group>"; };
 		465F7473238309A2005C6132 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		4662C747228C996E00D99B84 /* Teacher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Teacher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +297,13 @@
 			path = "Select an app profile from list";
 			sourceTree = "<group>";
 		};
+		46552440273811E900FF2239 /* FilestoMigrate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FilestoMigrate;
+			sourceTree = "<group>";
+		};
 		465E121423AF97470063DE3E /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +360,10 @@
 				46241B1323AFC2570002B516 /* MyTabBarController.swift */,
 				466560312731AD330004CBEE /* avatar.jpg */,
 				462F3BF023C299E60053462E /* GoogleService-Info.plist */,
+				46552441273811E900FF2239 /* GenerateURLRequestSession.swift */,
+				46552442273811E900FF2239 /* WebApiJsonDecoder.swift */,
+				46552443273811E900FF2239 /* ClassReturnObjct.swift */,
+				46552440273811E900FF2239 /* FilestoMigrate */,
 				46656020272F4D470004CBEE /* Getting Students Picture */,
 				46BCCDC92399C8CA0019E7BE /* Settings.bundle */,
 			);
@@ -368,6 +387,7 @@
 			children = (
 				46656021272F4D470004CBEE /* ClassReturnObject.swift */,
 				46656022272F4D470004CBEE /* GetAStudentPictute.swift */,
+				4655243E2738100200FF2239 /* GetAStudentPicturw.swift */,
 				46656023272F4D470004CBEE /* ConsumeURLDataRequest.swift */,
 				46656024272F4D470004CBEE /* UIImageExt.swift */,
 				46656025272F4D470004CBEE /* HelperStuff.swift */,
@@ -805,16 +825,20 @@
 				466B2C8D22FDA4B8009C19E4 /* DeviceGroup.swift in Sources */,
 				460C56052365FBBC00AC7606 /* DeviceListResponse.swift in Sources */,
 				46A96F34240495F4005A8AC1 /* AppStore.swift in Sources */,
+				4655243F2738100200FF2239 /* GetAStudentPicturw.swift in Sources */,
 				4622303923830B3C00B3DC70 /* DesignableButton.swift in Sources */,
 				46510BF52388320800838764 /* AppProfile.swift in Sources */,
 				46E1201E239FCFED00667E28 /* UserDetailResponse.swift in Sources */,
 				466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */,
 				4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */,
 				46A96F3C24049C23005A8AC1 /* AppTableViewCell.swift in Sources */,
+				465524462738143500FF2239 /* ClassReturnObjct.swift in Sources */,
 				464BAF9A23FCABBA005E7CF9 /* String xTensn.swift in Sources */,
 				46DD196E23874EB20023C0EF /* StudentCollectionViewController.swift in Sources */,
 				4665602A272F4D470004CBEE /* UIImageExt.swift in Sources */,
 				4662C75D228CA8E900D99B84 /* APIClient.swift in Sources */,
+				465524452738143200FF2239 /* WebApiJsonDecoder.swift in Sources */,
+				465524442738142E00FF2239 /* GenerateURLRequestSession.swift in Sources */,
 				46BF594925AE929400AC6158 /* ClassDetailResponse.swift in Sources */,
 				46656027272F4D470004CBEE /* ClassReturnObject.swift in Sources */,
 			);

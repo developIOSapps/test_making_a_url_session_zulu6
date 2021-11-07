@@ -181,6 +181,8 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     //  MARK: -  URL Stuff
     var url: URL = URL(string: "https://manage.zuludesk.com/storage/public/1049131/photos/647bba344396e7c8170902bcf2e15551.jpg")!
     
+    // used to execute the dataRetrevial from the Web API
+    var webApiJsonDecoder = WebApiJsonDecoder()
 
     
     
@@ -241,35 +243,35 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
             className = UserDefaultsHelper.groupName
 
             switch itemsToDisplay {
-                case .students:
-                    if classGroupCodeInt ==  nil {
-                        print("in about to perform segue")
-                        performSegue(withIdentifier: "loginScr", sender: nil)
-                    } else {
-                        
-                        // Register cell classes
-                        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-                        
-                        // title = navBarTitle
-                        
-                        // FIXME: 01-13-21 Code to get student pictures - working
-                        /* -
-                        GetDataApi.getClassDetail(GeneratedReq.init(request: ValidReqs.classDetail(classId: "3813b0d4-280f-4a3d-ab55-a8274bc9ead6"))) { (classDetailResponse) in
-                            DispatchQueue.main.async {
-                                         
-                                         guard let classDetailResponse = classDetailResponse as? ClassDetailResponse else {fatalError("could not convert it to classDetailResponse")}
-                                         /// Just load in the users into this class if needed
-                                            self.students = classDetailResponse.class.students.sorted { $0.lastName < $1.lastName }
-                                         /// Here we have what we need
-                                        classDetailResponse.class.students.forEach { print($0.firstName + "--" + $0.lastName) }
-                                         self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
-                                         self.collectionView.reloadData()
-                                     }
-                        }
-                        */
-                        studentsOfClass.getTheClassFromWeb { [self] in
-                            // get the student from the class based on the username, then we could get the picture
-                            print("we got the class object")
+            case .students:
+                if classGroupCodeInt ==  nil {
+                    print("in about to perform segue")
+                    performSegue(withIdentifier: "loginScr", sender: nil)
+                } else {
+                    
+                    // Register cell classes
+                    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+                    
+                    // title = navBarTitle
+                    
+                    // FIXME: 01-13-21 Code to get student pictures - working
+                    /* -
+                     GetDataApi.getClassDetail(GeneratedReq.init(request: ValidReqs.classDetail(classId: "3813b0d4-280f-4a3d-ab55-a8274bc9ead6"))) { (classDetailResponse) in
+                     DispatchQueue.main.async {
+                     
+                     guard let classDetailResponse = classDetailResponse as? ClassDetailResponse else {fatalError("could not convert it to classDetailResponse")}
+                     /// Just load in the users into this class if needed
+                     self.students = classDetailResponse.class.students.sorted { $0.lastName < $1.lastName }
+                     /// Here we have what we need
+                     classDetailResponse.class.students.forEach { print($0.firstName + "--" + $0.lastName) }
+                     self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
+                     self.collectionView.reloadData()
+                     }
+                     }
+                     */
+                    studentsOfClass.getTheClassFromWeb { [self] in
+                        // get the student from the class based on the username, then we could get the picture
+                        print("we got the class object")
                         let classGroupCodeStr = String(classGroupCodeInt)
                         print("*^* here")
                         GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
@@ -283,9 +285,9 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                                 self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
                                 self.collectionView.reloadData()
                             }
-                            }
                         }
-                        
+                    }
+                    
                 }
                 case .devices:
                     if classGroupCodeInt ==  nil {
