@@ -39,7 +39,7 @@ class GetAStudentPicture {
         if !fileManger.fileExists(atPath: urlForLocalFile.path) {
 
             // get the url as string
-            let studentPhotoUrl = url.absoluteString
+            let studentPhotoUrl = theUrl.absoluteString
             // create enum instance
             let urlValuesforStudent = URLValues.urlForStudentPic(picUrlString: studentPhotoUrl)
             self.webApiJsonDecoder.getTheClassFromWeb(with: urlValuesforStudent.getUrlRequest(), andSession: urlValuesforStudent.getSession() ) {(data) in

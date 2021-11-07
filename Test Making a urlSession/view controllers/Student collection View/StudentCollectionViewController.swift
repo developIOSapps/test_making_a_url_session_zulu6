@@ -174,9 +174,9 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     }
 
     
-    var studentsOfClass = StudentsOfClass()
-    var theClassReturnObject: ClassReturnObject?
-    var getAStudentPictute: GetAStudentPictute = GetAStudentPictute()
+//    var studentsOfClass = StudentsOfClass()
+//    var theClassReturnObject: ClassReturnObject?
+    var getAStudentPicture: GetAStudentPicture = GetAStudentPicture()
    
     //  MARK: -  URL Stuff
     var url: URL = URL(string: "https://manage.zuludesk.com/storage/public/1049131/photos/647bba344396e7c8170902bcf2e15551.jpg")!
@@ -436,7 +436,7 @@ extension StudentCollectionViewController {
         
         print("*^*^",newFileURL)
         // 3 execute the function that takes the closure
-          self.getAStudentPictute.retreiveDataAsPictureFle(withURL: photoURL) { data in
+          self.getAStudentPicture.retreiveDataAsPictureFle(withURL: photoURL) { data in
               DispatchQueue.main.async {
                 
               

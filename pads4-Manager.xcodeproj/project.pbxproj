@@ -48,7 +48,6 @@
 		4662C764228CBAAB00D99B84 /* QueryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662C763228CBAAB00D99B84 /* QueryType.swift */; };
 		4662C766228CBD7300D99B84 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662C765228CBD7300D99B84 /* APIRequest.swift */; };
 		46656027272F4D470004CBEE /* ClassReturnObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656021272F4D470004CBEE /* ClassReturnObject.swift */; };
-		46656028272F4D470004CBEE /* GetAStudentPictute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656022272F4D470004CBEE /* GetAStudentPictute.swift */; };
 		46656029272F4D470004CBEE /* ConsumeURLDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656023272F4D470004CBEE /* ConsumeURLDataRequest.swift */; };
 		4665602A272F4D470004CBEE /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656024272F4D470004CBEE /* UIImageExt.swift */; };
 		4665602B272F4D470004CBEE /* HelperStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656025272F4D470004CBEE /* HelperStuff.swift */; };
@@ -134,7 +133,6 @@
 		4662C763228CBAAB00D99B84 /* QueryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryType.swift; sourceTree = "<group>"; };
 		4662C765228CBD7300D99B84 /* APIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		46656021272F4D470004CBEE /* ClassReturnObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassReturnObject.swift; sourceTree = "<group>"; };
-		46656022272F4D470004CBEE /* GetAStudentPictute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAStudentPictute.swift; sourceTree = "<group>"; };
 		46656023272F4D470004CBEE /* ConsumeURLDataRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumeURLDataRequest.swift; sourceTree = "<group>"; };
 		46656024272F4D470004CBEE /* UIImageExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
 		46656025272F4D470004CBEE /* HelperStuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperStuff.swift; sourceTree = "<group>"; };
@@ -386,7 +384,6 @@
 			isa = PBXGroup;
 			children = (
 				46656021272F4D470004CBEE /* ClassReturnObject.swift */,
-				46656022272F4D470004CBEE /* GetAStudentPictute.swift */,
 				4655243E2738100200FF2239 /* GetAStudentPicturw.swift */,
 				46656023272F4D470004CBEE /* ConsumeURLDataRequest.swift */,
 				46656024272F4D470004CBEE /* UIImageExt.swift */,
@@ -799,7 +796,6 @@
 				46A3237E237E3BC500D4F77E /* SchoolClass.swift in Sources */,
 				46D56C422304E36A00CFF452 /* DeviceDetailResponse.swift in Sources */,
 				46510BF32388319900838764 /* ProfileTableViewCell.swift in Sources */,
-				46656028272F4D470004CBEE /* GetAStudentPictute.swift in Sources */,
 				4649F20A2381DB4B00D12E80 /* HelperFunctions.swift in Sources */,
 				46A96F3D24049C23005A8AC1 /* AppTableViewController.swift in Sources */,
 				46A96F3E24049C23005A8AC1 /* HeaderTableViewCell.swift in Sources */,
