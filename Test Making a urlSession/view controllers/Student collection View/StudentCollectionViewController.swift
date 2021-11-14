@@ -273,27 +273,59 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                     
                     // 1 - Get the list of classes
                     let urlValues = URLValues.urlForListOfClasses
-                    webApiJsonDecoder.getTheClassFromWeb(with: urlValues.getUrlRequest(), andSession: urlValues.getSession() ) {(data) in
+                    webApiJsonDecoder.sendURLReqToProcess(with: urlValues.getUrlRequest(), andSession: urlValues.getSession() ) {(data) in
+                        
                         // OK we are fine, we got data - so lets write it to a file so we can retieve it
-                        let aClassesReturnObject: ClassesReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
+                        
+                        let returnFromDecodingClassList: Result<ClassesReturnObjct, GetResultOfNetworkCallError> = self.webApiJsonDecoder.processTheData(with: data)
+                        guard let aClassesReturnObject = try? returnFromDecodingClassList.get() else {
+                            if case Result<ClassesReturnObjct, GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = returnFromDecodingClassList {
+                                self.webApiJsonDecoder.processTheError(with: getResultOfNetworkCallError)
+                            }
+                            return
+                        }
+//                        let aClassesReturnObject: ClassesReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
                         self.webApiJsonDecoder.theClassesReturnObjct = aClassesReturnObject
                         
                         dump(self.webApiJsonDecoder.theClassesReturnObjct)
                         
                         guard let classes: [ClassesReturnObjct.Classe] = (self.webApiJsonDecoder.theClassesReturnObjct?.classes),
                               let idx = classes.firstIndex(where: { $0.userGroupId == self.classGroupCodeInt} )
-                        else {fatalError("couldn't find the student")}
+                        else {fatalError("couldn't find the class group")}
                         
                         let classuuid = classes[idx].uuid
                         print(classuuid)
                         
                         
                         // 2 - Get the students in a class
+                         
+
+    
+                        
+                        
+                        
+                        
                         let urlValuesforClass = URLValues.urlForClassInfo(UUISString: classuuid)
-                        self.webApiJsonDecoder.getTheClassFromWeb(with: urlValuesforClass.getUrlRequest(), andSession: urlValuesforClass.getSession() ) {(data) in
+                        self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesforClass.getUrlRequest(), andSession: urlValuesforClass.getSession() ) {(data) in
                             // OK we are fine, we got data - so lets write it to a file so we can retieve it
-                            let aClassReturnObjct: ClassReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
-                            self.webApiJsonDecoder.theClassReturnObjct = aClassReturnObjct
+
+
+                            let returnFromDecodingClassInfo: Result<ClassReturnObjct, GetResultOfNetworkCallError> = self.webApiJsonDecoder.processTheData(with: data)
+                            guard let aClassReturnObject = try? returnFromDecodingClassInfo.get() else {
+                                if case Result<ClassReturnObjct, GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = returnFromDecodingClassInfo {
+                                    self.webApiJsonDecoder.processTheError(with: getResultOfNetworkCallError)
+                                }
+                                return
+                            }
+    //                        let aClassReturnObject: ClassesReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
+                            self.webApiJsonDecoder.theClassReturnObjct = aClassReturnObject
+//
+//
+//
+//
+//                            let aClassReturnObjct: ClassReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
+
+//                            self.webApiJsonDecoder.theClassReturnObjct = aClassReturnObjct
                             dump(self.webApiJsonDecoder.theClassReturnObjct)
                             
                             let student = self.webApiJsonDecoder.theClassReturnObjct?.class.students[2]
@@ -436,42 +468,42 @@ extension StudentCollectionViewController {
         
         print("*^*^",newFileURL)
         // 3 execute the function that takes the closure
-          self.getAStudentPicture.retreiveDataAsPictureFle(withURL: photoURL) { data in
-              DispatchQueue.main.async {
+        self.getAStudentPicture.retreiveDataAsPictureFle(withURL: photoURL) { data in
+            DispatchQueue.main.async {
                 
-              
-                 let replaceImage = UIImage(data: data)
-
-                  // - get the index
-                  /*
-                  The index path for the photo might have changed between the
-                  time the request started and finished, so find the most
-                  recent index path
-                  */
-                  guard let students: [ClassReturnObjct.Clss.Student] = (self.webApiJsonDecoder.theClassReturnObjct?.class.students),
+                
+                let replaceImage = UIImage(data: data)
+                
+                // - get the index
+                /*
+                 The index path for the photo might have changed between the
+                 time the request started and finished, so find the most
+                 recent index path
+                 */
+                guard let students: [ClassReturnObjct.Clss.Student] = (self.webApiJsonDecoder.theClassReturnObjct?.class.students),
                       let studentIdxInClass = students.firstIndex(where: { $0.photo == photoURL } )
-                  else {fatalError("couldn't find the student")}
-              
-                  // - create the indexpath object
-                  let studentIndexPath = IndexPath(item: studentIdxInClass, section: 0)
-
-print(data)
-                  // - When the request finishes, only update the cell if it's still visible
-                  if let cell = self.collectionView.cellForItem(at: studentIndexPath)
-                                                               as? StudentCollectionViewCell {
+                else {fatalError("couldn't find the student")}
+                
+                // - create the indexpath object
+                let studentIndexPath = IndexPath(item: studentIdxInClass, section: 0)
+                
+                print(data)
+                // - When the request finishes, only update the cell if it's still visible
+                if let cell = self.collectionView.cellForItem(at: studentIndexPath)
+                    as? StudentCollectionViewCell {
                     print("do cell ypdate")
-                      cell.update(displaying: replaceImage)
-                  }
-
-                 
-                  // cell.studentImageView.image = UIImage(data: data)
-                  // cell.studentNameLabel.text = student.title // + " " + student.lastName
-                 // return cell
-
-                  // return replaceImage
-                 //self.theStudentPic.image = replaceImage
-              }
-          }
+                    cell.update(displaying: replaceImage)
+                }
+                
+                
+                // cell.studentImageView.image = UIImage(data: data)
+                // cell.studentNameLabel.text = student.title // + " " + student.lastName
+                // return cell
+                
+                // return replaceImage
+                //self.theStudentPic.image = replaceImage
+            }
+        }
 
     }
 
