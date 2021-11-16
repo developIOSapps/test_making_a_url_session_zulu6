@@ -3,34 +3,34 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>887505720094-2mpijeu36vrs1km44m9kbujm5cafvjm5.apps.googleusercontent.com</string>
+	<string>897954359041-7sgs70vhm6ddbrj3jsqd0qhoq2pf4gdu.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.887505720094-2mpijeu36vrs1km44m9kbujm5cafvjm5</string>
+	<string>com.googleusercontent.apps.897954359041-7sgs70vhm6ddbrj3jsqd0qhoq2pf4gdu</string>
 	<key>API_KEY</key>
-	<string>AIzaSyD62qCkK4hDLJphKMkg6PMb0mvTifb_Df4</string>
+	<string>AIzaSyALICqcflvKcVkVOsijgn6MK9HwLNXrTk4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>887505720094</string>
+	<string>897954359041</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.appi4.teacher</string>
 	<key>PROJECT_ID</key>
-	<string>ipads4</string>
+	<string>jamfschoollogin</string>
 	<key>STORAGE_BUCKET</key>
-	<string>ipads4.appspot.com</string>
+	<string>jamfschoollogin.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:887505720094:ios:c8d72a0d835ac293e56f0f</string>
+	<string>1:897954359041:ios:f3dce4fbc147950f351d00</string>
 	<key>DATABASE_URL</key>
-	<string>https://ipads4.firebaseio.com</string>
+	<string>https://jamfschoollogin.firebaseio.com</string>
 </dict>
 </plist>
