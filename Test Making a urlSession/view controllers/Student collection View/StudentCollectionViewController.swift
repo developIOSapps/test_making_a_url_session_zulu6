@@ -15,7 +15,7 @@ protocol NotesDelegate {
 }
 
 class StudentCollectionViewController: UICollectionViewController, NotesDelegate {
-    
+        
     enum SelectionMode {
         
         case multipleEnabled(count: Int)
@@ -219,8 +219,6 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
 
                     
             // UserDefaultsHelper.removeGroupID()
