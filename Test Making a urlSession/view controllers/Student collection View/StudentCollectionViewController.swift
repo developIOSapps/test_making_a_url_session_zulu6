@@ -11,7 +11,7 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 protocol NotesDelegate {
-    func updateStudentNote(passedNoted: String, user: User)
+    func updateStudentNote(passedNoted: String, user: JSUser)
 }
 
 class StudentCollectionViewController: UICollectionViewController, NotesDelegate {
@@ -640,8 +640,8 @@ extension StudentCollectionViewController {
       
     }
     
-    func updateStudentNote(passedNoted: String, user: User) {
-        guard let users = self.users as? [User] else {
+    func updateStudentNote(passedNoted: String, user: JSUser) {
+        guard let users = self.users as? [JSUser] else {
             fatalError(" can not convert it to user type")
         }
         
@@ -670,7 +670,7 @@ extension StudentCollectionViewController {
         
               print("in should perform segue")
                       switch users[rowSelected] {
-                      case is User:
+                      case is JSUser:
                           print("IT Is **USER**")
                       case is Device:
                           print("IT Is **Device**")
@@ -685,7 +685,7 @@ extension StudentCollectionViewController {
             
         case "goToStudentDetail":
            
-                         guard let users = self.users as? [User] else {
+                         guard let users = self.users as? [JSUser] else {
                 return
             }
 

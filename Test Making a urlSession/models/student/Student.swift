@@ -30,7 +30,7 @@ struct Student: Codable {
     }
     
     
-    static func getStudentFromUser(_ user: User) -> Student {
+    static func getStudentFromUser(_ user: JSUser) -> Student {
            
            /// Setup
            let delimeter = "~#~"

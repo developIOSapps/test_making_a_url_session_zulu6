@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct User: OurCodable, NotesUpdateable {
+struct JSUser: OurCodable, NotesUpdateable {
     static func doConvert() {
         print("do convert")
     }
@@ -24,8 +24,8 @@ struct User: OurCodable, NotesUpdateable {
 
 }
 
-extension User: Equatable {
-  static func == (lhs: User, rhs: User) -> Bool {
+extension JSUser: Equatable {
+  static func == (lhs: JSUser, rhs: JSUser) -> Bool {
     return lhs.id == rhs.id 
   }
 }

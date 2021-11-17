@@ -16,7 +16,7 @@ struct UserResponse: OurCodable {
     
     let code: Int
     let count: Int
-    let users: [User]
+    let users: [JSUser]
     
     static func loadTheData() -> UserResponse {
         guard   let url = Bundle.main.url(forResource: "deviceGroups", withExtension: "json"),

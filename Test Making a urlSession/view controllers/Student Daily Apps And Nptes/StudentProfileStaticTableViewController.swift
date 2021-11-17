@@ -13,13 +13,13 @@ class StudentProfileStaticTableViewController: UITableViewController {
     
     
     // MARK: -  Properies
-    var user : User!
+    var user : JSUser!
     var student : Student!
     var daySelected = 99
     var notesDelegate: NotesDelegate?
     
     /// New property to handle multiple selections and even one selection now
-    var usersSelected: [User] = [User]()
+    var usersSelected: [JSUser] = [JSUser]()
 
     
     // MARK: - View Life Cycle
@@ -190,7 +190,7 @@ extension StudentProfileStaticTableViewController {
         daySelected = 99
     }
     
-    func upDateStudentAppNotes(appProfileToUse: String? = nil, for userToUpdate: User, personalNote: String? = nil)  {
+    func upDateStudentAppNotes(appProfileToUse: String? = nil, for userToUpdate: JSUser, personalNote: String? = nil)  {
         
         print("-x-x-x- the profile being passed is \(String(describing: appProfileToUse)) ")
         
