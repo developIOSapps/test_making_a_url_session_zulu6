@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print("* * *", UserDefaultsHelper.teacherSelected)
 
         FirebaseApp.configure()
-        doFB()
+//        doFB()
       
         return true
     }

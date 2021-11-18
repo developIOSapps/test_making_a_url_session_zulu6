@@ -419,21 +419,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="Vn5-Ur-pkn">
-                                <rect key="frame" x="57" y="344" width="300" height="154"/>
+                                <rect key="frame" x="57" y="374" width="300" height="94"/>
                                 <subviews>
-                                    <textField opaque="NO" alpha="0.64999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="School" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7zg-or-W8V">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="34"/>
-                                        <color key="textColor" red="0.78953212500000003" green="0.51761543750000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <textField opaque="NO" alpha="0.64999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bee-cZ-a0d">
-                                        <rect key="frame" x="0.0" y="60" width="300" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" alpha="0.64999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2gB-lF-zKp">
-                                        <rect key="frame" x="0.0" y="120" width="300" height="34"/>
+                                        <rect key="frame" x="0.0" y="60" width="300" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -443,7 +437,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fs-Uo-eMs" customClass="DesignableButton" customModule="Teacher" customModuleProvider="target">
-                                <rect key="frame" x="147" y="546" width="120" height="30"/>
+                                <rect key="frame" x="147" y="516" width="120" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="0.46672498080000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="dwp-3J-BAK"/>
@@ -475,13 +469,19 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yjw-JN-lUJ">
-                                <rect key="frame" x="201" y="633" width="46" height="30"/>
+                                <rect key="frame" x="184" y="694" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="doSegue:" destination="Tdd-nm-J6F" eventType="touchUpInside" id="CG5-jM-9Ho"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsj-Jy-9pK">
+                                <rect key="frame" x="16" y="826" width="382" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="COt-jb-QgC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -493,14 +493,22 @@
                             <constraint firstItem="PAH-MA-Je2" firstAttribute="centerX" secondItem="KoY-Vq-pi9" secondAttribute="centerX" id="KyV-Tb-6w3"/>
                             <constraint firstItem="PFX-uu-Ph0" firstAttribute="top" secondItem="COt-jb-QgC" secondAttribute="top" id="UVe-Wf-iox"/>
                             <constraint firstItem="COt-jb-QgC" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Vn5-Ur-pkn" secondAttribute="trailing" constant="57" id="VdP-CR-SZc"/>
+                            <constraint firstItem="hsj-Jy-9pK" firstAttribute="leading" secondItem="COt-jb-QgC" secondAttribute="leading" constant="16" id="WWS-HC-M3z"/>
                             <constraint firstItem="Vn5-Ur-pkn" firstAttribute="centerY" secondItem="KoY-Vq-pi9" secondAttribute="centerY" id="Woe-4M-pOW"/>
                             <constraint firstItem="COt-jb-QgC" firstAttribute="bottom" secondItem="PFX-uu-Ph0" secondAttribute="bottom" id="X1p-0J-lui"/>
+                            <constraint firstAttribute="bottom" secondItem="hsj-Jy-9pK" secondAttribute="bottom" constant="16" id="XH3-Ee-1IQ"/>
+                            <constraint firstItem="COt-jb-QgC" firstAttribute="trailing" secondItem="hsj-Jy-9pK" secondAttribute="trailing" constant="16" id="YWF-F8-a1T"/>
+                            <constraint firstItem="COt-jb-QgC" firstAttribute="trailing" secondItem="hsj-Jy-9pK" secondAttribute="trailing" constant="16" id="YYt-Fv-STV"/>
                             <constraint firstItem="Vn5-Ur-pkn" firstAttribute="centerX" secondItem="KoY-Vq-pi9" secondAttribute="centerX" id="gdI-VI-dwD"/>
                             <constraint firstItem="9fs-Uo-eMs" firstAttribute="top" secondItem="Vn5-Ur-pkn" secondAttribute="bottom" constant="48" id="ufG-kF-UTX"/>
                             <constraint firstItem="9fs-Uo-eMs" firstAttribute="centerX" secondItem="KoY-Vq-pi9" secondAttribute="centerX" id="v6k-QV-QWQ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailTextField" destination="bee-cZ-a0d" id="zyJ-eC-0KJ"/>
+                        <outlet property="errorLabel" destination="hsj-Jy-9pK" id="Bnb-jA-x67"/>
+                        <outlet property="loginButton" destination="9fs-Uo-eMs" id="u5k-O5-n1U"/>
+                        <outlet property="passwordTextField" destination="2gB-lF-zKp" id="ezQ-sl-3Rh"/>
                         <segue destination="85r-74-Bc2" kind="unwind" identifier="returnFromLoginWithClass" unwindAction="returnFromLoginWithClassWithSegue:" id="JDT-vk-evA"/>
                     </connections>
                 </viewController>

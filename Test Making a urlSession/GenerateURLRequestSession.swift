@@ -45,8 +45,12 @@ enum URLValues {
         request.httpMethod = "GET"
         
         // Headers
-        request.addValue(URLValues.authorizationValue, forHTTPHeaderField: URLValues.authorizationName)
-        request.addValue(URLValues.cookieValue, forHTTPHeaderField: URLValues.cookieName)
+        
+        guard let theApiKey = UserDefaultsHelper.getapiKey() else {fatalError("could not get the apikey")}
+        
+        request.addValue(theApiKey, forHTTPHeaderField: URLValues.authorizationName)
+//        request.addValue(URLValues.authorizationValue, forHTTPHeaderField: URLValues.authorizationName)
+       request.addValue(URLValues.cookieValue, forHTTPHeaderField: URLValues.cookieName)
         
         
         switch self {

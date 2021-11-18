@@ -15,6 +15,7 @@ struct UserDefaultsHelper {
     static let defaults = UserDefaults.standard
     
     /// literals
+    static let apiKeyKey = "apiKey"
     static let groupIDKey = "teacherSelected"
     static let groupNameKey = "groupNameKey"
     static let groupUUIDKey = "groupUUID"
@@ -77,6 +78,17 @@ struct UserDefaultsHelper {
     static func setGroupID(_ groupID: Int) {
         HelperFunctions.logIt(functionName: #function, message: "Saving The GroupId")
         defaults.set(groupID, forKey: groupIDKey)
+    }
+    
+    static func getapiKey() -> String? {
+        HelperFunctions.logIt(functionName: #function, message: "Get The apiKey")
+        return defaults.object(forKey: apiKeyKey) as? String
+    }
+
+    
+    static func setapiKey(_ apiKey: String) {
+        HelperFunctions.logIt(functionName: #function, message: "Saving The apiKey")
+        defaults.set(apiKey, forKey: apiKeyKey)
     }
 
     static func removeGroupID() {

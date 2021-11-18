@@ -138,6 +138,9 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
     var navBarTitle = ""
     
+    
+    var apiKey: String!
+    
     var classGroupCodeInt: Int!
     
     var className: String! {
@@ -217,6 +220,75 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         navigationController?.setToolbarHidden(true, animated: false)
     }
     
+    fileprivate func getClassandStudentData() {
+        // Register cell classes
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        let classGroupCodeStr = String(classGroupCodeInt)
+        // title = navBarTitle
+        
+        // 1 - Get the list of classes
+        let urlValues = URLValues.urlForListOfClasses
+        webApiJsonDecoder.sendURLReqToProcess(with: urlValues.getUrlRequest(), andSession: urlValues.getSession() ) {(data) in
+            
+            // OK we are fine, we got data - so lets write it to a file so we can retieve it
+            
+            let returnFromDecodingClassList: Result<ClassesReturnObjct, GetResultOfNetworkCallError> = self.webApiJsonDecoder.processTheData(with: data)
+            guard let aClassesReturnObject = try? returnFromDecodingClassList.get() else {
+                if case Result<ClassesReturnObjct, GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = returnFromDecodingClassList {
+                    self.webApiJsonDecoder.processTheError(with: getResultOfNetworkCallError)
+                }
+                return
+            }
+            //                        let aClassesReturnObject: ClassesReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
+            self.webApiJsonDecoder.theClassesReturnObjct = aClassesReturnObject
+            
+            dump(self.webApiJsonDecoder.theClassesReturnObjct)
+            
+            guard let classes: [ClassesReturnObjct.Classe] = (self.webApiJsonDecoder.theClassesReturnObjct?.classes),
+                  let idx = classes.firstIndex(where: { $0.userGroupId == self.classGroupCodeInt} )
+            else {fatalError("couldn't find the class group")}
+            
+            let classuuid = classes[idx].uuid
+            print(classuuid)
+            
+            
+            // 2 - Get the students in a class
+            
+            let urlValuesforClass = URLValues.urlForClassInfo(UUISString: classuuid)
+            self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesforClass.getUrlRequest(), andSession: urlValuesforClass.getSession() ) {(data) in
+                // OK we are fine, we got data - so lets write it to a file so we can retieve it
+                
+                
+                let returnFromDecodingClassInfo: Result<ClassReturnObjct, GetResultOfNetworkCallError> = self.webApiJsonDecoder.processTheData(with: data)
+                guard let aClassReturnObject = try? returnFromDecodingClassInfo.get() else {
+                    if case Result<ClassReturnObjct, GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = returnFromDecodingClassInfo {
+                        self.webApiJsonDecoder.processTheError(with: getResultOfNetworkCallError)
+                    }
+                    return
+                }
+                //                        let aClassReturnObject: ClassesReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
+                self.webApiJsonDecoder.theClassReturnObjct = aClassReturnObject
+                dump(self.webApiJsonDecoder.theClassReturnObjct)
+                
+                let student = self.webApiJsonDecoder.theClassReturnObjct?.class.students[2]
+                dump(student)
+                
+                GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
+                    DispatchQueue.main.async {
+                        
+                        guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
+                        /// Just load in the users into this class if needed
+                        self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
+                        /// Here we have what we need
+                        usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName  + "--" + $0.username) }
+                        self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
+                        self.collectionView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
  
@@ -238,126 +310,11 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
 
             switch itemsToDisplay {
             case .students:
-                //  FIXME: - 11/18/21 Take off the breakpoint to make the classGroupCodeInt
-                if classGroupCodeInt ==  nil {
+                if classGroupCodeInt ==  nil || UserDefaultsHelper.getapiKey() == nil  {
                     print("in about to perform segue")
                     performSegue(withIdentifier: "loginScr", sender: nil)
                 } else {
-                    
-                    // Register cell classes
-                    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-                    let classGroupCodeStr = String(classGroupCodeInt)
-                    // title = navBarTitle
-                    
-                    // FIXME: 01-13-21 Code to get student pictures - working
-                    /* -
-                     GetDataApi.getClassDetail(GeneratedReq.init(request: ValidReqs.classDetail(classId: "3813b0d4-280f-4a3d-ab55-a8274bc9ead6"))) { (classDetailResponse) in
-                     DispatchQueue.main.async {
-                     
-                     guard let classDetailResponse = classDetailResponse as? ClassDetailResponse else {fatalError("could not convert it to classDetailResponse")}
-                     /// Just load in the users into this class if needed
-                     self.students = classDetailResponse.class.students.sorted { $0.lastName < $1.lastName }
-                     /// Here we have what we need
-                     classDetailResponse.class.students.forEach { print($0.firstName + "--" + $0.lastName) }
-                     self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
-                     self.collectionView.reloadData()
-                     }
-                     }
-                     */
-                    
-                    
-                    // 1 - Get the list of classes
-                    let urlValues = URLValues.urlForListOfClasses
-                    webApiJsonDecoder.sendURLReqToProcess(with: urlValues.getUrlRequest(), andSession: urlValues.getSession() ) {(data) in
-                        
-                        // OK we are fine, we got data - so lets write it to a file so we can retieve it
-                        
-                        let returnFromDecodingClassList: Result<ClassesReturnObjct, GetResultOfNetworkCallError> = self.webApiJsonDecoder.processTheData(with: data)
-                        guard let aClassesReturnObject = try? returnFromDecodingClassList.get() else {
-                            if case Result<ClassesReturnObjct, GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = returnFromDecodingClassList {
-                                self.webApiJsonDecoder.processTheError(with: getResultOfNetworkCallError)
-                            }
-                            return
-                        }
-//                        let aClassesReturnObject: ClassesReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
-                        self.webApiJsonDecoder.theClassesReturnObjct = aClassesReturnObject
-                        
-                        dump(self.webApiJsonDecoder.theClassesReturnObjct)
-                        
-                        guard let classes: [ClassesReturnObjct.Classe] = (self.webApiJsonDecoder.theClassesReturnObjct?.classes),
-                              let idx = classes.firstIndex(where: { $0.userGroupId == self.classGroupCodeInt} )
-                        else {fatalError("couldn't find the class group")}
-                        
-                        let classuuid = classes[idx].uuid
-                        print(classuuid)
-                        
-                        
-                        // 2 - Get the students in a class
-                         
-
-    
-                        
-                        
-                        
-                        
-                        let urlValuesforClass = URLValues.urlForClassInfo(UUISString: classuuid)
-                        self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesforClass.getUrlRequest(), andSession: urlValuesforClass.getSession() ) {(data) in
-                            // OK we are fine, we got data - so lets write it to a file so we can retieve it
-
-
-                            let returnFromDecodingClassInfo: Result<ClassReturnObjct, GetResultOfNetworkCallError> = self.webApiJsonDecoder.processTheData(with: data)
-                            guard let aClassReturnObject = try? returnFromDecodingClassInfo.get() else {
-                                if case Result<ClassReturnObjct, GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = returnFromDecodingClassInfo {
-                                    self.webApiJsonDecoder.processTheError(with: getResultOfNetworkCallError)
-                                }
-                                return
-                            }
-    //                        let aClassReturnObject: ClassesReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
-                            self.webApiJsonDecoder.theClassReturnObjct = aClassReturnObject
-//
-//
-//
-//
-//                            let aClassReturnObjct: ClassReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
-
-//                            self.webApiJsonDecoder.theClassReturnObjct = aClassReturnObjct
-                            dump(self.webApiJsonDecoder.theClassReturnObjct)
-                            
-                            let student = self.webApiJsonDecoder.theClassReturnObjct?.class.students[2]
-                            dump(student)
-                            
-              
-              
-              
-                            GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
-                                 DispatchQueue.main.async {
-                                     
-                                     guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
-                                     /// Just load in the users into this class if needed
-                                     self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
-                                     /// Here we have what we need
-                                     usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName  + "--" + $0.username) }
-                                     self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
-                                     self.collectionView.reloadData()
-                                 }
-                             }
-
-               
-                        }
-                    }
-
-                    
-                    //***** start
-//                    studentsOfClass.getTheClassFromWeb { [self] in
-//                        // get the student from the class based on the username, then we could get the picture
-//                        print("we got the class object")
-//                        let classGroupCodeStr = String(classGroupCodeInt)
-//                        print("*^* here")
-//                    //*******
-//
-//
-//                    }
-                    
+                    getClassandStudentData()
                 }
                 case .devices:
                     if classGroupCodeInt ==  nil {
@@ -591,10 +548,16 @@ extension StudentCollectionViewController {
     
     
     @IBAction func returnFromLoginWithClass(segue: UIStoryboardSegue) {
-        guard let vc = segue.source as? LoginViewController, let groupID = vc.groupID, let groupName = vc.groupName  else { fatalError("No Class Group Code")  }
-        classGroupCodeInt = groupID
-        className = groupName
-        print("Returned from Segue \(classGroupCodeInt)")
+        guard let vc = segue.source as? LoginViewController else { fatalError("No Class Group Code")  }
+        guard let apiKeyfromVC = vc.myApiKey else { fatalError("api No Class Group Code")  }
+        guard let groupID = vc.groupID else { fatalError("groupid No Class Group Code")  }
+        guard let groupName = vc.groupName  else { fatalError("groupname No Class Group Code")  }
+
+        apiKey              = apiKeyfromVC
+        classGroupCodeInt   = groupID
+        className           = groupName
+        print("Returned from Segue \(classGroupCodeInt) and \(apiKey)")
+
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
@@ -605,19 +568,20 @@ extension StudentCollectionViewController {
 
         switch itemsToDisplay {
             case .students:
-                GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
-                    DispatchQueue.main.async {
-                        
-                        guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
-                        
-                        /// Just load in the users into this class if needed
-                        self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
-                        /// Here we have what we need
-                        usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
-                        self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
-                        self.collectionView.reloadData()
-                    }
-                }
+                getClassandStudentData()
+//                GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
+//                    DispatchQueue.main.async {
+//
+//                        guard let usrResponse = userResponse as? UserResponse else {fatalError("could not convert it to Users")}
+//
+//                        /// Just load in the users into this class if needed
+//                        self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
+//                        /// Here we have what we need
+//                        usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName) }
+//                        self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
+//                        self.collectionView.reloadData()
+//                    }
+//                }
             case .devices:
                 GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : classGroupCodeStr ]) )) { (deviceListResponse) in
                     DispatchQueue.main.async {
