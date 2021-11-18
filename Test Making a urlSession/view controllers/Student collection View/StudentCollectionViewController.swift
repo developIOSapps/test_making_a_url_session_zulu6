@@ -200,7 +200,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     override func viewDidAppear(_ animated: Bool) {
          super.viewDidAppear(animated)
 
-
+        
          if classGroupCodeInt ==  nil {
             print("in about to perform segue")
              performSegue(withIdentifier: "loginScr", sender: nil)
@@ -219,11 +219,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-                    
-            // UserDefaultsHelper.removeGroupID()
-            // UserDefaultsHelper.removeGroupName()
-            
+ 
             // Customize the navigation bar
             // navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             // navigationController?.navigationBar.shadowImage = UIImage()
@@ -242,6 +238,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
 
             switch itemsToDisplay {
             case .students:
+                //  FIXME: - 11/18/21 Take off the breakpoint to make the classGroupCodeInt
                 if classGroupCodeInt ==  nil {
                     print("in about to perform segue")
                     performSegue(withIdentifier: "loginScr", sender: nil)
@@ -668,17 +665,17 @@ extension StudentCollectionViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-              print("in should perform segue")
-                      switch users[rowSelected] {
-                      case is JSUser:
-                          print("IT Is **USER**")
-                      case is Device:
-                          print("IT Is **Device**")
-                      default:
-                          break
-                      }
-        
-        
+//              print("in should perform segue")
+//                      switch users[rowSelected] {
+//                      case is JSUser:
+//                          print("IT Is **USER**")
+//                      case is Device:
+//                          print("IT Is **Device**")
+//                      default:
+//                          break
+//                      }
+//
+//
         
         /// This meansI am selecting students
         switch segue.identifier  {

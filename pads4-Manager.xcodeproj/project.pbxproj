@@ -59,6 +59,8 @@
 		466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B2C9A22FDBAD9009C19E4 /* PrettyPrintingJson.swift */; };
 		466FC25B274433640075ECA5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 466FC25A274433640075ECA5 /* GoogleService-Info.plist */; };
 		4680FC4B23E1C6D700E333DA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4680FC4A23E1C6D700E333DA /* Constants.swift */; };
+		4685B27827454D520042AFD9 /* FBAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4685B27627454C990042AFD9 /* FBAuth.swift */; };
+		4685B27927454D520042AFD9 /* FBData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4685B27527454C990042AFD9 /* FBData.swift */; };
 		4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4694D91C2302E58000FEE622 /* GenerateReq.swift */; };
 		469CB55622A9BCD600631ACE /* deviceGroups.json in Resources */ = {isa = PBXBuildFile; fileRef = 469CB55522A9BCD600631ACE /* deviceGroups.json */; };
 		46A3237E237E3BC500D4F77E /* SchoolClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A3237D237E3BC500D4F77E /* SchoolClass.swift */; };
@@ -143,6 +145,8 @@
 		466B2C9A22FDBAD9009C19E4 /* PrettyPrintingJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyPrintingJson.swift; sourceTree = "<group>"; };
 		466FC25A274433640075ECA5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4680FC4A23E1C6D700E333DA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4685B27527454C990042AFD9 /* FBData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBData.swift; sourceTree = "<group>"; };
+		4685B27627454C990042AFD9 /* FBAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuth.swift; sourceTree = "<group>"; };
 		4694D91C2302E58000FEE622 /* GenerateReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateReq.swift; sourceTree = "<group>"; };
 		469CB55522A9BCD600631ACE /* deviceGroups.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deviceGroups.json; sourceTree = "<group>"; };
 		46A3237D237E3BC500D4F77E /* SchoolClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolClass.swift; sourceTree = "<group>"; };
@@ -340,6 +344,8 @@
 				469CB55722A9C25500631ACE /* resources */,
 				4662C762228CBA7800D99B84 /* -customization-notneeded */,
 				4662C756228C997300D99B84 /* Info.plist */,
+				4685B27527454C990042AFD9 /* FBData.swift */,
+				4685B27627454C990042AFD9 /* FBAuth.swift */,
 				466FC25A274433640075ECA5 /* GoogleService-Info.plist */,
 				4680FC4A23E1C6D700E333DA /* Constants.swift */,
 				4622303823830B3B00B3DC70 /* DesignableButton.swift */,
@@ -811,6 +817,8 @@
 				460C56052365FBBC00AC7606 /* DeviceListResponse.swift in Sources */,
 				46A96F34240495F4005A8AC1 /* AppStore.swift in Sources */,
 				4655243F2738100200FF2239 /* GetAStudentPicturw.swift in Sources */,
+				4685B27827454D520042AFD9 /* FBAuth.swift in Sources */,
+				4685B27927454D520042AFD9 /* FBData.swift in Sources */,
 				4622303923830B3C00B3DC70 /* DesignableButton.swift in Sources */,
 				46510BF52388320800838764 /* AppProfile.swift in Sources */,
 				46E1201E239FCFED00667E28 /* UserDetailResponse.swift in Sources */,

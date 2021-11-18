@@ -15,6 +15,17 @@ enum GetStringFromError: Error {
 }
 struct HelperFunctions {
     
+    static func logMsg(_ message: String,
+                    fileName: String = #file,
+                    functionName: String = #function,
+                    lineNumber: Int = #line,
+                    columnNumber: Int = #column) {
+
+        print("🤡🤡🤡 Called by \(functionName) at line \(lineNumber)[\(columnNumber)] -  message: \(message)")
+//        print("🤡🤡🤡 Called by \(fileName) - \(functionName) at line \(lineNumber)[\(columnNumber)]")
+    }
+
+    
     static func logIt(functionName: String, message: String) {
         print("* _ * _ * _", functionName, ":  \(message)")
     }

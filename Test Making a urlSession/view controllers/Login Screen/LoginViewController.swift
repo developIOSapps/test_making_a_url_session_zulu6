@@ -34,6 +34,8 @@ class LoginViewController: UIViewController {
     // MARK: - Life Cycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 //        if let xx = getGroupId() {
 //            print("It is there")
 //            doAnimate()

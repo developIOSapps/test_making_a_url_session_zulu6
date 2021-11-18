@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import FirebaseAuth
 import Firebase
+
 
 
 @UIApplicationMain
@@ -15,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var loggedInUser: User?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         var navigationBarAppearace = UINavigationBar.appearance()
@@ -33,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print("* * *", UserDefaultsHelper.teacherSelected)
 
         FirebaseApp.configure()
+        doFB()
       
         return true
     }
@@ -80,6 +84,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    func doFB() {
+        
+        FBAuth.autheticate(with: "stevenh@appi4.com", and: "Simcha@3485") { (result) in
+            
+            guard let authDataResult = try? result.get()
+                
+                else {   /* This deals with the error */
+                    fatalError("autheticate")
+                    // FBAuth.handleAuthError(vc: self, result: result)
+                    // self.handleAuthError(result: result)
+                    return
+                    
+                }
+            
+            /// Is e-mail verified
+            let isEmailVerified = authDataResult.user.isEmailVerified
+            guard isEmailVerified == true
+                
+                else {
+                    
+                    print("not verified - sending e-mail verification")
+                    FBAuth.sendEmailVerification(to: authDataResult.user) { (errorFromSendEmail) in
+                        
+                        guard errorFromSendEmail == nil else  {
+                            fatalError("errorFromSendEmail")
+                            // FBAuth.handleErrorNoResult(vc: self, error: errorFromSendEmail)
+                            // self.handleErrorNoResult(error: errorFromSendEmail)
+                            //self.logUserOff()
+                            return
+                        }
+                        
+                        print("sent verification well successfully")
+                    }
+                    
+                    return
+            }
+            
+            print("about to get the data ", authDataResult.user.email)
+            self.loggedInUser =  authDataResult.user
+            
+            FBData.getDocument(with: self.loggedInUser!) { (resultFromFSUserData) in
+                guard let theDoc = try? resultFromFSUserData.get()
+                    
+                    else {   /* This deals with the error */
+                        
+                        /// Setup to get what we need to process the error
+                        guard case Result.failure(let err) = resultFromFSUserData else { fatalError("// this should never execute in getting error") }
+                        
+                        /// We got what we need and we are ready to process the error
+                        print("the error code is \(err)")
+                        print("pause")
+                        return
+                        
+                    }
+                
+                guard let record = theDoc.data(), let apiKey = record["apiKey"] as? String else {
+                    fatalError("could not convert it to a non optional")
+                }
+                /// -> Success! - got the document and now can retreive the information
+                print("We got the apikey it is \(apiKey)")
+                
+             }
+        }
+    }
 }
 
 //extension UIApplication {
