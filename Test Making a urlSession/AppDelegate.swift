@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         var navigationBarAppearace = UINavigationBar.appearance()
 
+        fetchAppConfiguration()
         registerDefaultsFromSettingsBundle()
         
         // navigationBarAppearace.tintColor = UIColor(named: "myOrange")
@@ -59,6 +60,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         UserDefaults.standard.register(defaults: defaultsToRegister)
     }
+    func fetchAppConfiguration() {
+        
+        
+        let managedConfigFileKey = "com.apple.configuration.managed"
+        
+        if let managedConfigObj = UserDefaults.standard.object(forKey: managedConfigFileKey ) {
+            print("@-@ Found managed config")
+            guard let managedConfigDict = managedConfigObj as?  [String:Any?]  else {
+                print("@-@ Failed converting it to dictionary")
+                return
+            }
+            
+            guard let theItm  = managedConfigDict["itm"] as?  String  else {
+                print("@-@ Failed getting the itm")
+                return
+            }
+
+            print("@-@ the managed apikey is ",theItm )
+
+        }
+        else {
+
+            print("@-@ Failed finding managed config file")
+
+            return
+            
+        }
+        
+    }
+
+
 
 
     func applicationWillResignActive(_ application: UIApplication) {

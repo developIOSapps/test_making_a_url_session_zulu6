@@ -308,43 +308,43 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
             classGroupCodeInt = UserDefaultsHelper.groupID
             className = UserDefaultsHelper.groupName
 
-            switch itemsToDisplay {
-            case .students:
-                if classGroupCodeInt ==  nil || UserDefaultsHelper.getapiKey() == nil  {
-                    print("in about to perform segue")
-                    performSegue(withIdentifier: "loginScr", sender: nil)
-                } else {
-                    getClassandStudentData()
-                }
-                case .devices:
-                    if classGroupCodeInt ==  nil {
-                        print("in about to perform segue")
-                        performSegue(withIdentifier: "loginScr", sender: nil)
-                    } else {
-                        
-                        // Register cell classes
-                        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-                        
-                        // title = navBarTitle
-                        let classGroupCodeStr = String(classGroupCodeInt)
-                        
-                        GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : classGroupCodeStr ]) )) { (deviceListResponse) in
-                            DispatchQueue.main.async {
-                                
-                                guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
-                                
-                                /// Just load in the users into this class if needed
-                                self.users = deviceListResponse.devices
-                                /// Here we have what we need
-                                deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
-                                print("got devices")
-                                self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
-                                self.collectionView.reloadData()
-                            }
-                        }
-                }
-                
+        switch itemsToDisplay {
+        case .students:
+            if classGroupCodeInt ==  nil || UserDefaultsHelper.getapiKey() == nil  {
+                print("in about to perform segue")
+                performSegue(withIdentifier: "loginScr", sender: nil)
+            } else {
+                getClassandStudentData()
             }
+        case .devices:
+            if classGroupCodeInt ==  nil || UserDefaultsHelper.getapiKey() == nil {
+                print("in about to perform segue")
+                performSegue(withIdentifier: "loginScr", sender: nil)
+            } else {
+                
+                // Register cell classes
+                self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+                
+                // title = navBarTitle
+                let classGroupCodeStr = String(classGroupCodeInt)
+                
+                GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : classGroupCodeStr ]) )) { (deviceListResponse) in
+                    DispatchQueue.main.async {
+                        
+                        guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
+                        
+                        /// Just load in the users into this class if needed
+                        self.users = deviceListResponse.devices
+                        /// Here we have what we need
+                        deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
+                        print("got devices")
+                        self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
+                        self.collectionView.reloadData()
+                    }
+                }
+            }
+            
+        }
         
     }
     
