@@ -198,6 +198,37 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        
+//
+//
+//            let managedConfigFileKey = "com.apple.configuration.managed"
+//
+//            if let managedConfigObj = UserDefaults.standard.object(forKey: managedConfigFileKey ) {
+//                navigationItem.title = "@-@ Found managed config"
+//                print("@-@ Found managed config")
+//                guard let managedConfigDict = managedConfigObj as?  [String:Any?]  else {
+//                    print("@-@ Failed converting it to dictionary")
+//                    return
+//                }
+//
+//                guard let theItm  = managedConfigDict["itm"] as?  String  else {
+//                    print("@-@ Failed getting the itm")
+//                    return
+//                }
+//
+//                print("@-@ the managed apikey is ",theItm )
+//                navigationItem.title = theItm
+//
+//            }
+//            else {
+//
+//                print("@-@ Failed finding managed config file")
+//                navigationItem.title = "@-@ Failed finding managed config file"
+//
+//            }
+//
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -11,6 +11,11 @@ import Firebase
 
 class LoginViewController: UIViewController {
     
+    // used to execute the dataRetrevial from the Web API
+     var webApiJsonDecoder = WebApiJsonDecoder()
+     
+
+    
     //  MARK: -  Screen Objects
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -30,7 +35,6 @@ class LoginViewController: UIViewController {
     var myApiKey: String? {
         didSet {
             guard let theApiKey = myApiKey else { return  }
-            // UserDefaultsHelper.updateSelectedTeacher(groupID: groupID)
             UserDefaultsHelper.setapiKey(theApiKey)
         }
     }
@@ -38,7 +42,6 @@ class LoginViewController: UIViewController {
     var groupID: Int? {
         didSet {
             guard let groupID = groupID else { return  }
-            // UserDefaultsHelper.updateSelectedTeacher(groupID: groupID)
             UserDefaultsHelper.setGroupID(groupID)
         }
     }
@@ -48,6 +51,13 @@ class LoginViewController: UIViewController {
             UserDefaultsHelper.setGroupName(groupName)
         }
     }
+    var classUUID: String? {
+        didSet {
+            guard let classUUID = classUUID else { return  }
+            UserDefaultsHelper.setClassUUID(classUUID)
+        }
+    }
+    
     
     var schoolClasses: [SchoolClass] = []
 
@@ -246,5 +256,118 @@ class LoginViewController: UIViewController {
             errorLabel.text = error
             errorLabel.isHidden = false
         }
+
+}
+
+extension LoginViewController {
+    fileprivate func getTheCredentialedData() {
+        // Do any additional setup after loading the view.
+        
+        
+        
+        /*  1: --------  Authenticate the teaxher  ------------------------------------    */
+        let urlValuesForTeacherAuthenticate = URLValues.urlForTeacherAuthenticate
+        webApiJsonDecoder.justAuthenticateProcess(with: urlValuesForTeacherAuthenticate.getUrlRequest(), andSession: urlValuesForTeacherAuthenticate.getSession() ) {(result) in
+            
+            if case  .failure(.httpError(let respne)) = result, respne.statusCode == 401 {
+                print("error authi")
+                return
+            }
+            
+            
+            // *** No errors do the process and get the returned object ***
+            
+            // get the data from result
+            guard let aAuthenticateReturnData = try? result.get() else {fatalError("no data") }
+            
+            // decode the authenticate data
+            let returnFromDecodingAuthentication: Result<AuthenticateReturnObjct,GetResultOfNetworkCallError> = self.webApiJsonDecoder.processTheData(with: aAuthenticateReturnData)
+            
+            // verify and get the response object
+            guard let aAuthenticateReturnObjct = try? returnFromDecodingAuthentication.get() else {
+                if case Result<AuthenticateReturnObjct,GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = returnFromDecodingAuthentication {
+                    self.webApiJsonDecoder.processTheError(with: getResultOfNetworkCallError)
+                }
+                return
+            }
+            
+            
+            //  *** OK we got the returned object - Use it  ***
+            
+            self.webApiJsonDecoder.theAuthenticateReturnObjct = aAuthenticateReturnObjct
+            guard let userId = self.webApiJsonDecoder.theAuthenticateReturnObjct?.authenticatedAs.id else {fatalError("id error")}
+            
+            
+            
+            
+            /*  2: --------  Get teacher User info  ------------------------------------    */
+            let urlValuesForUserInfo = URLValues.urlForUserInfo(userID: String(userId))
+            self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesForUserInfo.getUrlRequest(), andSession: urlValuesForUserInfo.getSession() ) { (data) in
+                
+                 // OK we are fine, we got data - so lets write it to a file so we can retieve it
+                
+                
+                // decode the json data
+                let returnFromUserInfo: Result<UserInfoReturnObjct,GetResultOfNetworkCallError> = self.webApiJsonDecoder.processTheData(with: data)
+                
+                guard let aUserInfoReturnObjct = try? returnFromUserInfo.get() else {
+                    if case Result<UserInfoReturnObjct,GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = returnFromUserInfo {
+                        self.webApiJsonDecoder.processTheError(with: getResultOfNetworkCallError)
+                    }
+                    return
+                }
+                self.webApiJsonDecoder.theUserInfoReturnObjct = aUserInfoReturnObjct
+                
+                // get the class group code
+                guard let classGroupCode = aUserInfoReturnObjct.user.teacherGroups.first else {fatalError("There were no classes assigned to this teacher")}
+                
+                
+                
+                /*  3: --------  Get list of classes  ------------------------------------    */
+                let urlValuesForListOfClasses = URLValues.urlForListOfClasses
+                self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesForListOfClasses.getUrlRequest(), andSession: urlValuesForListOfClasses.getSession()) { data in
+                    let returnFromListOfClasses: Result<ClassesReturnObjct,GetResultOfNetworkCallError> = self.webApiJsonDecoder.processTheData(with: data)
+                    
+                    guard let aClassesReturnObjct = try? returnFromListOfClasses.get() else {
+                        if case Result<UserInfoReturnObjct,GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = returnFromUserInfo {
+                            self.webApiJsonDecoder.processTheError(with: getResultOfNetworkCallError)
+                        }
+                        return
+                    }
+                    
+                    self.webApiJsonDecoder.theClassesReturnObjct = aClassesReturnObjct
+                    
+                    
+                    
+                    /*  4: --------  Get this teachers class  ------------------------------------    */
+                    
+                    // first get the class identifier
+                    guard let classList = self.webApiJsonDecoder.theClassesReturnObjct?.classes           else {fatalError("could not retreive classes")}
+                    guard let idx = classList.firstIndex(where:  { $0.userGroupId == classGroupCode} )    else {fatalError("couldn't find the class group")}
+                    let theClass = classList[idx]
+                    let classuuid = theClass.uuid
+                    
+                    
+                    let urlValuesForClassInfo = URLValues.urlForClassInfo(UUISString: classuuid)
+                    self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesForClassInfo.getUrlRequest(), andSession: urlValuesForClassInfo.getSession()) { data in
+                        let returnFromClassInfo: Result<ClassReturnObjct,GetResultOfNetworkCallError>
+                            = self.webApiJsonDecoder.processTheData(with: data)
+                        
+                        guard let aClassReturnObjct = try? returnFromClassInfo.get() else {
+                            if case Result<UserInfoReturnObjct,GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError)
+                                = returnFromUserInfo {
+                                self.webApiJsonDecoder.processTheError(with: getResultOfNetworkCallError)
+                            }
+                            return
+                        }
+                        
+                        self.webApiJsonDecoder.theClassReturnObjct = aClassReturnObjct
+                        
+                        
+                    }
+                }
+            }
+        }
+    }
 
 }

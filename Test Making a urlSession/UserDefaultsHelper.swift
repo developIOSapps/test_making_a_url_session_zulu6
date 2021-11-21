@@ -18,7 +18,7 @@ struct UserDefaultsHelper {
     static let apiKeyKey = "apiKey"
     static let groupIDKey = "teacherSelected"
     static let groupNameKey = "groupNameKey"
-    static let groupUUIDKey = "groupUUID"
+    static let classUUIDKey = "classUUID"
 
 
     static let applicationProfilesKey = "applicationProfiles"
@@ -37,9 +37,8 @@ struct UserDefaultsHelper {
         guard let groupID = groupID, groupID != 0 else { return nil }
         return teacherNames[groupID]
     }
-    static var groupUUID: String? {
-        guard let groupID = groupID, groupID != 0 else { return nil }
-        return getGroupUUID()
+    static var classUUID: String? {
+        return getClassUUID()
     }
     static var appFilter: String  {
         return getAppFilterString()
@@ -109,18 +108,18 @@ struct UserDefaultsHelper {
         defaults.removeObject(forKey: groupNameKey)
     }
     
-    static func getGroupUUID() -> String? {
-         HelperFunctions.logIt(functionName: #function, message: "Get The GroupUUID")
-         return defaults.object(forKey: groupUUIDKey) as? String
+    static func getClassUUID() -> String? {
+         HelperFunctions.logIt(functionName: #function, message: "Get The classUUID")
+        return defaults.object(forKey: classUUIDKey) as? String
      }
      
-     static func setGroupUUID(_ groupUUID: String) {
-         HelperFunctions.logIt(functionName: #function, message: "Saving The GroupUUID")
-         defaults.set(groupUUID, forKey: groupUUIDKey)
+     static func setClassUUID(_ groupUUID: String) {
+         HelperFunctions.logIt(functionName: #function, message: "Saving The classUUID")
+         defaults.set(classUUID, forKey: classUUIDKey)
      }
 
-     static func removeGroupUUID() {
-         defaults.removeObject(forKey: groupUUIDKey)
+     static func removeClassUUID() {
+         defaults.removeObject(forKey: classUUIDKey)
      }
      
     

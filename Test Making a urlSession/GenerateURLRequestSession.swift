@@ -29,13 +29,14 @@ enum URLValues {
     static let urlStringForClassInfo = "https://api.zuludesk.com/classes"
     static let urlStringForStudentPic = "https://api.zuludesk.com/classes"
     static let urlStringForTeacherAuthenticate = "https://api.zuludesk.com/teacher/authenticate"
+    static let urlStringForUserInfo = "https://api.zuludesk.com/users"
 
     
     case urlForListOfClasses
     case urlForClassInfo(UUISString: String)
     case urlForStudentPic(picUrlString: String)
     case urlForTeacherAuthenticate
-
+    case urlForUserInfo(userID: String)
     
     func getUrlRequest(with urlString: String? = nil) -> URLRequest {
         
@@ -46,7 +47,7 @@ enum URLValues {
         
         // Headers
         
-        guard let theApiKey = UserDefaultsHelper.getapiKey() else {fatalError("could not get the apikey")}
+        let theApiKey = ApiKey.getApiKey()
         
         request.addValue(theApiKey, forHTTPHeaderField: URLValues.authorizationName)
 //        request.addValue(URLValues.authorizationValue, forHTTPHeaderField: URLValues.authorizationName)
@@ -54,11 +55,15 @@ enum URLValues {
         
         
         switch self {
+        
         case .urlForListOfClasses:  request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
 
         case .urlForClassInfo:      request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
 
         case .urlForStudentPic:     request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
+            
+        case .urlForUserInfo: request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
+            
 
         case .urlForTeacherAuthenticate:
             request.addValue(URLValues.xServerProtocolVersionValueV2, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
@@ -110,6 +115,11 @@ enum URLValues {
                 myUrl = yUrl
             }
             
+        case .urlForUserInfo(let UserId):
+             if let  yUrl = URL(string: Self.urlStringForUserInfo) {
+                 myUrl = yUrl.appendingPathComponent(UserId)
+             }
+             
             
         }
         

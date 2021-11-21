@@ -20,6 +20,9 @@ struct WebApiJsonDecoder {
     //  MARK: -  vars for the json decoded objects
     var theClassReturnObjct: ClassReturnObjct?
     var theClassesReturnObjct: ClassesReturnObjct?
+    var theAuthenticateReturnObjct: AuthenticateReturnObjct?
+    var theUserInfoReturnObjct: UserInfoReturnObjct?
+
     
     // Calls the `ConsumeURLDataRequest.getFromWeb` function and process the returned Result, It then ececuted the completionHandler passing it the Data from the Result
     func sendURLReqToProcess(with urlRequest:URLRequest, andSession session: URLSession, completionHandler:  @escaping (Data) -> Void ) -> Void {
@@ -49,6 +52,29 @@ struct WebApiJsonDecoder {
             return
         }
     }
+    
+    // Calls the `ConsumeURLDataRequest.getFromWeb` function and process the returned Result, It then ececuted the completionHandler passing it the Data from the Result
+    func justAuthenticateProcess(with urlRequest:URLRequest, andSession session: URLSession, completionHandler:  @escaping  (Result<Data, GetResultOfNetworkCallError>) -> Void ) -> Void {
+        
+        ConsumeURLDataRequest.getFromWeb(sessionToUse: session, urlRequstToUse: urlRequest) { (result) in
+            
+            switch result {
+                case .failure(.httpError(let respne)) where respne.statusCode == 401 :
+                    completionHandler(result)
+                    return
+                case .success(_):
+                    completionHandler(result)
+                    return
+                default:
+                    if case Result<Data, GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = result {
+                        processTheError(with: getResultOfNetworkCallError)
+                    }
+                    return
+            }
+        }
+    }
+
+
     
     // Turns the data into a jsonOnbject
     func processTheData<T: Codable>(with data: Data) -> Result<T, GetResultOfNetworkCallError> {

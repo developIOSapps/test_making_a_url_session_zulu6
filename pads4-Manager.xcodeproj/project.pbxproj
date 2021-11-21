@@ -15,6 +15,10 @@
 		4622303923830B3C00B3DC70 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622303823830B3B00B3DC70 /* DesignableButton.swift */; };
 		46241B1423AFC2570002B516 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46241B1323AFC2570002B516 /* MyTabBarController.swift */; };
 		463F12AE2746D4EE00AE8164 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12AD2746D4EE00AE8164 /* Utilities.swift */; };
+		463F12B2274ACC0300AE8164 /* ClassesReturnObjct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12B1274ACC0300AE8164 /* ClassesReturnObjct.swift */; };
+		463F12B4274ACC6A00AE8164 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12B3274ACC6A00AE8164 /* ApiKey.swift */; };
+		463F12B6274ACFD200AE8164 /* AuthenticateReturnObjct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12B5274ACFD200AE8164 /* AuthenticateReturnObjct.swift */; };
+		463F12B8274AD27A00AE8164 /* UserInfoReturnObjct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12B7274AD27A00AE8164 /* UserInfoReturnObjct.swift */; };
 		463F328C22A9A5C60015092E /* DeviceGroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F328B22A9A5C60015092E /* DeviceGroupResponse.swift */; };
 		4649F20A2381DB4B00D12E80 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4649F2092381DB4B00D12E80 /* HelperFunctions.swift */; };
 		464BAF9A23FCABBA005E7CF9 /* String xTensn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464BAF9923FCABBA005E7CF9 /* String xTensn.swift */; };
@@ -100,6 +104,10 @@
 		4622303823830B3B00B3DC70 /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		46241B1323AFC2570002B516 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		463F12AD2746D4EE00AE8164 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		463F12B1274ACC0300AE8164 /* ClassesReturnObjct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesReturnObjct.swift; sourceTree = "<group>"; };
+		463F12B3274ACC6A00AE8164 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
+		463F12B5274ACFD200AE8164 /* AuthenticateReturnObjct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateReturnObjct.swift; sourceTree = "<group>"; };
+		463F12B7274AD27A00AE8164 /* UserInfoReturnObjct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoReturnObjct.swift; sourceTree = "<group>"; };
 		463F328B22A9A5C60015092E /* DeviceGroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceGroupResponse.swift; sourceTree = "<group>"; };
 		4649F2092381DB4B00D12E80 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		464BAF9923FCABBA005E7CF9 /* String xTensn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String xTensn.swift"; sourceTree = "<group>"; };
@@ -352,6 +360,7 @@
 				466FC25A274433640075ECA5 /* GoogleService-Info.plist */,
 				4680FC4A23E1C6D700E333DA /* Constants.swift */,
 				4622303823830B3B00B3DC70 /* DesignableButton.swift */,
+				463F12B5274ACFD200AE8164 /* AuthenticateReturnObjct.swift */,
 				4662C74A228C996E00D99B84 /* AppDelegate.swift */,
 				4649F2092381DB4B00D12E80 /* HelperFunctions.swift */,
 				46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */,
@@ -361,6 +370,9 @@
 				46552441273811E900FF2239 /* GenerateURLRequestSession.swift */,
 				46552442273811E900FF2239 /* WebApiJsonDecoder.swift */,
 				46552443273811E900FF2239 /* ClassReturnObjct.swift */,
+				463F12B7274AD27A00AE8164 /* UserInfoReturnObjct.swift */,
+				463F12B1274ACC0300AE8164 /* ClassesReturnObjct.swift */,
+				463F12B3274ACC6A00AE8164 /* ApiKey.swift */,
 				46656020272F4D470004CBEE /* Getting Students Picture */,
 				46BCCDC92399C8CA0019E7BE /* Settings.bundle */,
 			);
@@ -790,6 +802,7 @@
 				465F7474238309A3005C6132 /* UIViewController.swift in Sources */,
 				46C2FA7C2742CD40002D5214 /* StringExt.swift in Sources */,
 				46A32380237E3BF700D4F77E /* SchoolClassResponse.swift in Sources */,
+				463F12B8274AD27A00AE8164 /* UserInfoReturnObjct.swift in Sources */,
 				46656029272F4D470004CBEE /* ConsumeURLDataRequest.swift in Sources */,
 				4608FE33237EEBC500EE7C80 /* ProfilesResponse.swift in Sources */,
 				46A3237E237E3BC500D4F77E /* SchoolClass.swift in Sources */,
@@ -809,11 +822,13 @@
 				4662C74B228C996E00D99B84 /* AppDelegate.swift in Sources */,
 				4665602B272F4D470004CBEE /* HelperStuff.swift in Sources */,
 				463F328C22A9A5C60015092E /* DeviceGroupResponse.swift in Sources */,
+				463F12B2274ACC0300AE8164 /* ClassesReturnObjct.swift in Sources */,
 				4662C761228CB95400D99B84 /* HTTPMethod.swift in Sources */,
 				465E121623AF97620063DE3E /* NotesUpdateable.swift in Sources */,
 				4662C764228CBAAB00D99B84 /* QueryType.swift in Sources */,
 				46A96F35240495F4005A8AC1 /* App.swift in Sources */,
 				4608FE35237EECC400EE7C80 /* Profile.swift in Sources */,
+				463F12B6274ACFD200AE8164 /* AuthenticateReturnObjct.swift in Sources */,
 				460C56072365FC9A00AC7606 /* Device.swift in Sources */,
 				46BCCDA623992CFA0019E7BE /* UserDefaultsHelper.swift in Sources */,
 				466B2C8D22FDA4B8009C19E4 /* DeviceGroup.swift in Sources */,
@@ -827,6 +842,7 @@
 				46510BF52388320800838764 /* AppProfile.swift in Sources */,
 				46E1201E239FCFED00667E28 /* UserDetailResponse.swift in Sources */,
 				466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */,
+				463F12B4274ACC6A00AE8164 /* ApiKey.swift in Sources */,
 				4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */,
 				46A96F3C24049C23005A8AC1 /* AppTableViewCell.swift in Sources */,
 				465524462738143500FF2239 /* ClassReturnObjct.swift in Sources */,
@@ -1009,7 +1025,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 9;
+				MARKETING_VERSION = 18;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appi4.teacher;
 				PRODUCT_NAME = Teacher;
 				SWIFT_SUPPRESS_WARNINGS = NO;
@@ -1033,7 +1049,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 9;
+				MARKETING_VERSION = 18;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appi4.teacher;
 				PRODUCT_NAME = Teacher;
 				SWIFT_SUPPRESS_WARNINGS = NO;
