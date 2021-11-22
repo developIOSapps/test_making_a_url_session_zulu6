@@ -28,7 +28,7 @@ class GetAStudentPicture {
     }()
     
     //  MARK: -  URL Stuff
-    var url: URL = URL(string: "https://manage.zuludesk.com/storage/public/1049131/photos/647bba344396e7c8170902bcf2e15551.jpg")!
+//    var url: URL = URL(string: "https://manage.zuludesk.com/storage/public/1049131/photos/647bba344396e7c8170902bcf2e15551.jpg")!
     
     func retreiveDataAsPictureFle(withURL theUrl: URL, completionHandler: @escaping (Data) -> Void) {
         print("*-* retreiveDataAsPictureFle \(HelperStuf.getTimeStamp()) ")
@@ -43,12 +43,7 @@ class GetAStudentPicture {
             // create enum instance
             let urlValuesforStudent = URLValues.urlForStudentPic(picUrlString: studentPhotoUrl)
             self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesforStudent.getUrlRequest(), andSession: urlValuesforStudent.getSession() ) {(data) in
-                        
-            // [weak self]
-                
-//                guard let self = self else { return }
-                
-                
+
                 // OK we are fine, we got data - so lets write it to a file so we can retieve it
                 let image = UIImage(data: data)
                 let targetSize = CGSize(width: 120, height: 90)
@@ -67,22 +62,20 @@ class GetAStudentPicture {
                 return
             }
         }
-        print("*-*  readPicFileFromLocalDataFileandDisplay \(HelperStuf.getTimeStamp()) ")
         readPicFileFromLocalDataFile(withURL: urlForLocalFile, completionHandler: completionHandler)
     }
     
     
-     func readPicFileFromLocalDataFile(withURL urlForLocalFile: URL,  completionHandler: @escaping (Data) -> Void) {
-         DispatchQueue.main.async {
-             do {
-                 let data = try Data(contentsOf: urlForLocalFile)
-                completionHandler(data)
-
-             } catch  {
-                 print(error.localizedDescription)
-             }
-         }
-     }
+    func readPicFileFromLocalDataFile(withURL urlForLocalFile: URL,  completionHandler: @escaping (Data) -> Void) {
+        
+        do {
+            let data = try Data(contentsOf: urlForLocalFile)
+            completionHandler(data)
+            
+        } catch  {
+            print(error.localizedDescription)
+        }
+    }
   
 
 

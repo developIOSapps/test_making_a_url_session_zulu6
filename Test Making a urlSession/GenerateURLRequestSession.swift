@@ -35,7 +35,7 @@ enum URLValues {
     case urlForListOfClasses
     case urlForClassInfo(UUISString: String)
     case urlForStudentPic(picUrlString: String)
-    case urlForTeacherAuthenticate
+    case urlForTeacherAuthenticate(username: String, userPassword: String)
     case urlForUserInfo(userID: String)
     
     func getUrlRequest(with urlString: String? = nil) -> URLRequest {
@@ -47,7 +47,7 @@ enum URLValues {
         
         // Headers
         
-        let theApiKey = ApiKey.getApiKey()
+        guard let theApiKey = SchoolInfo.getApiKey() else { fatalError("could not get the apikey")}
         
         request.addValue(theApiKey, forHTTPHeaderField: URLValues.authorizationName)
 //        request.addValue(URLValues.authorizationValue, forHTTPHeaderField: URLValues.authorizationName)
@@ -65,18 +65,26 @@ enum URLValues {
         case .urlForUserInfo: request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
             
 
-        case .urlForTeacherAuthenticate:
+        case .urlForTeacherAuthenticate(let username, let userPassword):
             request.addValue(URLValues.xServerProtocolVersionValueV2, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
             request.addValue(URLValues.ContentTypeValue, forHTTPHeaderField: URLValues.ContentTypeName)
             request.httpMethod = "Post"
 
             // JSON Body
-
+            
+            let bodyObject: [String : Any] = [
+                "company": "1049131",
+                "username": username,
+                "password": userPassword
+            ]
+ 
+/*
             let bodyObject: [String : Any] = [
                 "company": "1049131",
                 "username": "morahchumie",
                 "password": "Chummie@864"
             ]
+ */
             request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
         }
         

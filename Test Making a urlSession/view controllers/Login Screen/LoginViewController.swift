@@ -12,7 +12,7 @@ import Firebase
 class LoginViewController: UIViewController {
     
     // used to execute the dataRetrevial from the Web API
-     var webApiJsonDecoder = WebApiJsonDecoder()
+    var webApiJsonDecoder: WebApiJsonDecoder!
      
 
     
@@ -66,8 +66,8 @@ class LoginViewController: UIViewController {
     // MARK: - Life Cycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-//        emailTextField.text = "applereview1@appi4.com"
-//        passwordTextField.text = "Simcha@3485"
+        emailTextField.text = "morahchumie"
+        passwordTextField.text = "Chummie@864"
 
         
 //        if let xx = getGroupId() {
@@ -81,88 +81,12 @@ class LoginViewController: UIViewController {
     
     // MARK: - Screen Buttons
     @IBAction func loginPressed(_ sender: Any) {
-
-        
-        errorLabel.text = ""
-        /// Validate fields
-        if let error = validateTheFields() {
-            showError(error: error)
-            return
+        if let theApiKey = SchoolInfo.getApiKey() {
+           // myApiKey = theApiKey
+            getTheCredentialedData()
+        } else {
+            doFirebaseStuff()
         }
-        
-        guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
-                print("failed in guard")
-                return
-        }
-        
-        FBAuth.autheticate(with: email, and: password) { (result) in
-            
-            guard let authDataResult = try? result.get()
-                
-                else {   /* This deals with the error */
-                    
-                    FBAuth.handleAuthError(vc: self, result: result)
-                    // self.handleAuthError(result: result)
-                    return
-                    
-                }
-            
-            /// Is e-mail verified
-            let isEmailVerified = authDataResult.user.isEmailVerified
-            guard isEmailVerified == true
-                
-                else {
-                    
-                    print("not verified - sending e-mail verification")
-                    FBAuth.sendEmailVerification(to: authDataResult.user) { (errorFromSendEmail) in
-                        
-                        guard errorFromSendEmail == nil else  {
-                            FBAuth.handleErrorNoResult(vc: self, error: errorFromSendEmail)
-                            // self.handleErrorNoResult(error: errorFromSendEmail)
-                            self.logUserOff()
-                            return
-                        }
-                        
-                        print("sent verification well successfully")
-                    }
-                    
-                    return
-            }
-            
-            print("about to get the data ", authDataResult.user.email)
-            self.loggedInUser =  authDataResult.user
-            
-            FBData.getDocument(with: self.loggedInUser!) { (resultFromFSUserData) in
-                guard let theDoc = try? resultFromFSUserData.get()
-                    
-                    else {   /* This deals with the error */
-                        
-                        /// Setup to get what we need to process the error
-                        guard case Result.failure(let err) = resultFromFSUserData else { fatalError("// this should never execute in getting error") }
-                        
-                        /// We got what we need and we are ready to process the error
-                        print("the error code is \(err)")
-                        print("pause")
-                        return
-                        
-                    }
-                
-                guard let record = theDoc.data(), let apiKey = record["apiKey"] as? String, let classGroupCodeInt = record["classGroupCodeInt"] as? Int, let className = record["className"] as? String else {
-                    fatalError("could not convert it to a non optional")
-                }
-                /// -> Success! - got the document and now can retreive the information
-                print("We got the apikey it is \(apiKey) and \(className) and \(classGroupCodeInt) ")
-                
-                self.groupID = classGroupCodeInt
-                self.groupName = className
-                self.myApiKey = apiKey
-                
-                self.performSegue(withIdentifier: "returnFromLoginWithClass", sender: self)
-                
-             }
-        }
-        // doAnimate()
     }
     
     @IBAction func doSegue(_ sender: Any) {
@@ -266,7 +190,7 @@ extension LoginViewController {
         
         
         /*  1: --------  Authenticate the teaxher  ------------------------------------    */
-        let urlValuesForTeacherAuthenticate = URLValues.urlForTeacherAuthenticate
+        let urlValuesForTeacherAuthenticate = URLValues.urlForTeacherAuthenticate(username: emailTextField.text!, userPassword: passwordTextField.text!)
         webApiJsonDecoder.justAuthenticateProcess(with: urlValuesForTeacherAuthenticate.getUrlRequest(), andSession: urlValuesForTeacherAuthenticate.getSession() ) {(result) in
             
             if case  .failure(.httpError(let respne)) = result, respne.statusCode == 401 {
@@ -362,12 +286,108 @@ extension LoginViewController {
                         }
                         
                         self.webApiJsonDecoder.theClassReturnObjct = aClassReturnObjct
+                        dump(self.webApiJsonDecoder.theClassReturnObjct)
+                        self.groupID = classGroupCode
+                        self.groupName = "xxxx"
+                        self.myApiKey = SchoolInfo.getApiKey()
+                        
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "returnFromLoginWithClass", sender: self)
+                        }
+                        
+                        
+
                         
                         
                     }
                 }
             }
         }
+    }
+    
+    fileprivate func doFirebaseStuff() {
+        
+        errorLabel.text = ""
+        /// Validate fields
+        if let error = validateTheFields() {
+            showError(error: error)
+            return
+        }
+        
+        guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+                print("failed in guard")
+                return
+        }
+        
+        FBAuth.autheticate(with: email, and: password) { (result) in
+            
+            guard let authDataResult = try? result.get()
+                
+                else {   /* This deals with the error */
+                    
+                    FBAuth.handleAuthError(vc: self, result: result)
+                    // self.handleAuthError(result: result)
+                    return
+                    
+                }
+            
+            /// Is e-mail verified
+            let isEmailVerified = authDataResult.user.isEmailVerified
+            guard isEmailVerified == true
+                
+                else {
+                    
+                    print("not verified - sending e-mail verification")
+                    FBAuth.sendEmailVerification(to: authDataResult.user) { (errorFromSendEmail) in
+                        
+                        guard errorFromSendEmail == nil else  {
+                            FBAuth.handleErrorNoResult(vc: self, error: errorFromSendEmail)
+                            // self.handleErrorNoResult(error: errorFromSendEmail)
+                            self.logUserOff()
+                            return
+                        }
+                        
+                        print("sent verification well successfully")
+                    }
+                    
+                    return
+            }
+            
+            print("about to get the data ", authDataResult.user.email)
+            self.loggedInUser =  authDataResult.user
+            
+            FBData.getDocument(with: self.loggedInUser!) { (resultFromFSUserData) in
+                guard let theDoc = try? resultFromFSUserData.get()
+                    
+                    else {   /* This deals with the error */
+                        
+                        /// Setup to get what we need to process the error
+                        guard case Result.failure(let err) = resultFromFSUserData else { fatalError("// this should never execute in getting error") }
+                        
+                        /// We got what we need and we are ready to process the error
+                        print("the error code is \(err)")
+                        print("pause")
+                        return
+                        
+                    }
+                
+                guard let record = theDoc.data(), let apiKey = record["apiKey"] as? String, let classGroupCodeInt = record["classGroupCodeInt"] as? Int, let className = record["className"] as? String else {
+                    fatalError("could not convert it to a non optional")
+                }
+                /// -> Success! - got the document and now can retreive the information
+                print("We got the apikey it is \(apiKey) and \(className) and \(classGroupCodeInt) ")
+                
+                self.groupID = classGroupCodeInt
+                self.groupName = className
+                self.myApiKey = apiKey
+                
+                self.performSegue(withIdentifier: "returnFromLoginWithClass", sender: self)
+                
+             }
+        }
+        // doAnimate()
+
     }
 
 }

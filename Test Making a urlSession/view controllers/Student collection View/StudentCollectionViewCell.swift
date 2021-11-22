@@ -16,6 +16,8 @@ class StudentCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var studentNameLabel: UILabel!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var checkmarkImageView: UIImageView! {
         didSet {
             checkmarkImageView.alpha = 0.0
@@ -43,6 +45,8 @@ class StudentCollectionViewCell: UICollectionViewCell {
         
         studentImageView.layer.cornerRadius = 60
         studentImageView.layer.masksToBounds = true
+        
+        activityIndicator.startAnimating()
     }
     
     
@@ -57,6 +61,7 @@ class StudentCollectionViewCell: UICollectionViewCell {
     }
     
     func update(displaying image: UIImage?) {
+        activityIndicator.stopAnimating()
         if let imageToDisplay = image {
             // spinner.stopAnimating()
             studentImageView.image = imageToDisplay

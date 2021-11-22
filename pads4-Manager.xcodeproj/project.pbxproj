@@ -16,7 +16,7 @@
 		46241B1423AFC2570002B516 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46241B1323AFC2570002B516 /* MyTabBarController.swift */; };
 		463F12AE2746D4EE00AE8164 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12AD2746D4EE00AE8164 /* Utilities.swift */; };
 		463F12B2274ACC0300AE8164 /* ClassesReturnObjct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12B1274ACC0300AE8164 /* ClassesReturnObjct.swift */; };
-		463F12B4274ACC6A00AE8164 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12B3274ACC6A00AE8164 /* ApiKey.swift */; };
+		463F12B4274ACC6A00AE8164 /* SchoolInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12B3274ACC6A00AE8164 /* SchoolInfo.swift */; };
 		463F12B6274ACFD200AE8164 /* AuthenticateReturnObjct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12B5274ACFD200AE8164 /* AuthenticateReturnObjct.swift */; };
 		463F12B8274AD27A00AE8164 /* UserInfoReturnObjct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12B7274AD27A00AE8164 /* UserInfoReturnObjct.swift */; };
 		463F328C22A9A5C60015092E /* DeviceGroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F328B22A9A5C60015092E /* DeviceGroupResponse.swift */; };
@@ -105,7 +105,7 @@
 		46241B1323AFC2570002B516 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		463F12AD2746D4EE00AE8164 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		463F12B1274ACC0300AE8164 /* ClassesReturnObjct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesReturnObjct.swift; sourceTree = "<group>"; };
-		463F12B3274ACC6A00AE8164 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
+		463F12B3274ACC6A00AE8164 /* SchoolInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolInfo.swift; sourceTree = "<group>"; };
 		463F12B5274ACFD200AE8164 /* AuthenticateReturnObjct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateReturnObjct.swift; sourceTree = "<group>"; };
 		463F12B7274AD27A00AE8164 /* UserInfoReturnObjct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoReturnObjct.swift; sourceTree = "<group>"; };
 		463F328B22A9A5C60015092E /* DeviceGroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceGroupResponse.swift; sourceTree = "<group>"; };
@@ -372,7 +372,7 @@
 				46552443273811E900FF2239 /* ClassReturnObjct.swift */,
 				463F12B7274AD27A00AE8164 /* UserInfoReturnObjct.swift */,
 				463F12B1274ACC0300AE8164 /* ClassesReturnObjct.swift */,
-				463F12B3274ACC6A00AE8164 /* ApiKey.swift */,
+				463F12B3274ACC6A00AE8164 /* SchoolInfo.swift */,
 				46656020272F4D470004CBEE /* Getting Students Picture */,
 				46BCCDC92399C8CA0019E7BE /* Settings.bundle */,
 			);
@@ -842,7 +842,7 @@
 				46510BF52388320800838764 /* AppProfile.swift in Sources */,
 				46E1201E239FCFED00667E28 /* UserDetailResponse.swift in Sources */,
 				466B2C9B22FDBAD9009C19E4 /* PrettyPrintingJson.swift in Sources */,
-				463F12B4274ACC6A00AE8164 /* ApiKey.swift in Sources */,
+				463F12B4274ACC6A00AE8164 /* SchoolInfo.swift in Sources */,
 				4694D91D2302E58000FEE622 /* GenerateReq.swift in Sources */,
 				46A96F3C24049C23005A8AC1 /* AppTableViewCell.swift in Sources */,
 				465524462738143500FF2239 /* ClassReturnObjct.swift in Sources */,

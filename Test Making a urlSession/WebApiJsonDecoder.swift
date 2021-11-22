@@ -15,7 +15,7 @@ enum GetResultOfNetworkCallError: Error {
     case encodingError(Error)
 }
 
-struct WebApiJsonDecoder {
+class WebApiJsonDecoder {
     
     //  MARK: -  vars for the json decoded objects
     var theClassReturnObjct: ClassReturnObjct?
@@ -32,7 +32,7 @@ struct WebApiJsonDecoder {
             
             guard let data = try? result.get() else {
                 if case Result<Data, GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = result {
-                    processTheError(with: getResultOfNetworkCallError)
+                    self.processTheError(with: getResultOfNetworkCallError)
                 }
                 return
             }
@@ -67,7 +67,7 @@ struct WebApiJsonDecoder {
                     return
                 default:
                     if case Result<Data, GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = result {
-                        processTheError(with: getResultOfNetworkCallError)
+                        self.processTheError(with: getResultOfNetworkCallError)
                     }
                     return
             }

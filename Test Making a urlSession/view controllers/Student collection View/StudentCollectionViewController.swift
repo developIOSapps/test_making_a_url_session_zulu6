@@ -258,6 +258,8 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         // title = navBarTitle
         
         // 1 - Get the list of classes
+        
+        /*
         let urlValues = URLValues.urlForListOfClasses
         webApiJsonDecoder.sendURLReqToProcess(with: urlValues.getUrlRequest(), andSession: urlValues.getSession() ) {(data) in
             
@@ -301,9 +303,9 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                 self.webApiJsonDecoder.theClassReturnObjct = aClassReturnObject
                 dump(self.webApiJsonDecoder.theClassReturnObjct)
                 
-                let student = self.webApiJsonDecoder.theClassReturnObjct?.class.students[2]
+                let student = self.webApiJsonDecoder.theClassReturnObjct?.class.students[1]
                 dump(student)
-                
+          */
                 GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
                     DispatchQueue.main.async {
                         
@@ -317,8 +319,8 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                     }
                 }
             }
-        }
-    }
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -409,86 +411,47 @@ extension StudentCollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if ItemsToDisplay.devices == itemsToDisplay {
-            return
-        }
-        print("*^* In will display\(indexPath.row)")
-        // Configure the cell
-        
-        // get the current student
-        let userStudent = users[indexPath.row]
-        
-        dump(userStudent)
-        // 2a Get the studentIdx to get the photo url and for future index path
-        guard let students: [ClassReturnObjct.Clss.Student] = (self.webApiJsonDecoder.theClassReturnObjct?.class.students),
-              let studentIdxInClass = students.firstIndex(where: { $0.id == Int(userStudent.identity) } )
-        else {fatalError("couldn't find the student")}
-        
+         if ItemsToDisplay.devices == itemsToDisplay {
+             return
+         }
 
-        // 2b.1 get the photo url
-        let photoURL = students[studentIdxInClass].photo
-        
-        // if there is no picture uploaded for the student then set it to stub and leave
-        print("*^*^*^",photoURL.absoluteString)
-        if photoURL.absoluteString.contains(Constants.avatar) {
-            print("*^*^*^","its an avatar")
-            if let cell = cell as? StudentCollectionViewCell {
-                print("*^*^*^","update its an avatar")
-                cell.update(displaying: UIImage(named: "avatar"))
-            }
-            return
-        }
-        
-        
-        // 2b.2 make file url from photo url
-        let newFileURL: URL = {
-            let lp: String = { photoURL.lastPathComponent}()
-            let docURL: URL = {
-                return  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            }()
-            return docURL.appendingPathComponent(lp)
-        }()
-        
-        print("*^*^",newFileURL)
-        // 3 execute the function that takes the closure
-        self.getAStudentPicture.retreiveDataAsPictureFle(withURL: photoURL) { data in
-            DispatchQueue.main.async {
-                
-                
-                let replaceImage = UIImage(data: data)
-                
-                // - get the index
-                /*
-                 The index path for the photo might have changed between the
-                 time the request started and finished, so find the most
-                 recent index path
-                 */
-                guard let students: [ClassReturnObjct.Clss.Student] = (self.webApiJsonDecoder.theClassReturnObjct?.class.students),
-                      let studentIdxInClass = students.firstIndex(where: { $0.photo == photoURL } )
-                else {fatalError("couldn't find the student")}
-                
-                // - create the indexpath object
-                let studentIndexPath = IndexPath(item: studentIdxInClass, section: 0)
-                
-                print(data)
-                // - When the request finishes, only update the cell if it's still visible
-                if let cell = self.collectionView.cellForItem(at: studentIndexPath)
-                    as? StudentCollectionViewCell {
-                    print("do cell ypdate")
-                    cell.update(displaying: replaceImage)
-                }
-                
-                
-                // cell.studentImageView.image = UIImage(data: data)
-                // cell.studentNameLabel.text = student.title // + " " + student.lastName
-                // return cell
-                
-                // return replaceImage
-                //self.theStudentPic.image = replaceImage
-            }
-        }
+         // get the current student
+         let userStudent = users[indexPath.row]
+         
+         // 2a Get the studentIdx to get the photo url and for future index path
+         guard let students: [ClassReturnObjct.Clss.Student] = (self.webApiJsonDecoder.theClassReturnObjct?.class.students),
+               let studentIdxInClass = students.firstIndex(where: { $0.id == Int(userStudent.identity) } )
+         else {fatalError("couldn't find the student")}
+         
 
-    }
+         // 2b.1 get the photo url
+         let photoURL = students[studentIdxInClass].photo
+         
+         // if there is no picture uploaded for the student then set it to stub and leave
+         if photoURL.absoluteString.contains(Constants.avatar) {
+             if let cell = cell as? StudentCollectionViewCell {
+                 cell.update(displaying: UIImage(named: "avatar"))
+             }
+             return
+         }
+         // 3 execute the function that takes the closure
+         self.getAStudentPicture.retreiveDataAsPictureFle(withURL: photoURL) { data in
+             DispatchQueue.main.async {
+                 
+                 let replaceImage = UIImage(data: data)
+                 guard let studentIdxInClass = self.users.firstIndex(where: { $0.identity == userStudent.identity } ) else {fatalError()}
+
+                 // - create the indexpath object
+                 let studentIndexPath = IndexPath(item: studentIdxInClass, section: 0)
+                 
+                  // - When the request finishes, only update the cell if it's still visible
+                 if let cell = self.collectionView.cellForItem(at: studentIndexPath)
+                     as? StudentCollectionViewCell {
+                     cell.update(displaying: replaceImage)
+                 }
+             }
+         }
+     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as? StudentCollectionViewCell else {fatalError("could not deque")}
@@ -500,7 +463,7 @@ extension StudentCollectionViewController {
             cell.studentImageView.image = UIImage(named: student.picName)
         }
 
-        // cell.studentImageView.image = UIImage(named: student.picName)
+        cell.studentImageView.image = UIImage(named: "avatar")
         cell.studentNameLabel.text = student.title // + " " + student.lastName
         return cell
     }
@@ -587,6 +550,11 @@ extension StudentCollectionViewController {
         apiKey              = apiKeyfromVC
         classGroupCodeInt   = groupID
         className           = groupName
+//        self.webApiJsonDecoder.theAuthenticateReturnObjct = vc.webApiJsonDecoder.theAuthenticateReturnObjct
+//        self.webApiJsonDecoder.theClassReturnObjct = vc.webApiJsonDecoder.theClassReturnObjct
+//        self.webApiJsonDecoder.theClassesReturnObjct = vc.webApiJsonDecoder.theClassesReturnObjct
+//        self.webApiJsonDecoder.theUserInfoReturnObjct = vc.webApiJsonDecoder.theUserInfoReturnObjct
+
         print("Returned from Segue \(classGroupCodeInt) and \(apiKey)")
 
         // Register cell classes
@@ -674,6 +642,12 @@ extension StudentCollectionViewController {
         
         /// This meansI am selecting students
         switch segue.identifier  {
+        
+        case "loginScr":
+            guard let loginVC = segue.destination as? LoginViewController else {
+                fatalError("Could not go to the login view controller")
+            }
+            loginVC.webApiJsonDecoder = self.webApiJsonDecoder
             
         case "goToStudentDetail":
            

@@ -54,19 +54,26 @@
                                                 <constraint firstAttribute="width" constant="24" id="ab2-4Q-yaW"/>
                                             </constraints>
                                         </imageView>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="JqI-P5-1sa">
+                                            <rect key="frame" x="60" y="60" width="20" height="20"/>
+                                            <color key="color" systemColor="systemBackgroundColor"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="4gT-9g-zUB" firstAttribute="bottom" secondItem="EZi-3c-852" secondAttribute="bottomMargin" id="3Fd-Zk-sy0"/>
                                         <constraint firstItem="BKZ-at-STG" firstAttribute="top" secondItem="EZi-3c-852" secondAttribute="topMargin" id="Ioe-wj-AEz"/>
                                         <constraint firstItem="BKZ-at-STG" firstAttribute="leading" secondItem="EZi-3c-852" secondAttribute="leadingMargin" id="Jvd-nQ-tMD"/>
                                         <constraint firstItem="BKZ-at-STG" firstAttribute="trailing" secondItem="EZi-3c-852" secondAttribute="trailingMargin" id="Oe5-Jf-LH2"/>
+                                        <constraint firstItem="JqI-P5-1sa" firstAttribute="centerX" secondItem="BKZ-at-STG" secondAttribute="centerX" id="S31-d6-PEC"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="4gT-9g-zUB" secondAttribute="trailing" id="TlA-QA-Y7H"/>
                                         <constraint firstItem="4gT-9g-zUB" firstAttribute="leading" secondItem="EZi-3c-852" secondAttribute="leadingMargin" id="aca-T4-8V3"/>
+                                        <constraint firstItem="JqI-P5-1sa" firstAttribute="centerY" secondItem="BKZ-at-STG" secondAttribute="centerY" id="ezM-6x-PCE"/>
                                         <constraint firstItem="J5I-gY-XTH" firstAttribute="centerX" secondItem="EZi-3c-852" secondAttribute="centerX" id="hN5-yg-iE9"/>
                                         <constraint firstItem="J5I-gY-XTH" firstAttribute="centerY" secondItem="EZi-3c-852" secondAttribute="centerY" id="lOc-FC-cUV"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="JqI-P5-1sa" id="MXm-oP-tkh"/>
                                     <outlet property="checkmarkImageView" destination="J5I-gY-XTH" id="QPW-nG-kbe"/>
                                     <outlet property="studentImageView" destination="BKZ-at-STG" id="RfB-cO-4Rx"/>
                                     <outlet property="studentNameLabel" destination="4gT-9g-zUB" id="dVN-38-OUb"/>
