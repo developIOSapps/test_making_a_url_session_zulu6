@@ -141,6 +141,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
     var apiKey: String!
     
+    var classUUID: String!
     var classGroupCodeInt: Int!
     
     var className: String! {
@@ -284,10 +285,12 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
             let classuuid = classes[idx].uuid
             print(classuuid)
             
-            
+         */
             // 2 - Get the students in a class
+        
+       
             
-            let urlValuesforClass = URLValues.urlForClassInfo(UUISString: classuuid)
+            let urlValuesforClass = URLValues.urlForClassInfo(UUISString: self.classUUID)
             self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesforClass.getUrlRequest(), andSession: urlValuesforClass.getSession() ) {(data) in
                 // OK we are fine, we got data - so lets write it to a file so we can retieve it
                 
@@ -305,7 +308,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                 
                 let student = self.webApiJsonDecoder.theClassReturnObjct?.class.students[1]
                 dump(student)
-          */
+
                 GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
                     DispatchQueue.main.async {
                         
@@ -319,7 +322,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                     }
                 }
             }
-//        }
+        }
 //    }
     
     override func viewDidLoad() {
@@ -338,6 +341,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
             
             collectionView.allowsMultipleSelection = false
             
+            classUUID = UserDefaultsHelper.getClassUUID()
             classGroupCodeInt = UserDefaultsHelper.groupID
             className = UserDefaultsHelper.groupName
 
@@ -544,12 +548,15 @@ extension StudentCollectionViewController {
     @IBAction func returnFromLoginWithClass(segue: UIStoryboardSegue) {
         guard let vc = segue.source as? LoginViewController else { fatalError("No Class Group Code")  }
         guard let apiKeyfromVC = vc.myApiKey else { fatalError("api No Class Group Code")  }
+        guard let classUUID = vc.classUUID else {fatalError("no calss uuid")}
         guard let groupID = vc.groupID else { fatalError("groupid No Class Group Code")  }
         guard let groupName = vc.groupName  else { fatalError("groupname No Class Group Code")  }
 
         apiKey              = apiKeyfromVC
         classGroupCodeInt   = groupID
+        self.classUUID           = classUUID
         className           = groupName
+
 //        self.webApiJsonDecoder.theAuthenticateReturnObjct = vc.webApiJsonDecoder.theAuthenticateReturnObjct
 //        self.webApiJsonDecoder.theClassReturnObjct = vc.webApiJsonDecoder.theClassReturnObjct
 //        self.webApiJsonDecoder.theClassesReturnObjct = vc.webApiJsonDecoder.theClassesReturnObjct

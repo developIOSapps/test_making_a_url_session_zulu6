@@ -66,6 +66,9 @@ class LoginViewController: UIViewController {
     // MARK: - Life Cycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordTextField.delegate = self
+        emailTextField.delegate = self
+        
         emailTextField.text = "morahchumie"
         passwordTextField.text = "Chummie@864"
 
@@ -94,6 +97,7 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Internal Helper Functions
+    
     fileprivate func doAnimate() -> Void {
         print("About to animate")
         
@@ -116,6 +120,14 @@ class LoginViewController: UIViewController {
             }
         }
     }
+
+    fileprivate func doErrorAlert() {
+        let alert = UIAlertController(title: "Authorization Error", message: "User name or password is incorrect", preferredStyle: .alert)
+        let action = UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default) { _ in NSLog("The \"OK\" alert occured.") }
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+
 
     
     func saveGroupId(_ groupID: Int, andName name: String) {
@@ -195,6 +207,9 @@ extension LoginViewController {
             
             if case  .failure(.httpError(let respne)) = result, respne.statusCode == 401 {
                 print("error authi")
+                DispatchQueue.main.async {
+                    self.doErrorAlert()
+                }
                 return
             }
             
@@ -269,10 +284,21 @@ extension LoginViewController {
                     guard let classList = self.webApiJsonDecoder.theClassesReturnObjct?.classes           else {fatalError("could not retreive classes")}
                     guard let idx = classList.firstIndex(where:  { $0.userGroupId == classGroupCode} )    else {fatalError("couldn't find the class group")}
                     let theClass = classList[idx]
-                    let classuuid = theClass.uuid
+                    UserDefaultsHelper.setClassUUID(theClass.uuid)
+                    self.classUUID = theClass.uuid
                     
                     
-                    let urlValuesForClassInfo = URLValues.urlForClassInfo(UUISString: classuuid)
+                    self.groupID = classGroupCode
+                     self.groupName = "xxxx"
+                     self.myApiKey = SchoolInfo.getApiKey()
+                     
+                     DispatchQueue.main.async {
+                         self.performSegue(withIdentifier: "returnFromLoginWithClass", sender: self)
+                     }
+
+                    
+                    /*
+                    let urlValuesForClassInfo = URLValues.urlForClassInfo(UUISString: self.classUUID!)
                     self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesForClassInfo.getUrlRequest(), andSession: urlValuesForClassInfo.getSession()) { data in
                         let returnFromClassInfo: Result<ClassReturnObjct,GetResultOfNetworkCallError>
                             = self.webApiJsonDecoder.processTheData(with: data)
@@ -294,12 +320,12 @@ extension LoginViewController {
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "returnFromLoginWithClass", sender: self)
                         }
-                        
+                      */
                         
 
                         
                         
-                    }
+//                    }
                 }
             }
         }
@@ -390,4 +416,13 @@ extension LoginViewController {
 
     }
 
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+         textField.resignFirstResponder()
+         return true
+     }
+    
 }
