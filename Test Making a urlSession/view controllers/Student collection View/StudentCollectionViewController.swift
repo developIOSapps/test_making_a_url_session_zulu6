@@ -326,13 +326,13 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         //         }
         //
 
-        
+        /*
         let alert = UIAlertController(title: "Items from config file", message: schoolInfo?.mngedCfgitems, preferredStyle: .alert)
         let action = UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default) { _ in NSLog("The \"OK\" alert occured.") }
         alert.addAction(action)
         
         self.present(alert, animated: true, completion: nil)
-        
+         */
     }
  
     fileprivate func setUpToolBar() {
@@ -504,7 +504,6 @@ extension StudentCollectionViewController {
         return cell
     }
 
-    
     override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
 //           if let cell = collectionView.cellForItem(at: indexPath) {
 //               cell.contentView.backgroundColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
@@ -592,22 +591,20 @@ extension StudentCollectionViewController {
             getAStudentPicture = GetAStudentPicture()
             getAStudentPicture.schoolInfo = schoolInfo
             getAStudentPicture.webApiJsonDecoder = webApiJsonDecoder
-            mdmStatus = .fromLoginVC
+            
             classGroupCodeInt   = groupID
             self.classUUID      = classUUID
             className           = groupName
-
-            guard let tbPropertySaver = self.tabBarController as? MyTabBarController else {return}
-            tbPropertySaver.saveTheInfo(vc: self)
 
         default:
             classGroupCodeInt   = groupID
             self.classUUID      = classUUID
             className           = groupName
-
         }
+        mdmStatus = .fromLoginVC
+        guard let tbPropertySaver = self.tabBarController as? MyTabBarController else {return}
+        tbPropertySaver.saveTheInfo(vc: self)
 
-        // apiKey              = apiKeyfromVC
         
         
 
@@ -863,8 +860,6 @@ extension StudentCollectionViewController {
         }
 
     }
-    
-
     
     @IBAction func backToDeviceList(seque: UIStoryboardSegue)  {
         

@@ -24,6 +24,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
+    
+    @IBOutlet weak var saveLogin: UISegmentedControl!
+    @IBOutlet weak var stackWithLoginSave: UIStackView!
+    
+
   
     @IBOutlet weak var msgVW: UITextView!
   
@@ -49,24 +54,31 @@ class LoginViewController: UIViewController {
     
     var groupID: Int? {
         didSet {
-            guard let groupID = groupID else { return  }
-            UserDefaultsHelper.setGroupID(groupID)
+            if saveLogin.selectedSegmentIndex == 0 {
+                guard let groupID = groupID else { return  }
+                UserDefaultsHelper.setGroupID(groupID)
+            }
         }
     }
     var groupName: String? {
         didSet {
-            guard let groupName = groupName else { return  }
-            UserDefaultsHelper.setGroupName(groupName)
+            if saveLogin.selectedSegmentIndex == 0 {
+                guard let groupName = groupName else { return  }
+                UserDefaultsHelper.setGroupName(groupName)
+            }
         }
     }
     var classUUID: String? {
         didSet {
-            guard let classUUID = classUUID else { return  }
-            UserDefaultsHelper.setClassUUID(classUUID)
+            DispatchQueue.main.async { [self] in
+                if saveLogin.selectedSegmentIndex == 0 {
+                    guard let classUUID = classUUID else { return  }
+                    UserDefaultsHelper.setClassUUID(classUUID)
+                }
+            }
         }
     }
-    
-    
+        
     var schoolClasses: [SchoolClass] = []
 
 
@@ -74,6 +86,11 @@ class LoginViewController: UIViewController {
     // MARK: - Life Cycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if MDMStatus.missing ==  mdmStatus {
+//            saveLogin.isHidden = true
+            stackWithLoginSave.isHidden = true
+        }
         
         msgVW.text = msgFromSegue
         
@@ -112,9 +129,9 @@ class LoginViewController: UIViewController {
         
     }
     
-    @IBAction func doSegue(_ sender: Any) {
-        performSegue(withIdentifier: "returnWithClass", sender: nil)
-    }
+//    @IBAction func doSegue(_ sender: Any) {
+//        performSegue(withIdentifier: "returnWithClass", sender: nil)
+//    }
     
     // MARK: - Internal Helper Functions
     
