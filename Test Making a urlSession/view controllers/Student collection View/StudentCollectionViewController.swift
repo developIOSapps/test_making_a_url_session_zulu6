@@ -92,6 +92,8 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
          }
          
      }
+    
+    var myValue: Int?
      
     var itemsToDisplay: ItemsToDisplay = .students {
         didSet {
@@ -133,13 +135,17 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
             }
         }
     }
-
+    
     var addBarButton: UIBarButtonItem = UIBarButtonItem()
     
     var navBarTitle = ""
     
     
-    var apiKey: String!
+    var schoolInfo: SchoolInfo?
+    
+    var mdmStatus: MDMStatus?
+
+    // var apiKey: String!
     
     var classUUID: String!
     var classGroupCodeInt: Int!
@@ -180,7 +186,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
 //    var studentsOfClass = StudentsOfClass()
 //    var theClassReturnObject: ClassReturnObject?
-    var getAStudentPicture: GetAStudentPicture = GetAStudentPicture()
+    var getAStudentPicture: GetAStudentPicture!
    
     //  MARK: -  URL Stuff
     var url: URL = URL(string: "https://manage.zuludesk.com/storage/public/1049131/photos/647bba344396e7c8170902bcf2e15551.jpg")!
@@ -189,60 +195,146 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     var webApiJsonDecoder = WebApiJsonDecoder()
 
     
-    
-    
     @IBOutlet weak var barButtonSelectCancel: UIBarButtonItem!
     
     
     // MARK: - View Controller Life Cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+  
+        
+        // Customize the navigation bar
+        // navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        // navigationController?.navigationBar.shadowImage = UIImage()
+        // navigationController?.hidesBarsOnSwipe = true
+        
+        
+        self.activityIndicator.animateActivity(title: "Loading...", view: self.view, navigationItem: navigationItem)
+        navigationController?.navigationBar.tintColor = UIColor(named: "tintContrast")
+        barButtonSelectCancel.title = "Select"
+        
+        setUpToolBar()
+        
+        collectionView.allowsMultipleSelection = false
+
+        // Step 1 - get the values from the MDM config file if missing go to login screen
+
+        // restore saved properties from tabbar controller
+        guard let tbPropertySaver = self.tabBarController as? MyTabBarController else {return}
+        tbPropertySaver.restoreTheInfo(vc: self)
+
+        if MDMStatus.fromLoginVC !=  self.mdmStatus {
+        
+            guard let schoolInf = SchoolInfo() else {
+                mdmStatus = .missing
+                performSegue(withIdentifier: "loginScr", sender: nil)
+                return
+            }
+            
+            schoolInfo = schoolInf
+            mdmStatus = .found
+            getAStudentPicture = GetAStudentPicture()
+            getAStudentPicture.schoolInfo = schoolInfo
+            getAStudentPicture.webApiJsonDecoder = webApiJsonDecoder
+            
+            
+            // Step 2 - get the class credentials if missing go to login
+            classUUID = UserDefaultsHelper.getClassUUID()
+            classGroupCodeInt = UserDefaultsHelper.getGroupID()
+            className = UserDefaultsHelper.groupName
+            
+            guard let classUUID = classUUID, let classGroupCodeInt = classGroupCodeInt else {
+                performSegue(withIdentifier: "loginScr", sender: nil)
+                return
+            }
+            
+            if classUUID.isEmpty  ||  classGroupCodeInt < 1  {
+                performSegue(withIdentifier: "loginScr", sender: nil)
+                return
+            }
+        }
+        
+        switch itemsToDisplay {
+        case .students:
+            getClassandStudentData()
+//            if classGroupCodeInt ==  nil || UserDefaultsHelper.getapiKey() == nil  {
+//                print("in about to perform segue")
+//                performSegue(withIdentifier: "loginScr", sender: nil)
+//            } else {
+//                getClassandStudentData()
+//            }
+        case .devices:
+//            if classGroupCodeInt ==  nil || UserDefaultsHelper.getapiKey() == nil {
+//                print("in about to perform segue")
+//                performSegue(withIdentifier: "loginScr", sender: nil)
+//            } else {
+//
+                // Register cell classes
+                self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+                
+                // title = navBarTitle
+                let classGroupCodeStr = String(classGroupCodeInt)
+                
+                GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : classGroupCodeStr ]) )) { (deviceListResponse) in
+                    DispatchQueue.main.async {
+                        
+                        guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
+                        
+                        /// Just load in the users into this class if needed
+                        self.users = deviceListResponse.devices
+                        /// Here we have what we need
+                        deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
+                        print("got devices")
+                        self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
+                        self.collectionView.reloadData()
+                    }
+                }
+            }
+            
+//        }
+        
+    }
+    
+
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
         
-//
-//
-//            let managedConfigFileKey = "com.apple.configuration.managed"
-//
-//            if let managedConfigObj = UserDefaults.standard.object(forKey: managedConfigFileKey ) {
-//                navigationItem.title = "@-@ Found managed config"
-//                print("@-@ Found managed config")
-//                guard let managedConfigDict = managedConfigObj as?  [String:Any?]  else {
-//                    print("@-@ Failed converting it to dictionary")
-//                    return
-//                }
-//
-//                guard let theItm  = managedConfigDict["itm"] as?  String  else {
-//                    print("@-@ Failed getting the itm")
-//                    return
-//                }
-//
-//                print("@-@ the managed apikey is ",theItm )
-//                navigationItem.title = theItm
-//
-//            }
-//            else {
-//
-//                print("@-@ Failed finding managed config file")
-//                navigationItem.title = "@-@ Failed finding managed config file"
-//
-//            }
-//
-        
         
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//         super.viewDidAppear(animated)
+////  FIXME: -  mh should this be here
+////        classGroupCodeInt = UserDefaultsHelper.getGroupID()
+////         if classGroupCodeInt ==  nil {
+////            print("in about to perform segue")
+////             performSegue(withIdentifier: "loginScr", sender: nil)
+////         }
+////
+//     }
     override func viewDidAppear(_ animated: Bool) {
-         super.viewDidAppear(animated)
+        super.viewDidAppear(animated)
+        //  FIXME: -  mh should this be here
+        //        classGroupCodeInt = UserDefaultsHelper.getGroupID()
+        //         if classGroupCodeInt ==  nil {
+        //            print("in about to perform segue")
+        //             performSegue(withIdentifier: "loginScr", sender: nil)
+        //         }
+        //
 
         
-         if classGroupCodeInt ==  nil {
-            print("in about to perform segue")
-             performSegue(withIdentifier: "loginScr", sender: nil)
-         }
+        let alert = UIAlertController(title: "Items from config file", message: schoolInfo?.mngedCfgitems, preferredStyle: .alert)
+        let action = UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default) { _ in NSLog("The \"OK\" alert occured.") }
+        alert.addAction(action)
         
-     }
-    
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+ 
     fileprivate func setUpToolBar() {
         addBarButton = UIBarButtonItem(title: "Select App Prolfiles", style: .plain, target: self, action: #selector(addTapped))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
@@ -290,7 +382,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         
        
             
-            let urlValuesforClass = URLValues.urlForClassInfo(UUISString: self.classUUID)
+        let urlValuesforClass = URLValues.urlForClassInfo(UUISString: self.classUUID, apiKey: schoolInfo!.thekey )
             self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesforClass.getUrlRequest(), andSession: urlValuesforClass.getSession() ) {(data) in
                 // OK we are fine, we got data - so lets write it to a file so we can retieve it
                 
@@ -324,66 +416,6 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
             }
         }
 //    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
- 
-            // Customize the navigation bar
-            // navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            // navigationController?.navigationBar.shadowImage = UIImage()
-            // navigationController?.hidesBarsOnSwipe = true
-            
-                self.activityIndicator.animateActivity(title: "Loading...", view: self.view, navigationItem: navigationItem)
-            navigationController?.navigationBar.tintColor = UIColor(named: "tintContrast")
-            barButtonSelectCancel.title = "Select"
-            
-            setUpToolBar()
-            
-            collectionView.allowsMultipleSelection = false
-            
-            classUUID = UserDefaultsHelper.getClassUUID()
-            classGroupCodeInt = UserDefaultsHelper.groupID
-            className = UserDefaultsHelper.groupName
-
-        switch itemsToDisplay {
-        case .students:
-            if classGroupCodeInt ==  nil || UserDefaultsHelper.getapiKey() == nil  {
-                print("in about to perform segue")
-                performSegue(withIdentifier: "loginScr", sender: nil)
-            } else {
-                getClassandStudentData()
-            }
-        case .devices:
-            if classGroupCodeInt ==  nil || UserDefaultsHelper.getapiKey() == nil {
-                print("in about to perform segue")
-                performSegue(withIdentifier: "loginScr", sender: nil)
-            } else {
-                
-                // Register cell classes
-                self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-                
-                // title = navBarTitle
-                let classGroupCodeStr = String(classGroupCodeInt)
-                
-                GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : classGroupCodeStr ]) )) { (deviceListResponse) in
-                    DispatchQueue.main.async {
-                        
-                        guard let deviceListResponse = deviceListResponse as? DeviceListResponse else {fatalError("could not convert it to Users")}
-                        
-                        /// Just load in the users into this class if needed
-                        self.users = deviceListResponse.devices
-                        /// Here we have what we need
-                        deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
-                        print("got devices")
-                        self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
-                        self.collectionView.reloadData()
-                    }
-                }
-            }
-            
-        }
-        
-    }
     
 
     @IBAction func buttonClicked(_ sender: UIBarButtonItem) {
@@ -546,23 +578,46 @@ extension StudentCollectionViewController {
     
     
     @IBAction func returnFromLoginWithClass(segue: UIStoryboardSegue) {
+        
         guard let vc = segue.source as? LoginViewController else { fatalError("No Class Group Code")  }
+       
         guard let apiKeyfromVC = vc.myApiKey else { fatalError("api No Class Group Code")  }
         guard let classUUID = vc.classUUID else {fatalError("no calss uuid")}
         guard let groupID = vc.groupID else { fatalError("groupid No Class Group Code")  }
         guard let groupName = vc.groupName  else { fatalError("groupname No Class Group Code")  }
+        
+        switch vc.mdmStatus {
+        case .missing:
+            self.schoolInfo = vc.schoolInfo
+            getAStudentPicture = GetAStudentPicture()
+            getAStudentPicture.schoolInfo = schoolInfo
+            getAStudentPicture.webApiJsonDecoder = webApiJsonDecoder
+            mdmStatus = .fromLoginVC
+            classGroupCodeInt   = groupID
+            self.classUUID      = classUUID
+            className           = groupName
 
-        apiKey              = apiKeyfromVC
-        classGroupCodeInt   = groupID
-        self.classUUID           = classUUID
-        className           = groupName
+            guard let tbPropertySaver = self.tabBarController as? MyTabBarController else {return}
+            tbPropertySaver.saveTheInfo(vc: self)
+
+        default:
+            classGroupCodeInt   = groupID
+            self.classUUID      = classUUID
+            className           = groupName
+
+        }
+
+        // apiKey              = apiKeyfromVC
+        
+        
+
 
 //        self.webApiJsonDecoder.theAuthenticateReturnObjct = vc.webApiJsonDecoder.theAuthenticateReturnObjct
 //        self.webApiJsonDecoder.theClassReturnObjct = vc.webApiJsonDecoder.theClassReturnObjct
 //        self.webApiJsonDecoder.theClassesReturnObjct = vc.webApiJsonDecoder.theClassesReturnObjct
 //        self.webApiJsonDecoder.theUserInfoReturnObjct = vc.webApiJsonDecoder.theUserInfoReturnObjct
 
-        print("Returned from Segue \(classGroupCodeInt) and \(apiKey)")
+       // print("Returned from Segue \(classGroupCodeInt) and \(apiKey)")
 
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -655,6 +710,16 @@ extension StudentCollectionViewController {
                 fatalError("Could not go to the login view controller")
             }
             loginVC.webApiJsonDecoder = self.webApiJsonDecoder
+            loginVC.msgFromSegue = self.schoolInfo?.mngedCfgitems ?? ""
+            loginVC.mdmStatus = self.mdmStatus
+            
+            if MDMStatus.found == self.mdmStatus {
+                loginVC.schoolInfo = self.schoolInfo
+            }
+            if MDMStatus.fromLoginVC == self.mdmStatus {
+                loginVC.schoolInfo = self.schoolInfo
+            }
+
             
         case "goToStudentDetail":
            

@@ -9,8 +9,18 @@
 import UIKit
 
 
-class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
+class MyTabBarController: UITabBarController, UITabBarControllerDelegate, TabBarPropertySaver {
+   
+    var myValue: Int?
+    var schoolInfo: SchoolInfo?
+    var mdmStatus: MDMStatus?
+    var classUUID: String!
+    var classGroupCodeInt: Int!
+    var className: String!
+    var getAStudentPicture: GetAStudentPicture!
 
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
@@ -47,6 +57,40 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
             vc.itemsToDisplay = .devices
         }
     }
+}
+
+extension MyTabBarController {
+        
+    func restoreTheInfo(vc: UIViewController) {
+        guard let vc = vc as? StudentCollectionViewController else { return}
+        guard let mdmStatus = self.mdmStatus, MDMStatus.fromLoginVC == mdmStatus else {return}
+
+        vc.schoolInfo = schoolInfo
+        vc.mdmStatus = mdmStatus
+        vc.getAStudentPicture = getAStudentPicture
+        vc.classGroupCodeInt = classGroupCodeInt
+        vc.classUUID = classUUID
+        vc.className = className
+
+    }
+    
+    
+    func saveTheInfo(vc: UIViewController) {
+        guard let vc = vc as? StudentCollectionViewController else { return}
+        guard let schoolInfo = vc.schoolInfo else { return }
+
+        self.schoolInfo         = schoolInfo
+        self.mdmStatus          = vc.mdmStatus
+        self.getAStudentPicture = vc.getAStudentPicture
+        self.classGroupCodeInt  = vc.classGroupCodeInt
+        self.classUUID          = vc.classUUID
+        self.className          = vc.className
+
+        
+    }
+    
+
+    
 }
 
 

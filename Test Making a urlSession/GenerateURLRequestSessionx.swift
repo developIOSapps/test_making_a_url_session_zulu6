@@ -1,13 +1,15 @@
 //
-//  GenerateURLRequestSession.swift
-//  Getting Dtudent Pic
+//  GenerateURLRequestSessionx.swift
+//  Test Making a urlSession
 //
-//  Created by Steven Hertz on 11/3/21.
+//  Created by Steven Hertz on 11/24/21.
+//  Copyright © 2021 DIA. All rights reserved.
 //
+
 
 import Foundation
 
-enum URLValuesz {
+enum URLValues {
 
     // Headers
     static let authorizationValue = "Basic NTM3MjI0NjA6RVBUTlpaVEdYV1U1VEo0Vk5RUDMyWDVZSEpSVjYyMkU="
@@ -32,11 +34,11 @@ enum URLValuesz {
     static let urlStringForUserInfo = "https://api.zuludesk.com/users"
 
     
-    case urlForListOfClasses
-    case urlForClassInfo(UUISString: String)
-    case urlForStudentPic(picUrlString: String)
-    case urlForTeacherAuthenticate(username: String, userPassword: String)
-    case urlForUserInfo(userID: String)
+    case urlForListOfClasses(apiKey: String)
+    case urlForClassInfo(UUISString: String, apiKey: String)
+    case urlForStudentPic(picUrlString: String, apiKey: String)
+    case urlForTeacherAuthenticate(username: String, userPassword: String, apiKey: String, CompanyID: Int)
+    case urlForUserInfo(userID: String, apiKey: String)
     
     func getUrlRequest(with urlString: String? = nil) -> URLRequest {
         
@@ -47,44 +49,57 @@ enum URLValuesz {
         
         // Headers
         
-        guard let theApiKey = SchoolInfo.getApiKey() else { fatalError("could not get the apikey")}
+   //     guard let theApiKey = SchoolInfo.getApiKey() else { fatalError("could not get the apikey")}
         
-        request.addValue(theApiKey, forHTTPHeaderField: URLValues.authorizationName)
+ //       request.addValue(theApiKey, forHTTPHeaderField: URLValues.authorizationName)
 //        request.addValue(URLValues.authorizationValue, forHTTPHeaderField: URLValues.authorizationName)
        request.addValue(URLValues.cookieValue, forHTTPHeaderField: URLValues.cookieName)
         
         
         switch self {
         
-        case .urlForListOfClasses:  request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
+        case .urlForListOfClasses(let theApiKey):
+            request.addValue(theApiKey, forHTTPHeaderField: URLValues.authorizationName)
+            request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
 
-        case .urlForClassInfo:      request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
+        case .urlForClassInfo(_, let theApiKey):
+            request.addValue(theApiKey, forHTTPHeaderField: URLValues.authorizationName)
+            request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
 
-        case .urlForStudentPic:     request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
+        case .urlForStudentPic(_, let theApiKey):
+            request.addValue(theApiKey, forHTTPHeaderField: URLValues.authorizationName)
+            request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
             
-        case .urlForUserInfo: request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
+        case .urlForUserInfo(_, let theApiKey):
+            request.addValue(theApiKey, forHTTPHeaderField: URLValues.authorizationName)
+            request.addValue(URLValues.xServerProtocolVersionValueV3, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
             
 
-        case .urlForTeacherAuthenticate(let username, let userPassword):
+        case .urlForTeacherAuthenticate(let username, let userPassword, let theApiKey, let CompanyID):
+            print("@@@@ the user name is \(username) and password is \(userPassword)")
+            request.addValue(theApiKey, forHTTPHeaderField: URLValues.authorizationName)
             request.addValue(URLValues.xServerProtocolVersionValueV2, forHTTPHeaderField: URLValues.xServerProtocolVersionName)
             request.addValue(URLValues.ContentTypeValue, forHTTPHeaderField: URLValues.ContentTypeName)
             request.httpMethod = "Post"
+            print("@@@@ the user name is \(theApiKey) and password is \(userPassword)")
 
             // JSON Body
-            
+        
             let bodyObject: [String : Any] = [
-                "company": "1049131",
+                "company": String(CompanyID),
                 "username": username,
                 "password": userPassword
             ]
  
-/*
+           
+            /*
+
             let bodyObject: [String : Any] = [
                 "company": "1049131",
                 "username": "morahchumie",
                 "password": "Chummie@864"
             ]
- */
+             */
             request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
         }
         
@@ -108,12 +123,12 @@ enum URLValuesz {
                 myUrl = yUrl
             }
             
-        case .urlForClassInfo(let UUIDString):
+        case .urlForClassInfo(let UUIDString,_):
             if let  yUrl = URL(string: Self.urlStringForClassInfo) {
                 myUrl = yUrl.appendingPathComponent(UUIDString)
             }
             
-        case .urlForStudentPic(let picUrlString):
+        case .urlForStudentPic(let picUrlString, _):
             if let  yUrl = URL(string: picUrlString) {
                 myUrl = yUrl
             }
@@ -123,7 +138,7 @@ enum URLValuesz {
                 myUrl = yUrl
             }
             
-        case .urlForUserInfo(let UserId):
+        case .urlForUserInfo(let UserId, _):
              if let  yUrl = URL(string: Self.urlStringForUserInfo) {
                  myUrl = yUrl.appendingPathComponent(UserId)
              }

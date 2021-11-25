@@ -14,6 +14,7 @@
 		46204ACC2394854E00E55690 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46204ACB2394854E00E55690 /* LoginViewController.swift */; };
 		4622303923830B3C00B3DC70 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4622303823830B3B00B3DC70 /* DesignableButton.swift */; };
 		46241B1423AFC2570002B516 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46241B1323AFC2570002B516 /* MyTabBarController.swift */; };
+		4634A33C274EDF6300AAD772 /* GenerateURLRequestSessionx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4634A33B274EDF6300AAD772 /* GenerateURLRequestSessionx.swift */; };
 		463F12AE2746D4EE00AE8164 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12AD2746D4EE00AE8164 /* Utilities.swift */; };
 		463F12B2274ACC0300AE8164 /* ClassesReturnObjct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12B1274ACC0300AE8164 /* ClassesReturnObjct.swift */; };
 		463F12B4274ACC6A00AE8164 /* SchoolInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463F12B3274ACC6A00AE8164 /* SchoolInfo.swift */; };
@@ -77,6 +78,7 @@
 		46A96F3C24049C23005A8AC1 /* AppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A96F3924049C23005A8AC1 /* AppTableViewCell.swift */; };
 		46A96F3D24049C23005A8AC1 /* AppTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A96F3A24049C23005A8AC1 /* AppTableViewController.swift */; };
 		46A96F3E24049C23005A8AC1 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A96F3B24049C23005A8AC1 /* HeaderTableViewCell.swift */; };
+		46B0AA1B274FC61900F53678 /* TabBarPropertySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B0AA1A274FC61900F53678 /* TabBarPropertySaver.swift */; };
 		46BCCDA623992CFA0019E7BE /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */; };
 		46BCCDCA2399C8CA0019E7BE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 46BCCDC92399C8CA0019E7BE /* Settings.bundle */; };
 		46BF594925AE929400AC6158 /* ClassDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BF594825AE929400AC6158 /* ClassDetailResponse.swift */; };
@@ -103,6 +105,7 @@
 		46204ACB2394854E00E55690 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4622303823830B3B00B3DC70 /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		46241B1323AFC2570002B516 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		4634A33B274EDF6300AAD772 /* GenerateURLRequestSessionx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateURLRequestSessionx.swift; sourceTree = "<group>"; };
 		463F12AD2746D4EE00AE8164 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		463F12B1274ACC0300AE8164 /* ClassesReturnObjct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesReturnObjct.swift; sourceTree = "<group>"; };
 		463F12B3274ACC6A00AE8164 /* SchoolInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolInfo.swift; sourceTree = "<group>"; };
@@ -168,6 +171,7 @@
 		46A96F3924049C23005A8AC1 /* AppTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTableViewCell.swift; sourceTree = "<group>"; };
 		46A96F3A24049C23005A8AC1 /* AppTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTableViewController.swift; sourceTree = "<group>"; };
 		46A96F3B24049C23005A8AC1 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		46B0AA1A274FC61900F53678 /* TabBarPropertySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPropertySaver.swift; sourceTree = "<group>"; };
 		46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		46BCCDC92399C8CA0019E7BE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		46BF594825AE929400AC6158 /* ClassDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDetailResponse.swift; sourceTree = "<group>"; };
@@ -366,8 +370,10 @@
 				46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */,
 				46F6140923B3C11F00C4352D /* ActivityIndicator.swift */,
 				46241B1323AFC2570002B516 /* MyTabBarController.swift */,
+				46B0AA1A274FC61900F53678 /* TabBarPropertySaver.swift */,
 				466560312731AD330004CBEE /* avatar.jpg */,
 				46552441273811E900FF2239 /* GenerateURLRequestSession.swift */,
+				4634A33B274EDF6300AAD772 /* GenerateURLRequestSessionx.swift */,
 				46552442273811E900FF2239 /* WebApiJsonDecoder.swift */,
 				46552443273811E900FF2239 /* ClassReturnObjct.swift */,
 				463F12B7274AD27A00AE8164 /* UserInfoReturnObjct.swift */,
@@ -804,6 +810,7 @@
 				46A32380237E3BF700D4F77E /* SchoolClassResponse.swift in Sources */,
 				463F12B8274AD27A00AE8164 /* UserInfoReturnObjct.swift in Sources */,
 				46656029272F4D470004CBEE /* ConsumeURLDataRequest.swift in Sources */,
+				46B0AA1B274FC61900F53678 /* TabBarPropertySaver.swift in Sources */,
 				4608FE33237EEBC500EE7C80 /* ProfilesResponse.swift in Sources */,
 				46A3237E237E3BC500D4F77E /* SchoolClass.swift in Sources */,
 				46D56C422304E36A00CFF452 /* DeviceDetailResponse.swift in Sources */,
@@ -850,6 +857,7 @@
 				46DD196E23874EB20023C0EF /* StudentCollectionViewController.swift in Sources */,
 				4665602A272F4D470004CBEE /* UIImageExt.swift in Sources */,
 				4662C75D228CA8E900D99B84 /* APIClient.swift in Sources */,
+				4634A33C274EDF6300AAD772 /* GenerateURLRequestSessionx.swift in Sources */,
 				465524452738143200FF2239 /* WebApiJsonDecoder.swift in Sources */,
 				465524442738142E00FF2239 /* GenerateURLRequestSession.swift in Sources */,
 				46BF594925AE929400AC6158 /* ClassDetailResponse.swift in Sources */,
@@ -1025,7 +1033,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 18;
+				MARKETING_VERSION = 21.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appi4.teacher;
 				PRODUCT_NAME = Teacher;
 				SWIFT_SUPPRESS_WARNINGS = NO;
@@ -1049,7 +1057,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 18;
+				MARKETING_VERSION = 21.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appi4.teacher;
 				PRODUCT_NAME = Teacher;
 				SWIFT_SUPPRESS_WARNINGS = NO;

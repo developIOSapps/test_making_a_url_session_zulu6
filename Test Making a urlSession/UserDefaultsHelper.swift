@@ -15,10 +15,10 @@ struct UserDefaultsHelper {
     static let defaults = UserDefaults.standard
     
     /// literals
-    static let apiKeyKey = "apiKey"
-    static let groupIDKey = "teacherSelected"
+    static let apiKeyKey = "apiKeyKey"
+    static let groupIDKey = "groupIDKey"
     static let groupNameKey = "groupNameKey"
-    static let classUUIDKey = "classUUID"
+    static let classUUIDKey = "classUUIDKey"
 
 
     static let applicationProfilesKey = "applicationProfiles"
@@ -35,7 +35,7 @@ struct UserDefaultsHelper {
     }
     static var groupName: String? {
         guard let groupID = groupID, groupID != 0 else { return nil }
-        return teacherNames[groupID]
+        return getGroupName()
     }
     static var classUUID: String? {
         return getClassUUID()
@@ -57,11 +57,6 @@ struct UserDefaultsHelper {
         17: "Morah Ilana" ,  18: "Morah Chaya" ,  19: "Morah Chumie" ,  20: "Morah Shaindy" ,  21: "Morah Gitty" , 22: "Morah Chaya Raizy"
     ]
     
-    
-//    static var teacherSelected: Int?  {
-//        return getteacherSelected()
-//    }
-
 
     /// samething with closure
     static var groupID2: Int? = {
@@ -84,7 +79,6 @@ struct UserDefaultsHelper {
         return defaults.object(forKey: apiKeyKey) as? String
     }
 
-    
     static func setapiKey(_ apiKey: String) {
         HelperFunctions.logIt(functionName: #function, message: "Saving The apiKey")
         defaults.set(apiKey, forKey: apiKeyKey)
@@ -113,7 +107,7 @@ struct UserDefaultsHelper {
         return defaults.object(forKey: classUUIDKey) as? String
      }
      
-     static func setClassUUID(_ groupUUID: String) {
+     static func setClassUUID(_ classUUID: String) {
          HelperFunctions.logIt(functionName: #function, message: "Saving The classUUID")
          defaults.set(classUUID, forKey: classUUIDKey)
      }

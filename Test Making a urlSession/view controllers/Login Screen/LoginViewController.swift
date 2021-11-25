@@ -13,16 +13,24 @@ class LoginViewController: UIViewController {
     
     // used to execute the dataRetrevial from the Web API
     var webApiJsonDecoder: WebApiJsonDecoder!
-     
-
+    
+    var mdmStatus: MDMStatus?
+    
+    var schoolInfo: SchoolInfo?
+    
     
     //  MARK: -  Screen Objects
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
-    
+  
+    @IBOutlet weak var msgVW: UITextView!
+  
     var loggedInUser: User?
+    
+    var msgFromSegue = ""
+    
     
 //    var classGroupCodeInt: Int?
 //    var className: String?
@@ -66,11 +74,14 @@ class LoginViewController: UIViewController {
     // MARK: - Life Cycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        msgVW.text = msgFromSegue
+        
         passwordTextField.delegate = self
         emailTextField.delegate = self
         
-        emailTextField.text = "morahchumie"
-        passwordTextField.text = "Chummie@864"
+        emailTextField.text = "applereview1@appi4.com"
+        passwordTextField.text = "Simcha@3485"
 
         
 //        if let xx = getGroupId() {
@@ -84,12 +95,21 @@ class LoginViewController: UIViewController {
     
     // MARK: - Screen Buttons
     @IBAction func loginPressed(_ sender: Any) {
-        if let theApiKey = SchoolInfo.getApiKey() {
-           // myApiKey = theApiKey
-            getTheCredentialedData()
-        } else {
+        guard let mdmStatus = mdmStatus else {fatalError("no mdmstatus")}
+        
+        switch mdmStatus {
+        case .found:
+            guard let mytheapikey = schoolInfo?.thekey, let myCompanyID = schoolInfo?.companyId else {fatalError("could not ge the apikey") }
+            myApiKey = mytheapikey
+            getTheCredentialedData(withUser: emailTextField.text!, andPassword: passwordTextField.text!, andApiKey: mytheapikey, CompanyID: myCompanyID)
+        case .missing:
+            print("### doing firebase")
             doFirebaseStuff()
-        }
+        case .fromLoginVC:
+            break
+        
+}
+        
     }
     
     @IBAction func doSegue(_ sender: Any) {
@@ -196,17 +216,16 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController {
-    fileprivate func getTheCredentialedData() {
+    
+    fileprivate func getTheCredentialedData(withUser userName: String, andPassword pwd: String, andApiKey theApiKey: String,  CompanyID: Int) {
         // Do any additional setup after loading the view.
         
-        
-        
         /*  1: --------  Authenticate the teaxher  ------------------------------------    */
-        let urlValuesForTeacherAuthenticate = URLValues.urlForTeacherAuthenticate(username: emailTextField.text!, userPassword: passwordTextField.text!)
+        let urlValuesForTeacherAuthenticate = URLValues.urlForTeacherAuthenticate(username: userName, userPassword: pwd, apiKey: theApiKey, CompanyID: CompanyID)
         webApiJsonDecoder.justAuthenticateProcess(with: urlValuesForTeacherAuthenticate.getUrlRequest(), andSession: urlValuesForTeacherAuthenticate.getSession() ) {(result) in
             
             if case  .failure(.httpError(let respne)) = result, respne.statusCode == 401 {
-                print("error authi")
+                print("error auth from 1")
                 DispatchQueue.main.async {
                     self.doErrorAlert()
                 }
@@ -235,12 +254,12 @@ extension LoginViewController {
             
             self.webApiJsonDecoder.theAuthenticateReturnObjct = aAuthenticateReturnObjct
             guard let userId = self.webApiJsonDecoder.theAuthenticateReturnObjct?.authenticatedAs.id else {fatalError("id error")}
-            
+            print(userId)
             
             
             
             /*  2: --------  Get teacher User info  ------------------------------------    */
-            let urlValuesForUserInfo = URLValues.urlForUserInfo(userID: String(userId))
+            let urlValuesForUserInfo = URLValues.urlForUserInfo(userID: String(userId), apiKey: theApiKey )
             self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesForUserInfo.getUrlRequest(), andSession: urlValuesForUserInfo.getSession() ) { (data) in
                 
                  // OK we are fine, we got data - so lets write it to a file so we can retieve it
@@ -263,7 +282,7 @@ extension LoginViewController {
                 
                 
                 /*  3: --------  Get list of classes  ------------------------------------    */
-                let urlValuesForListOfClasses = URLValues.urlForListOfClasses
+                let urlValuesForListOfClasses = URLValues.urlForListOfClasses( apiKey: theApiKey)
                 self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesForListOfClasses.getUrlRequest(), andSession: urlValuesForListOfClasses.getSession()) { data in
                     let returnFromListOfClasses: Result<ClassesReturnObjct,GetResultOfNetworkCallError> = self.webApiJsonDecoder.processTheData(with: data)
                     
@@ -288,8 +307,8 @@ extension LoginViewController {
                     self.classUUID = theClass.uuid
                     
                     
-                    self.groupID = classGroupCode
-                     self.groupName = "xxxx"
+                     self.groupID = classGroupCode
+                     self.groupName = "yyyyyy"
                      self.myApiKey = SchoolInfo.getApiKey()
                      
                      DispatchQueue.main.async {
@@ -334,88 +353,94 @@ extension LoginViewController {
     fileprivate func doFirebaseStuff() {
         
         errorLabel.text = ""
-        /// Validate fields
+        
+        // Validate fields it is external
         if let error = validateTheFields() {
             showError(error: error)
             return
         }
         
+        // take out the white spaces
         guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
-                print("failed in guard")
-                return
+              let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+            print("Failed trimming the e-mail and password from whitespaces")
+            return
         }
+        
+        /* OK ready to login to firestore */
         
         FBAuth.autheticate(with: email, and: password) { (result) in
             
             guard let authDataResult = try? result.get()
-                
-                else {   /* This deals with the error */
-                    
-                    FBAuth.handleAuthError(vc: self, result: result)
-                    // self.handleAuthError(result: result)
-                    return
-                    
-                }
+            else {   /* This deals with the error */
+                FBAuth.handleAuthError(vc: self, result: result)
+                // self.handleAuthError(result: result)
+                return
+            }
             
-            /// Is e-mail verified
+            // Login is succesful now see if is e-mail verified if not send verification
             let isEmailVerified = authDataResult.user.isEmailVerified
             guard isEmailVerified == true
-                
-                else {
+            else {
+                print("not verified - sending e-mail verification")
+                FBAuth.sendEmailVerification(to: authDataResult.user) { (errorFromSendEmail) in
                     
-                    print("not verified - sending e-mail verification")
-                    FBAuth.sendEmailVerification(to: authDataResult.user) { (errorFromSendEmail) in
-                        
-                        guard errorFromSendEmail == nil else  {
-                            FBAuth.handleErrorNoResult(vc: self, error: errorFromSendEmail)
-                            // self.handleErrorNoResult(error: errorFromSendEmail)
-                            self.logUserOff()
-                            return
-                        }
-                        
-                        print("sent verification well successfully")
+                    guard errorFromSendEmail == nil else  {
+                        FBAuth.handleErrorNoResult(vc: self, error: errorFromSendEmail)
+                        // self.handleErrorNoResult(error: errorFromSendEmail)
+                        self.logUserOff()
+                        return
                     }
                     
-                    return
+                    print("sent verification well successfully")
+                }
+                return
             }
+            
+            
+            /* OK -mail is verified, now get the fire-store data */
             
             print("about to get the data ", authDataResult.user.email)
             self.loggedInUser =  authDataResult.user
             
             FBData.getDocument(with: self.loggedInUser!) { (resultFromFSUserData) in
                 guard let theDoc = try? resultFromFSUserData.get()
-                    
-                    else {   /* This deals with the error */
-                        
-                        /// Setup to get what we need to process the error
-                        guard case Result.failure(let err) = resultFromFSUserData else { fatalError("// this should never execute in getting error") }
-                        
-                        /// We got what we need and we are ready to process the error
-                        print("the error code is \(err)")
-                        print("pause")
-                        return
-                        
-                    }
                 
-                guard let record = theDoc.data(), let apiKey = record["apiKey"] as? String, let classGroupCodeInt = record["classGroupCodeInt"] as? Int, let className = record["className"] as? String else {
+                else {   /* This deals with the error */
+                    
+                    /// Setup to get what we need to process the error
+                    guard case Result.failure(let err) = resultFromFSUserData else { fatalError("// this should never execute in getting error") }
+                    
+                    /// We got what we need and we are ready to process the error
+                    print("the error code is \(err)")
+                    print("pause")
+                    return
+                }
+                
+                guard let record = theDoc.data(),
+                      let apiKey = record["apiKey"] as? String,
+                      let username = record["username"] as? String,
+                      let userpassword = record["userpassword"] as? String,
+                      let CompanyID = record["CompanyID"] as? Int
+                      else {
                     fatalError("could not convert it to a non optional")
                 }
+                
                 /// -> Success! - got the document and now can retreive the information
-                print("We got the apikey it is \(apiKey) and \(className) and \(classGroupCodeInt) ")
+                print("We got the apikey it is \(apiKey) and \(username) and \(userpassword) ")
                 
-                self.groupID = classGroupCodeInt
-                self.groupName = className
-                self.myApiKey = apiKey
+                self.schoolInfo = SchoolInfo(apiKey: apiKey, CompanyID: CompanyID)
                 
-                self.performSegue(withIdentifier: "returnFromLoginWithClass", sender: self)
+                 self.myApiKey = apiKey
                 
-             }
+                self.getTheCredentialedData(withUser: username, andPassword: userpassword, andApiKey: apiKey, CompanyID: CompanyID )
+                
+                // self.performSegue(withIdentifier: "returnFromLoginWithClass", sender: self)
+            }
         }
         // doAnimate()
-
     }
-
+    
 }
 
 extension LoginViewController: UITextFieldDelegate {

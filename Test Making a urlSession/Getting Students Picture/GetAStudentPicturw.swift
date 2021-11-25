@@ -18,7 +18,8 @@ import Foundation
 import UIKit
 
 class GetAStudentPicture {
-    var webApiJsonDecoder = WebApiJsonDecoder()
+    var webApiJsonDecoder: WebApiJsonDecoder!
+    var schoolInfo: SchoolInfo!
 
     //  MARK: -  Stuff for the file manager
     private var fileManger: FileManager = FileManager.default
@@ -41,7 +42,7 @@ class GetAStudentPicture {
             // get the url as string
             let studentPhotoUrl = theUrl.absoluteString
             // create enum instance
-            let urlValuesforStudent = URLValues.urlForStudentPic(picUrlString: studentPhotoUrl)
+            let urlValuesforStudent = URLValues.urlForStudentPic(picUrlString: studentPhotoUrl, apiKey: schoolInfo.thekey )
             self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesforStudent.getUrlRequest(), andSession: urlValuesforStudent.getSession() ) {(data) in
 
                 // OK we are fine, we got data - so lets write it to a file so we can retieve it
