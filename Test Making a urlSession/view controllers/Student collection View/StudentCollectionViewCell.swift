@@ -22,7 +22,6 @@ class StudentCollectionViewCell: UICollectionViewCell {
         didSet {
             checkmarkImageView.alpha = 0.0
             let tintableImage = checkmarkImageView.image?.withRenderingMode(.alwaysTemplate)
-            print("set it tintable")
             checkmarkImageView.image = tintableImage
             // checkmarkImageView.tintColor = UIColor(named: "tintcontrast")
 

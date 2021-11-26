@@ -38,7 +38,6 @@
 		46510BF32388319900838764 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46510BF22388319900838764 /* ProfileTableViewCell.swift */; };
 		46510BF52388320800838764 /* AppProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46510BF42388320800838764 /* AppProfile.swift */; };
 		4655243F2738100200FF2239 /* GetAStudentPicturw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4655243E2738100200FF2239 /* GetAStudentPicturw.swift */; };
-		465524442738142E00FF2239 /* GenerateURLRequestSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46552441273811E900FF2239 /* GenerateURLRequestSession.swift */; };
 		465524452738143200FF2239 /* WebApiJsonDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46552442273811E900FF2239 /* WebApiJsonDecoder.swift */; };
 		465524462738143500FF2239 /* ClassReturnObjct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46552443273811E900FF2239 /* ClassReturnObjct.swift */; };
 		465E121623AF97620063DE3E /* NotesUpdateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465E121523AF97620063DE3E /* NotesUpdateable.swift */; };
@@ -56,7 +55,7 @@
 		4665602A272F4D470004CBEE /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656024272F4D470004CBEE /* UIImageExt.swift */; };
 		4665602B272F4D470004CBEE /* HelperStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46656025272F4D470004CBEE /* HelperStuff.swift */; };
 		4665602E272F4DBA0004CBEE /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4665602D272F4DBA0004CBEE /* URLError.swift */; };
-		466560322731AD330004CBEE /* avatar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 466560312731AD330004CBEE /* avatar.jpg */; };
+		466560322731AD330004CBEE /* avatxar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 466560312731AD330004CBEE /* avatxar.jpg */; };
 		466B2C8822FDA11D009C19E4 /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = 466B2C8722FDA11D009C19E4 /* users.json */; };
 		466B2C8D22FDA4B8009C19E4 /* DeviceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B2C8C22FDA4B8009C19E4 /* DeviceGroup.swift */; };
 		466B2C9122FDAAB6009C19E4 /* OurCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B2C9022FDAAB6009C19E4 /* OurCodable.swift */; };
@@ -129,7 +128,6 @@
 		46510BF22388319900838764 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		46510BF42388320800838764 /* AppProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProfile.swift; sourceTree = "<group>"; };
 		4655243E2738100200FF2239 /* GetAStudentPicturw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAStudentPicturw.swift; sourceTree = "<group>"; };
-		46552441273811E900FF2239 /* GenerateURLRequestSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateURLRequestSession.swift; sourceTree = "<group>"; };
 		46552442273811E900FF2239 /* WebApiJsonDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiJsonDecoder.swift; sourceTree = "<group>"; };
 		46552443273811E900FF2239 /* ClassReturnObjct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassReturnObjct.swift; sourceTree = "<group>"; };
 		465E121523AF97620063DE3E /* NotesUpdateable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesUpdateable.swift; sourceTree = "<group>"; };
@@ -149,7 +147,7 @@
 		46656024272F4D470004CBEE /* UIImageExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
 		46656025272F4D470004CBEE /* HelperStuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperStuff.swift; sourceTree = "<group>"; };
 		4665602D272F4DBA0004CBEE /* URLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
-		466560312731AD330004CBEE /* avatar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar.jpg; sourceTree = "<group>"; };
+		466560312731AD330004CBEE /* avatxar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatxar.jpg; sourceTree = "<group>"; };
 		466B2C8722FDA11D009C19E4 /* users.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
 		466B2C8C22FDA4B8009C19E4 /* DeviceGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceGroup.swift; sourceTree = "<group>"; };
 		466B2C9022FDAAB6009C19E4 /* OurCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurCodable.swift; sourceTree = "<group>"; };
@@ -357,29 +355,22 @@
 				466B2C8E22FDAA5C009C19E4 /* protocols and extensions */,
 				469CB55722A9C25500631ACE /* resources */,
 				4662C762228CBA7800D99B84 /* -customization-notneeded */,
-				4662C756228C997300D99B84 /* Info.plist */,
-				4685B27527454C990042AFD9 /* FBData.swift */,
+				468580922750830F00D37019 /* FireStore */,
+				46656020272F4D470004CBEE /* Getting Students Picture */,
+				46858093275083EF00D37019 /* return Object */,
 				463F12AD2746D4EE00AE8164 /* Utilities.swift */,
-				4685B27627454C990042AFD9 /* FBAuth.swift */,
-				466FC25A274433640075ECA5 /* GoogleService-Info.plist */,
 				4680FC4A23E1C6D700E333DA /* Constants.swift */,
 				4622303823830B3B00B3DC70 /* DesignableButton.swift */,
-				463F12B5274ACFD200AE8164 /* AuthenticateReturnObjct.swift */,
 				4662C74A228C996E00D99B84 /* AppDelegate.swift */,
 				4649F2092381DB4B00D12E80 /* HelperFunctions.swift */,
 				46BCCDA523992CFA0019E7BE /* UserDefaultsHelper.swift */,
 				46F6140923B3C11F00C4352D /* ActivityIndicator.swift */,
-				46241B1323AFC2570002B516 /* MyTabBarController.swift */,
-				46B0AA1A274FC61900F53678 /* TabBarPropertySaver.swift */,
-				466560312731AD330004CBEE /* avatar.jpg */,
-				46552441273811E900FF2239 /* GenerateURLRequestSession.swift */,
+				466560312731AD330004CBEE /* avatxar.jpg */,
 				4634A33B274EDF6300AAD772 /* GenerateURLRequestSessionx.swift */,
 				46552442273811E900FF2239 /* WebApiJsonDecoder.swift */,
-				46552443273811E900FF2239 /* ClassReturnObjct.swift */,
-				463F12B7274AD27A00AE8164 /* UserInfoReturnObjct.swift */,
-				463F12B1274ACC0300AE8164 /* ClassesReturnObjct.swift */,
 				463F12B3274ACC6A00AE8164 /* SchoolInfo.swift */,
-				46656020272F4D470004CBEE /* Getting Students Picture */,
+				4662C756228C997300D99B84 /* Info.plist */,
+				466FC25A274433640075ECA5 /* GoogleService-Info.plist */,
 				46BCCDC92399C8CA0019E7BE /* Settings.bundle */,
 			);
 			path = "Test Making a urlSession";
@@ -509,6 +500,7 @@
 		467881F822B6ABF600FA8DCF /* view controllers */ = {
 			isa = PBXGroup;
 			children = (
+				468580942750843900D37019 /* TabBarViewController */,
 				46A96F3824049C23005A8AC1 /* AppsView */,
 				46ABE62D23968F9800FCB1DB /* Login Screen */,
 				46D91FD8238780CB001E0597 /* Student collection View */,
@@ -516,6 +508,35 @@
 				46510BF12388300C00838764 /* Select an app profile from list */,
 			);
 			path = "view controllers";
+			sourceTree = "<group>";
+		};
+		468580922750830F00D37019 /* FireStore */ = {
+			isa = PBXGroup;
+			children = (
+				4685B27527454C990042AFD9 /* FBData.swift */,
+				4685B27627454C990042AFD9 /* FBAuth.swift */,
+			);
+			path = FireStore;
+			sourceTree = "<group>";
+		};
+		46858093275083EF00D37019 /* return Object */ = {
+			isa = PBXGroup;
+			children = (
+				463F12B5274ACFD200AE8164 /* AuthenticateReturnObjct.swift */,
+				46552443273811E900FF2239 /* ClassReturnObjct.swift */,
+				463F12B7274AD27A00AE8164 /* UserInfoReturnObjct.swift */,
+				463F12B1274ACC0300AE8164 /* ClassesReturnObjct.swift */,
+			);
+			path = "return Object";
+			sourceTree = "<group>";
+		};
+		468580942750843900D37019 /* TabBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				46B0AA1A274FC61900F53678 /* TabBarPropertySaver.swift */,
+				46241B1323AFC2570002B516 /* MyTabBarController.swift */,
+			);
+			path = TabBarViewController;
 			sourceTree = "<group>";
 		};
 		469CB55722A9C25500631ACE /* resources */ = {
@@ -693,7 +714,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = DIA;
 				TargetAttributes = {
 					4662C746228C996E00D99B84 = {
@@ -739,7 +760,7 @@
 				464C69CC238D548C00842071 /* Rubik-MediumItalic.ttf in Resources */,
 				464C69D3238D548C00842071 /* Rubik-Bold.ttf in Resources */,
 				46F0445423908404007EB18B /* Not interested.storyboard in Resources */,
-				466560322731AD330004CBEE /* avatar.jpg in Resources */,
+				466560322731AD330004CBEE /* avatxar.jpg in Resources */,
 				4662C752228C997300D99B84 /* Assets.xcassets in Resources */,
 				466FC25B274433640075ECA5 /* GoogleService-Info.plist in Resources */,
 				46BCCDCA2399C8CA0019E7BE /* Settings.bundle in Resources */,
@@ -859,7 +880,6 @@
 				4662C75D228CA8E900D99B84 /* APIClient.swift in Sources */,
 				4634A33C274EDF6300AAD772 /* GenerateURLRequestSessionx.swift in Sources */,
 				465524452738143200FF2239 /* WebApiJsonDecoder.swift in Sources */,
-				465524442738142E00FF2239 /* GenerateURLRequestSession.swift in Sources */,
 				46BF594925AE929400AC6158 /* ClassDetailResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -928,6 +948,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -989,6 +1010,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

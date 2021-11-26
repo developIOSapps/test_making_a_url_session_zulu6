@@ -62,8 +62,9 @@ class GetAStudentPicture {
                 self.readPicFileFromLocalDataFile(withURL: urlForLocalFile, completionHandler: completionHandler)
                 return
             }
+        } else {
+            readPicFileFromLocalDataFile(withURL: urlForLocalFile, completionHandler: completionHandler)
         }
-        readPicFileFromLocalDataFile(withURL: urlForLocalFile, completionHandler: completionHandler)
     }
     
     
