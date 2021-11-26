@@ -54,17 +54,21 @@ class LoginViewController: UIViewController {
     
     var groupID: Int? {
         didSet {
-            if saveLogin.selectedSegmentIndex == 0 {
-                guard let groupID = groupID else { return  }
-                UserDefaultsHelper.setGroupID(groupID)
+            DispatchQueue.main.async { [self] in
+                if saveLogin.selectedSegmentIndex == 0 {
+                    guard let groupID = groupID else { return  }
+                    UserDefaultsHelper.setGroupID(groupID)
+                }
             }
         }
     }
     var groupName: String? {
         didSet {
-            if saveLogin.selectedSegmentIndex == 0 {
-                guard let groupName = groupName else { return  }
-                UserDefaultsHelper.setGroupName(groupName)
+            DispatchQueue.main.async { [self] in
+                if saveLogin.selectedSegmentIndex == 0 {
+                    guard let groupName = groupName else { return  }
+                    UserDefaultsHelper.setGroupName(groupName)
+                }
             }
         }
     }
@@ -86,6 +90,10 @@ class LoginViewController: UIViewController {
     // MARK: - Life Cycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        saveLogin.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: UIControl.State.selected)
+        saveLogin.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: UIControl.State.normal)
+
         
         if MDMStatus.missing ==  mdmStatus {
 //            saveLogin.isHidden = true
@@ -417,7 +425,7 @@ extension LoginViewController {
             
             /* OK -mail is verified, now get the fire-store data */
             
-            print("about to get the data ", authDataResult.user.email)
+            print("about to get the data ", authDataResult.user.email as Any)
             self.loggedInUser =  authDataResult.user
             
             FBData.getDocument(with: self.loggedInUser!) { (resultFromFSUserData) in

@@ -1033,7 +1033,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 21.0;
+				MARKETING_VERSION = 22.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appi4.teacher;
 				PRODUCT_NAME = Teacher;
 				SWIFT_SUPPRESS_WARNINGS = NO;
@@ -1057,7 +1057,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 21.0;
+				MARKETING_VERSION = 22.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appi4.teacher;
 				PRODUCT_NAME = Teacher;
 				SWIFT_SUPPRESS_WARNINGS = NO;

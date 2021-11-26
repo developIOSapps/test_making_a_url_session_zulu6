@@ -432,14 +432,6 @@
                                     <action selector="doSegue:" destination="Tdd-nm-J6F" eventType="touchUpInside" id="CG5-jM-9Ho"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MRE-qa-cWC">
-                                <rect key="frame" x="20" y="21" width="374" height="288"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="images-12" translatesAutoresizingMaskIntoConstraints="NO" id="PFX-uu-Ph0">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                             </imageView>
@@ -483,23 +475,24 @@
                                             <action selector="loginPressed:" destination="Tdd-nm-J6F" eventType="touchUpInside" id="KQi-V7-Zcw"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XDK-9r-WLb">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="XDK-9r-WLb">
                                         <rect key="frame" x="0.0" y="209.5" width="214" height="31"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Login:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdo-pA-3Br">
-                                                <rect key="frame" x="0.0" y="0.0" width="87.5" height="31"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Save Login:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdo-pA-3Br">
+                                                <rect key="frame" x="0.0" y="0.0" width="80.5" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="8W7-Wr-ixr">
-                                                <rect key="frame" x="97.5" y="0.0" width="116.5" height="32"/>
+                                                <rect key="frame" x="94.5" y="0.0" width="119.5" height="32"/>
                                                 <segments>
                                                     <segment title="Yes"/>
                                                     <segment title="No"/>
                                                 </segments>
                                             </segmentedControl>
                                         </subviews>
+                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -519,12 +512,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MRE-qa-cWC">
+                                <rect key="frame" x="20" y="558" width="374" height="230"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="1ac-pE-spr"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="COt-jb-QgC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="L6T-8k-vXg" firstAttribute="centerY" secondItem="KoY-Vq-pi9" secondAttribute="centerY" id="2TL-f8-S7T"/>
                             <constraint firstItem="L6T-8k-vXg" firstAttribute="centerX" secondItem="KoY-Vq-pi9" secondAttribute="centerX" id="9JN-bH-idz"/>
+                            <constraint firstItem="MRE-qa-cWC" firstAttribute="leading" secondItem="COt-jb-QgC" secondAttribute="leading" constant="20" id="DjB-2E-62C"/>
                             <constraint firstItem="COt-jb-QgC" firstAttribute="trailing" secondItem="PFX-uu-Ph0" secondAttribute="trailing" id="KDY-sG-4IT"/>
                             <constraint firstItem="PFX-uu-Ph0" firstAttribute="leading" secondItem="COt-jb-QgC" secondAttribute="leading" id="KoA-WE-nMW"/>
                             <constraint firstItem="PAH-MA-Je2" firstAttribute="top" secondItem="COt-jb-QgC" secondAttribute="top" constant="52" id="Kox-0q-qZ6"/>
@@ -537,6 +541,8 @@
                             <constraint firstAttribute="bottom" secondItem="hsj-Jy-9pK" secondAttribute="bottom" constant="16" id="XH3-Ee-1IQ"/>
                             <constraint firstItem="COt-jb-QgC" firstAttribute="trailing" secondItem="hsj-Jy-9pK" secondAttribute="trailing" constant="16" id="YWF-F8-a1T"/>
                             <constraint firstItem="COt-jb-QgC" firstAttribute="trailing" secondItem="hsj-Jy-9pK" secondAttribute="trailing" constant="16" id="YYt-Fv-STV"/>
+                            <constraint firstItem="COt-jb-QgC" firstAttribute="trailing" secondItem="MRE-qa-cWC" secondAttribute="trailing" constant="20" id="bP1-WB-4Ql"/>
+                            <constraint firstItem="hsj-Jy-9pK" firstAttribute="top" secondItem="MRE-qa-cWC" secondAttribute="bottom" constant="8" symbolic="YES" id="u0n-fM-Ygn"/>
                         </constraints>
                     </view>
                     <connections>
@@ -850,6 +856,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 NSLog("Key not found")
                 continue
             }
-            print(preference["Key"], "->" , preference["DefaultValue"])
+            print(preference["Key"] as Any, "->" , preference["DefaultValue"] as Any)
             defaultsToRegister[key] = preference["DefaultValue"]
         }
         UserDefaults.standard.register(defaults: defaultsToRegister)

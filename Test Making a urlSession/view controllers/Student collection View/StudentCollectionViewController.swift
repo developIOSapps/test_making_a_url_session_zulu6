@@ -227,7 +227,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
 
         if MDMStatus.fromLoginVC !=  self.mdmStatus {
         
-            guard let schoolInf = SchoolInfo() else {
+            guard let schoolInf = SchoolInfo(apiKey: "Basic NTM3MjI0NjA6RVBUTlpaVEdYV1U1VEo0Vk5RUDMyWDVZSEpSVjYyMkU=", CompanyID: 1049131, evenNbr: 3 ) else {
                 mdmStatus = .missing
                 performSegue(withIdentifier: "loginScr", sender: nil)
                 return
@@ -326,13 +326,13 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         //         }
         //
 
-        /*
+        
         let alert = UIAlertController(title: "Items from config file", message: schoolInfo?.mngedCfgitems, preferredStyle: .alert)
         let action = UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default) { _ in NSLog("The \"OK\" alert occured.") }
         alert.addAction(action)
         
         self.present(alert, animated: true, completion: nil)
-         */
+         
     }
  
     fileprivate func setUpToolBar() {

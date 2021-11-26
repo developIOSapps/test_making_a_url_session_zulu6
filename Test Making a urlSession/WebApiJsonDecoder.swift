@@ -38,7 +38,7 @@ class WebApiJsonDecoder {
             }
             // got the data now lets do the correct process
             let value = String(data: data, encoding: .utf8)
-            print(value)
+            print(value as Any)
 
             // get the data from the Result type
 //            guard let data = try? result.get() else {

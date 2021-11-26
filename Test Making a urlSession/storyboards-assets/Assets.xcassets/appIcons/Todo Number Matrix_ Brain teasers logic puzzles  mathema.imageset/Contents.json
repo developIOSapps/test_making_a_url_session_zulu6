@@ -5,8 +5,8 @@
       "scale" : "1x"
     },
     {
+      "filename" : "Todo Number Matrix_ Brain teasers, logic puzzles, and mathematical reasoning for kids.png",
       "idiom" : "universal",
-      "filename" : "Todo Number Matrix: Brain teasers, logic puzzles, and mathematical reasoning for kids.png",
       "scale" : "2x"
     },
     {
@@ -15,7 +15,7 @@
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

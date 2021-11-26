@@ -48,7 +48,7 @@ struct GetDataApi {
                 
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
-                print(data.prettyPrintedJSONString)
+                print(data.prettyPrintedJSONString as Any)
 
                 let decoder = JSONDecoder()
                 guard let UserDetailResponsxx = try? decoder.decode(UserDetailResponse.self, from: data) else {fatalError()}
@@ -71,7 +71,7 @@ struct GetDataApi {
 
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
-                print(data.prettyPrintedJSONString)
+                print(data.prettyPrintedJSONString as Any)
                 print("we are updating notes")
                 
                 
@@ -99,7 +99,7 @@ struct GetDataApi {
 
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
-                print(data.prettyPrintedJSONString)
+                print(data.prettyPrintedJSONString as Any)
                 print("we are updating notes")
                 
                 
@@ -129,7 +129,7 @@ struct GetDataApi {
                 
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
-                print(data.prettyPrintedJSONString)
+                print(data.prettyPrintedJSONString as Any)
                 print("we are updating notes")
                 completion()
             }

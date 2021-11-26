@@ -98,6 +98,17 @@ class SchoolInfo {
         self.thekey = apiKey
         self.companyId = CompanyID
     }
+    
+    init?(apiKey: String, CompanyID: Int, evenNbr: Int) {
+        if evenNbr.isMultiple(of: 2) {
+            return nil
+        }
+        self.thekey = apiKey
+        self.companyId = CompanyID
+    }
+    
+ 
+    
 
     
 //
