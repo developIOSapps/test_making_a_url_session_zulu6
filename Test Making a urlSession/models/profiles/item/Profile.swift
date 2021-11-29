@@ -14,6 +14,7 @@ struct Profile: OurCodable {
     }
     
     let id:                 Int
+    var locationId:         Int
     var name:               String
     let description:        String
     var ctgNum:             String?

@@ -270,8 +270,6 @@ enum GeneratedReq  {
         urlComponents.path = self.generatedPath
         
         var queryItemsArray = [URLQueryItem]()
-        print("******************* about to dump query items")
-        dump(self.generatedQueryItems)
 
         if let queryItems = self.generatedQueryItems {
             for (key, value) in queryItems {

@@ -19,6 +19,8 @@ struct UserDefaultsHelper {
     static let groupIDKey = "groupIDKey"
     static let groupNameKey = "groupNameKey"
     static let classUUIDKey = "classUUIDKey"
+    static let locationIdKey = "locationIdKey"
+
 
 
     static let applicationProfilesKey = "applicationProfiles"
@@ -39,6 +41,9 @@ struct UserDefaultsHelper {
     }
     static var classUUID: String? {
         return getClassUUID()
+    }
+    static var locationId: Int {
+        return getlocationId()
     }
     static var appFilter: String  {
         return getAppFilterString()
@@ -65,23 +70,37 @@ struct UserDefaultsHelper {
 
     
     static func getGroupID() -> Int {
-        HelperFunctions.logIt(functionName: #function, message: "Get The GroupId")
+//        HelperFunctions.logIt(functionName: #function, message: "Get The GroupId")
         return defaults.integer(forKey: groupIDKey)
     }
+
+    static func getlocationId() -> Int {
+//        HelperFunctions.logIt(functionName: #function, message: "Get The GroupId")
+        return defaults.integer(forKey: locationIdKey)
+    }
     
+    static func setlocationId(_ locationId: Int) {
+//        HelperFunctions.logIt(functionName: #function, message: "Saving The GroupId")
+        defaults.set(locationId, forKey: locationIdKey)
+    }
+
     static func setGroupID(_ groupID: Int) {
-        HelperFunctions.logIt(functionName: #function, message: "Saving The GroupId")
+//        HelperFunctions.logIt(functionName: #function, message: "Saving The GroupId")
         defaults.set(groupID, forKey: groupIDKey)
     }
     
     static func getapiKey() -> String? {
-        HelperFunctions.logIt(functionName: #function, message: "Get The apiKey")
+//        HelperFunctions.logIt(functionName: #function, message: "Get The apiKey")
         return defaults.object(forKey: apiKeyKey) as? String
     }
 
     static func setapiKey(_ apiKey: String) {
-        HelperFunctions.logIt(functionName: #function, message: "Saving The apiKey")
+//        HelperFunctions.logIt(functionName: #function, message: "Saving The apiKey")
         defaults.set(apiKey, forKey: apiKeyKey)
+    }
+    
+    static func removelocationId() {
+        defaults.removeObject(forKey: locationIdKey)
     }
 
     static func removeGroupID() {
@@ -89,12 +108,12 @@ struct UserDefaultsHelper {
     }
     
     static func getGroupName() -> String? {
-        HelperFunctions.logIt(functionName: #function, message: "Get The GroupName")
+//        HelperFunctions.logIt(functionName: #function, message: "Get The GroupName")
         return defaults.object(forKey: groupNameKey) as? String
     }
     
     static func setGroupName(_ groupName: String) {
-        HelperFunctions.logIt(functionName: #function, message: "Saving The GroupName")
+//        HelperFunctions.logIt(functionName: #function, message: "Saving The GroupName")
         defaults.set(groupName, forKey: groupNameKey)
     }
 
@@ -103,12 +122,12 @@ struct UserDefaultsHelper {
     }
     
     static func getClassUUID() -> String? {
-         HelperFunctions.logIt(functionName: #function, message: "Get The classUUID")
+//         HelperFunctions.logIt(functionName: #function, message: "Get The classUUID")
         return defaults.object(forKey: classUUIDKey) as? String
      }
      
      static func setClassUUID(_ classUUID: String) {
-         HelperFunctions.logIt(functionName: #function, message: "Saving The classUUID")
+//         HelperFunctions.logIt(functionName: #function, message: "Saving The classUUID")
          defaults.set(classUUID, forKey: classUUIDKey)
      }
 

@@ -149,7 +149,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
     
     var classUUID: String!
     var classGroupCodeInt: Int!
-    
+    var locationId: Int!
     var className: String! {
         didSet {
 //            navigationItem.title = className
@@ -227,7 +227,8 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
 
         if MDMStatus.fromLoginVC !=  self.mdmStatus {
         
-            guard let schoolInf = SchoolInfo(apiKey: "Basic NTM3MjI0NjA6RVBUTlpaVEdYV1U1VEo0Vk5RUDMyWDVZSEpSVjYyMkU=", CompanyID: 1049131, evenNbr: 3 ) else {
+            
+            guard let schoolInf = SchoolInfo() else {
                 mdmStatus = .missing
                 performSegue(withIdentifier: "loginScr", sender: nil)
                 return
@@ -244,6 +245,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
             classUUID = UserDefaultsHelper.getClassUUID()
             classGroupCodeInt = UserDefaultsHelper.getGroupID()
             className = UserDefaultsHelper.groupName
+            locationId = UserDefaultsHelper.getlocationId()
             
             guard let classUUID = classUUID, let classGroupCodeInt = classGroupCodeInt else {
                 performSegue(withIdentifier: "loginScr", sender: nil)
@@ -277,6 +279,24 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                 // title = navBarTitle
                 let classGroupCodeStr = String(classGroupCodeInt)
                 
+            
+            
+            /* if demoMode then load this data in
+             
+             let decoder = JSONDecoder()
+             
+             guard let deviceListResponsexx = try? decoder.decode(DeviceListResponse.self, from: data) else {fatalError("deviceListResponsexx ")}
+             let dvc = deviceListResponsexx as DeviceListResponse
+
+                          
+             
+             */
+            
+            
+            
+            
+            
+            
                 GetDataApi.getDeviceListByAssetResponse(GeneratedReq.init(request: ValidReqs.devicesInAssetTag(parameterDict: ["assettag" : classGroupCodeStr ]) )) { (deviceListResponse) in
                     DispatchQueue.main.async {
                         
@@ -326,13 +346,13 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         //         }
         //
 
-        
+        /*
         let alert = UIAlertController(title: "Items from config file", message: schoolInfo?.mngedCfgitems, preferredStyle: .alert)
         let action = UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default) { _ in NSLog("The \"OK\" alert occured.") }
         alert.addAction(action)
         
         self.present(alert, animated: true, completion: nil)
-         
+        */
     }
  
     fileprivate func setUpToolBar() {
@@ -385,8 +405,7 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         let urlValuesforClass = URLValues.urlForClassInfo(UUISString: self.classUUID, apiKey: schoolInfo!.thekey )
             self.webApiJsonDecoder.sendURLReqToProcess(with: urlValuesforClass.getUrlRequest(), andSession: urlValuesforClass.getSession() ) {(data) in
                 // OK we are fine, we got data - so lets write it to a file so we can retieve it
-                
-                
+                                
                 let returnFromDecodingClassInfo: Result<ClassReturnObjct, GetResultOfNetworkCallError> = self.webApiJsonDecoder.processTheData(with: data)
                 guard let aClassReturnObject = try? returnFromDecodingClassInfo.get() else {
                     if case Result<ClassReturnObjct, GetResultOfNetworkCallError>.failure(let getResultOfNetworkCallError) = returnFromDecodingClassInfo {
@@ -394,12 +413,8 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                     }
                     return
                 }
-                //                        let aClassReturnObject: ClassesReturnObjct = self.webApiJsonDecoder.processTheData(with: data) { print("**** From completion handler") }
                 self.webApiJsonDecoder.theClassReturnObjct = aClassReturnObject
-                dump(self.webApiJsonDecoder.theClassReturnObjct)
                 
-                let student = self.webApiJsonDecoder.theClassReturnObjct?.class.students[1]
-                dump(student)
 
                 GetDataApi.getUserListByGroupResponse (GeneratedReq.init(request: ValidReqs.usersInDeviceGroup(parameterDict: ["memberOf" : classGroupCodeStr ]) )) { (userResponse) in
                     DispatchQueue.main.async {
@@ -408,7 +423,6 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
                         /// Just load in the users into this class if needed
                         self.users = usrResponse.users.sorted { $0.lastName < $1.lastName }
                         /// Here we have what we need
-                        usrResponse.users.forEach { print($0.firstName + "--" + $0.lastName  + "--" + $0.username) }
                         self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
                         self.collectionView.reloadData()
                     }
@@ -427,8 +441,8 @@ class StudentCollectionViewController: UICollectionViewController, NotesDelegate
         case .students:
             performSegue(withIdentifier: "goToStudentDetail", sender: nil)
         case .devices:
-             performSegue(withIdentifier: "goToAppProfile", sender: nil)
-//            performSegue(withIdentifier: "gotoAppTable", sender: nil)
+//             performSegue(withIdentifier: "goToAppProfile", sender: nil)
+            performSegue(withIdentifier: "gotoAppTable", sender: nil)
         }
     }
     
@@ -497,10 +511,12 @@ extension StudentCollectionViewController {
         // FIXME: Put in a stub image to test easier
         if ItemsToDisplay.devices == itemsToDisplay {
             cell.studentImageView.image = UIImage(named: student.picName)
-        }
+            cell.studentNameLabel.text = student.title // + " " + student.lastName
+        } else {
+            cell.studentImageView.image = UIImage(named: "avatar")
+            cell.studentNameLabel.text = student.title // + " " + student.lastName
 
-        cell.studentImageView.image = UIImage(named: "avatar")
-        cell.studentNameLabel.text = student.title // + " " + student.lastName
+        }
         return cell
     }
 
@@ -530,8 +546,8 @@ extension StudentCollectionViewController {
             case .students:
                 performSegue(withIdentifier: "goToStudentDetail", sender: nil)
             case .devices:
-                 performSegue(withIdentifier: "goToAppProfile", sender: nil)
-//                performSegue(withIdentifier: "gotoAppTable", sender: nil)
+//                 performSegue(withIdentifier: "goToAppProfile", sender: nil)
+                performSegue(withIdentifier: "gotoAppTable", sender: nil)
             }
 
         case .multipleEnabled:
@@ -580,11 +596,12 @@ extension StudentCollectionViewController {
         
         guard let vc = segue.source as? LoginViewController else { fatalError("No Class Group Code")  }
        
-        guard let apiKeyfromVC = vc.myApiKey else { fatalError("api No Class Group Code")  }
+//        guard let apiKeyfromVC = vc.myApiKey else { fatalError("api No Class Group Code")  }
         guard let classUUID = vc.classUUID else {fatalError("no calss uuid")}
         guard let groupID = vc.groupID else { fatalError("groupid No Class Group Code")  }
         guard let groupName = vc.groupName  else { fatalError("groupname No Class Group Code")  }
-        
+        guard let locationId = vc.locationId else { fatalError("locationId not in vc")  }
+
         switch vc.mdmStatus {
         case .missing:
             self.schoolInfo = vc.schoolInfo
@@ -595,19 +612,18 @@ extension StudentCollectionViewController {
             classGroupCodeInt   = groupID
             self.classUUID      = classUUID
             className           = groupName
+            self.locationId     = locationId
 
         default:
             classGroupCodeInt   = groupID
             self.classUUID      = classUUID
             className           = groupName
+            self.locationId     = locationId
+
         }
         mdmStatus = .fromLoginVC
         guard let tbPropertySaver = self.tabBarController as? MyTabBarController else {return}
         tbPropertySaver.saveTheInfo(vc: self)
-
-        
-        
-
 
 //        self.webApiJsonDecoder.theAuthenticateReturnObjct = vc.webApiJsonDecoder.theAuthenticateReturnObjct
 //        self.webApiJsonDecoder.theClassReturnObjct = vc.webApiJsonDecoder.theClassReturnObjct
@@ -650,7 +666,6 @@ extension StudentCollectionViewController {
                         self.users = deviceListResponse.devices
                         /// Here we have what we need
                         deviceListResponse.devices.forEach { print($0.name + "--" + $0.UDID) }
-                        print("got devices")
                         self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
                         self.collectionView.reloadData()
                     }
@@ -670,35 +685,9 @@ extension StudentCollectionViewController {
         }
     }
 
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//        print("in should perform segue")
-//               switch users[rowSelected] {
-//               case is User:
-//                   print("IT Is **USER**")
-//                    return true
-//               case is Device:
-//                   print("IT Is **Device**")
-//                   return false
-//               default:
-//                   return false
-//               }
-//
-//    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-//              print("in should perform segue")
-//                      switch users[rowSelected] {
-//                      case is JSUser:
-//                          print("IT Is **USER**")
-//                      case is Device:
-//                          print("IT Is **Device**")
-//                      default:
-//                          break
-//                      }
-//
-//
-        
+                
         /// This meansI am selecting students
         switch segue.identifier  {
         
@@ -726,6 +715,7 @@ extension StudentCollectionViewController {
 
             guard let studentProfileStaticTableVC = segue.destination as? StudentProfileStaticTableViewController else { fatalError(" could not segue ") }
             
+            studentProfileStaticTableVC.schoolInfo = schoolInfo
                          studentProfileStaticTableVC.notesDelegate = self
              switch selectionMode {
              case .multipleDisabled:
@@ -752,8 +742,8 @@ extension StudentCollectionViewController {
 
             guard let appProfilesTableVC = segue.destination as? AppProfilesTableViewController else { fatalError(" could not segue ") }
 
-            print("Going to app profile because dealing ith devices")
-            switch selectionMode {
+            appProfilesTableVC.schoolInfo = schoolInfo
+             switch selectionMode {
             case .multipleDisabled:
                 devicesSelected.removeAll()
                 devicesSelected.append(devices[rowSelected])
@@ -777,6 +767,8 @@ extension StudentCollectionViewController {
             }
             
             guard let appTableVC = segue.destination as? AppTableViewController else { fatalError(" could not segue ") }
+            
+            appTableVC.schoolInfo = schoolInfo
             
             print("Going to app profile because dealing ith devices")
             switch selectionMode {
@@ -850,21 +842,16 @@ extension StudentCollectionViewController {
     @IBAction func fromAppsListbackToDeviceList(seque: UIStoryboardSegue)  {
         /// What we need
         guard let appTableViewController =  seque.source as? AppTableViewController else {fatalError("Was not the AppTableViewController VC")}
-        print(appTableViewController.selectedProfile, "0000000000000000000")
 
-        let selectedappProfile = appTableViewController.selectedProfile.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
-        print("**********",selectedappProfile)
+//        let selectedappProfile = appTableViewController.selectedProfile.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
 
-        for (position, device)  in devicesSelected.enumerated() {
+        for (_, device)  in devicesSelected.enumerated() {
             upDateDeviceNotes(appProfileToUse: appTableViewController.selectedProfile, for: device)
         }
 
     }
     
     @IBAction func backToDeviceList(seque: UIStoryboardSegue)  {
-        
-        print("came back from app profile")
-       
         /// What we need
         guard let appProfilesTableVC =  seque.source as? AppProfilesTableViewController else {fatalError("Was not the AppProfilesTable VC")}
         
@@ -872,15 +859,13 @@ extension StudentCollectionViewController {
         guard let row = appProfilesTableVC.rowSelected else { fatalError("There was no row selected")}
         
         /// get the profile name ,  use it to show on the screen so we take off the prefix
-        let selectedappProfile = appProfilesTableVC.profileArray[segmentIdx][row].name.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
-        print("**********",selectedappProfile)
+//        let selectedappProfile = appProfilesTableVC.profileArray[segmentIdx][row].name.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")
         for device in devicesSelected {
             print(device.UDID)
         }
-        
-  
+
         ///  Update the device
-        for (position, device)  in devicesSelected.enumerated() {
+        for (_, device)  in devicesSelected.enumerated() {
             upDateDeviceNotes(appProfileToUse: appProfilesTableVC.profileArray[segmentIdx][row].name, for: device)
         }
       

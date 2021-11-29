@@ -52,6 +52,17 @@ class LoginViewController: UIViewController {
         }
     }
     
+    var locationId: Int? {
+        didSet {
+            DispatchQueue.main.async { [self] in
+                if saveLogin.selectedSegmentIndex == 0 {
+                    guard let locationId = locationId else { return  }
+                    UserDefaultsHelper.setlocationId(locationId)
+                }
+            }
+        }
+    }
+
     var groupID: Int? {
         didSet {
             DispatchQueue.main.async { [self] in
@@ -174,7 +185,7 @@ class LoginViewController: UIViewController {
     }
 
 
-    
+ /*
     func saveGroupId(_ groupID: Int, andName name: String) {
         self.groupID = groupID
         // UserDefaults.standard.set(groupID, forKey: "teacherSelected")
@@ -182,6 +193,7 @@ class LoginViewController: UIViewController {
         self.groupName = name
 //        UserDefaults.standard.set(groupID, forKey: groupIdKeyLiteral)
     }
+ */
  
     func getGroupId() -> Int? {
         // let groupCode = UserDefaults.standard.integer(forKey: groupIdKeyLiteral)
@@ -331,10 +343,12 @@ extension LoginViewController {
                     UserDefaultsHelper.setClassUUID(theClass.uuid)
                     self.classUUID = theClass.uuid
                     
-                    
+                     self.locationId =  self.webApiJsonDecoder.theUserInfoReturnObjct?.user.locationId
+                    self.schoolInfo?.locationId =  self.webApiJsonDecoder.theUserInfoReturnObjct?.user.locationId
                      self.groupID = classGroupCode
                      self.groupName = "yyyyyy"
                      self.myApiKey = SchoolInfo.getApiKey()
+//                    self.demomode = demomode
                      
                      DispatchQueue.main.async {
                          self.performSegue(withIdentifier: "returnFromLoginWithClass", sender: self)
@@ -447,7 +461,7 @@ extension LoginViewController {
                       let username = record["username"] as? String,
                       let userpassword = record["userpassword"] as? String,
                       let CompanyID = record["CompanyID"] as? Int
-                      else {
+                else {
                     fatalError("could not convert it to a non optional")
                 }
                 
@@ -455,6 +469,9 @@ extension LoginViewController {
                 print("We got the apikey it is \(apiKey) and \(username) and \(userpassword) ")
                 
                 self.schoolInfo = SchoolInfo(apiKey: apiKey, CompanyID: CompanyID)
+                if let demomode = record["demomode"] as? Bool {
+                    self.schoolInfo?.demomode = demomode
+                }
                 
                  self.myApiKey = apiKey
                 

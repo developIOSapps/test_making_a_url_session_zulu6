@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var loggedInUser: User?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        var navigationBarAppearace = UINavigationBar.appearance()
+//        var navigationBarAppearace = UINavigationBar.appearance()
 
        
         registerDefaultsFromSettingsBundle()
@@ -30,10 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // change navigation item title color
         //navigationBarAppearace.titleTextAttributes =[NSForegroundColorAttributeName:UIColor.whiteColor()]
-        
-        print("* * *", UserDefaultsHelper.appFilter)
-        print("* * *", UserDefaultsHelper.appCtgFilter)
-        print("* * *", UserDefaultsHelper.appKioskFilter)
+//        
+//        print("* * *", UserDefaultsHelper.appFilter)
+//        print("* * *", UserDefaultsHelper.appCtgFilter)
+//        print("* * *", UserDefaultsHelper.appKioskFilter)
 //        print("* * *", UserDefaultsHelper.teacherSelected)
 
         FirebaseApp.configure()
@@ -97,8 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     fatalError("autheticate")
                     // FBAuth.handleAuthError(vc: self, result: result)
                     // self.handleAuthError(result: result)
-                    return
-                    
                 }
             
             /// Is e-mail verified
@@ -115,7 +113,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             // FBAuth.handleErrorNoResult(vc: self, error: errorFromSendEmail)
                             // self.handleErrorNoResult(error: errorFromSendEmail)
                             //self.logUserOff()
-                            return
                         }
                         
                         print("sent verification well successfully")
@@ -124,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return
             }
             
-            print("about to get the data ", authDataResult.user.email)
+            print("about to get the data ", authDataResult.user.email as Any)
             self.loggedInUser =  authDataResult.user
             
             FBData.getDocument(with: self.loggedInUser!) { (resultFromFSUserData) in

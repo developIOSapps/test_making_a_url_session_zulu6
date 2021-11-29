@@ -16,6 +16,7 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate, TabBar
     var mdmStatus: MDMStatus?
     var classUUID: String!
     var classGroupCodeInt: Int!
+    var locationId: Int!
     var className: String!
     var getAStudentPicture: GetAStudentPicture!
 
@@ -69,6 +70,9 @@ extension MyTabBarController {
         vc.mdmStatus = mdmStatus
         vc.getAStudentPicture = getAStudentPicture
         vc.classGroupCodeInt = classGroupCodeInt
+        vc.locationId = locationId
+                
+        
         vc.classUUID = classUUID
         vc.className = className
 
@@ -82,6 +86,8 @@ extension MyTabBarController {
         self.schoolInfo         = schoolInfo
         self.mdmStatus          = vc.mdmStatus
         self.getAStudentPicture = vc.getAStudentPicture
+        self.locationId           = vc.locationId
+
         self.classGroupCodeInt  = vc.classGroupCodeInt
         self.classUUID          = vc.classUUID
         self.className          = vc.className

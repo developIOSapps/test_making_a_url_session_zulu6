@@ -422,6 +422,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MRE-qa-cWC">
+                                <rect key="frame" x="20" y="558" width="374" height="230"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="1ac-pE-spr"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="images-12" translatesAutoresizingMaskIntoConstraints="NO" id="PFX-uu-Ph0">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                             </imageView>
@@ -508,16 +518,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MRE-qa-cWC">
-                                <rect key="frame" x="20" y="558" width="374" height="230"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="230" id="1ac-pE-spr"/>
-                                </constraints>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="COt-jb-QgC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -827,7 +827,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="YPh-dj-d52"/>
-        <segue reference="Tby-EC-8KV"/>
+        <segue reference="FBc-6k-1YY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.right" catalog="system" width="128" height="106"/>

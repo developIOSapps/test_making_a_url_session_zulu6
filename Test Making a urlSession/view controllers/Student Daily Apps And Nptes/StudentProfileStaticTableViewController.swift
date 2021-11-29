@@ -21,6 +21,8 @@ class StudentProfileStaticTableViewController: UITableViewController {
     /// New property to handle multiple selections and even one selection now
     var usersSelected: [JSUser] = [JSUser]()
 
+    var schoolInfo: SchoolInfo?
+    
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -116,6 +118,7 @@ extension StudentProfileStaticTableViewController {
             daySelected = 0
             appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Mondays"
             appProfileVC.itemsToDisplay = .students
+            appProfileVC.schoolInfo = schoolInfo
         case "tuesday":
             guard let appProfileVC = segue.destination as? AppProfilesTableViewController else {
                 fatalError("could not cast the destination app segue")
@@ -123,6 +126,7 @@ extension StudentProfileStaticTableViewController {
             daySelected = 1
             appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Tuesdays"
             appProfileVC.itemsToDisplay = .students
+            appProfileVC.schoolInfo = schoolInfo
         case "wednesday":
             guard let appProfileVC = segue.destination as? AppProfilesTableViewController else {
                 fatalError("could not cast the destination app segue")
@@ -130,6 +134,7 @@ extension StudentProfileStaticTableViewController {
             daySelected = 2
             appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Wednesdays"
             appProfileVC.itemsToDisplay = .students
+            appProfileVC.schoolInfo = schoolInfo
         case "thursday":
             guard let appProfileVC = segue.destination as? AppProfilesTableViewController else {
                 fatalError("could not cast the destination app segue")
@@ -137,6 +142,7 @@ extension StudentProfileStaticTableViewController {
             daySelected = 3
             appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Thursdays"
             appProfileVC.itemsToDisplay = .students
+            appProfileVC.schoolInfo = schoolInfo
         case "friday":
             guard let appProfileVC = segue.destination as? AppProfilesTableViewController else {
                 fatalError("could not cast the destination app segue")
@@ -144,6 +150,7 @@ extension StudentProfileStaticTableViewController {
             daySelected = 4
             appProfileVC.navigationItem.prompt = "Select the app profile that \(forLiteral) should have on Fridays"
             appProfileVC.itemsToDisplay = .students
+            appProfileVC.schoolInfo = schoolInfo
         case "friday2":
             guard let appTableVC = segue.destination as? AppTableViewController else {
                 fatalError("could not cast the destination app segue")
@@ -152,6 +159,7 @@ extension StudentProfileStaticTableViewController {
             appTableVC.navigationItem.title = "Friday Setup - Select Category or App"
             appTableVC.navigationItem.prompt = "\(forLiteral)"
             appTableVC.itemsToDisplay = .students
+            appTableVC.schoolInfo = schoolInfo
         default:
             break
         }
@@ -170,7 +178,7 @@ extension StudentProfileStaticTableViewController {
         profileForDayLabel[daySelected].text = (appProfilesTableVC.profileArray[segmentIdx][row].name.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")).replacingOccurrences(of: UserDefaultsHelper.appCtgFilter, with: "Category:").replacingOccurrences(of: UserDefaultsHelper.appKioskFilter, with: UserDefaultsHelper.appKioskFilter + ":")
         
         /// then Update the student
-        for (position, user)  in usersSelected.enumerated() {
+        for (_, user)  in usersSelected.enumerated() {
             upDateStudentAppNotes(appProfileToUse: appProfilesTableVC.profileArray[segmentIdx][row].name, for: user)
         }
         
@@ -183,7 +191,7 @@ extension StudentProfileStaticTableViewController {
         print(appTableViewController.selectedProfile, "0000000000000000000")
         profileForDayLabel[daySelected].text = (appTableViewController.selectedProfile.replacingOccurrences(of: UserDefaultsHelper.appFilter, with: "")).replacingOccurrences(of: UserDefaultsHelper.appCtgFilter, with: "Category:").replacingOccurrences(of: UserDefaultsHelper.appKioskFilter, with: UserDefaultsHelper.appKioskFilter + ":")
 
-        for (position, user)  in usersSelected.enumerated() {
+        for (_, user)  in usersSelected.enumerated() {
             upDateStudentAppNotes(appProfileToUse: appTableViewController.selectedProfile, for: user)
         }
 

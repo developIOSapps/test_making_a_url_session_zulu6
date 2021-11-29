@@ -41,10 +41,8 @@ class AppTableViewController: UITableViewController {
                 return "fromAppsListbackToDeviceListWithSeque"
             case .students:
                 return "fromAppsListBackToStudentAppProfileWithSeque"
-            default: break
-
             }
-            return "he"
+//            return "he"
         }
     }
 
@@ -57,7 +55,7 @@ class AppTableViewController: UITableViewController {
     
     
 
-    
+    var schoolInfo: SchoolInfo?
    
     var appCategoryStore: AppCategoryStore!
     var appStore: AppStore!

@@ -52,7 +52,7 @@ struct GetDataApi {
 
                 let decoder = JSONDecoder()
                 guard let UserDetailResponsxx = try? decoder.decode(UserDetailResponse.self, from: data) else {fatalError()}
-                guard let usrdtl = UserDetailResponsxx as? UserDetailResponse else {fatalError("could not convert it to Users")}
+                let usrdtl = UserDetailResponsxx as UserDetailResponse
                 completion(usrdtl)
             }
         }
@@ -78,7 +78,7 @@ struct GetDataApi {
                 let decoder = JSONDecoder()
                 
                 guard let deviceDetailResponsxx = try? decoder.decode(DeviceDetailResponse.self, from: data) else {fatalError()}
-                guard let dvdtl = deviceDetailResponsxx as? DeviceDetailResponse else {fatalError("could not convert it to Users")}
+                let dvdtl = deviceDetailResponsxx as DeviceDetailResponse
                 print("we are up to device detail response response")
                 completion(dvdtl)
                 
@@ -106,7 +106,7 @@ struct GetDataApi {
                 let decoder = JSONDecoder()
                 
                 guard let classDetailResponsxx = try? decoder.decode(ClassDetailResponse.self, from: data) else {fatalError()}
-                guard let cldtl = classDetailResponsxx as? ClassDetailResponse else {fatalError("could not convert it to Users")}
+                let cldtl = classDetailResponsxx as ClassDetailResponse
                 print("we are up to class detail response response")
                 completion(cldtl)
                 
@@ -152,7 +152,7 @@ struct GetDataApi {
               
           case .success(let data):
               print("in the GetDataApi.getZuluDataWrapper in switch success")
-              print(data.prettyPrintedJSONString)
+              print(data.prettyPrintedJSONString  as Any)
               print("we are updating notes")
               completion()
               
@@ -174,12 +174,12 @@ struct GetDataApi {
 
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
-                print(data.prettyPrintedJSONString)
+                print(data.prettyPrintedJSONString  as Any)
 
                 let decoder = JSONDecoder()
 
                 guard let schoolClassResponsxx = try? decoder.decode(SchoolClassResponse.self, from: data) else {fatalError()}
-                guard let schoolClss = schoolClassResponsxx as? SchoolClassResponse else {fatalError("could not convert it to Users")}
+                let schoolClss = schoolClassResponsxx as SchoolClassResponse
                 print("we are up to schoolClss response")
                 completion(schoolClss)
                 
@@ -201,12 +201,12 @@ struct GetDataApi {
 
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
-                print(data.prettyPrintedJSONString)
+                print(data.prettyPrintedJSONString  as Any)
 
                 let decoder = JSONDecoder()
 
                 guard let profilesResponsexx = try? decoder.decode(ProfilesResponse.self, from: data) else {fatalError()}
-                guard let profileList = profilesResponsexx as? ProfilesResponse else {fatalError("could not convert it to profiles")}
+                let profileList = profilesResponsexx as ProfilesResponse
                 print("we are up to schoolClss response")
                 completion(profileList)
                 
@@ -233,7 +233,7 @@ struct GetDataApi {
                 let decoder = JSONDecoder()
 
                 guard let userResponsxx = try? decoder.decode(UserResponse.self, from: data) else {fatalError()}
-                guard let usr = userResponsxx as? UserResponse else {fatalError("could not convert it to Users")}
+                let usr = userResponsxx as UserResponse
                 print("we are up to users response")
                 completion(usr)
                 
@@ -260,7 +260,7 @@ struct GetDataApi {
                 let decoder = JSONDecoder()
                 
                 guard let userResponsxx = try? decoder.decode(UserResponse.self, from: data) else {fatalError()}
-                guard let usr = userResponsxx as? UserResponse else {fatalError("could not convert it to Users")}
+                let usr = userResponsxx as UserResponse
                 print("we are up to users response")
                 completion(usr)
                 
@@ -287,7 +287,7 @@ struct GetDataApi {
                 let decoder = JSONDecoder()
                 
                 guard let deviceListResponsexx = try? decoder.decode(DeviceListResponse.self, from: data) else {fatalError()}
-                guard let dvc = deviceListResponsexx as? DeviceListResponse else {fatalError("could not convert it to DeviceList")}
+                let dvc = deviceListResponsexx as DeviceListResponse
                 print("we are up to users response")
                 completion(dvc)
                 
@@ -309,12 +309,12 @@ struct GetDataApi {
 
             case .success(let data):
                 print("in the GetDataApi.getZuluDataWrapper in switch success")
-                //                print(data.prettyPrintedJSONString)
+                                print(data.prettyPrintedJSONString)
                 
                 let decoder = JSONDecoder()
                 
                 guard let deviceListResponsexx = try? decoder.decode(DeviceListResponse.self, from: data) else {fatalError("deviceListResponsexx ")}
-                guard let dvc = deviceListResponsexx as? DeviceListResponse else {fatalError("could not convert it to DeviceList")}
+                let dvc = deviceListResponsexx as DeviceListResponse
                 print("we are up to users response")
                 completion(dvc)
                 
@@ -339,7 +339,7 @@ struct GetDataApi {
                 let decoder = JSONDecoder()
                 
                 guard let deviceGroupResponsxx = try? decoder.decode(DeviceGroupResponse.self, from: data) else {fatalError()}
-                guard let dvcg = deviceGroupResponsxx as? DeviceGroupResponse else {fatalError("could not vonvert it to devicegroup")}
+                let dvcg = deviceGroupResponsxx as DeviceGroupResponse
                 print("we are up to device group response")
                 completion(dvcg)
                 

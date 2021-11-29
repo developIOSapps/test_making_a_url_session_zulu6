@@ -20,7 +20,9 @@ class SchoolInfo {
     var thekey: String
     var companyId: Int
     var udid: String?
+    var locationId: Int?
     var asset: String?
+    var demomode: Bool?
     
     
 //    CompanyId

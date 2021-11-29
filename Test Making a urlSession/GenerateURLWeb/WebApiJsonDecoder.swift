@@ -37,16 +37,6 @@ class WebApiJsonDecoder {
                 return
             }
             // got the data now lets do the correct process
-            let value = String(data: data, encoding: .utf8)
-            print(value as Any)
-
-            // get the data from the Result type
-//            guard let data = try? result.get() else {
-//                if case Result.failure(let error) = result {
-//                    print("these was an error with getting on-line pic\(error.localizedDescription)")
-//                }
-//                return
-//            }
             
             completionHandler(data)
             return

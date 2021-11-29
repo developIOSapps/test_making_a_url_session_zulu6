@@ -42,7 +42,7 @@ class AppProfilesTableViewController: UITableViewController {
         }
     
     
-    
+    var schoolInfo: SchoolInfo?
     var itemsToDisply: String = ""
     
     let allProfiles = ["Profile-CTG-first", "Profile-CTG-second", "Profile-CTG-third", "Profile-Kiosk-first", "Profile-Kiosk-second", "Profile-Kiosk-third", "Profile-Kiosk-fourth", "Profile-Kiosk-fifth"]
@@ -91,6 +91,19 @@ class AppProfilesTableViewController: UITableViewController {
                     return newPrf
                 })
                 
+                var locationToFilter: Int
+                if let theLocation = self.schoolInfo?.locationId {
+                    locationToFilter = theLocation
+                } else  {
+                    if  UserDefaultsHelper.getlocationId() > 0  {
+                        locationToFilter = UserDefaultsHelper.getlocationId()
+                    } else {
+                        fatalError("Could not get the location id")
+                    }
+                }
+                
+                
+                self.profiles = self.profiles.filter {$0.locationId == locationToFilter }
                 self.profiles.sort()
                     // profilesResponse.profiles.filter{$0.name.hasPrefix("Profile-App") }
                 

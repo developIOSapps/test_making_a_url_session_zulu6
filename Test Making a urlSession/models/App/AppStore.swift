@@ -57,7 +57,7 @@ class AppStore {
     var apps = [App]()
     
     init() {
-        for (idx, app) in appList.enumerated() {
+        for (_, app) in appList.enumerated() {
             let app = App(key: app.0, name: app.1, kioskName: app.2, description: app.3)
             apps.append(app)
         }

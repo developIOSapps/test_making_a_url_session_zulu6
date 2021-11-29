@@ -32,7 +32,7 @@ class GetAStudentPicture {
 //    var url: URL = URL(string: "https://manage.zuludesk.com/storage/public/1049131/photos/647bba344396e7c8170902bcf2e15551.jpg")!
     
     func retreiveDataAsPictureFle(withURL theUrl: URL, completionHandler: @escaping (Data) -> Void) {
-        print("*-* retreiveDataAsPictureFle \(HelperStuf.getTimeStamp()) ")
+//        print("*-* retreiveDataAsPictureFle \(HelperStuf.getTimeStamp()) ")
 
         let lastPath: String = { theUrl.lastPathComponent}()
         let urlForLocalFile: URL = { docURL.appendingPathComponent(lastPath) }()
